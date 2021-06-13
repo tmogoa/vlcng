@@ -2,11 +2,67 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>Hello World!</title>
-        <link rel="stylesheet" href="index.css" />
+        <title>VLCng</title>
+        <link rel="stylesheet" href="./index.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+            rel="stylesheet"
+        />
     </head>
-    <body>
-        <h1>💖 Test</h1>
-        <p>Welcome to your Electron application.</p>
+    <body class="bg-gray-900">
+        <div
+            class="
+                w-full
+                bg-gray-50
+                flex flex-row
+                items-center
+                justify-between
+                text-gray-600
+                py-2
+                px-4
+            "
+            style="
+                -webkit-app-region: drag;
+                -webkit-user-select: none;
+                -webkit-app-region: drag;
+            "
+        >
+            <div>Into the atom</div>
+            <div class="flex flex-row justify-end gap-4">
+                <button
+                    id="minimize"
+                    class="
+                        p-2
+                        rounded-full
+                        focus:outline-none
+                        hover:bg-gray-200
+                    "
+                >
+                    <img
+                        id="closeIcon"
+                        src="./assets/img/min.png"
+                        alt=""
+                        class="w-4"
+                    />
+                </button>
+                <button
+                    id="close"
+                    class="
+                        p-2
+                        rounded-full
+                        focus:outline-none
+                        hover:bg-gray-200
+                    "
+                >
+                    <img
+                        id="closeIcon"
+                        src="./assets/img/close.png"
+                        alt=""
+                        class="w-4"
+                    />
+                </button>
+            </div>
+        </div>
+        <script defer src="./render.js"></script>
     </body>
 </html>
