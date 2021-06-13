@@ -9,7 +9,7 @@
             rel="stylesheet"
         />
     </head>
-    <body class="bg-gray-900">
+    <body class="bg-gray-900 flex flex-col items-center">
         <div
             class="
                 w-full
@@ -46,6 +46,17 @@
                     />
                 </button>
                 <button
+                    id="maximize"
+                    class="
+                        p-2
+                        rounded-full
+                        focus:outline-none
+                        hover:bg-gray-200
+                    "
+                >
+                    <img src="./assets/img/max.png" alt="" class="w-4" />
+                </button>
+                <button
                     id="close"
                     class="
                         p-2
@@ -54,15 +65,16 @@
                         hover:bg-gray-200
                     "
                 >
-                    <img
-                        id="closeIcon"
-                        src="./assets/img/close.png"
-                        alt=""
-                        class="w-4"
-                    />
+                    <img src="./assets/img/close.png" alt="" class="w-4" />
                 </button>
             </div>
         </div>
+
+        <video
+            src="./assets/video/cli_vs_expo.mp4"
+            autoplay
+            class="w-full bg-gray-900 rounded-none p-0"
+        ></video>
         <script defer src="./render.js"></script>
     </body>
 </html>

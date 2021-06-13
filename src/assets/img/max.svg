@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="/home/tony/electron/vlcng/src/assets/img/max.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   sodipodi:docname="max.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     showborder="false"
+     inkscape:zoom="2.084596"
+     inkscape:cx="402.71593"
+     inkscape:cy="550.70624"
+     inkscape:window-width="1366"
+     inkscape:window-height="731"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect3022"
+       style="opacity:0.693361;fill:#000000;fill-opacity:0.734832;stroke-width:8.36768"
+       d="M 387.81055 499.47266 C 383.34708 499.47266 379.75391 503.06778 379.75391 507.53125 L 379.75391 602.49219 C 379.75391 606.95566 383.34708 610.54883 387.81055 610.54883 L 482.77344 610.54883 C 487.23691 610.54883 490.83008 606.95566 490.83008 602.49219 L 490.83008 507.53125 C 490.83008 503.06778 487.23691 499.47266 482.77344 499.47266 L 387.81055 499.47266 z M 394.68945 506.90625 L 475.89453 506.90625 C 480.05129 506.90625 483.39648 510.25144 483.39648 514.4082 L 483.39648 595.61328 C 483.39648 599.77004 480.05129 603.11719 475.89453 603.11719 L 394.68945 603.11719 C 390.53273 603.11719 387.18555 599.77004 387.18555 595.61328 L 387.18555 514.4082 C 387.18555 510.25144 390.53273 506.90625 394.68945 506.90625 z "
+       transform="scale(0.26458333)" />
+  </g>
+</svg>
