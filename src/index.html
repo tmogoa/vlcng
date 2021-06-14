@@ -9,17 +9,20 @@
             rel="stylesheet"
         />
     </head>
-    <body class="bg-gray-900 flex flex-col items-center">
+    <body class="flex flex-col items-center">
         <div
             class="
+                shadow-xl
                 w-full
-                bg-gray-50
+                bg-gray-50 bg-opacity-10
                 flex flex-row
                 items-center
                 justify-between
                 text-gray-600
                 py-2
                 px-4
+                z-50
+                absolute
             "
             style="
                 -webkit-app-region: drag;
@@ -28,14 +31,14 @@
             "
         >
             <div>Into the atom</div>
-            <div class="flex flex-row justify-end gap-4">
+            <div class="flex flex-row justify-end gap-5">
                 <button
                     id="minimize"
                     class="
                         p-2
                         rounded-full
                         focus:outline-none
-                        hover:bg-gray-200
+                        hover:bg-gray-300
                     "
                 >
                     <img
@@ -51,7 +54,7 @@
                         p-2
                         rounded-full
                         focus:outline-none
-                        hover:bg-gray-200
+                        hover:bg-gray-300
                     "
                 >
                     <img src="./assets/img/max.png" alt="" class="w-4" />
@@ -62,7 +65,7 @@
                         p-2
                         rounded-full
                         focus:outline-none
-                        hover:bg-gray-200
+                        hover:bg-gray-300
                     "
                 >
                     <img src="./assets/img/close.png" alt="" class="w-4" />
@@ -71,9 +74,9 @@
         </div>
 
         <video
-            src="./assets/video/cli_vs_expo.mp4"
-            autoplay
+            src="/home/tony/Videos/The Mystery of Matter “UNRULY ELEMENTS” -Documentary-.mp4"
             class="w-full bg-gray-900 rounded-none p-0"
+            controls
         ></video>
         <script defer src="./render.js"></script>
     </body>
