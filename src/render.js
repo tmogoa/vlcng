@@ -20,6 +20,7 @@ vid.addEventListener(
 //ipcRenderer.send("window:resize", vid.videoHeight);
 
 const minimizeIcon = document.getElementById("minimize");
+const maximizeIcon = document.getElementById("maximize");
 
 closeBtn.onclick = (e) => {
     getWindow().close();
@@ -28,8 +29,14 @@ closeBtn.onclick = (e) => {
 minimizeIcon.onclick = (e) => {
     getWindow().minimize();
 };
+
+maximizeIcon.onclick = (e) => {
+    maximize();
+};
+
 function maximize() {
     const window = getWindow();
     window.isMaximized() ? window.unmaximize() : window.maximize();
 }
+
 document.addEventListener("dblclick", maximize);
