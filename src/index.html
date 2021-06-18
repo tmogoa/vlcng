@@ -8,7 +8,15 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
             rel="stylesheet"
         />
+        <style type="text/css">
+            div#video_player_box{ width: 550px; background-color: #000; margin: 0px auto; }
+            div#video_controls_bar{ background: #333; padding: 10px; color:#CCC; }
+            input#seekslider{ width: 180px; }
+            input#volumeslider{ width:80px; }
+          </style>
+        <script src="main.js"></script>
     </head>
+
     <body class="flex flex-col items-center">
         <div
             class="
@@ -79,5 +87,22 @@
             controls
         ></video>
         <script defer src="./render.js"></script>
+
+        <div id="video_player_box">
+            <video id="my_video" autoplay  height="320" width="550"
+              src="videos/video.mp4" type="video/*">
+              <!-- <source src="https://youtu.be/kUzDC9fUtcM" type="video/*"> -->
+              <!-- src="videos/video.mp4" type="video/*"> -->
+            </video>
+        
+            <div id="video_controls_bar">
+              <button id="playpausebtn">Pause</button>
+              <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
+              <span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span>
+              <button id="mutebtn">Mute</button>
+              <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+              <button id="fullscreenbtn">[ &nbsp; ]</button>
+            </div>
+          </div>
     </body>
 </html>
