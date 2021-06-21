@@ -5,19 +5,19 @@ const getWindow = () => remote.BrowserWindow.getFocusedWindow();
 
 const closeBtn = document.getElementById("close");
 const video = document.querySelector("video");
-// vid.addEventListener(
-//     "loadedmetadata",
-//     function (e) {
-//         console.log("video " + this.videoWidth);
-//         ipcRenderer.send(
-//             "window:resize",
-//             (800 * this.videoHeight) / this.videoWidth
-//         );
-//     },
-//     false
-// );
+video.addEventListener(
+    "loadedmetadata",
+    function (e) {
+        console.log("video " + this.videoWidth);
+        ipcRenderer.send(
+            "window:resize",
+            (800 * this.videoHeight) / this.videoWidth
+        );
+    },
+    false
+);
 
-//ipcRenderer.send("window:resize", vid.videoHeight);
+ipcRenderer.send("window:resize", video.videoHeight);
 
 const minimizeIcon = document.getElementById("minimize");
 const maximizeIcon = document.getElementById("maximize");

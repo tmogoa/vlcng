@@ -8,24 +8,6 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
             rel="stylesheet"
         />
-        <style type="text/css">
-            div.video_player_box {
-                width: 550px;
-                background-color: #000;
-                margin: 0px auto;
-            }
-            div#video_controls_bar {
-                background: #333;
-                padding: 10px;
-                color: #ccc;
-            }
-            input#seekslider {
-                width: 180px;
-            }
-            input#volumeslider {
-                width: 80px;
-            }
-        </style>
     </head>
 
     <body class="flex flex-col items-center">
@@ -88,52 +70,11 @@
             </div>
         </div>
 
-        <!-- <video
-            src="/home/tony/Videos/The Mystery of Matter “UNRULY ELEMENTS” -Documentary-.mp4"
+        <video
+            src="./assets/video/Going Beyond- A Celebration of Safaricom at 20 -23TwendeTukiuke.mp4"
             class="w-full bg-gray-900 rounded-none p-0"
             controls
-        ></video> -->
+        ></video>
         <script defer src="./render.js"></script>
-
-        <video
-            id="my_video"
-            autoplay
-            height="320"
-            width="550"
-            src="./assets/video/Going Beyond- A Celebration of Safaricom at 20 -23TwendeTukiuke.mp4"
-            type="video/*"
-            class="w-full bg-gray-900 rounded-none p-0"
-        >
-            <!-- <source src="https://youtu.be/kUzDC9fUtcM" type="video/*"> -->
-            <!-- src="videos/video.mp4" type="video/*"> -->
-        </video>
-
-        <div
-            id="video_controls_bar"
-            class="w-full bg-gray-900 rounded-none p-0"
-        >
-            <button id="playpausebtn">Pause</button>
-            <input
-                id="seekslider"
-                type="range"
-                min="0"
-                max="100"
-                value="0"
-                step="1"
-            />
-            <span id="curtimetext">00:00</span> /
-            <span id="durtimetext">00:00</span>
-            <button id="mutebtn">Mute</button>
-            <input
-                id="volumeslider"
-                type="range"
-                min="0"
-                max="100"
-                value="100"
-                step="1"
-            />
-            <button id="fullscreenbtn">[ &nbsp; ]</button>
-        </div>
-        <script defer src="main.js"></script>
     </body>
 </html>
