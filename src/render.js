@@ -4,7 +4,7 @@ const { ipcRenderer } = require("electron");
 const getWindow = () => remote.BrowserWindow.getFocusedWindow();
 
 const closeBtn = document.getElementById("close");
-//const vid = document.querySelector("video");
+const video = document.querySelector("video");
 // vid.addEventListener(
 //     "loadedmetadata",
 //     function (e) {
@@ -38,5 +38,15 @@ function maximize() {
     const window = getWindow();
     window.isMaximized() ? window.unmaximize() : window.maximize();
 }
-
-document.addEventListener("dblclick", maximize);
+function toggleFullScreen() {
+    if (video.requestFullScreen) {
+        video.requestFullScreen();
+    }
+    if (video.webkitRequestFullScreen) {
+        video.webkitRequestFullScreen();
+    }
+    if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+    }
+}
+document.addEventListener("dblclick", toggleFullScreen);

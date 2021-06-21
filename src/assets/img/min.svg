@@ -28,12 +28,12 @@
      showgrid="false"
      showborder="false"
      inkscape:zoom="2.9480639"
-     inkscape:cx="243.54967"
-     inkscape:cy="1683.817"
+     inkscape:cx="266.61566"
+     inkscape:cy="1693.1451"
      inkscape:window-width="1366"
-     inkscape:window-height="731"
+     inkscape:window-height="768"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="-37"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
@@ -43,7 +43,7 @@
      id="layer1"
      inkscape:groupmode="layer">
     <rect
-       style="opacity:0;fill:#ffffff;fill-opacity:0.734832;stroke-width:1.808;stroke-opacity:0.995863"
+       style="opacity:0;fill:#2b0000;fill-opacity:0.734832;stroke-width:1.808;stroke-opacity:0.995863"
        id="rect2857"
        width="24"
        height="24"
@@ -51,12 +51,12 @@
        y="433.35565"
        ry="0.30194247" />
     <rect
-       style="fill:#000000;fill-opacity:0.734832;stroke-width:1.52379;stroke-opacity:0.995863"
+       style="fill:#ffffff;fill-opacity:0.734832;stroke-width:1.91502;stroke-opacity:0.995863"
        id="rect3167"
-       width="22.061583"
-       height="1.6893911"
-       x="57.924931"
-       y="444.51096"
-       ry="0.22972721" />
+       width="23.06782"
+       height="2.5518396"
+       x="57.421814"
+       y="444.07974"
+       ry="0.34700489" />
   </g>
 </svg>

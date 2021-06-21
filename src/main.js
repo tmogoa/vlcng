@@ -28,7 +28,6 @@ function initializePlayer() {
     mutebtn.addEventListener("click", vidmute, false);
     volumeslider.addEventListener("change", setvolume, false);
     fullscreenbtn.addEventListener("click", toggleFullScreen, false);
-    console.log("height" + videoControlsBar.offsetHeight);
     vid.addEventListener(
         "loadedmetadata",
         function (e) {
