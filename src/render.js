@@ -49,4 +49,4 @@ function toggleFullScreen() {
         video.mozRequestFullScreen();
     }
 }
-document.addEventListener("dblclick", toggleFullScreen);
+//document.addEventListener("dblclick", toggleFullScreen);
