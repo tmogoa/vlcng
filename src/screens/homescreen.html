@@ -10,7 +10,7 @@
         />
     </head>
 
-    <body>
+    <body class="overflow-hidden">
         <div
             class="
                 shadow-xl
@@ -32,7 +32,7 @@
                 -webkit-app-region: drag;
             "
         >
-            <div>VLCng</div>
+            <div>Recent</div>
 
             <div class="flex flex-row justify-end gap-5">
                 <button
@@ -71,7 +71,57 @@
             </div>
         </div>
 
-        <div class="w-full h-screen bg-gray-700 overflow-hidden">
+        <div
+            class="
+                z-30
+                absolute
+                bg-gray-900 bg-opacity-30
+                w-full
+                text-white
+                h-screen
+                flex flex-row
+                items-center
+            "
+        >
+            <div class="w-4/12 h-full flex flex-col justify-end px-4 py-10">
+                <span class="text-4xl font-semibold mb-4 text-yellow-500"
+                    >Cars 3</span
+                >
+
+                <div class="flex flex-row items-center mb-8">
+                    <!---Progress bar-->
+                    <div class="flex bg-black rounded-md w-8/12 h-1 mr-2">
+                        <div
+                            id="videoProgressBar"
+                            class="
+                                flex
+                                items-center
+                                bg-yellow-500
+                                rounded-md rounded-r-none
+                                w-4/12
+                                h-1
+                                overflow-visible
+                            "
+                        ></div>
+                    </div>
+
+                    <!--Duration-->
+                    <span class="text-xs text-yellow-500 font-bold"
+                        >62 min left</span
+                    >
+                </div>
+
+                <button
+                    class="py-3 px-4 bg-yellow-500 rounded-md text-xs font-bold"
+                >
+                    Continue Watching
+                </button>
+            </div>
+            <div class="w-7/12 bg-green-300 h-full">Playlist</div>
+            <div class="w-1/12 bg-yellow-500 h-full">Pagination</div>
+        </div>
+
+        <div class="w-full h-screen bg-gray-700 opacity-80 overflow-hidden">
             <img
                 src="../assets/img/1.jpg"
                 alt=""
