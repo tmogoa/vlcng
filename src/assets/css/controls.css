@@ -192,7 +192,7 @@ border-radius: 10px;
 }
 .menubtn:hover{
 opacity: 1;
-background-color: yellow;
+background-color: #F59E0B;
 color: white;
 }
 #menu > div#submenu{
