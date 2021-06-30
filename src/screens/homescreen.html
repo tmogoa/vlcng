@@ -12,7 +12,6 @@
     </head>
 
     <body class="overflow-hidden">
-
         <div
             class="
                 shadow-xl
@@ -85,19 +84,58 @@
                 items-center
             "
         >
-
-            <div class="w-4/12 h-full flex flex-col justify-end px-4 py-10">
-                    <div class="flex items-center rounded-full shadow-xl mb-1 left-7 top-7 ">
-                        <input class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none" id="search" type="text" placeholder="Search">
+            <div class="w-6/12 h-full flex flex-col justify-end px-4 py-10">
+                <div class="flex-grow flex flex-col justify-start pt-10">
+                    <div
+                        class="
+                            flex
+                            items-center
+                            rounded-full
+                            shadow-xl
+                            mb-1
+                            left-7
+                            top-7
+                        "
+                    >
+                        <input
+                            class="
+                                rounded-l-full
+                                w-full
+                                py-4
+                                px-6
+                                text-gray-700
+                                leading-tight
+                                focus:outline-none
+                            "
+                            id="search"
+                            type="text"
+                            placeholder="Search"
+                        />
                         <div class="p-4">
-                          <button class="bg-yellow-500 text-white rounded-full p-2 hover:bg-yellow-400 focus:outline-none w-12 h-12 flex items-center justify-center">
-                              <img
-                              src="../assets/img/search.svg.svg"
-                              alt=""
-                          />
-                          </button>
-                          </div>
+                            <button
+                                class="
+                                    bg-yellow-500
+                                    text-white
+                                    rounded-full
+                                    p-2
+                                    hover:bg-yellow-400
+                                    focus:outline-none
+                                    w-12
+                                    h-12
+                                    flex
+                                    items-center
+                                    justify-center
+                                "
+                            >
+                                <img
+                                    src="../assets/img/search.svg.svg"
+                                    alt=""
+                                />
+                            </button>
                         </div>
+                    </div>
+                </div>
+
                 <span class="text-4xl font-semibold mb-4 text-yellow-500"
                     >Cars 3</span
                 >
@@ -126,7 +164,15 @@
                 </div>
 
                 <button
-                    class="py-3 px-4 bg-yellow-500 rounded-md text-xs font-bold"
+                    class="
+                        py-3
+                        px-4
+                        bg-yellow-500
+                        rounded-md
+                        text-xs
+                        font-bold
+                        w-6/12
+                    "
                 >
                     Continue Watching
                 </button>
@@ -134,7 +180,7 @@
             <div
                 id="listView"
                 class="
-                    w-8/12
+                    w-6/12
                     h-full
                     px-1
                     pt-14
@@ -144,807 +190,71 @@
                 "
             >
                 <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
+                <div id="item">
+                    <div class="bg-white rounded-lg flex flex-row h-28">
+                        <img
+                            src="../assets/img/2.jpg"
+                            alt=""
+                            class="object-cover rounded-l-lg w-5/12"
+                        />
+                        <div
+                            class="
+                                flex flex-col
+                                p-4
+                                flex-grow
+                                text-gray-500
+                                justify-between
+                            "
+                        >
                             <div
                                 class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
+                                    flex flex-row
+                                    justify-between
+                                    items-center
                                 "
                             >
+                                <span>Cars 2</span>
+                                <!--Duration-->
+                                <span class="text-xs font-semibold"
+                                    >62 min left</span
+                                >
+                            </div>
+
+                            <div class="">
                                 <div
-                                    id="videoProgressBar"
                                     class="
                                         flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
+                                        bg-black
+                                        rounded-lg
+                                        w-8/12
                                         h-1
                                         bg-clip-padding
                                     "
-                                ></div>
+                                >
+                                    <div
+                                        id="videoProgressBar"
+                                        class="
+                                            flex
+                                            bg-yellow-500
+                                            rounded-lg rounded-r-none
+                                            w-4/12
+                                            h-1
+                                            bg-clip-padding
+                                        "
+                                    ></div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
                             <div
                                 class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
+                                    flex flex-row
+                                    justify-end
+                                    text-xs
+                                    font-semibold
                                 "
                             >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
+                                <span>June 24th</span>
                             </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Item 1-->
-                <div class="bg-white rounded-lg flex flex-row h-28">
-                    <img
-                        src="../assets/img/2.jpg"
-                        alt=""
-                        class="object-cover rounded-l-lg w-5/12"
-                    />
-                    <div
-                        class="
-                            flex flex-col
-                            p-4
-                            flex-grow
-                            text-gray-500
-                            justify-between
-                        "
-                    >
-                        <div class="flex flex-row justify-between items-center">
-                            <span>Cars 2</span>
-                            <!--Duration-->
-                            <span class="text-xs font-semibold"
-                                >62 min left</span
-                            >
-                        </div>
-
-                        <div class="">
-                            <div
-                                class="
-                                    flex
-                                    bg-black
-                                    rounded-lg
-                                    w-8/12
-                                    h-1
-                                    bg-clip-padding
-                                "
-                            >
-                                <div
-                                    id="videoProgressBar"
-                                    class="
-                                        flex
-                                        bg-yellow-500
-                                        rounded-lg rounded-r-none
-                                        w-4/12
-                                        h-1
-                                        bg-clip-padding
-                                    "
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="
-                                flex flex-row
-                                justify-end
-                                text-xs
-                                font-semibold
-                            "
-                        >
-                            <span>June 24th</span>
                         </div>
                     </div>
                 </div>

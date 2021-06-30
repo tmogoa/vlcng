@@ -24,3 +24,16 @@ function maximize() {
     const window = getWindow();
     window.isMaximized() ? window.unmaximize() : window.maximize();
 }
+
+/// ### PLEASE IGNORE
+// Only for UI testing and iteration
+const content = document.getElementById("item");
+const listView = document.getElementById("listView");
+console.log(content.innerHTML);
+
+for (let index = 0; index < 20; index++) {
+    let div = document.createElement("div");
+    div.innerHTML = content.innerHTML;
+    listView.appendChild(div);
+}
+//end of UI testing
