@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>VLCng</title>
         <link rel="stylesheet" href="./index.css" />
         <link
@@ -13,6 +14,16 @@
             type="text/css"
             href="./assets/css/controls.css"
         />
+        <script>
+            function showMenu() {
+                var x = document.getElementById("menu")
+                displayValue = "";
+                if (x.style.display == "")
+                    displayValue = "none";
+
+                x.style.display = displayValue;
+            }
+        </script>
     </head>
 
     <body class="flex flex-col items-center overflow-hidden">
@@ -75,11 +86,35 @@
             </div>
         </div>
 
-        <video
-            src="/home/tony/Videos/The Mystery of Matter “INTO THE ATOM” -Documentary-.mp4"
-            class="w-full bg-gray-900 rounded-none p-0"
-            autoplay
-        ></video>
+        <div id="mainMenu">
+            <video
+                src="../src/assets/video/Going Beyond- A Celebration of Safaricom at 20 -23TwendeTukiuke.mp4"
+                class="w-full bg-gray-900 rounded-none p-0"
+               
+            ></video>
+
+            <div id="menu" style="display:none">
+                <div id="submenu">
+                 <button class="menubtn" id="media_btn">Media</button>
+                  <button class="menubtn" id="video_btn">Video</button>
+                  <button class="menubtn" id="audio_btn">Audio</button>
+                  <button class="menubtn" id="sub_btn">Subtitles</button>
+                  <button class="menubtn" id="tools_btn">Tools</button>
+                  <button class="menubtn" id="view_btn">View</button>
+                  <button class="menubtn" id="help_btn">Help</button>
+                </div>
+        
+                <div id="rightmenu">
+                  <br> <br>
+                  <label for="audio">Choose an Audio track:</label>
+                    <select name="audio" id="audio">
+                        <option value="Track">Track 1 - English</option>
+                        <option value="Track">Track 2 - German</option>
+                        <option value="Track">Track 3 - French</option>
+                    </select>
+                </div>
+              </div>
+        </div>
 
         <div
             class="
@@ -189,6 +224,7 @@
 
             <button
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
+                onclick="showMenu()"
             >
                 <img src="./assets/img/settings.svg" alt="" />
             </button>

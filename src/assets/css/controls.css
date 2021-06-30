@@ -173,3 +173,56 @@ button#morebtn{
     opacity:0.5;
     margin:5px 10px 5px;
 }
+#mainMenu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#menu{
+position: absolute;
+width: 600px;
+height: 50%;
+text-align: center;
+background-color: #FFF; 
+display: flex;                  /* establish flex container */
+flex-direction: row;            /* default value; can be omitted */
+flex-wrap: nowrap;
+border-radius: 10px; 
+}
+.menubtn:hover{
+opacity: 1;
+background-color: yellow;
+color: white;
+}
+#menu > div#submenu{
+width: 150px;
+height: 100%;
+margin-right: 10px;
+/* border: 2px dashed black; */
+}
+#menu > div#rightmenu{
+width: 300px;
+height: 100%;
+border-left: 2px solid gray;
+}
+.menubtn {
+border: none;
+color: black;
+background-color: #ddd;
+/* background-color: yellow; */
+padding: 12px 16px;
+font-size: 16px;
+cursor: pointer;
+width: 150px;
+border-radius: 0px 50px 50px 0px;
+opacity: 0.6;
+transition: 0.3s;
+}
+.menubtn:before {
+content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/star_outline/v10/24px.svg);
+width: 20px;
+float: left;
+margin-right: 5px;
+margin-top: -2px;
+}
