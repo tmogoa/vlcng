@@ -1,0 +1,14 @@
+#listView::-webkit-scrollbar {
+    width: 7px; /* width of the entire scrollbar */
+}
+
+#listView::-webkit-scrollbar-track {
+    background: none; /* color of the tracking area */
+}
+
+#listView::-webkit-scrollbar-thumb {
+    background-color: orange; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    /* border: 3px solid orange;  */
+    /* creates padding around scroll thumb */
+}
