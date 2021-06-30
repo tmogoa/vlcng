@@ -84,23 +84,13 @@
                 items-center
             "
         >
-            <div class="w-6/12 h-full flex flex-col justify-end px-4 py-10">
+            <div class="w-6/12 h-full flex flex-col justify-end px-7 py-10">
                 <div class="flex-grow flex flex-col justify-start pt-10">
-                    <div
-                        class="
-                            flex
-                            items-center
-                            rounded-full
-                            shadow-xl
-                            mb-1
-                            left-7
-                            top-7
-                        "
-                    >
+                    <div class="flex items-center rounded-full shadow-xl mb-1">
                         <input
                             class="
                                 rounded-l-full
-                                w-full
+                                w-6/12
                                 py-4
                                 px-6
                                 text-gray-700
@@ -136,73 +126,76 @@
                     </div>
                 </div>
 
-                <span class="text-4xl font-semibold mb-4 text-yellow-500"
-                    >Cars 3</span
-                >
+                <div class="flex-grow flex flex-col justify-start pt-10">
+                    <span class="text-4xl font-semibold mb-4 text-yellow-500"
+                        >Cars 3</span
+                    >
 
-                <div class="flex flex-row items-center mb-8">
-                    <!---Progress bar-->
-                    <div class="flex bg-black rounded-md w-8/12 h-1 mr-2">
-                        <div
-                            id="videoProgressBar"
-                            class="
-                                flex
-                                items-center
-                                bg-yellow-500
-                                rounded-md rounded-r-none
-                                w-4/12
-                                h-1
-                                overflow-visible
-                            "
-                        ></div>
+                    <div class="flex flex-row items-center mb-8">
+                        <!---Progress bar-->
+                        <div class="flex bg-black rounded-md w-8/12 h-1 mr-2">
+                            <div
+                                id="videoProgressBar"
+                                class="
+                                    flex
+                                    items-center
+                                    bg-yellow-500
+                                    rounded-md rounded-r-none
+                                    w-4/12
+                                    h-1
+                                    overflow-visible
+                                "
+                            ></div>
+                        </div>
+
+                        <!--Duration-->
+                        <span class="text-xs text-yellow-500 font-bold"
+                            >62 min left</span
+                        >
                     </div>
 
-                    <!--Duration-->
-                    <span class="text-xs text-yellow-500 font-bold"
-                        >62 min left</span
+                    <button
+                        class="
+                            py-3
+                            px-4
+                            bg-yellow-500
+                            rounded-md
+                            text-xs
+                            font-bold
+                            w-6/12
+                        "
                     >
+                        Continue Watching
+                    </button>
                 </div>
-
-                <button
-                    class="
-                        py-3
-                        px-4
-                        bg-yellow-500
-                        rounded-md
-                        text-xs
-                        font-bold
-                        w-6/12
-                    "
-                >
-                    Continue Watching
-                </button>
             </div>
             <div
                 id="listView"
                 class="
                     w-6/12
                     h-full
-                    px-1
+                    px-4
                     pt-14
+                    pb-6
                     flex flex-col
                     overflow-y-scroll
-                    gap-4
+                    gap-6
                 "
             >
                 <!---Item 1-->
                 <div id="item">
-                    <div class="bg-white rounded-lg flex flex-row h-28">
+                    <div class="bg-gray-800 rounded-lg flex flex-row h-20">
                         <img
                             src="../assets/img/2.jpg"
                             alt=""
-                            class="object-cover rounded-l-lg w-5/12"
+                            class="object-cover rounded-l-lg w-4/12"
                         />
                         <div
                             class="
                                 flex flex-col
-                                p-4
+                                p-2
                                 flex-grow
-                                text-gray-500
+                                text-white
                                 justify-between
                             "
                         >
@@ -213,11 +206,9 @@
                                     items-center
                                 "
                             >
-                                <span>Cars 2</span>
+                                <span class="font-semibold">Cars 2</span>
                                 <!--Duration-->
-                                <span class="text-xs font-semibold"
-                                    >62 min left</span
-                                >
+                                <span class="text-xs">62 min left</span>
                             </div>
 
                             <div class="">
@@ -226,7 +217,7 @@
                                         flex
                                         bg-black
                                         rounded-lg
-                                        w-8/12
+                                        w-full
                                         h-1
                                         bg-clip-padding
                                     "
@@ -245,14 +236,10 @@
                                 </div>
                             </div>
 
-                            <div
-                                class="
-                                    flex flex-row
-                                    justify-end
-                                    text-xs
-                                    font-semibold
-                                "
-                            >
+                            <div class="flex flex-row justify-between text-xs">
+                                <span class="font-semibold"
+                                    >home/Downloads</span
+                                >
                                 <span>June 24th</span>
                             </div>
                         </div>
