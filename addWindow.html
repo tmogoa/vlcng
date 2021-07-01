@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+    <title>Add New Video</title>
+</head>
+<body>
+    <form>
+        <div>
+            <label>Select Video File</label>
+            <input type="file" id="item" accept="video/*" autofocus>
+        </div>
+        <button type="submit">Add Video</button>
+    </form>
+
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', submitForm);
+
+        function submitForm(e) {
+            e.preventDefault();
+            const item = document.querySelector('#item').value;
+            ipcRenderer.send('item:add', item);
+        }
+    </script>
+</body>
+</html>
