@@ -39,6 +39,10 @@ jspm_packages/
 # TypeScript v1 declaration files
 typings/
 
+#Composer generation
+package-json.lock
+yarn.lock
+
 # TypeScript cache
 *.tsbuildinfo
 
