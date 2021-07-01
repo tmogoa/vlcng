@@ -7,7 +7,7 @@ let start = 0;
 let end = lineLength - 1;
 let length = subtitles.length;
 let iteration = 0;
-while (length >= lineLength) {
+while (length > 0) {
     const subtitleLine = subtitles.slice(start, end);
     start += lineLength;
     end += lineLength;
@@ -18,4 +18,3 @@ while (length >= lineLength) {
     }, 1000 + iteration * 1000);
     iteration++;
 }
-const lastLine = subtitles.slice(end + 1);
