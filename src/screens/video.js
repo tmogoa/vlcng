@@ -5,6 +5,7 @@ const getWindow = () => remote.BrowserWindow.getFocusedWindow();
 
 const closeBtn = document.getElementById("close");
 const video = document.querySelector("video");
+const trigger = document.querySelector(".trigger");
 
 let mProgress = 0;
 
@@ -98,3 +99,21 @@ setInterval(() => {
     updateVideoProgess(mProgress);
     updateVolumeLevel(mProgress);
 }, 100);
+
+const modal = document.querySelector(".modal");
+
+const closeButton = document.querySelector(".close-button");
+
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+}
+
+function windowOnClick(event) {
+    if (event.target === modal) {
+        toggleModal();
+    }
+}
+
+trigger.addEventListener("click", toggleModal);
+closeButton.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);

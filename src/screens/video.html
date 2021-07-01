@@ -90,6 +90,7 @@
                 src="../assets/video/Cars 3 Rivalry Official Trailer.mp4"
                 class="w-full h-screen bg-gray-900 rounded-none p-0"
                 autoplay
+                muted
             ></video>
 
             <div id="menu" style="display: none">
@@ -152,7 +153,6 @@
             >
                 1x
             </button>
-            
 
             <div class="flex bg-yellow-500 bg-opacity-20 rounded-lg w-96 h-8">
                 <div
@@ -186,8 +186,6 @@
                     <span>1:12:34</span>
                 </div>
             </div>
-            
-
 
             <button
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
@@ -234,7 +232,14 @@
             </button>
 
             <button
-                class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
+                id="bookmarkBtn"
+                class="
+                    trigger
+                    p-2
+                    rounded-full
+                    focus:outline-none
+                    hover:bg-yellow-500
+                "
             >
                 <img src="../assets/img/bookmark_alert.png" alt="" />
             </button>
@@ -264,8 +269,177 @@
         </div>
 
         <!---Dialog boxes-->
-        <div class="z-50 hidden bg-white h-4/6 absolute top-0 w-8/12">
-            Test div
+        <div class="modal">
+            <div
+                class="
+                    modal-content
+                    flex flex-col
+                    h-2/3
+                    w-8/12
+                    rounded-lg
+                    overflow-hidden
+                "
+            >
+                <div
+                    class="
+                        border-b
+                        p-4
+                        flex flex-row
+                        justify-between
+                        items-center
+                    "
+                >
+                    <span class="text-2xl text-gray-500">Bookmarks</span>
+                    <button
+                        id="bookmarkBtn"
+                        class="
+                            p-2
+                            close-button
+                            rounded-full
+                            focus:outline-none
+                            hover:bg-yellow-500
+                        "
+                    >
+                        <img src="../assets/img/close_black_24dp.svg" alt="" />
+                    </button>
+                </div>
+                <div class="flex flex-row justify-end items-center p-4">
+                    <button
+                        class="
+                            py-3
+                            px-4
+                            bg-yellow-500
+                            rounded-md
+                            text-xs text-white
+                            font-bold
+                        "
+                    >
+                        Add bookmark
+                    </button>
+                </div>
+                <div
+                    id="bookmarkList"
+                    class="
+                        flex flex-col
+                        px-4
+                        pt-4
+                        pb-6
+                        text-gray-500
+                        overflow-y-scroll
+                    "
+                >
+                    <!--Item-->
+                    <div
+                        class="
+                            flex flex-row
+                            border
+                            rounded-md
+                            p-2
+                            items-center
+                            hover:bg-gray-100
+                            mb-2
+                        "
+                    >
+                        <div class="flex-grow flex flex-col">
+                            <span class="mb-2">1:15:20</span>
+                            <span class="text-xs"
+                                >Bookmark has no description</span
+                            >
+                        </div>
+                        <div>
+                            <!--Close btn-->
+                            <button
+                                id="bookmarkBtn"
+                                class="
+                                    p-2
+                                    rounded-full
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                "
+                            >
+                                <img
+                                    src="../assets/img/close_black_24dp.svg"
+                                    alt=""
+                                />
+                            </button>
+                        </div>
+                    </div>
+
+                    <!--Item-->
+                    <div
+                        class="
+                            flex flex-row
+                            border
+                            rounded-md
+                            p-2
+                            items-center
+                            hover:bg-gray-100
+                            mb-2
+                        "
+                    >
+                        <div class="flex-grow flex flex-col">
+                            <span class="mb-2">1:15:20</span>
+                            <span class="text-xs"
+                                >Bookmark has no description</span
+                            >
+                        </div>
+                        <div>
+                            <!--Close btn-->
+                            <button
+                                id="bookmarkBtn"
+                                class="
+                                    p-2
+                                    rounded-full
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                "
+                            >
+                                <img
+                                    src="../assets/img/close_black_24dp.svg"
+                                    alt=""
+                                />
+                            </button>
+                        </div>
+                    </div>
+
+                    <!--Item-->
+                    <div
+                        class="
+                            flex flex-row
+                            border
+                            rounded-md
+                            p-2
+                            items-center
+                            hover:bg-gray-100
+                            mb-2
+                        "
+                    >
+                        <div class="flex-grow flex flex-col">
+                            <span class="mb-2">1:15:20</span>
+                            <span class="text-xs"
+                                >Bookmark has no description</span
+                            >
+                        </div>
+                        <div>
+                            <!--Close btn-->
+                            <button
+                                id="bookmarkBtn"
+                                class="
+                                    p-2
+                                    rounded-full
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                "
+                            >
+                                <img
+                                    src="../assets/img/close_black_24dp.svg"
+                                    alt=""
+                                />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!--End of dialog boxes-->
         <script defer src="./video.js"></script>
