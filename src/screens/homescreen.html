@@ -85,8 +85,8 @@
             "
         >
             <div class="w-6/12 h-full flex flex-col justify-end px-7 py-10">
-                <div class="flex-grow flex flex-col justify-start pt-10">
-                    <div class="flex items-center rounded-full shadow-xl mb-1">
+                <div class="flex-grow flex flex-col justify-start pt-10 gap-12">
+                    <div class="flex items-center rounded-full shadow-xl">
                         <input
                             class="
                                 rounded-l-full
@@ -121,6 +121,40 @@
                                     src="../assets/img/search.svg.svg"
                                     alt=""
                                 />
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Paste a link to a video..."
+                                class="
+                                    py-3
+                                    px-6
+                                    bg-gray-200
+                                    text-gray-600
+                                    rounded-3xl
+                                    mb-2
+                                    w-8/12
+                                    focus:outline-none
+                                    text-sm
+                                "
+                            />
+                        </div>
+                        <div class="flex flex-row justify-end w-8/12">
+                            <button
+                                id="playNetVideoBtn"
+                                class="
+                                    py-3
+                                    px-4
+                                    bg-yellow-500
+                                    rounded-md
+                                    text-xs
+                                    font-bold
+                                "
+                            >
+                                Play
                             </button>
                         </div>
                     </div>

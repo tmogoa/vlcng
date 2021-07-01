@@ -1,5 +1,4 @@
-const remote = require("electron").remote;
-const { ipcRenderer } = require("electron");
+const { remote } = require("electron");
 
 const getWindow = () => remote.BrowserWindow.getFocusedWindow();
 
@@ -7,6 +6,7 @@ const closeBtn = document.getElementById("close");
 
 const minimizeIcon = document.getElementById("minimize");
 const maximizeIcon = document.getElementById("maximize");
+const playNetVideoBtn = document.getElementById("playNetVideoBtn");
 
 closeBtn.onclick = (e) => {
     getWindow().close();
@@ -29,11 +29,13 @@ function maximize() {
 // Only for UI testing and iteration
 const content = document.getElementById("item");
 const listView = document.getElementById("listView");
-console.log(content.innerHTML);
 
 for (let index = 0; index < 20; index++) {
     let div = document.createElement("div");
     div.innerHTML = content.innerHTML;
     listView.appendChild(div);
 }
+playNetVideoBtn.onclick = (e) => {
+    getWindow().loadFile("./src/screens/video.html");
+};
 //end of UI testing
