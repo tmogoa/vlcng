@@ -38,7 +38,7 @@
                 font-semibold
                 py-2
                 px-4
-                z-50
+                z-30
                 absolute
             "
             style="
@@ -85,10 +85,10 @@
             </div>
         </div>
 
-        <div id="mainMenu">
+        <div id="mainMenu" class="w-full h-screen">
             <video
                 src="../assets/video/Cars 3 Rivalry Official Trailer.mp4"
-                class="w-full bg-gray-900 rounded-none p-0"
+                class="w-full h-screen bg-gray-900 rounded-none p-0"
                 autoplay
             ></video>
 
@@ -171,7 +171,7 @@
                     class="
                         flex
                         absolute
-                        z-50
+                        z-30
                         h-8
                         flex-row
                         items-center
@@ -199,7 +199,7 @@
                         absolute
                         bottom-16
                         rounded-lg
-                        z-50
+                        z-30
                         flex flex-col-reverse
                         items-center
                     "
@@ -233,7 +233,7 @@
             <button
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
             >
-                <img src="../assets/img/bookmark_black_24dp.svg" alt="" />
+                <img src="../assets/img/bookmark_alert.png" alt="" />
             </button>
 
             <button
@@ -259,6 +259,12 @@
         >
             Some text
         </div>
+
+        <!---Dialog boxes-->
+        <div class="z-50 hidden bg-white h-4/6 absolute top-0 w-8/12">
+            Test div
+        </div>
+        <!--End of dialog boxes-->
         <script defer src="./video.js"></script>
         <script defer src="../test/subtitles.js"></script>
     </body>
