@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>VLCng</title>
-        <link rel="stylesheet" href="./index.css" />
+        <link rel="stylesheet" href="../index.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
             rel="stylesheet"
@@ -12,14 +12,13 @@
         <link
             rel="stylesheet"
             type="text/css"
-            href="./assets/css/controls.css"
+            href="../assets/css/controls.css"
         />
         <script>
             function showMenu() {
-                var x = document.getElementById("menu")
+                var x = document.getElementById("menu");
                 displayValue = "";
-                if (x.style.display == "")
-                    displayValue = "none";
+                if (x.style.display == "") displayValue = "none";
 
                 x.style.display = displayValue;
             }
@@ -61,7 +60,7 @@
                 >
                     <img
                         id="closeIcon"
-                        src="./assets/img/min.png"
+                        src="../assets/img/min.png"
                         alt=""
                         class="w-4"
                     />
@@ -75,50 +74,47 @@
                         hover:bg-gray-800
                     "
                 >
-                    <img src="./assets/img/max.png" alt="" class="w-4" />
+                    <img src="../assets/img/max.png" alt="" class="w-4" />
                 </button>
                 <button
                     id="close"
                     class="p-2 rounded-full focus:outline-none hover:bg-white"
                 >
-                    <img src="./assets/img/close.png" alt="" class="w-4" />
+                    <img src="../assets/img/close.png" alt="" class="w-4" />
                 </button>
             </div>
         </div>
 
-<<<<<<< HEAD
         <div id="mainMenu">
             <video
-            src="assets/video/Cars 3 Rivalry Official Trailer.mp4"
-            class="w-full bg-gray-900 rounded-none p-0"
-            autoplay
-        ></video>
+                src="../assets/video/Cars 3 Rivalry Official Trailer.mp4"
+                class="w-full bg-gray-900 rounded-none p-0"
+                autoplay
+            ></video>
 
-            <div id="menu" style="display:none">
+            <div id="menu" style="display: none">
                 <div id="submenu">
-                 <button class="menubtn" id="media_btn">Media</button>
-                  <button class="menubtn" id="video_btn">Video</button>
-                  <button class="menubtn" id="audio_btn">Audio</button>
-                  <button class="menubtn" id="sub_btn">Subtitles</button>
-                  <button class="menubtn" id="tools_btn">Tools</button>
-                  <button class="menubtn" id="view_btn">View</button>
-                  <button class="menubtn" id="help_btn">Help</button>
+                    <button class="menubtn" id="media_btn">Media</button>
+                    <button class="menubtn" id="video_btn">Video</button>
+                    <button class="menubtn" id="audio_btn">Audio</button>
+                    <button class="menubtn" id="sub_btn">Subtitles</button>
+                    <button class="menubtn" id="tools_btn">Tools</button>
+                    <button class="menubtn" id="view_btn">View</button>
+                    <button class="menubtn" id="help_btn">Help</button>
                 </div>
-        
+
                 <div id="rightmenu">
-                  <br> <br>
-                  <label for="audio">Choose an Audio track:</label>
+                    <br />
+                    <br />
+                    <label for="audio">Choose an Audio track:</label>
                     <select name="audio" id="audio">
                         <option value="Track">Track 1 - English</option>
                         <option value="Track">Track 2 - German</option>
                         <option value="Track">Track 3 - French</option>
                     </select>
                 </div>
-              </div>
+            </div>
         </div>
-=======
-        
->>>>>>> 1a7d310b700d32de018216e8996a37f48bf1480a
 
         <div
             class="
@@ -138,7 +134,7 @@
             <button
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
             >
-                <img src="./assets/img/play_arrow_black_24dp.svg" alt="" />
+                <img src="../assets/img/play_arrow_black_24dp.svg" alt="" />
             </button>
 
             <button
@@ -192,7 +188,7 @@
             <button
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
             >
-                <img src="./assets/img/volume_up_black_24dp.svg" alt="" />
+                <img src="../assets/img/volume_up_black_24dp.svg" alt="" />
 
                 <div
                     class="
@@ -230,22 +226,22 @@
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
                 onclick="showMenu()"
             >
-                <img src="./assets/img/settings.svg" alt="" />
+                <img src="../assets/img/settings.svg" alt="" />
             </button>
 
             <button
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
             >
-                <img src="./assets/img/bookmark_black_24dp.svg" alt="" />
+                <img src="../assets/img/bookmark_black_24dp.svg" alt="" />
             </button>
 
             <button
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
             >
-                <img src="./assets/img/fullscreen.svg" alt="" />
+                <img src="../assets/img/fullscreen.svg" alt="" />
             </button>
         </div>
 
-        <script defer src="./render.js"></script>
+        <script defer src="./video.js"></script>
     </body>
 </html>
