@@ -99,11 +99,19 @@ export default class VlcMediaContent{
 
     }
 
-    setCurrentTime(){
+    /**
+     * The time in H:m:s
+     * @param {string} time 
+     */
+    setCurrentTime(time){
 
     }
 
-    setVolume(){
+    /**
+     * The new volume of the media object
+     * @param {double} volume 
+     */
+    setVolume(volume){
 
     }
 
@@ -111,7 +119,7 @@ export default class VlcMediaContent{
 
     }
 
-
+    
 
 }
 
