@@ -1,4 +1,4 @@
-const { remote } = require("electron");
+const { remote, ipcRenderer } = require("electron");
 
 const getWindow = () => remote.BrowserWindow.getFocusedWindow();
 
@@ -35,7 +35,11 @@ for (let index = 0; index < 20; index++) {
     div.innerHTML = content.innerHTML;
     listView.appendChild(div);
 }
+
 playNetVideoBtn.onclick = (e) => {
+    //send the video link
+    ipcRenderer.send('save-video-link', "../assets/video/Cars 3 Rivalry Official Trailer.mp4");
+    console.log("sent video link");
     getWindow().loadFile("./src/screens/video.html");
 };
 //end of UI testing

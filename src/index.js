@@ -1,5 +1,12 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const Manager = require('./classes/Manager');
+
+/**
+ * This is the manager object that will manage the entire video playing process
+ */
+
+const vlcManager = new Manager();
 
 let mainWindow;
 
@@ -23,7 +30,7 @@ const createWindow = () => {
     });
 
     // and load the index.html of the app.
-    mainWindow.loadFile(path.join(__dirname, "/screens/video.html"));
+    mainWindow.loadFile(path.join(__dirname, "/screens/homescreen.html"));
 
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();
@@ -56,3 +63,16 @@ app.on("activate", () => {
 ipcMain.on("window:resize", (event, arg) => {
     mainWindow.setSize(800, Math.ceil(arg));
 });
+
+//Handling the link from the homescreen
+ipcMain.on('save-video-link', (evt, link)=>{
+    vlcManager.currentlyPlayingMediaSrc = link;
+    console.log(link);
+});
+
+ipcMain.on('send-video-link', (evt)=>{
+    evt.reply('receive-video-link', vlcManager.currentlyPlayingMediaSrc);
+    console.log('sending video link');
+});
+
+
