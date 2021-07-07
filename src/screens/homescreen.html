@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>VLCng</title>
+        <link rel="stylesheet" href="../index.css" />
+        <link rel="stylesheet" href="../assets/css/homescreen.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+
+    <body class="overflow-hidden">
+        <div
+            class="
+                shadow-xl
+                w-full
+                bg-gray-50 bg-opacity-10
+                flex flex-row
+                items-center
+                justify-between
+                text-white
+                font-semibold
+                py-2
+                px-4
+                z-50
+                absolute
+            "
+            style="
+                -webkit-app-region: drag;
+                -webkit-user-select: none;
+                -webkit-app-region: drag;
+            "
+        >
+            <div>Recent</div>
+
+            <div class="flex flex-row justify-end gap-5">
+                <button
+                    id="minimize"
+                    class="
+                        p-2
+                        rounded-full
+                        focus:outline-none
+                        hover:bg-gray-800
+                    "
+                >
+                    <img
+                        id="closeIcon"
+                        src="../assets/img/min.png"
+                        alt=""
+                        class="w-4"
+                    />
+                </button>
+                <button
+                    id="maximize"
+                    class="
+                        p-2
+                        rounded-full
+                        focus:outline-none
+                        hover:bg-gray-800
+                    "
+                >
+                    <img src="../assets/img/max.png" alt="" class="w-4" />
+                </button>
+                <button
+                    id="close"
+                    class="p-2 rounded-full focus:outline-none hover:bg-white"
+                >
+                    <img src="../assets/img/close.png" alt="" class="w-4" />
+                </button>
+            </div>
+        </div>
+
+        <div
+            class="
+                z-30
+                absolute
+                bg-gray-900 bg-opacity-30
+                w-full
+                text-white
+                h-screen
+                flex flex-row
+                items-center
+            "
+        >
+            <div class="w-6/12 h-full flex flex-col justify-end px-7 py-10">
+                <div class="flex-grow flex flex-col justify-start pt-10 gap-12">
+                    <div class="flex items-center rounded-full shadow-xl">
+                        <input
+                            class="
+                                rounded-l-full
+                                w-6/12
+                                py-4
+                                px-6
+                                text-gray-700
+                                leading-tight
+                                focus:outline-none
+                            "
+                            id="search"
+                            type="text"
+                            placeholder="Search"
+                        />
+                        <div class="p-4">
+                            <button
+                                class="
+                                    bg-yellow-500
+                                    text-white
+                                    rounded-full
+                                    p-2
+                                    hover:bg-yellow-400
+                                    focus:outline-none
+                                    w-12
+                                    h-12
+                                    flex
+                                    items-center
+                                    justify-center
+                                "
+                            >
+                                <img
+                                    src="../assets/img/search.svg.svg"
+                                    alt=""
+                                />
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Paste a link to a video..."
+                                class="
+                                    py-3
+                                    px-6
+                                    bg-gray-200
+                                    text-gray-600
+                                    rounded-3xl
+                                    mb-2
+                                    w-8/12
+                                    focus:outline-none
+                                    text-sm
+                                "
+                            />
+                        </div>
+                        <div class="flex flex-row justify-end w-8/12">
+                            <button
+                                id="playNetVideoBtn"
+                                class="
+                                    py-3
+                                    px-4
+                                    bg-yellow-500
+                                    rounded-md
+                                    text-xs
+                                    font-bold
+                                "
+                            >
+                                Play
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-grow flex flex-col justify-start pt-10">
+                    <span class="text-4xl font-semibold mb-4 text-yellow-500"
+                        >Cars 3</span
+                    >
+
+                    <div class="flex flex-row items-center mb-8">
+                        <!---Progress bar-->
+                        <div class="flex bg-black rounded-md w-8/12 h-1 mr-2">
+                            <div
+                                id="videoProgressBar"
+                                class="
+                                    flex
+                                    items-center
+                                    bg-yellow-500
+                                    rounded-md rounded-r-none
+                                    w-4/12
+                                    h-1
+                                    overflow-visible
+                                "
+                            ></div>
+                        </div>
+
+                        <!--Duration-->
+                        <span class="text-xs text-yellow-500 font-bold"
+                            >62 min left</span
+                        >
+                    </div>
+
+                    <button
+                        class="
+                            py-3
+                            px-4
+                            bg-yellow-500
+                            rounded-md
+                            text-xs
+                            font-bold
+                            w-6/12
+                        "
+                    >
+                        Continue Watching
+                    </button>
+                </div>
+            </div>
+            <div
+                id="listView"
+                class="
+                    w-6/12
+                    h-full
+                    px-4
+                    pt-14
+                    pb-6
+                    flex flex-col
+                    overflow-y-scroll
+                    gap-6
+                "
+            >
+                <!---Item 1-->
+                <div id="item">
+                    <div class="bg-gray-800 rounded-lg flex flex-row h-20">
+                        <img
+                            src="../assets/img/2.jpg"
+                            alt=""
+                            class="object-cover rounded-l-lg w-4/12"
+                        />
+                        <div
+                            class="
+                                flex flex-col
+                                p-2
+                                flex-grow
+                                text-white
+                                justify-between
+                            "
+                        >
+                            <div
+                                class="
+                                    flex flex-row
+                                    justify-between
+                                    items-center
+                                "
+                            >
+                                <span class="font-semibold">Cars 2</span>
+                                <!--Duration-->
+                                <span class="text-xs">62 min left</span>
+                            </div>
+
+                            <div class="">
+                                <div
+                                    class="
+                                        flex
+                                        bg-black
+                                        rounded-lg
+                                        w-full
+                                        h-1
+                                        bg-clip-padding
+                                    "
+                                >
+                                    <div
+                                        id="videoProgressBar"
+                                        class="
+                                            flex
+                                            bg-yellow-500
+                                            rounded-lg rounded-r-none
+                                            w-4/12
+                                            h-1
+                                            bg-clip-padding
+                                        "
+                                    ></div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row justify-between text-xs">
+                                <span class="font-semibold"
+                                    >home/Downloads</span
+                                >
+                                <span>June 24th</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full h-screen bg-gray-700 opacity-80 overflow-hidden">
+            <img
+                src="../assets/img/1.jpg"
+                alt=""
+                class="w-full h-full object-cover"
+            />
+        </div>
+        <script defer src="./homescreen.js"></script>
+    </body>
+</html>
