@@ -117,3 +117,24 @@ function windowOnClick(event) {
 trigger.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
+
+let timeoutId;
+const floatingMenu = document.getElementById("floatingMenu");
+
+function listenForChanges() {
+    floatingMenu.style.visibility = "visible";
+    if (timeoutId) {
+        clearTimeout(timeoutId);
+    }
+
+    timeoutId = setTimeout(() => {
+        //save article to db after 1s inactivity
+        floatingMenu.style.visibility = "hidden";
+    }, 1000);
+}
+
+function autoShowMenu() {
+    video.addEventListener("mouseover", listenForChanges);
+}
+
+autoShowMenu();
