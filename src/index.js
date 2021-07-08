@@ -7,7 +7,7 @@ const Manager = require('./classes/Manager');
  */
 
 const vlcManager = new Manager();
-
+ 
 let mainWindow;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.

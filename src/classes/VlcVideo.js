@@ -2,7 +2,7 @@ const VlcMediaContent = require('./VlcMediaContent');
 
 /**
  * This  class mostly manipulates the UI of the video playing interface
- */
+ */ 
 class VlcVideo extends VlcMediaContent{
 
     uiVideoProgressBar; //the progress bar

@@ -23,6 +23,7 @@ const Utility = require('./Utility');
      * name = file
      */
     srcObject = {};
+    
 
     /**
      * Name of the content
@@ -78,7 +79,7 @@ const Utility = require('./Utility');
 
     /**
      * Plays a VLCMedia content: audio or video
-     * @param {double} speed - the speed of the video (0.25x, 0.5x, 1x, 1.5x, 2x, 2.5x)
+     * @param {double} speed - the speedIndex of the video from this array [0.25x, 0.5x, 0.75x, 1x, 1.25x, 1.5x, 1.75x, 2x]
      */
     play(speedIndex = 3){
         this.mediaObject.playbackRate = this.playbackSpeeds[speedIndex];
@@ -126,7 +127,7 @@ const Utility = require('./Utility');
     }
 
     /**
-     * The new volume of the media object
+     * The new volume of the media object b/w 0,1
      * @param {double} volume 
      */
     setVolume(volume){
@@ -157,6 +158,7 @@ const Utility = require('./Utility');
        
         return;
     }
+    
 
 }
 

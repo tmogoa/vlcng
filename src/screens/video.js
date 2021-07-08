@@ -47,18 +47,6 @@ const trigger = document.querySelector(".trigger");
 const modal = document.querySelector(".modal");
 const closeButton = document.querySelector(".close-button");
 
-
-// playButton.addEventListener('click', function() {
-//    if(!vlcVideo.isPlaying){
-//        vlcVideo.play(); 
-//        this.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
-//    }
-//    else{
-//        vlcVideo.pause();
-//        this.querySelector('img').src = "../assets/img/pause.svg";
-//    }
-// });
-
 vlcVideo.mediaObject.addEventListener(
     "loadedmetadata",
     function (e) {
@@ -80,53 +68,6 @@ function toggleFullScreen() {
 }
 
 document.addEventListener("dblclick", toggleFullScreen);
-
-
-
-/**
- *
- * @param {int} progress
- */
-// function updateVolumeLevel(progress) {
-//     max = 112; //maximum height of the bar
-//     if (progress <= 100 && progress >= 0) {
-//         if (progress == 95) {
-//             volumeProgressColumn.classList.remove("rounded-t-none");
-//         }
-//         volumeText.innerHTML = progress;
-//         volumeProgressColumn.style.height = `${Math.ceil(
-//             (progress * max) / 100
-//         )}px`;
-//     }
-// }
-
-// volumeProgressColumn.style.height = "0px";
-// videoProgressBar.style.width = "0px";
-
-/**
- *
- * @param {int} progress
- */
-// function updateVideoProgess(progress, totalDuration) {
-//     max = videoProgressBar.parentElement.clientWidth;
-//     let ratio = progress/totalDuration;
-//     if (ratio * 100 >= 95) {
-//         videoProgressBar.classList.remove("rounded-r-none");
-//     }
-//     videoProgressBar.style.width = `${Math.ceil(ratio * max)}px`;
-// }
-
-// //updating the seekbar
-// vlcVideo.mediaObject.addEventListener('timeupdate', () =>{
-//     updateVideoProgess(vlcVideo.getCurrentTime(), vlcVideo.getTotalDuration());
-// });
-
-
-// setInterval(() => {
-//     mProgress++; 
-//     updateVolumeLevel(mProgress);
-// }, 100);
-
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
