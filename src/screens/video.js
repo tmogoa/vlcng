@@ -30,8 +30,18 @@ function maximize() {
 // UI controls
 // #########
 
+//create the manager for this video
+const Manager = require("./../classes/Manager");
+const theManager = new Manager();
+
+//initial the vlcVideo object that will manage the played video
 const VlcVideo = require("./../classes/VlcVideo");
 const vlcVideo = new VlcVideo();
+
+//set the manager ManagedObject property to this video.
+theManager.managedObject = vlcVideo;
+vlcVideo.myManager = theManager;
+
 vlcVideo.mediaObject = document.querySelector("video");
 vlcVideo.uiVolumeProgressColumn = document.getElementById(
     "volumeProgressColumn"
@@ -117,5 +127,6 @@ autoShowMenu();
 
 ipcRenderer.send("send-video-link", "");
 ipcRenderer.on("receive-video-link", (evt, link) => {
-    vlcVideo.setSrc(link);
+    //the video manager than sets the source
+    theManager.setSrc(link);
 });

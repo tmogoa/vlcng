@@ -5,6 +5,9 @@ const VlcMediaContent = require('./VlcMediaContent');
  */ 
 class VlcVideo extends VlcMediaContent{
 
+    //The manager of this vlcVideo
+    myManager;
+
     uiVideoProgressBar; //the progress bar
     uiTotalDurationText; //The text showing the total duration of the video
     uiCurrentTimeText; //The text showing the current time in the video
@@ -47,6 +50,7 @@ class VlcVideo extends VlcMediaContent{
         this.mediaObject.addEventListener('timeupdate', () =>{
             this.updateVideoProgess();
             this.updateDurationText();
+            myManager.updateTime();
         });
 
         /**

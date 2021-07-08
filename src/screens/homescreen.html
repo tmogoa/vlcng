@@ -161,7 +161,9 @@
                 </div>
 
                 <div class="flex-grow flex flex-col justify-start pt-10">
-                    <span class="text-4xl font-semibold mb-4 text-yellow-500"
+                    <span 
+                    id="continue-video-name"
+                    class="text-4xl font-semibold mb-4 text-yellow-500"
                         >Cars 3</span
                     >
 
@@ -169,7 +171,7 @@
                         <!---Progress bar-->
                         <div class="flex bg-black rounded-md w-8/12 h-1 mr-2">
                             <div
-                                id="videoProgressBar"
+                                id="continue-video-progressBar"
                                 class="
                                     flex
                                     items-center
@@ -183,12 +185,15 @@
                         </div>
 
                         <!--Duration-->
-                        <span class="text-xs text-yellow-500 font-bold"
+                        <span 
+                        id = "minutes-left"
+                        class="text-xs text-yellow-500 font-bold"
                             >62 min left</span
                         >
                     </div>
 
                     <button
+                        id = "continue-watching-button"
                         class="
                             py-3
                             px-4
