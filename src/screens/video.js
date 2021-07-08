@@ -30,18 +30,20 @@ function maximize() {
 // UI controls
 // #########
 
-const VlcVideo = require('./../classes/VlcVideo');
+const VlcVideo = require("./../classes/VlcVideo");
 const vlcVideo = new VlcVideo();
 vlcVideo.mediaObject = document.querySelector("video");
-vlcVideo.uiVolumeProgressColumn = document.getElementById("volumeProgressColumn");
+vlcVideo.uiVolumeProgressColumn = document.getElementById(
+    "volumeProgressColumn"
+);
 vlcVideo.uiVolumeText = document.getElementById("volumeText");
 vlcVideo.uiVideoProgressBar = document.getElementById("videoProgressBar");
-vlcVideo.uiVolumeButtonImg = document.querySelector('#mute-volume');
+vlcVideo.uiVolumeButtonImg = document.querySelector("#mute-volume");
 vlcVideo.uiPlayButton = document.querySelector("#play-pause");
-vlcVideo.uiCurrentTimeText = document.querySelector('#current-time');
-vlcVideo.uiTotalDurationText = document.querySelector('#dur-time');
-vlcVideo.uiNameText = document.querySelector('#media-name');
-vlcVideo.uiPlaySpeedButton = document.querySelector('#play-speed');
+vlcVideo.uiCurrentTimeText = document.querySelector("#current-time");
+vlcVideo.uiTotalDurationText = document.querySelector("#dur-time");
+vlcVideo.uiNameText = document.querySelector("#media-name");
+vlcVideo.uiPlaySpeedButton = document.querySelector("#play-speed");
 
 const trigger = document.querySelector(".trigger");
 const modal = document.querySelector(".modal");
@@ -83,6 +85,26 @@ trigger.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
 
+let timeoutId;
+const floatingMenu = document.getElementById("floatingMenu");
+
+function listenForChanges() {
+    floatingMenu.style.visibility = "visible";
+    if (timeoutId) {
+        clearTimeout(timeoutId);
+    }
+
+    timeoutId = setTimeout(() => {
+        //save article to db after 1s inactivity
+        floatingMenu.style.visibility = "hidden";
+    }, 1000);
+}
+
+function autoShowMenu() {
+    video.addEventListener("mouseover", listenForChanges);
+}
+
+autoShowMenu();
 /**
  * #####################################################
  * Logic below
@@ -93,10 +115,7 @@ window.addEventListener("click", windowOnClick);
  * Gets the link from the homescreen.
  */
 
- ipcRenderer.send('send-video-link', '');
- ipcRenderer.on('receive-video-link', (evt, link)=>{
-     vlcVideo.setSrc(link);
- });
-
-
-
+ipcRenderer.send("send-video-link", "");
+ipcRenderer.on("receive-video-link", (evt, link) => {
+    vlcVideo.setSrc(link);
+});

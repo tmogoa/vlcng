@@ -143,11 +143,11 @@
                 id="play-speed"
                 class="
                     font-bold
-                    w-9
-                    h-9
-                    text-sm
-                    p-2
-                    rounded-full
+                    text-xs
+                    px-2
+                    py-1
+                    rounded
+                    ring-2 ring-yellow-500
                     focus:outline-none
                     hover:bg-yellow-500
                 "
@@ -182,9 +182,9 @@
                         font-bold
                     "
                 >
-                    <span id='current-time'>23:14</span>
+                    <span id="current-time">23:14</span>
                     <span>&nbsp;/&nbsp;</span>
-                    <span id='dur-time'>1:12:34</span>
+                    <span id="dur-time">1:12:34</span>
                 </div>
             </div>
 
@@ -192,9 +192,11 @@
                 id="volume-control-button"
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
             >
-                <img 
-                id='mute-volume'
-                src="../assets/img/volume_up_black_24dp.svg" alt="" />
+                <img
+                    id="mute-volume"
+                    src="../assets/img/volume_up_black_24dp.svg"
+                    alt=""
+                />
 
                 <div
                     class="
@@ -446,7 +448,7 @@
             </div>
         </div>
         <!--End of dialog boxes-->
-        <script defer src="./video.js" ></script>
+        <script defer src="./video.js"></script>
         <script defer src="../test/subtitles.js"></script>
     </body>
 </html>
