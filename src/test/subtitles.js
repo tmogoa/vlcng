@@ -14,7 +14,7 @@ while (length > 0) {
     length -= lineLength;
     setTimeout(() => {
         subtitleBox.innerHTML = subtitleLine;
-        // console.log(subtitleLine);
+        //console.log(subtitleLine);
     }, 1000 + iteration * 1000);
     iteration++;
 }

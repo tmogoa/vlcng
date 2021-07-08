@@ -90,7 +90,6 @@
                 src="../assets/video/Cars 3 Rivalry Official Trailer.mp4"
                 class="w-full h-screen bg-gray-900 rounded-none p-0"
                 autoplay
-                muted
             ></video>
 
             <div id="menu" style="display: none">
@@ -135,11 +134,13 @@
         >
             <button
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
+                id="play-pause"
             >
                 <img src="../assets/img/play_arrow_black_24dp.svg" alt="" />
             </button>
 
             <button
+                id="play-speed"
                 class="
                     font-bold
                     w-9
@@ -181,16 +182,19 @@
                         font-bold
                     "
                 >
-                    <span>23:14</span>
+                    <span id='current-time'>23:14</span>
                     <span>&nbsp;/&nbsp;</span>
-                    <span>1:12:34</span>
+                    <span id='dur-time'>1:12:34</span>
                 </div>
             </div>
 
             <button
+                id="volume-control-button"
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
             >
-                <img src="../assets/img/volume_up_black_24dp.svg" alt="" />
+                <img 
+                id='mute-volume'
+                src="../assets/img/volume_up_black_24dp.svg" alt="" />
 
                 <div
                     class="
@@ -442,7 +446,7 @@
             </div>
         </div>
         <!--End of dialog boxes-->
-        <script defer src="./video.js"></script>
+        <script defer src="./video.js" ></script>
         <script defer src="../test/subtitles.js"></script>
     </body>
 </html>
