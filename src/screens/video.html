@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>VLCng</title>
         <link rel="stylesheet" href="../index.css" />
+        <link rel="stylesheet" href="../assets/css/slider.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
             rel="stylesheet"
@@ -147,15 +148,14 @@
                     px-2
                     py-1
                     rounded
-                    ring-2 ring-yellow-500
                     focus:outline-none
-                    hover:bg-yellow-500
+                    bg-yellow-500
                 "
             >
                 1x
             </button>
 
-            <div class="flex bg-yellow-500 bg-opacity-20 rounded-lg w-96 h-8">
+            <!-- <div class="flex bg-yellow-500 bg-opacity-20 rounded-lg w-96 h-8">
                 <div
                     id="videoProgressBar"
                     class="
@@ -179,6 +179,66 @@
                         items-center
                         text-xs
                         px-4
+                        font-bold
+                    "
+                >
+                    <span id="current-time">23:14</span>
+                    <span>&nbsp;/&nbsp;</span>
+                    <span id="dur-time">1:12:34</span>
+                </div>
+            </div> -->
+
+            <div
+                id="videoProgressBar"
+                class="flex items-center rounded-lg w-96 h-8"
+            >
+                <!--* Your slider is here.
+                    * The sliding thumb's visibility is hidden
+                    * CSS for the slider is under slider.css-->
+                <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                    class="
+                        slider
+                        bg-opacity-20 bg-yellow-500
+                        rounded-lg
+                        w-96
+                        h-8
+                    "
+                    id="myRange"
+                />
+
+                <!--* The following <div> is what you should lengthen or shorten
+                    * It is also transparent to clicks
+                    * Also remember than this div when progress is near 100, the corners to its right
+                        should be rounded by removing the class`rounded-r-none`-->
+                <div
+                    id="progressIndicator"
+                    class="
+                        flex
+                        absolute
+                        rounded-lg rounded-r-none
+                        w-48
+                        pointer-events-none
+                        bg-yellow-500
+                        h-8
+                    "
+                ></div>
+
+                <!--* This is the progress text-->
+                <div
+                    class="
+                        flex
+                        absolute
+                        z-30
+                        h-8
+                        flex-row
+                        items-center
+                        text-xs
+                        px-4
+                        pointer-events-none
                         font-bold
                     "
                 >
