@@ -10,20 +10,10 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
             rel="stylesheet"
         />
-        <link
+         <link
             rel="stylesheet"
             type="text/css"
-            href="../assets/css/controls.css"
-        />
-        <script>
-            function showMenu() {
-                var x = document.getElementById("menu");
-                displayValue = "";
-                if (x.style.display == "") displayValue = "none";
-
-                x.style.display = displayValue;
-            }
-        </script>
+            href="../assets/css/controls.css"/>
     </head>
 
     <body class="flex flex-col items-center overflow-hidden">
@@ -90,29 +80,120 @@
             <video
                 src="../assets/video/Cars 3 Rivalry Official Trailer.mp4"
                 class="w-full h-screen bg-gray-900 rounded-none p-0"
-                autoplay
+                
             ></video>
 
-            <div id="menu" style="display: none">
+            <div id="menu" style="display: none" >
+                <!-- <div id="submenu">
+                    <button class="menubtn" id="media_btn" onclick="showMedia('mymedia')">Media</button>
+                    <button class="menubtn" id="video_btn" onclick="showVideo('myvideo')">Video</button>
+                    <button class="menubtn" id="audio_btn" onclick="showAudio('myaudio')">Audio</button>
+                    <button class="menubtn" id="sub_btn" onclick="showSub('mysubtitles')">Subtitles</button>
+                    <button class="menubtn" id="tools_btn" onclick="showTools('mytools')">Tools</button>
+                    <button class="menubtn" id="view_btn" onclick="showView('myview')">View</button>
+                    <button class="menubtn" id="help_btn" onclick="ShowHelp('myhelp')">Help</button>
+                </div> -->
+
                 <div id="submenu">
-                    <button class="menubtn" id="media_btn">Media</button>
-                    <button class="menubtn" id="video_btn">Video</button>
-                    <button class="menubtn" id="audio_btn">Audio</button>
-                    <button class="menubtn" id="sub_btn">Subtitles</button>
-                    <button class="menubtn" id="tools_btn">Tools</button>
-                    <button class="menubtn" id="view_btn">View</button>
-                    <button class="menubtn" id="help_btn">Help</button>
+                    <p>Settings</p><br>
+                    <button class="menubtn" id="media_btn" onclick="show('mymedia')">Media</button>
+                    <button class="menubtn" id="video_btn" onclick="show('myvideo')">Video</button>
+                    <button class="menubtn" id="audio_btn" onclick="show('myaudio')">Audio</button>
+                    <button class="menubtn" id="sub_btn" onclick="show('mysubtitles')">Subtitles</button>
+                    <button class="menubtn" id="tools_btn" onclick="show('mytools')">Tools</button>
+                    <button class="menubtn" id="view_btn" onclick="show('myview')">View</button>
+                    <button class="menubtn" id="help_btn" onclick="show('myhelp')">Help</button>
                 </div>
 
                 <div id="rightmenu">
                     <br />
                     <br />
-                    <label for="audio">Choose an Audio track:</label>
-                    <select name="audio" id="audio">
-                        <option value="Track">Track 1 - English</option>
-                        <option value="Track">Track 2 - German</option>
-                        <option value="Track">Track 3 - French</option>
-                    </select>
+                    <div id="main_place" >
+                        <label for="audio">Choose an Audio track:</label>
+                        <select name="audio" id="audio">
+                            <option value="Track">Track 1 - Venezuela</option>
+                            <option value="Track">Track 2 - German</option>
+                            <option value="Track">Track 3 - French</option>
+                        </select>
+                    </div>
+
+                    <div id="mymedia" style="display: none">
+                        <label for="audio">Choose an Audio track:</label>
+                        <select name="audio" id="audio">
+                            <option value="Track">Track 1 - Spanish</option>
+                            <option value="Track">Track 2 - German</option>
+                            <option value="Track">Track 3 - French</option>
+                        </select>
+
+                    </div>
+
+                    <div id="myvideo" style="display: none">
+                        <label for="audio">Choose an Audio track:</label>
+                        <select name="audio" id="audio">
+                            <option value="Track">Track 2 - English uk</option>
+                            <option value="Track">Track 2 - Spanish</option>
+                            <option value="Track">Track 3 - Swahili</option>
+                        </select>
+                    </div>
+
+                    <div id="myaudio" style="display: none">
+                        <label for="audio">Choose an Audio track:</label>
+                        <select name="audio" id="audio">
+                            <option value="Track">Track 3 - English</option>
+                            <option value="Track">Track 3 - Danish</option>
+                            <option value="Track">Track 3 - Swedish</option>
+                        </select>
+                    </div>
+
+                    <div id="mysubtitles" style="display: none">
+                        <label for="audio">Choose an Audio track:</label>
+                        <select name="audio" id="audio">
+                            <option value="Track">Track 4 - English</option>
+                            <option value="Track">Track 2 - Polish</option>
+                            <option value="Track">Track 3 - French</option>
+                        </select>
+                    </div>
+
+                    <div id="mytools" style="display: none">
+                        <label for="audio">Choose an Audio track:</label>
+                        <select name="audio" id="audio">
+                            <option value="Track">Track 5 - English</option>
+                            <option value="Track">Track 2 - Urkain</option>
+                            <option value="Track">Track 3 - French</option>
+                        </select>
+                    </div>
+
+                    <div id="myview" style="display: none">
+                        <label for="audio">Choose an Audio track:</label>
+                        <select name="audio" id="audio">
+                            <option value="Track">Track 6 - English</option>
+                            <option value="Track">Track 2 - Chinese</option>
+                            <option value="Track">Track 3 - French</option>
+                        </select>
+                    </div>
+
+                    <div id="myhelp" style="display: none">
+                        <div>
+                            <p>
+                                Welcome to VLCng media player Help
+                                Documentation
+                                You can find VLC documentation on VideoLAN's wiki website.
+                                If you are a newcomer to VLCng media player, please read the
+                                Introduction to VLCng media player.
+                                You will find some information on how to use the player in the 
+                                "How to play files with VLCng media player" document.
+                                For all the saving, converting, transcoding, encoding, muxing and streaming tasks, you should find useful information in the Streaming Documentation.
+                                If you are unsure about terminology, please consult the knowledge base.
+                                To understand the main keyboard shortcuts, read the shortcuts page.
+                                Help
+                                Before asking any question, please refer yourself to the FAQ.
+                                You might then get (and give) help on the Forums, the mailing-lists or our IRC channel (#videolan on irc.freenode.net).
+                                Contribute to the project
+                                You can help the VideoLAN project giving some of your time to help the community, to design skins, to translate the documentation, to test and to code. You can also give funds and material to help us. And of course, you can promote VLCng media player.
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -189,7 +270,7 @@
             </div> -->
 
             <div
-                id="videoProgressBar"
+                id="videoProgressBaxrs"
                 class="flex items-center rounded-lg w-96 h-8"
             >
                 <!--* Your slider is here.
@@ -258,29 +339,57 @@
                     alt=""
                 />
 
+                <!--BEGIN Volume progress column-->
                 <div
+                    id="audioProgressColumn"
                     class="
-                        h-28
-                        w-10
-                        bg-yellow-500
+                        flex
                         absolute
                         bottom-16
-                        rounded-lg
-                        z-30
-                        flex flex-col-reverse
                         items-center
+                        rounded-lg
+                        bg-red-700
+                        h-28
+                        w-10
+                        z-30
                     "
                 >
-                    <div
-                        id="volumeProgressColumn"
+                    <!--Actual slider-->
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
                         class="
-                            h-14
+                            volume
+                            -left-9
+                            bg-yellow-500
+                            absolute
+                            rounded-lg
+                            w-28
+                            h-10
+                        "
+                        id="myRange"
+                    />
+
+                    <!--* The following <div> is what you should lengthen or shorten
+                    * It is also transparent to clicks
+                    * Also remember than this div when progress is near 100, the corners to its top
+                        should be rounded by removing the class`rounded-t-none`-->
+                    <div
+                        id="progressIndicator"
+                        class="
+                            h-20
+                            absolute
+                            self-end
+                            pointer-events-none
                             w-10
                             bg-black bg-opacity-70
                             rounded-lg rounded-t-none
                             flex flex-col-reverse
                         "
                     >
+                        <!--The text showing volume level-->
                         <span
                             id="volumeText"
                             class="text-white text-xs font-bold mb-1"
@@ -510,5 +619,6 @@
         <!--End of dialog boxes-->
         <script defer src="./video.js"></script>
         <script defer src="../test/subtitles.js"></script>
+        <script defer src="./menu.js"></script>
     </body>
 </html>
