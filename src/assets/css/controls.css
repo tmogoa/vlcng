@@ -219,8 +219,50 @@ border-radius: 0px 50px 50px 0px;
 opacity: 0.6;
 transition: 0.3s;
 }
-.menubtn:before {
-content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/star_outline/v10/24px.svg);
+#media_btn:before {
+content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/personal_video/v12/24px.svg);
+width: 20px;
+float: left;
+margin-right: 5px;
+margin-top: -2px;
+}
+#audio_btn:before {
+content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/mic/v12/24px.svg);
+width: 20px;
+float: left;
+margin-right: 5px;
+margin-top: -2px;
+}
+#video_btn:before {
+content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/videocam/v14/24px.svg);
+width: 20px;
+float: left;
+margin-right: 5px;
+margin-top: -2px;
+}
+#sub_btn:before {
+content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/subtitles/v11/24px.svg);
+width: 20px;
+float: left;
+margin-right: 5px;
+margin-top: -2px;
+}
+#tools_btn:before {
+content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/construction/v10/24px.svg);
+width: 20px;
+float: left;
+margin-right: 5px;
+margin-top: -2px;
+}
+#view_btn:before {
+content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/visibility/v14/24px.svg);
+width: 20px;
+float: left;
+margin-right: 5px;
+margin-top: -2px;
+}
+#help_btn:before {
+content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/help_outline/v11/24px.svg);
 width: 20px;
 float: left;
 margin-right: 5px;

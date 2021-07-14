@@ -1,16 +1,15 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const Manager = require('./classes/Manager');
+const Manager = require("./classes/Manager");
 
 /**
  * This is the manager object that will manage the entire video playing process
  */
 
 const vlcManager = new Manager();
- 
+
 let mainWindow;
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
     // eslint-disable-line global-require
     app.quit();
@@ -30,7 +29,7 @@ const createWindow = () => {
     });
 
     // and load the index.html of the app.
-    mainWindow.loadFile(path.join(__dirname, "/screens/homescreen.html"));
+    mainWindow.loadFile(path.join(__dirname, "/screens/video.html"));
 
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();
@@ -65,14 +64,12 @@ ipcMain.on("window:resize", (event, arg) => {
 });
 
 //Handling the link from the homescreen
-ipcMain.on('save-video-link', (evt, link)=>{
+ipcMain.on("save-video-link", (evt, link) => {
     vlcManager.currentlyPlayingMediaSrc = link;
     console.log(link);
 });
 
-ipcMain.on('send-video-link', (evt)=>{
-    evt.reply('receive-video-link', vlcManager.currentlyPlayingMediaSrc);
-    console.log('sending video link');
+ipcMain.on("send-video-link", (evt) => {
+    evt.reply("receive-video-link", vlcManager.currentlyPlayingMediaSrc);
+    console.log("sending video link");
 });
-
-
