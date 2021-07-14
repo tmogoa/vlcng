@@ -1,3 +1,4 @@
+const Utility = require('./Utility');
 const VlcMediaContent = require('./VlcMediaContent');
 
 /**
@@ -9,14 +10,7 @@ class VlcVideo extends VlcMediaContent{
     myManager;
 
     uiVideoProgressBar; //the progress bar
-    uiTotalDurationText; //The text showing the total duration of the video
-    uiCurrentTimeText; //The text showing the current time in the video
-    uiVolumeText; //the volume text of the volume
-    uiVolumeButtonImg; //the volume button with the volume icon
-    uiVolumeProgressColumn; //the ui slider on the volume
-    uiPlaySpeedButton; //the speed text
-    uiPlayButton; //playbutton
-    uiNameText; //The name of the video
+    
 
     /**
      * @property {index} currentPlaybackRateIndex the current playback index
@@ -35,7 +29,8 @@ class VlcVideo extends VlcMediaContent{
      * After you have set everything for the ui, call the this method.
      */
     activate(){
-
+        
+        console.log("Video object");
         this.updateVolumeLevel(this.getVolume() * 100);
         this.updateVideoProgess();
 
@@ -50,7 +45,7 @@ class VlcVideo extends VlcMediaContent{
         this.mediaObject.addEventListener('timeupdate', () =>{
             this.updateVideoProgess();
             this.updateDurationText();
-            myManager.updateTime();
+            this.myManager.updateTime();
         });
 
         /**
@@ -64,6 +59,13 @@ class VlcVideo extends VlcMediaContent{
         this.uiPlaySpeedButton.addEventListener('click', ()=>{
             this.changePlaybackRate();
         });
+        console.log(this.name);
+        this.addListener('source-set', ()=>{
+            //The object is ready to be managed. Hence, signal the manager.
+            this.myManager.emit('managed-object-ready');
+            this.uiNameText.innerHTML = this.name;
+        });
+        
     }
 
     /**

@@ -26,12 +26,18 @@ function maximize() {
     window.isMaximized() ? window.unmaximize() : window.maximize();
 }
 
+
 // #########
 // UI controls
 // #########
 
 //create the manager for this video
+const Utility = require("./../classes/Utility");
 const Manager = require("./../classes/Manager");
+
+Utility.databasePath = remote.app.getPath("userData");
+
+console.log(Utility.databasePath + " is not defined");
 const theManager = new Manager();
 
 //initial the vlcVideo object that will manage the played video
@@ -111,7 +117,7 @@ function listenForChanges() {
 }
 
 function autoShowMenu() {
-    video.addEventListener("mouseover", listenForChanges);
+    vlcVideo.mediaObject.addEventListener("mouseover", listenForChanges);
 }
 
 autoShowMenu();
@@ -130,3 +136,5 @@ ipcRenderer.on("receive-video-link", (evt, link) => {
     //the video manager than sets the source
     theManager.setSrc(link);
 });
+
+

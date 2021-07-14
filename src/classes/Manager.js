@@ -2,7 +2,10 @@
  * This is the Manager class
  */
 
-class Manager{
+const Utility = require("./Utility");
+const EventEmitter = require('events');
+
+class Manager extends EventEmitter{
     currentlyPlayingMediaSrc = "";
     /**
      * the managed object of the manager
@@ -20,7 +23,8 @@ class Manager{
     bookmarks = [];
 
     constructor(){
-        
+        super();
+        Utility.initDb();
     }
 
     /**
@@ -35,7 +39,7 @@ class Manager{
      * Updates the time of the managedObject
      */
     updateTime(){
-        this.managedObject.addEventListener('timeupdate', ()=>{
+        this.managedObject.mediaObject.addEventListener('timeupdate', ()=>{
             this.currentlyStoppedAt = this.managedObject.getCurrentTime();
         });
     }
@@ -47,6 +51,16 @@ class Manager{
 
     }
 
+    /**
+     * Telling the manager to perform his management function
+     */
+    manage(){
+        this.addListener('managed-object-ready', ()=>{
+
+            console.log('managing the object');
+
+        });
+    }
 
 }
 

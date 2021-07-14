@@ -5,8 +5,9 @@
  * You must set the static mediaObject first before calling the constructor
  */
 const Utility = require('./Utility');
+const EventEmitter = require('events');
 
- class VlcMediaContent{
+ class VlcMediaContent extends EventEmitter{
 
     /**
      * Type of the Media content: Audio or Video
@@ -47,11 +48,21 @@ const Utility = require('./Utility');
      */
     playbackSpeeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
+    uiTotalDurationText; //The text showing the total duration of the video
+    uiCurrentTimeText; //The text showing the current time in the video
+    uiVolumeText; //the volume text of the volume
+    uiVolumeButtonImg; //the volume button with the volume icon
+    uiVolumeProgressColumn; //the ui slider on the volume
+    uiPlaySpeedButton; //the speed text
+    uiPlayButton; //playbutton
+    uiNameText; //The name of the media object
+
     /**
      * The constructor
      * @param {string} type - 'video' or 'audio' 
      */
     constructor(type, src = ""){
+        super();
         this.type = type;
 
         /**
@@ -153,7 +164,10 @@ const Utility = require('./Utility');
             this.srcObject.directory = Utility.path.dirname(src);
             this.srcObject.basename = Utility.path.basename(src);
             this.srcObject.name = Utility.path.basename(src, this.srcObject.extension);
+            this.name = this.srcObject.name;
             this.mediaObject.src = src;
+            this.emit('source-set'); //emit that the source is set.
+            console.log(this.srcObject);
         }
        
         return;

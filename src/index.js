@@ -1,10 +1,16 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const Manager = require('./classes/Manager');
+const Utility = require("./classes/Utility");
 
 /**
  * This is the manager object that will manage the entire video playing process
  */
+
+/**
+ * Always set the database path before calling the Utility#initdb method.
+ */
+Utility.databasePath = app.getPath('userData');
 
 const vlcManager = new Manager();
  
@@ -74,5 +80,6 @@ ipcMain.on('send-video-link', (evt)=>{
     evt.reply('receive-video-link', vlcManager.currentlyPlayingMediaSrc);
     console.log('sending video link');
 });
+
 
 
