@@ -10,12 +10,17 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
             rel="stylesheet"
         />
-        <link
+        <!-- <link
             rel="stylesheet"
             type="text/css"
             href="../assets/css/controls.css"
+<<<<<<< HEAD
         />
         <!-- <script>
+=======
+        /> -->
+        <script>
+>>>>>>> 5450978ce5eedc2341bc75f10410a384e7a8ec9b
             function showMenu() {
                 var x = document.getElementById("menu");
                 displayValue = "";
@@ -280,7 +285,7 @@
             </div> -->
 
             <div
-                id="videoProgressBar"
+                id="videoProgressBaxrs"
                 class="flex items-center rounded-lg w-96 h-8"
             >
                 <!--* Your slider is here.
@@ -349,29 +354,57 @@
                     alt=""
                 />
 
+                <!--BEGIN Volume progress column-->
                 <div
+                    id="audioProgressColumn"
                     class="
-                        h-28
-                        w-10
-                        bg-yellow-500
+                        flex
                         absolute
                         bottom-16
-                        rounded-lg
-                        z-30
-                        flex flex-col-reverse
                         items-center
+                        rounded-lg
+                        bg-red-700
+                        h-28
+                        w-10
+                        z-30
                     "
                 >
-                    <div
-                        id="volumeProgressColumn"
+                    <!--Actual slider-->
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
                         class="
-                            h-14
+                            volume
+                            -left-9
+                            bg-yellow-500
+                            absolute
+                            rounded-lg
+                            w-28
+                            h-10
+                        "
+                        id="myRange"
+                    />
+
+                    <!--* The following <div> is what you should lengthen or shorten
+                    * It is also transparent to clicks
+                    * Also remember than this div when progress is near 100, the corners to its top
+                        should be rounded by removing the class`rounded-t-none`-->
+                    <div
+                        id="progressIndicator"
+                        class="
+                            h-20
+                            absolute
+                            self-end
+                            pointer-events-none
                             w-10
                             bg-black bg-opacity-70
                             rounded-lg rounded-t-none
                             flex flex-col-reverse
                         "
                     >
+                        <!--The text showing volume level-->
                         <span
                             id="volumeText"
                             class="text-white text-xs font-bold mb-1"
