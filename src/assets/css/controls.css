@@ -182,7 +182,7 @@ button#morebtn{
 #menu{
 position: absolute;
 width: 600px;
-height: 50%;
+height: 60%;
 text-align: center;
 background-color: #FFF; 
 display: flex;                  /* establish flex container */
@@ -202,9 +202,10 @@ margin-right: 10px;
 /* border: 2px dashed black; */
 }
 #menu > div#rightmenu{
-width: 300px;
+width: 320px;
 height: 100%;
 border-left: 2px solid gray;
+padding-left: 5px;
 }
 .menubtn {
 border: none;
