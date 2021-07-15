@@ -15,8 +15,52 @@ class="bg-red-200
        flex items-center 
        justify-center" 
        
-  style="background: #e4733e;"
-  >
+  style="background: #e4733e;">
+
+  <style>
+     .slidecontainer {
+    width: 100%;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+  
+.default {
+  width: 100%;
+  height: 25px;
+}
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: #04AA6D;
+  cursor: pointer;
+}
+  
+  .slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+  </style>
 
       <!-- Sidebar -->
       <div id="sidebarMenu"
@@ -344,15 +388,13 @@ class="bg-red-200
                                 class="mx-8 py-4">
                             
                              <div class="flex justify-between text-sm text-yellow-500">
-                                   <p>0:40</p>
-                                   <p>4:20</p>
+                                   <p>0:00</p>
+                                   <p>0:00</p>
                                </div>
-                               <div class="mt-1">
-                                 <div class="h-1 bg-blue-600 rounded-full">
-                                   <div class="w-2/5 h-1 bg-yellow-500 rounded-full relative">
-                                       <span class="w-4 h-4 bg-yellow-700 absolute pin-r pin-b -mb-1 rounded-full shadow"></span>
-                                   </div>
+                               <div class="slidecontainer">
+                                 <input type="range" min="1" max="100" value="50" class="default">
                                </div>
+                              </div>
                                </div>
                            </div>
                        </div>

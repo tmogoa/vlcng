@@ -133,7 +133,22 @@ class Manager extends EventEmitter{
         this.showBookmarkForm();
         let uiBookmarkTime = document.querySelector("#bookmark-marked-time");
         uiBookmarkTime.innerHTML = this.managedObject.formatTime(bookmarkTime)[0];
+        let uiBookmarkSaveButton = document.querySelector("#add-bookmark-button");
 
+        //remember to remove the event listner from the button
+
+        uiBookmarkSaveButton.addEventListener("click", ()=>{
+            let description = document.querySelector("#bookmark-description").value;
+            if(this.managedObject.getId() !== 'undefined'){
+                (async()=>{
+                    const SQL = await initSqlJs();
+                    let db = Utility.openDatabase(SQL);
+                    db.run(`INSERT INTO ${this.managedObject.type}Bookmark(${this.managedObject.type}Id, markedTime, description) values (${this.managedObject.getId()}, ${bookmarkTime}, ${description})`);
+                    Utility.closeDatabase(db);
+                })();
+            }
+            
+        });
 
         
 
@@ -142,9 +157,7 @@ class Manager extends EventEmitter{
         let bookmarkForm = document.querySelector("#bookmardId");
         bookmarkForm.style.visibility = "visible"
     }
-    saveBookmark(){
-        
-    }
+    
 
 
     returnThumbnail(imageObject) {

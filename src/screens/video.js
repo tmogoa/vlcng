@@ -1,7 +1,6 @@
 const remote = require("electron").remote;
 const { ipcRenderer } = require("electron");
 
-
 // ########
 // windows controls
 // ########
@@ -12,21 +11,23 @@ const maximizeIcon = document.getElementById("maximize");
 
 closeBtn.onclick = (e) => {
     getWindow().close();
+    console.log("close clicked");
 };
 
 minimizeIcon.onclick = (e) => {
     getWindow().minimize();
+    console.log("close clicked");
 };
 
 maximizeIcon.onclick = (e) => {
     maximize();
+    console.log("close clicked");
 };
 
 function maximize() {
     const window = getWindow();
     window.isMaximized() ? window.unmaximize() : window.maximize();
 }
-
 
 // #########
 // UI controls
@@ -60,14 +61,20 @@ vlcVideo.uiTotalDurationText = document.querySelector("#dur-time");
 vlcVideo.uiNameText = document.querySelector("#media-name");
 vlcVideo.uiPlaySpeedButton = document.querySelector("#play-speed");
 vlcVideo.uiVolumeInputRange = document.querySelector("#volume-input-range");
+<<<<<<< HEAD
 vlcVideo.uiProgressBarInputRange = document.querySelector("#progress-bar-input-range");
 vlcVideo.uiBookmarkButton = document.querySelector("#bookmarkBtn");
+=======
+vlcVideo.uiProgressBarInputRange = document.querySelector(
+    "#progress-bar-input-range"
+);
+>>>>>>> 3d220e62cfd8e124ee3fe7e2af77fb63c6392c87
 
 const trigger = document.querySelector(".trigger");
 const modal = document.querySelector(".modal");
 const closeButton = document.querySelector(".close-button");
 
-console.log( "Directory name is: " +Utility.path.resolve(__dirname));
+console.log("Directory name is: " + Utility.path.resolve(__dirname));
 
 vlcVideo.mediaObject.addEventListener(
     "loadedmetadata",
@@ -82,7 +89,7 @@ vlcVideo.mediaObject.addEventListener(
 );
 
 vlcVideo.activate(); //activates all event listeners for the video
-theManager.manage();//calls the manager to manage the videos
+theManager.manage(); //calls the manager to manage the videos
 
 ipcRenderer.send("window:resize", vlcVideo.mediaObject.videoHeight);
 
@@ -114,7 +121,6 @@ function listenForChanges() {
     // if (timeoutId) {
     //     clearTimeout(timeoutId);
     // }
-
     // timeoutId = setTimeout(() => {
     //     //save article to db after 1s inactivity
     //     floatingMenu.style.visibility = "hidden";
@@ -136,13 +142,10 @@ autoShowMenu();
  * Gets the link from the homescreen.
  */
 
-
 //change this to invoke
 ipcRenderer.send("send-video-link", "");
 ipcRenderer.on("receive-video-link", (evt, link) => {
     //the video manager than sets the source
-    
-    theManager.setSrc(Utility.path.resolve(__dirname,link));
+
+    theManager.setSrc(Utility.path.resolve(__dirname, link));
 });
-
-
