@@ -1,10 +1,16 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const Manager = require("./classes/Manager");
+const Manager = require('./classes/Manager');
+const Utility = require("./classes/Utility");
 
 /**
  * This is the manager object that will manage the entire video playing process
  */
+
+/**
+ * Always set the database path before calling the Utility#initdb method.
+ */
+Utility.databasePath = app.getPath('userData');
 
 const vlcManager = new Manager();
 
@@ -29,7 +35,7 @@ const createWindow = () => {
     });
 
     // and load the index.html of the app.
-    mainWindow.loadFile(path.join(__dirname, "/screens/video.html"));
+    mainWindow.loadFile(path.join(__dirname, "/screens/homescreen.html"));
 
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();

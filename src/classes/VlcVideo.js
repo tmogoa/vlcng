@@ -1,3 +1,4 @@
+const Utility = require('./Utility');
 const VlcMediaContent = require('./VlcMediaContent');
 
 /**
@@ -9,14 +10,7 @@ class VlcVideo extends VlcMediaContent{
     myManager;
 
     uiVideoProgressBar; //the progress bar
-    uiTotalDurationText; //The text showing the total duration of the video
-    uiCurrentTimeText; //The text showing the current time in the video
-    uiVolumeText; //the volume text of the volume
-    uiVolumeButtonImg; //the volume button with the volume icon
-    uiVolumeProgressColumn; //the ui slider on the volume
-    uiPlaySpeedButton; //the speed text
-    uiPlayButton; //playbutton
-    uiNameText; //The name of the video
+    
 
     /**
      * @property {index} currentPlaybackRateIndex the current playback index
@@ -35,8 +29,9 @@ class VlcVideo extends VlcMediaContent{
      * After you have set everything for the ui, call the this method.
      */
     activate(){
+        this.isPlaying = true;
 
-        this.updateVolumeLevel(this.getVolume() * 100);
+        this.updateVolumeSlider();
         this.updateVideoProgess();
 
         this.uiPlayButton.addEventListener('click', () => {
@@ -49,21 +44,36 @@ class VlcVideo extends VlcMediaContent{
 
         this.mediaObject.addEventListener('timeupdate', () =>{
             this.updateVideoProgess();
+            this.updateVolumeSlider();
             this.updateDurationText();
-            myManager.updateTime();
+            this.myManager.updateTime();
         });
 
         /**
          * Will implement animation later
          */
-        this.uiVolumeProgressColumn.parentElement.addEventListener('click', (evt)=>{
-            this.updateVolumeSlider(evt);
-            console.log('volume progress column clicked');
+        this.uiVolumeInputRange.addEventListener('input', (evt)=>{
+            this.updateVolumeSlider();
         });
 
         this.uiPlaySpeedButton.addEventListener('click', ()=>{
             this.changePlaybackRate();
         });
+
+        this.uiProgressBarInputRange.addEventListener('input', ()=>{
+            let level = this.uiProgressBarInputRange.value / 100 * this.getTotalDuration(); 
+            this.setCurrentTime(level);
+            this.updateVideoProgess();
+            this.updateDurationText();
+            this.myManager.updateTime();
+        });
+        
+        this.addListener('source-set', ()=>{
+            //The object is ready to be managed. Hence, signal the manager.
+            this.myManager.emit('managed-object-ready');
+            this.uiNameText.innerHTML = this.name;
+        });
+        
     }
 
     /**
@@ -112,42 +122,40 @@ class VlcVideo extends VlcMediaContent{
      * Update the height of the slider to tell the volume
      */
     updateVolumeSlider(evt){
-        let columnY1 = evt.pageY - this.uiVolumeProgressColumn.parentElement.offsetTop;
-        let columnY2 = this.uiVolumeProgressColumn.parentElement.clientHeight + columnY1;
-
-        //get the mouse top position
-        let mouseY = evt.clientX;
-
-        let volumeLevel = Math.ceil(columnY2 - mouseY);
-        if(volumeLevel < 0){
-            volumeLevel = 0;
-        }
-        this.updateVolumeLevel(volumeLevel);
-        console.log(`The mouse Y pos is ${mouseY}, level is ${volumeLevel} and columnY2 is ${columnY2} and columnY1 is ${columnY1} the height of the client is ${this.uiVolumeProgressColumn.parentElement.clientHeight}`);
+        let level = this.uiVolumeInputRange.value;
+        this.updateVolumeLevel(level);
     }
 
+    /**
+     * 
+     * @param {int} level - value from the range 
+     */
     updateVolumeLevel(level) {
-        let max = this.uiVolumeProgressColumn.parentElement.clientHeight; //maximum height of the bar
-        let ratio = level/max;
-        if(ratio > 1){
-            ratio = 1;
-        }
+        let max = this.uiVolumeLevelBar.parentElement.clientHeight; //maximum height of the bar
+        let ratio = (level/100);
+       
         this.setVolume(ratio);
 
+            this.uiVolumeLevelBar.classList.add("rounded-t-none");
         if (level >= 95) {
-            this.uiVolumeProgressColumn.classList.remove("rounded-t-none");
+            this.uiVolumeLevelBar.classList.remove("rounded-t-none");
         }
 
         this.uiVolumeText.innerHTML = level;
-        this.uiVolumeProgressColumn.style.height = `${Math.ceil(
+        this.uiVolumeLevelBar.style.height = `${Math.ceil(
             ratio * max
         )}px`;
+
     }
     
     updateVideoProgess(){
+
         let max = this.uiVideoProgressBar.parentElement.clientWidth;
         let ratio = this.getCurrentTime()/this.getTotalDuration();
-        if ((ratio * 100) >= 95) {
+        this.uiProgressBarInputRange.value = ratio * 100;
+
+        this.uiVideoProgressBar.classList.add("rounded-r-none");
+        if (this.uiProgressBarInputRange.value >= 95) {
             this.uiVideoProgressBar.classList.remove("rounded-r-none");
         }
         this.uiVideoProgressBar.style.width = `${Math.ceil(ratio * max)}px`;

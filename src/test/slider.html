@@ -28,7 +28,7 @@
                         w-96
                         h-8
                     "
-                    id="myRange"
+                    id="myRanddge"
                 />
 
                 <!--* The following <div> is what you should lengthen or shorten
@@ -71,6 +71,80 @@
         </div>
 
         <div id="demo"></div>
+
+        <!---Volume-->
+
+        <div class="mt-20">
+            <button
+                id="volume-control-button"
+                class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
+            >
+                <img
+                    id="mute-volume"
+                    src="../assets/img/volume_up_black_24dp.svg"
+                    alt=""
+                />
+
+                <!--BEGIN Volume progress column-->
+                <div
+                    id="audioProgressColumn"
+                    class="
+                        flex
+                        bottom-16
+                        absolute
+                        items-center
+                        rounded-lg
+                        bg-red-700
+                        h-28
+                        w-10
+                        z-30
+                    "
+                >
+                    <!--Actual slider-->
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
+                        class="
+                            volume
+                            -left-9
+                            bg-yellow-500
+                            absolute
+                            rounded-lg
+                            w-28
+                            h-10
+                        "
+                        id="myRange"
+                    />
+
+                    <!--* The following <div> is what you should lengthen or shorten
+                    * It is also transparent to clicks
+                    * Also remember than this div when progress is near 100, the corners to its top
+                        should be rounded by removing the class`rounded-t-none`-->
+                    <div
+                        id="progressIndicator"
+                        class="
+                            h-20
+                            absolute
+                            self-end
+                            pointer-events-none
+                            w-10
+                            bg-black bg-opacity-70
+                            rounded-lg rounded-t-none
+                            flex flex-col-reverse
+                        "
+                    >
+                        <!--The text showing volume level-->
+                        <span
+                            id="volumeText"
+                            class="text-white text-xs font-bold mb-1"
+                            >0</span
+                        >
+                    </div>
+                </div>
+            </button>
+        </div>
     </body>
     <script>
         var slider = document.getElementById("myRange");
