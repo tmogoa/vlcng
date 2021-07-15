@@ -218,7 +218,24 @@ const { timeStamp } = require('console');
     setId(id){
         this.id = id;
     }
-    
+
+    /**
+     * 
+     * @returns {array} [currentDuration text, totalDuration text]
+     */
+     formatTime(){
+        let durHours = Math.floor(this.getTotalDuration() / 3600);
+        let durMins = Math.floor((this.getTotalDuration() - 3600 * durHours) / 60);
+        let durSecs = Math.floor(this.getTotalDuration() % 60);
+
+        let curHours = Math.floor(this.getCurrentTime() / 3600);
+        let curMins = Math.floor((this.getCurrentTime() - 3600 * curHours) / 60);
+        let curSecs = Math.floor(this.getCurrentTime() % 60);
+
+        return [`${(curHours > 0) ?(curHours > 9 ? curHours : "0" + curHours + ":") : ""}${curMins > 9 ? curMins : "0" + curMins}:${curSecs > 9 ? curSecs : "0" + curSecs}`,
+        
+        `${(durHours > 0) ?(durHours > 9 ? durHours : "0" + durHours + ":"): ""}${durMins > 9 ? durMins : "0" + durMins}:${durSecs > 9 ? durSecs : "0" + durSecs}`];
+    }
 
 }
 

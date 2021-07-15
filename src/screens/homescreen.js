@@ -32,6 +32,10 @@ function maximize() {
 const content = document.getElementById("item");
 const listView = document.getElementById("listView");
 
+//getting the recent videos
+
+
+
 //Listing recently watched videos
 for (let index = 0; index < 20; index++) {
     let div = document.createElement("div");

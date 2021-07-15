@@ -112,15 +112,18 @@ class Manager extends EventEmitter{
      * @param {SQL} SQL 
      */
     updatePlayedTime(SQL){
-        const db = Utility.openDatabase(SQL);
-        this.currentlyStoppedAt = this.managedObject.getCurrentTime();
-        if(this.managedObject.id !== 'undefined'){
-            db.run(`UPDATE ${this.managedObject.type} set playedTill = ? where id = ?`, [this.currentlyStoppedAt, this.managedObject.getId()]);
-
-            db.run(`UPDATE recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)} set datePlayed = CURRENT_TIMESTAMP where  ${this.managedObject.type}Id = ?`, [this.managedObject.getId()]);
+        if(this.managedObject.isPlaying){
+            const db = Utility.openDatabase(SQL);
+            this.currentlyStoppedAt = this.managedObject.getCurrentTime();
+            if(this.managedObject.id !== 'undefined'){
+                db.run(`UPDATE ${this.managedObject.type} set playedTill = ? where id = ?`, [this.currentlyStoppedAt, this.managedObject.getId()]);
+    
+                db.run(`UPDATE recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)} set datePlayed = CURRENT_TIMESTAMP where  ${this.managedObject.type}Id = ?`, [this.managedObject.getId()]);
+            }
+            Utility.closeDatabase(db);
+            console.log("updated successfully");
         }
-        Utility.closeDatabase(db);
-        console.log("updated successfully");
+        
     }
     addBookmark(SQL){
         this.managedObject.pause();
@@ -136,6 +139,21 @@ class Manager extends EventEmitter{
     }
 
 
+    returnThumbnail(imageObject) {
+
+        var canvas = document.createElement("canvas");
+        var container = document.getElementById(`thumbnail-container-${this.managedObject.getId()}`);
+        if(container){
+            var width = container.clientWidth;
+            var height = container.clientHeight;
+            canvas.width = (width / 3);
+            canvas.height = height;
+            canvas.getContext("2d").drawImage(this.managedObject.mediaObject, 0, 0, canvas.width, canvas.height);
+            var image = document.createElement("img");
+            image.src = canvas.toDataURL();
+            return image;
+        }
+         }
 
 
 }
