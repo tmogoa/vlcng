@@ -17,6 +17,9 @@ class VlcVideo extends VlcMediaContent{
     uiPlaySpeedButton; //the speed text
     uiPlayButton; //playbutton
     uiNameText; //The name of the video
+    //implement foward and rewing buttons
+
+    
 
     /**
      * @property {index} currentPlaybackRateIndex the current playback index
@@ -34,10 +37,13 @@ class VlcVideo extends VlcMediaContent{
     /**
      * After you have set everything for the ui, call the this method.
      */
+    //call methods for btns heregit
     activate(){
 
         this.updateVolumeLevel(this.getVolume() * 100);
-        this.updateVideoProgess();
+        this.updateVideoProgess(
+            progress.addEventListener('click', (e) => { const progressTime = (e.offsetX / progress.offsetWidth) * this.duration; this.currentTime = progressTime }) 
+        );
 
         this.uiPlayButton.addEventListener('click', () => {
             this.playPause();

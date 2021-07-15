@@ -95,21 +95,42 @@ const Utility = require('./Utility');
         this.isPlaying = false;
     }
 
+    // testing sth out
+
+    seek(numberOfSeconds) {
+        let time = this.mediaObject.currentTime() + numberOfSeconds;
+      
+        if (time < 0) {
+          time = 0;
+        }
+      
+        this.mediaObject.currentTime(time);
+      }
+      
+      forward() {
+        this.seek(10);
+      }
+      
+      rewind() {
+        this.seek(-10);
+      }
+
     /**
      * Seek a certain time backward in the media
      * @param {int} numberOfSeconds 
      */
-    backward(numberOfSeconds){
+    // backward(numberOfSeconds){
 
-    }
 
-    /**
-     * moves forward a certain time in the media
-     * @param {int} numberOfSeconds 
-     */
-    forward(numberOfSeconds){
+    // }
 
-    }
+    // /**
+    //  * moves forward a certain time in the media
+    //  * @param {int} numberOfSeconds 
+    //  */
+    // forward(numberOfSeconds){
+
+    // }
 
     /**
      * The Current time of the media object
