@@ -66,6 +66,7 @@ vlcVideo.uiBookmarkButton = document.querySelector("#bookmarkBtn");
 vlcVideo.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
 );
+vlcVideo.uiBookmarkCloseButton = document.querySelector("#close-bookmark-button");
 
 const trigger = document.querySelector(".trigger");
 const modal = document.querySelector(".modal");
@@ -98,7 +99,7 @@ document.addEventListener("dblclick", toggleFullScreen);
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
-    console.log("trigger clicked");
+    theManager.managedObject.playPause();
 }
 
 function windowOnClick(event) {
@@ -115,18 +116,18 @@ let timeoutId;
 const floatingMenu = document.getElementById("floatingMenu");
 
 function listenForChanges() {
-    // floatingMenu.style.visibility = "visible";
-    // if (timeoutId) {
-    //     clearTimeout(timeoutId);
-    // }
-    // timeoutId = setTimeout(() => {
-    //     //save article to db after 1s inactivity
-    //     floatingMenu.style.visibility = "hidden";
-    // }, 1000);
+    floatingMenu.style.visibility = "visible";
+    if (timeoutId) {
+        clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+        //save article to db after 1s inactivity
+        floatingMenu.style.visibility = "hidden";
+    }, 1000);
 }
 
 function autoShowMenu() {
-    vlcVideo.mediaObject.addEventListener("mouseover", listenForChanges);
+    vlcVideo.mediaObject.addEventListener("mousemove", listenForChanges);
 }
 
 autoShowMenu();

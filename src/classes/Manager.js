@@ -101,12 +101,18 @@ class Manager extends EventEmitter{
         }
 
         this.managedObject.setId(result[0].values[0][0]);
-        this.initBookmarksList(SQL);
-        var bookmarksList = document.querySelector("#bookmarkList");
-
-        console.log(db.exec("SELECT * from " + this.managedObject.type));
+        this.initBookmarksList(SQL, db);
+        this.listBookmarks();
         Utility.closeDatabase(db);
         
+    }
+
+    listBookmarks(){
+        var bookmarksList = document.querySelector("#bookmarkList");
+        bookmarksList.innerHTML = "";
+        this.bookmarks.forEach(bookmark => {
+            bookmarksList.innerHTML += this.returnedFormatedBookmark(bookmark);
+        });
     }
 
     /**
@@ -130,54 +136,116 @@ class Manager extends EventEmitter{
         
     }
 
-    initBookmarksList(SQL){
-        result = db.exec(`SELECT * from ${this.managedObject.type}Bookmark where ${this.managedObject.type}Id = ?`, [this.managedObject.getId()]);
+    initBookmarksList(SQL, db = null){
+        this.bookmarks = [];
+        let wasPassed = true;
+        if(db == null){
+            db = Utility.openDatabase(SQL);
+            wasPassed = false;
+        }
+        
+        let result = db.exec(`SELECT * from ${this.managedObject.type}Bookmark where ${this.managedObject.type}Id = ?`, [this.managedObject.getId()]);
         if(result.length > 0){
-            let values = result.values;
+            let values = result[0].values;
             values.forEach(row => {
                 let bookmark = new Bookmark();
                 bookmark.id = row[0];
                 bookmark.currentTime = row[2];
                 bookmark.description = row[3];
                 bookmark.dateAdded = row[4];
-                bookmark.type = this.mediaObject.type;
+                bookmark.type = this.managedObject.type;
                 this.bookmarks.push(bookmark);
-            });
-            
+            });   
+        }
+
+        if(!wasPassed){
+            Utility.closeDatabase(db);
         }
     }
 
     addBookmark(){
-        this.managedObject.pause();
-    
+
         let bookmarkTime = this.managedObject.getCurrentTime();
-        let uiBookmarkTime = document.querySelector("#bookmark-marked-time");
+        let uiBookmarkTime = document.querySelector("#bookmark-added-time");
         uiBookmarkTime.innerHTML = this.managedObject.formatTime(bookmarkTime)[0];
         let uiBookmarkSaveButton = document.querySelector("#add-bookmark-button");
-
+        let eventListenerAdded = false;
         //remember to remove the event listner from the button
-
-        uiBookmarkSaveButton.addEventListener("click", ()=>{
+        let save = ()=>{
             let description = document.querySelector("#bookmark-description").value;
             if(this.managedObject.getId() !== 'undefined'){
                 (async()=>{
                     const SQL = await initSqlJs();
                     let db = Utility.openDatabase(SQL);
-                    db.run(`INSERT INTO ${this.managedObject.type}Bookmark(${this.managedObject.type}Id, markedTime, description) values (${this.managedObject.getId()}, ${bookmarkTime}, ${description})`);
+                    db.run(`INSERT INTO ${this.managedObject.type}Bookmark(${this.managedObject.type}Id, markedTime, description) values (?, ?, ?)`, [this.managedObject.getId(), bookmarkTime, description]);
+                    this.initBookmarksList(SQL, db);
+                    this.listBookmarks();
                     Utility.closeDatabase(db);
+                    //alert("Successfully added the bookmark");
                 })();
             }
-            
-        });
-
+        }
+        uiBookmarkSaveButton.addEventListener("click", save); 
         
+        let keyDown = (evt)=>{
+            console.log("keydown");
+            if(evt.key == "Enter"){
+                save();
+            }
+        }
+
+        window.addEventListener('keydown', keyDown);
 
     }
   
     returnedFormatedBookmark(bookmarkObject){
-        return ``;
+        let bookmark = `<div
+        class="
+            flex flex-row
+            border
+            rounded-md
+            p-2
+            items-center
+            hover:bg-gray-100
+            mb-2
+        "
+    >
+        <div class="flex-grow flex flex-col" onclick='theManager.setCurrentTime(${bookmarkObject.currentTime})'>
+            <span class="mb-2" >${this.managedObject.formatTime(bookmarkObject.currentTime)[0]}</span>
+            <span class="text-xs"
+                >${bookmarkObject.description}</span
+            >
+        </div>
+        <div>
+            <!--Close btn-->
+            <button
+                class="
+                    p-2
+                    rounded-full
+                    focus:outline-none
+                    hover:bg-yellow-500
+                "
+                onclick="theManager.deleteBookmark(${bookmarkObject.id})"
+            >
+                <img
+                    src="../assets/img/close_black_24dp.svg"
+                    alt=""
+                />
+            </button>
+        </div>`;
+        return bookmark;
     }
 
+    deleteBookmark(bookmarkId){
+        (async()=>{
+            const SQL = await initSqlJs();
+            let db = Utility.openDatabase(SQL);
+            db.run(`DELETE FROM ${this.managedObject.type}Bookmark where id = ?`, [bookmarkId]);
+            this.initBookmarksList(SQL, db);
+            this.listBookmarks();
+            Utility.closeDatabase(db);
+        })();
+    }
 
     returnThumbnail(imageObject) {
 
@@ -195,6 +263,9 @@ class Manager extends EventEmitter{
         }
          }
 
+        setCurrentTime(currentTime){
+            this.managedObject.setCurrentTime(currentTime);
+        }
 
 }
 

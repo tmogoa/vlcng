@@ -87,11 +87,10 @@ class VlcVideo extends VlcMediaContent{
 
         this.uiBookmarkButton.addEventListener('click', ()=>{
             if(this.myManager){
-                this.myManager.addBookmark()
+                this.myManager.addBookmark();
             }
-
         });
-        
+
     }
 
     /**

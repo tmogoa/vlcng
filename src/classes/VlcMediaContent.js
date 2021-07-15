@@ -65,6 +65,7 @@ const { timeStamp } = require('console');
     uiVolumeInputRange;
     uiProgressBarInputRange;
     uiBookmarkButton;
+    uiBookmarkCloseButton;
 
     /**
      * The constructor
