@@ -61,14 +61,11 @@ vlcVideo.uiTotalDurationText = document.querySelector("#dur-time");
 vlcVideo.uiNameText = document.querySelector("#media-name");
 vlcVideo.uiPlaySpeedButton = document.querySelector("#play-speed");
 vlcVideo.uiVolumeInputRange = document.querySelector("#volume-input-range");
-<<<<<<< HEAD
 vlcVideo.uiProgressBarInputRange = document.querySelector("#progress-bar-input-range");
 vlcVideo.uiBookmarkButton = document.querySelector("#bookmarkBtn");
-=======
 vlcVideo.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
 );
->>>>>>> 3d220e62cfd8e124ee3fe7e2af77fb63c6392c87
 
 const trigger = document.querySelector(".trigger");
 const modal = document.querySelector(".modal");
