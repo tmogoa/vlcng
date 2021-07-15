@@ -84,6 +84,13 @@ class VlcVideo extends VlcMediaContent{
             this.myManager.emit('managed-object-ready');
             this.uiNameText.innerHTML = this.name;
         });
+
+        this.uiBookmarkButton.addEventListener('click', ()=>{
+            if(this.myManager){
+                
+            }
+
+        });
         
     }
 

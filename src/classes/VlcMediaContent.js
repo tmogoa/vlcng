@@ -64,6 +64,7 @@ const { timeStamp } = require('console');
     uiNameText; //The name of the media object
     uiVolumeInputRange;
     uiProgressBarInputRange;
+    uiBookmarkButton;
 
     /**
      * The constructor

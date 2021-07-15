@@ -122,6 +122,19 @@ class Manager extends EventEmitter{
         Utility.closeDatabase(db);
         console.log("updated successfully");
     }
+    addBookmark(SQL){
+        this.managedObject.pause();
+    
+        let bookmarkTime = this.managedObject.getCurrentTime();
+        this.showBookmarkForm();
+        
+
+    }
+    showBookmarkForm(){
+        let bookmarkForm = document.querySelector("#bookmardId");
+        bookmarkForm.style.visibility = "visible"
+    }
+
 
 
 
