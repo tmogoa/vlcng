@@ -7,6 +7,8 @@ const closeBtn = document.getElementById("close");
 const minimizeIcon = document.getElementById("minimize");
 const maximizeIcon = document.getElementById("maximize");
 const playNetVideoBtn = document.getElementById("playNetVideoBtn");
+//This is provisional
+const musicBtn = document.getElementById("musicBtn");
 
 //Suppose the list recent videos and audio?
 
@@ -34,8 +36,6 @@ const listView = document.getElementById("listView");
 
 //getting the recent videos
 
-
-
 //Listing recently watched videos
 for (let index = 0; index < 20; index++) {
     let div = document.createElement("div");
@@ -43,19 +43,29 @@ for (let index = 0; index < 20; index++) {
     listView.appendChild(div);
 }
 
-const continuePlayingBtn = document.getElementById('continue-watching-button');
+const continuePlayingBtn = document.getElementById("continue-watching-button");
 
-continuePlayingBtn.addEventListener('click', (e)=>{
+continuePlayingBtn.addEventListener("click", (e) => {
     //send the video link
-    ipcRenderer.send('save-video-link', "../assets/video/Cars 3 Rivalry Official Trailer.mp4");
+    ipcRenderer.send(
+        "save-video-link",
+        "../assets/video/Cars 3 Rivalry Official Trailer.mp4"
+    );
     console.log("sent video link");
     getWindow().loadFile("./src/screens/video.html");
 });
 
 playNetVideoBtn.onclick = (e) => {
     //send the video link
-    ipcRenderer.send('save-video-link', "../assets/video/Cars 3 Rivalry Official Trailer.mp4");
+    ipcRenderer.send(
+        "save-video-link",
+        "../assets/video/Cars 3 Rivalry Official Trailer.mp4"
+    );
     console.log("sent video link");
     getWindow().loadFile("./src/screens/video.html");
+};
+
+musicBtn.onclick = (e) => {
+    getWindow().loadFile("./src/screens/audio.html");
 };
 //end of UI testing
