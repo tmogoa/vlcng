@@ -10,10 +10,11 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
             rel="stylesheet"
         />
-         <link
+        <link
             rel="stylesheet"
             type="text/css"
-            href="../assets/css/controls.css"/>
+            href="../assets/css/controls.css"
+        />
     </head>
 
     <body class="flex flex-col items-center overflow-hidden">
@@ -32,14 +33,10 @@
                 z-30
                 absolute
             "
-            style="
-                -webkit-app-region: drag;
-                -webkit-user-select: none;
-                -webkit-app-region: drag;
-            "
+            style="-webkit-app-region: drag; -webkit-user-select: none"
         >
             <div id="media-name">Video Title</div>
-            <input type="hidden" id="video-id" value="0">
+            <input type="hidden" id="video-id" value="0" />
             <div class="flex flex-row justify-end gap-8">
                 <button
                     id="minimize"
@@ -50,12 +47,7 @@
                         hover:bg-gray-800
                     "
                 >
-                    <img
-                        id="closeIcon"
-                        src="../assets/img/min.png"
-                        alt=""
-                        class="w-4"
-                    />
+                    <img src="../assets/img/min.png" alt="" class="w-4" />
                 </button>
                 <button
                     id="maximize"
@@ -84,7 +76,7 @@
                 autoplay
             ></video>
 
-            <div id="menu" style="display: none" >
+            <div id="menu" style="display: none">
                 <!-- <div id="submenu">
                     <button class="menubtn" id="media_btn" onclick="showMedia('mymedia')">Media</button>
                     <button class="menubtn" id="video_btn" onclick="showVideo('myvideo')">Video</button>
@@ -96,20 +88,63 @@
                 </div> -->
 
                 <div id="submenu">
-                    <p>Settings</p><br>
-                    <button class="menubtn" id="media_btn" onclick="show('mymedia')">Media</button>
-                    <button class="menubtn" id="video_btn" onclick="show('myvideo')">Video</button>
-                    <button class="menubtn" id="audio_btn" onclick="show('myaudio')">Audio</button>
-                    <button class="menubtn" id="sub_btn" onclick="show('mysubtitles')">Subtitles</button>
-                    <button class="menubtn" id="tools_btn" onclick="show('mytools')">Tools</button>
-                    <button class="menubtn" id="view_btn" onclick="show('myview')">View</button>
-                    <button class="menubtn" id="help_btn" onclick="show('myhelp')">Help</button>
+                    <p>Settings</p>
+                    <br />
+                    <button
+                        class="menubtn"
+                        id="media_btn"
+                        onclick="show('mymedia')"
+                    >
+                        Media
+                    </button>
+                    <button
+                        class="menubtn"
+                        id="video_btn"
+                        onclick="show('myvideo')"
+                    >
+                        Video
+                    </button>
+                    <button
+                        class="menubtn"
+                        id="audio_btn"
+                        onclick="show('myaudio')"
+                    >
+                        Audio
+                    </button>
+                    <button
+                        class="menubtn"
+                        id="sub_btn"
+                        onclick="show('mysubtitles')"
+                    >
+                        Subtitles
+                    </button>
+                    <button
+                        class="menubtn"
+                        id="tools_btn"
+                        onclick="show('mytools')"
+                    >
+                        Tools
+                    </button>
+                    <button
+                        class="menubtn"
+                        id="view_btn"
+                        onclick="show('myview')"
+                    >
+                        View
+                    </button>
+                    <button
+                        class="menubtn"
+                        id="help_btn"
+                        onclick="show('myhelp')"
+                    >
+                        Help
+                    </button>
                 </div>
 
                 <div id="rightmenu">
                     <br />
                     <br />
-                    <div id="main_place" >
+                    <div id="main_place">
                         <label for="audio">Choose an Audio track:</label>
                         <select name="audio" id="audio">
                             <option value="Track">Track 1 - Venezuela</option>
@@ -125,7 +160,6 @@
                             <option value="Track">Track 2 - German</option>
                             <option value="Track">Track 3 - French</option>
                         </select>
-
                     </div>
 
                     <div id="myvideo" style="display: none">
@@ -176,25 +210,33 @@
                     <div id="myhelp" style="display: none">
                         <div>
                             <p>
-                                Welcome to VLCng media player Help
-                                Documentation
-                                You can find VLC documentation on VideoLAN's wiki website.
-                                If you are a newcomer to VLCng media player, please read the
-                                Introduction to VLCng media player.
-                                You will find some information on how to use the player in the 
-                                "How to play files with VLCng media player" document.
-                                For all the saving, converting, transcoding, encoding, muxing and streaming tasks, you should find useful information in the Streaming Documentation.
-                                If you are unsure about terminology, please consult the knowledge base.
-                                To understand the main keyboard shortcuts, read the shortcuts page.
-                                Help
-                                Before asking any question, please refer yourself to the FAQ.
-                                You might then get (and give) help on the Forums, the mailing-lists or our IRC channel (#videolan on irc.freenode.net).
-                                Contribute to the project
-                                You can help the VideoLAN project giving some of your time to help the community, to design skins, to translate the documentation, to test and to code. You can also give funds and material to help us. And of course, you can promote VLCng media player.
+                                Welcome to VLCng media player Help Documentation
+                                You can find VLC documentation on VideoLAN's
+                                wiki website. If you are a newcomer to VLCng
+                                media player, please read the Introduction to
+                                VLCng media player. You will find some
+                                information on how to use the player in the "How
+                                to play files with VLCng media player" document.
+                                For all the saving, converting, transcoding,
+                                encoding, muxing and streaming tasks, you should
+                                find useful information in the Streaming
+                                Documentation. If you are unsure about
+                                terminology, please consult the knowledge base.
+                                To understand the main keyboard shortcuts, read
+                                the shortcuts page. Help Before asking any
+                                question, please refer yourself to the FAQ. You
+                                might then get (and give) help on the Forums,
+                                the mailing-lists or our IRC channel (#videolan
+                                on irc.freenode.net). Contribute to the project
+                                You can help the VideoLAN project giving some of
+                                your time to help the community, to design
+                                skins, to translate the documentation, to test
+                                and to code. You can also give funds and
+                                material to help us. And of course, you can
+                                promote VLCng media player.
                             </p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -349,7 +391,6 @@
                         bottom-16
                         items-center
                         rounded-lg
-                        bg-red-700
                         h-28
                         w-10
                         z-30
@@ -405,7 +446,7 @@
                 onclick="showMenu()"
             >
                 <img src="../assets/img/settings.svg" alt="" />
-            </button>
+            </button> 
 
             <button
                 id="bookmarkBtn"
@@ -467,7 +508,7 @@
                 >
                     <span class="text-2xl text-gray-500">Bookmarks</span>
                     <button
-                        id="bookmarkBtn"
+                        id="close-bookmark-button"
                         class="
                             p-2
                             close-button
@@ -479,8 +520,17 @@
                         <img src="../assets/img/close_black_24dp.svg" alt="" />
                     </button>
                 </div>
-                <div class="flex flex-row justify-end items-center p-4">
+                <div
+                    class="flex flex-row justify-between items-center p-4 gap-4"
+                >
+                    <input
+                        id="bookmarkDesc"
+                        class="py-2 px-4 flex-grow border rounded-md"
+                        placeholder="Enter a bookmark description.."
+                        type="text"
+                    />
                     <button
+                        id="add-bookmark-button"
                         class="
                             py-3
                             px-4
@@ -517,7 +567,13 @@
                         "
                     >
                         <div class="flex-grow flex flex-col">
-                            <span class="mb-2">1:15:20</span>
+<<<<<<< HEAD
+                            <span class="mb-2" id="bookmark-added-time">1:15:20</span>
+=======
+                            <span class="mb-2" id="bookmark-marked-time"
+                                >1:15:20</span
+                            >
+>>>>>>> 657451e742d3203eaa38efe4939c35132d4da5b8
                             <span class="text-xs"
                                 >Bookmark has no description</span
                             >
@@ -525,81 +581,7 @@
                         <div>
                             <!--Close btn-->
                             <button
-                                id="bookmarkBtn"
-                                class="
-                                    p-2
-                                    rounded-full
-                                    focus:outline-none
-                                    hover:bg-yellow-500
-                                "
-                            >
-                                <img
-                                    src="../assets/img/close_black_24dp.svg"
-                                    alt=""
-                                />
-                            </button>
-                        </div>
-                    </div>
-
-                    <!--Item-->
-                    <div
-                        class="
-                            flex flex-row
-                            border
-                            rounded-md
-                            p-2
-                            items-center
-                            hover:bg-gray-100
-                            mb-2
-                        "
-                    >
-                        <div class="flex-grow flex flex-col">
-                            <span class="mb-2">1:15:20</span>
-                            <span class="text-xs"
-                                >Bookmark has no description</span
-                            >
-                        </div>
-                        <div>
-                            <!--Close btn-->
-                            <button
-                                id="bookmarkBtn"
-                                class="
-                                    p-2
-                                    rounded-full
-                                    focus:outline-none
-                                    hover:bg-yellow-500
-                                "
-                            >
-                                <img
-                                    src="../assets/img/close_black_24dp.svg"
-                                    alt=""
-                                />
-                            </button>
-                        </div>
-                    </div>
-
-                    <!--Item-->
-                    <div
-                        class="
-                            flex flex-row
-                            border
-                            rounded-md
-                            p-2
-                            items-center
-                            hover:bg-gray-100
-                            mb-2
-                        "
-                    >
-                        <div class="flex-grow flex flex-col">
-                            <span class="mb-2">1:15:20</span>
-                            <span class="text-xs"
-                                >Bookmark has no description</span
-                            >
-                        </div>
-                        <div>
-                            <!--Close btn-->
-                            <button
-                                id="bookmarkBtn"
+                                id="delete-bookmark-button"
                                 class="
                                     p-2
                                     rounded-full

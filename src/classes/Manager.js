@@ -1,5 +1,6 @@
 const initSqlJs = require("sql.js");
 const Utility = require("./Utility");
+const Bookmark = require("./Bookmark");
 const EventEmitter = require('events');
 
 /**
@@ -100,6 +101,9 @@ class Manager extends EventEmitter{
         }
 
         this.managedObject.setId(result[0].values[0][0]);
+        this.initBookmarksList(SQL);
+        var bookmarksList = document.querySelector("#bookmarkList");
+
         console.log(db.exec("SELECT * from " + this.managedObject.type));
         Utility.closeDatabase(db);
         
@@ -125,6 +129,55 @@ class Manager extends EventEmitter{
         }
         
     }
+
+    initBookmarksList(SQL){
+        result = db.exec(`SELECT * from ${this.managedObject.type}Bookmark where ${this.managedObject.type}Id = ?`, [this.managedObject.getId()]);
+        if(result.length > 0){
+            let values = result.values;
+            values.forEach(row => {
+                let bookmark = new Bookmark();
+                bookmark.id = row[0];
+                bookmark.currentTime = row[2];
+                bookmark.description = row[3];
+                bookmark.dateAdded = row[4];
+                bookmark.type = this.mediaObject.type;
+                this.bookmarks.push(bookmark);
+            });
+            
+        }
+    }
+
+    addBookmark(){
+        this.managedObject.pause();
+    
+        let bookmarkTime = this.managedObject.getCurrentTime();
+        let uiBookmarkTime = document.querySelector("#bookmark-marked-time");
+        uiBookmarkTime.innerHTML = this.managedObject.formatTime(bookmarkTime)[0];
+        let uiBookmarkSaveButton = document.querySelector("#add-bookmark-button");
+
+        //remember to remove the event listner from the button
+
+        uiBookmarkSaveButton.addEventListener("click", ()=>{
+            let description = document.querySelector("#bookmark-description").value;
+            if(this.managedObject.getId() !== 'undefined'){
+                (async()=>{
+                    const SQL = await initSqlJs();
+                    let db = Utility.openDatabase(SQL);
+                    db.run(`INSERT INTO ${this.managedObject.type}Bookmark(${this.managedObject.type}Id, markedTime, description) values (${this.managedObject.getId()}, ${bookmarkTime}, ${description})`);
+                    Utility.closeDatabase(db);
+                })();
+            }
+            
+        });
+
+        
+
+    }
+  
+    returnedFormatedBookmark(bookmarkObject){
+        return ``;
+    }
+
 
     returnThumbnail(imageObject) {
 

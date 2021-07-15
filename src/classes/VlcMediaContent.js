@@ -64,6 +64,7 @@ const { timeStamp } = require('console');
     uiNameText; //The name of the media object
     uiVolumeInputRange;
     uiProgressBarInputRange;
+    uiBookmarkButton;
 
     /**
      * The constructor
@@ -114,21 +115,42 @@ const { timeStamp } = require('console');
         this.isPlaying = false;
     }
 
+    // testing sth out
+
+    seek(numberOfSeconds) {
+        let time = this.mediaObject.currentTime() + numberOfSeconds;
+      
+        if (time < 0) {
+          time = 0;
+        }
+      
+        this.mediaObject.currentTime(time);
+      }
+      
+      forward() {
+        this.seek(10);
+      }
+      
+      rewind() {
+        this.seek(-10);
+      }
+
     /**
      * Seek a certain time backward in the media
      * @param {int} numberOfSeconds 
      */
-    backward(numberOfSeconds){
+    // backward(numberOfSeconds){
 
-    }
 
-    /**
-     * moves forward a certain time in the media
-     * @param {int} numberOfSeconds 
-     */
-    forward(numberOfSeconds){
+    // }
 
-    }
+    // /**
+    //  * moves forward a certain time in the media
+    //  * @param {int} numberOfSeconds 
+    //  */
+    // forward(numberOfSeconds){
+
+    // }
 
     /**
      * The Current time of the media object
@@ -201,14 +223,17 @@ const { timeStamp } = require('console');
      * 
      * @returns {array} [currentDuration text, totalDuration text]
      */
-     formatTime(){
+     formatTime(passedTime = -1){
+         if(passedTime == -1){
+             passedTime = this.getCurrentTime();
+         }
         let durHours = Math.floor(this.getTotalDuration() / 3600);
         let durMins = Math.floor((this.getTotalDuration() - 3600 * durHours) / 60);
         let durSecs = Math.floor(this.getTotalDuration() % 60);
 
-        let curHours = Math.floor(this.getCurrentTime() / 3600);
-        let curMins = Math.floor((this.getCurrentTime() - 3600 * curHours) / 60);
-        let curSecs = Math.floor(this.getCurrentTime() % 60);
+        let curHours = Math.floor(passedTime / 3600);
+        let curMins = Math.floor((passedTime - 3600 * curHours) / 60);
+        let curSecs = Math.floor(passedTime % 60);
 
         return [`${(curHours > 0) ?(curHours > 9 ? curHours : "0" + curHours + ":") : ""}${curMins > 9 ? curMins : "0" + curMins}:${curSecs > 9 ? curSecs : "0" + curSecs}`,
         

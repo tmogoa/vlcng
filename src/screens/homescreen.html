@@ -27,11 +27,7 @@
                 z-50
                 absolute
             "
-            style="
-                -webkit-app-region: drag;
-                -webkit-user-select: none;
-                -webkit-app-region: drag;
-            "
+            style="-webkit-app-region: drag; -webkit-user-select: none"
         >
             <div>Recent</div>
 
@@ -161,9 +157,9 @@
                 </div>
 
                 <div class="flex-grow flex flex-col justify-start pt-10">
-                    <span 
-                    id="continue-video-name"
-                    class="text-4xl font-semibold mb-4 text-yellow-500"
+                    <span
+                        id="continue-video-name"
+                        class="text-4xl font-semibold mb-4 text-yellow-500"
                         >Cars 3</span
                     >
 
@@ -185,15 +181,15 @@
                         </div>
 
                         <!--Duration-->
-                        <span 
-                        id = "minutes-left"
-                        class="text-xs text-yellow-500 font-bold"
+                        <span
+                            id="minutes-left"
+                            class="text-xs text-yellow-500 font-bold"
                             >62 min left</span
                         >
                     </div>
 
                     <button
-                        id = "continue-watching-button"
+                        id="continue-watching-button"
                         class="
                             py-3
                             px-4
@@ -205,6 +201,18 @@
                         "
                     >
                         Continue Watching
+                    </button>
+
+                    <button
+                        id="musicBtn"
+                        class="
+                            text-yellow-500 text-sm
+                            font-bold
+                            self-start
+                            mt-10
+                        "
+                    >
+                        Music
                     </button>
                 </div>
             </div>
@@ -223,10 +231,10 @@
             >
                 <!---Item 1-->
                 <div id="item">
-                    <input type="hidden" value="" id="video-id">
+                    <input type="hidden" value="" id="video-id" />
                     <div class="bg-gray-800 rounded-lg flex flex-row h-20">
                         <img
-                            id = "video-thumbnail-container"
+                            id="video-thumbnail-container"
                             src="https://picsum.photos/300/200"
                             alt=""
                             class="object-cover rounded-l-lg w-4/12"
@@ -247,9 +255,13 @@
                                     items-center
                                 "
                             >
-                                <span class="font-semibold" id="video-name">Cars 2</span>
+                                <span class="font-semibold" id="video-name"
+                                    >Cars 2</span
+                                >
                                 <!--Duration-->
-                                <span class="text-xs" id="watch-time-left">62 min left</span>
+                                <span class="text-xs" id="watch-time-left"
+                                    >62 min left</span
+                                >
                             </div>
 
                             <div class="">

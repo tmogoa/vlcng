@@ -10,6 +10,16 @@ class VlcVideo extends VlcMediaContent{
     myManager;
 
     uiVideoProgressBar; //the progress bar
+    uiTotalDurationText; //The text showing the total duration of the video
+    uiCurrentTimeText; //The text showing the current time in the video
+    uiVolumeText; //the volume text of the volume
+    uiVolumeButtonImg; //the volume button with the volume icon
+    uiVolumeProgressColumn; //the ui slider on the volume
+    uiPlaySpeedButton; //the speed text
+    uiPlayButton; //playbutton
+    uiNameText; //The name of the video
+    //implement foward and rewing buttons
+
     
 
     /**
@@ -28,6 +38,7 @@ class VlcVideo extends VlcMediaContent{
     /**
      * After you have set everything for the ui, call the this method.
      */
+    //call methods for btns heregit
     activate(){
         this.isPlaying = true;
 
@@ -72,6 +83,13 @@ class VlcVideo extends VlcMediaContent{
             //The object is ready to be managed. Hence, signal the manager.
             this.myManager.emit('managed-object-ready');
             this.uiNameText.innerHTML = this.name;
+        });
+
+        this.uiBookmarkButton.addEventListener('click', ()=>{
+            if(this.myManager){
+                this.myManager.addBookmark()
+            }
+
         });
         
     }
