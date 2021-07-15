@@ -61,7 +61,9 @@ vlcVideo.uiTotalDurationText = document.querySelector("#dur-time");
 vlcVideo.uiNameText = document.querySelector("#media-name");
 vlcVideo.uiPlaySpeedButton = document.querySelector("#play-speed");
 vlcVideo.uiVolumeInputRange = document.querySelector("#volume-input-range");
-vlcVideo.uiProgressBarInputRange = document.querySelector("#progress-bar-input-range");
+vlcVideo.uiProgressBarInputRange = document.querySelector(
+    "#progress-bar-input-range"
+);
 vlcVideo.uiBookmarkButton = document.querySelector("#bookmarkBtn");
 vlcVideo.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
@@ -116,18 +118,19 @@ let timeoutId;
 const floatingMenu = document.getElementById("floatingMenu");
 
 function listenForChanges() {
-    // floatingMenu.style.visibility = "visible";
-    // if (timeoutId) {
-    //     clearTimeout(timeoutId);
-    // }
-    // timeoutId = setTimeout(() => {
-    //     //save article to db after 1s inactivity
-    //     floatingMenu.style.visibility = "hidden";
-    // }, 1000);
+    console.log("mouse hovered");
+    floatingMenu.style.visibility = "visible";
+    if (timeoutId) {
+        clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+        //save article to db after 1s inactivity
+        floatingMenu.style.visibility = "hidden";
+    }, 2000);
 }
 
 function autoShowMenu() {
-    vlcVideo.mediaObject.addEventListener("mouseover", listenForChanges);
+    window.addEventListener("mousemove", listenForChanges);
 }
 
 autoShowMenu();
