@@ -219,8 +219,10 @@
             >
                 <!---Item 1-->
                 <div id="item">
+                    <input type="hidden" value="" id="video-id">
                     <div class="bg-gray-800 rounded-lg flex flex-row h-20">
                         <img
+                            id = "video-thumbnail-container"
                             src="https://picsum.photos/300/200"
                             alt=""
                             class="object-cover rounded-l-lg w-4/12"
@@ -241,9 +243,9 @@
                                     items-center
                                 "
                             >
-                                <span class="font-semibold">Cars 2</span>
+                                <span class="font-semibold" id="video-name">Cars 2</span>
                                 <!--Duration-->
-                                <span class="text-xs">62 min left</span>
+                                <span class="text-xs" id="watch-time-left">62 min left</span>
                             </div>
 
                             <div class="">
@@ -272,10 +274,10 @@
                             </div>
 
                             <div class="flex flex-row justify-between text-xs">
-                                <span class="font-semibold"
+                                <span class="font-semibold" id="video-path"
                                     >home/Downloads</span
                                 >
-                                <span>June 24th</span>
+                                <span id="last-date-played">June 24th</span>
                             </div>
                         </div>
                     </div>

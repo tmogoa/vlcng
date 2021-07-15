@@ -137,7 +137,7 @@ autoShowMenu();
  * Gets the link from the homescreen.
  */
 
-//change this to invoke later.
+//change this to invoke
 ipcRenderer.send("send-video-link", "");
 ipcRenderer.on("receive-video-link", (evt, link) => {
     //the video manager than sets the source
