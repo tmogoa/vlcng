@@ -15,6 +15,11 @@
             type="text/css"
             href="../assets/css/controls.css"
         />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../assets/css/bookmark.css"
+        />
     </head>
 
     <body class="flex flex-col items-center overflow-hidden">
@@ -446,7 +451,7 @@
                 onclick="showMenu()"
             >
                 <img src="../assets/img/settings.svg" alt="" />
-            </button> 
+            </button>
 
             <button
                 id="bookmarkBtn"
@@ -493,6 +498,7 @@
                     flex flex-col
                     h-2/3
                     w-8/12
+                    lg:w-4/12
                     rounded-lg
                     overflow-hidden
                 "
@@ -552,6 +558,7 @@
                         pb-6
                         text-gray-500
                         overflow-y-scroll
+                        flex-grow
                     "
                 >
                     <!--Item-->
@@ -567,13 +574,10 @@
                         "
                     >
                         <div class="flex-grow flex flex-col">
-<<<<<<< HEAD
-                            <span class="mb-2" id="bookmark-added-time">1:15:20</span>
-=======
                             <span class="mb-2" id="bookmark-marked-time"
                                 >1:15:20</span
                             >
->>>>>>> 657451e742d3203eaa38efe4939c35132d4da5b8
+
                             <span class="text-xs"
                                 >Bookmark has no description</span
                             >

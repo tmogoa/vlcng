@@ -18,7 +18,7 @@ button {
         opacity: 0;
         visibility: hidden;
         transform: scale(1.1);
-        transition: visibility 1.5s linear 0s, opacity 1.5s 0s, transform 1.5s;
+        transition: visibility 0.5s linear 0s, opacity 0.5s 0s, transform 0.5s;
     }
     .modal-content {
         position: absolute;
@@ -39,6 +39,6 @@ button {
         opacity: 1;
         visibility: visible;
         transform: scale(1);
-        transition: visibility 1.5s linear 0s, opacity 1.5s 0s, transform 1.5s;
+        transition: visibility 0.5s linear 0s, opacity 0.5s 0s, transform 0.5s;
     }
 }

@@ -118,7 +118,6 @@ let timeoutId;
 const floatingMenu = document.getElementById("floatingMenu");
 
 function listenForChanges() {
-    console.log("mouse hovered");
     floatingMenu.style.visibility = "visible";
     if (timeoutId) {
         clearTimeout(timeoutId);
