@@ -61,8 +61,11 @@ vlcVideo.uiTotalDurationText = document.querySelector("#dur-time");
 vlcVideo.uiNameText = document.querySelector("#media-name");
 vlcVideo.uiPlaySpeedButton = document.querySelector("#play-speed");
 vlcVideo.uiVolumeInputRange = document.querySelector("#volume-input-range");
+<<<<<<< HEAD
 vlcVideo.uiProgressBarInputRange = document.querySelector("#progress-bar-input-range");
 vlcVideo.uiBookmarkButton = document.querySelector("#bookmarkBtn");
+=======
+>>>>>>> 657451e742d3203eaa38efe4939c35132d4da5b8
 vlcVideo.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
 );
@@ -98,6 +101,7 @@ document.addEventListener("dblclick", toggleFullScreen);
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
+    console.log("trigger clicked");
 }
 
 function windowOnClick(event) {

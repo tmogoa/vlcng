@@ -1,2 +1,0 @@
-# vlcng
-VLC Next Generation
