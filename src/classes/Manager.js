@@ -125,17 +125,25 @@ class Manager extends EventEmitter{
         }
         
     }
-    addBookmark(SQL){
+
+    addBookmark(){
         this.managedObject.pause();
     
         let bookmarkTime = this.managedObject.getCurrentTime();
         this.showBookmarkForm();
+        let uiBookmarkTime = document.querySelector("#bookmark-marked-time");
+        uiBookmarkTime.innerHTML = this.managedObject.formatTime(bookmarkTime)[0];
+
+
         
 
     }
     showBookmarkForm(){
         let bookmarkForm = document.querySelector("#bookmardId");
         bookmarkForm.style.visibility = "visible"
+    }
+    saveBookmark(){
+        
     }
 
 
