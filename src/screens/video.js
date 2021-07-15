@@ -86,11 +86,6 @@ vlcVideo.mediaObject.addEventListener(
     false
 );
 
-vlcVideo.activate(); //activates all event listeners for the video
-theManager.manage(); //calls the manager to manage the videos
-
-ipcRenderer.send("window:resize", vlcVideo.mediaObject.videoHeight);
-
 function toggleFullScreen() {
     maximize();
 }
@@ -103,6 +98,7 @@ function toggleModal() {
 }
 
 function windowOnClick(event) {
+    console.log("Window clicked");
     if (event.target === modal) {
         toggleModal();
     }
@@ -111,6 +107,11 @@ function windowOnClick(event) {
 trigger.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
+
+vlcVideo.activate(); //activates all event listeners for the video
+theManager.manage(); //calls the manager to manage the videos
+
+ipcRenderer.send("window:resize", vlcVideo.mediaObject.videoHeight);
 
 let timeoutId;
 const floatingMenu = document.getElementById("floatingMenu");
