@@ -201,14 +201,17 @@ const { timeStamp } = require('console');
      * 
      * @returns {array} [currentDuration text, totalDuration text]
      */
-     formatTime(){
+     formatTime(passedTime = -1){
+         if(passedTime == -1){
+             passedTime = this.getCurrentTime();
+         }
         let durHours = Math.floor(this.getTotalDuration() / 3600);
         let durMins = Math.floor((this.getTotalDuration() - 3600 * durHours) / 60);
         let durSecs = Math.floor(this.getTotalDuration() % 60);
 
-        let curHours = Math.floor(this.getCurrentTime() / 3600);
-        let curMins = Math.floor((this.getCurrentTime() - 3600 * curHours) / 60);
-        let curSecs = Math.floor(this.getCurrentTime() % 60);
+        let curHours = Math.floor(passedTime / 3600);
+        let curMins = Math.floor((passedTime - 3600 * curHours) / 60);
+        let curSecs = Math.floor(passedTime % 60);
 
         return [`${(curHours > 0) ?(curHours > 9 ? curHours : "0" + curHours + ":") : ""}${curMins > 9 ? curMins : "0" + curMins}:${curSecs > 9 ? curSecs : "0" + curSecs}`,
         
