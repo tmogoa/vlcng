@@ -138,7 +138,7 @@ class Manager extends EventEmitter{
         //remember to remove the event listner from the button
 
         uiBookmarkSaveButton.addEventListener("click", ()=>{
-            let description = document.querySelector("#bookmark-description").value;
+            let description = "this bookmark has no description";
             if(this.managedObject.getId() !== 'undefined'){
                 (async()=>{
                     const SQL = await initSqlJs();
