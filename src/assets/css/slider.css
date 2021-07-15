@@ -13,3 +13,24 @@
     cursor: pointer; /* Cursor on hover */
     visibility: hidden;
 }
+
+.volume {
+    -webkit-transform: rotate(270deg);
+    -webkit-appearance: none; /* Override default CSS styles */
+    appearance: none;
+    outline: none; /* Remove outline */
+}
+
+.volume::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 40px; /* Slider handle height */
+    background: #04aa6d; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    visibility: hidden;
+}
+
+.rotated {
+    -webkit-transform: rotate(270deg);
+}
