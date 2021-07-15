@@ -42,3 +42,9 @@ button {
         transition: visibility 0.5s linear 0s, opacity 0.5s 0s, transform 0.5s;
     }
 }
+
+@layer components {
+    .active-tab {
+        @apply bg-gray-800 rounded text-white;
+    }
+}

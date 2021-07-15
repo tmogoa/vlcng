@@ -31,6 +31,37 @@
         >
             <div>Recent</div>
 
+            <!--START OF TAB SWITHCER-->
+            <div
+                class="
+                    tab-switcher
+                    bg-white
+                    flex
+                    items-center
+                    text-xs
+                    py-1
+                    gap-1
+                    px-2
+                    font-semibold
+                    rounded
+                "
+            >
+                <button
+                    id="videoTabBtn"
+                    class="py-1 px-2 active-tab font-semibold rounded"
+                >
+                    Video
+                </button>
+                <button
+                    id="musicTabBtn"
+                    class="py-1 px-2 rounded text-gray-500 font-semibold"
+                >
+                    Audio
+                </button>
+            </div>
+
+            <!---END OF TAB SWITCHER-->
+
             <div class="flex flex-row justify-end gap-5">
                 <button
                     id="minimize"
@@ -206,10 +237,11 @@
                     <button
                         id="musicBtn"
                         class="
-                            text-yellow-500 text-sm
-                            font-bold
+                            mt-5
+                            text-yellow-500
                             self-start
-                            mt-10
+                            text-xs
+                            font-semibold
                         "
                     >
                         Music
