@@ -6,6 +6,7 @@
  */
 const Utility = require('./Utility');
 const EventEmitter = require('events');
+const { timeStamp } = require('console');
 
  class VlcMediaContent extends EventEmitter{
 
@@ -13,6 +14,11 @@ const EventEmitter = require('events');
      * Type of the Media content: Audio or Video
      */
     type;
+
+    /**
+     * The id of the Audio or Video in the database
+     */
+    id;
 
     /**
      * The src of the media content object
@@ -52,10 +58,12 @@ const EventEmitter = require('events');
     uiCurrentTimeText; //The text showing the current time in the video
     uiVolumeText; //the volume text of the volume
     uiVolumeButtonImg; //the volume button with the volume icon
-    uiVolumeProgressColumn; //the ui slider on the volume
+    uiVolumeLevelBar; //the ui slider on the volume
     uiPlaySpeedButton; //the speed text
     uiPlayButton; //playbutton
     uiNameText; //The name of the media object
+    uiVolumeInputRange;
+    uiProgressBarInputRange;
 
     /**
      * The constructor
@@ -134,7 +142,7 @@ const EventEmitter = require('events');
      * @param {string} time 
      */
     setCurrentTime(time){
-
+        this.mediaObject.currentTime = time;
     }
 
     /**
@@ -171,6 +179,22 @@ const EventEmitter = require('events');
         }
        
         return;
+    }
+
+    getName(){
+        return this.name;
+    }
+
+    setName(name){
+        this.name = name;
+    }
+
+    getId(){
+        return this.id;
+    }
+
+    setId(id){
+        this.id = id;
     }
     
 

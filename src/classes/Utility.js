@@ -88,15 +88,16 @@ class Utility{
         return placeholders.replace(/(\?,)$/,"?");
     }
 
-    static openDatabase(){
+    /**
+     * Always call const SQL = await initSqlJs(); and pass SQL to this function if SQL is not already defined.
+     * @param {Object} SQL 
+     * @returns Object Db
+     */
+    static openDatabase(SQL){
         let dbPath = Utility.path.join(Utility.databasePath, Utility.dbFileName);
-        return initSqlJs().then(function(SQL) {
-              console.log("opened the database");
-                return SQL.Database(dbPath);
-             }).catch (error => {
-            console.log("Can't open database file.", error.message)
-            return null
-            });
+        console.log("opening database");
+        let fileBuffer = fs.readFileSync(dbPath);
+        return new SQL.Database(fileBuffer);
     }
 }
 

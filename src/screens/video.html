@@ -38,7 +38,8 @@
                 -webkit-app-region: drag;
             "
         >
-            <div id="media-name">Into the atom</div>
+            <div id="media-name">Video Title</div>
+            <input type="hidden" id="video-id" value="0">
             <div class="flex flex-row justify-end gap-8">
                 <button
                     id="minimize"
@@ -78,9 +79,9 @@
 
         <div id="mainMenu" class="w-full h-screen">
             <video
-                src="../assets/video/Cars 3 Rivalry Official Trailer.mp4"
+                src="file://C:\Users\Levi Kamara Zwannah\Documents\School works\ICS year 3\Semester 1\papers\HCI\vlcng\src\assets\video\Cars 3 Rivalry Official Trailer.mp4"
                 class="w-full h-screen bg-gray-900 rounded-none p-0"
-                
+                autoplay
             ></video>
 
             <div id="menu" style="display: none" >
@@ -94,7 +95,7 @@
                     <button class="menubtn" id="help_btn" onclick="ShowHelp('myhelp')">Help</button>
                 </div> -->
 
-                <div id="submenu">
+                <!-- <div id="submenu">
                     <p>Settings</p><br>
                     <button class="menubtn" id="media_btn" onclick="show('mymedia')">Media</button>
                     <button class="menubtn" id="video_btn" onclick="show('myvideo')">Video</button>
@@ -103,7 +104,7 @@
                     <button class="menubtn" id="tools_btn" onclick="show('mytools')">Tools</button>
                     <button class="menubtn" id="view_btn" onclick="show('myview')">View</button>
                     <button class="menubtn" id="help_btn" onclick="show('myhelp')">Help</button>
-                </div>
+                </div> -->
 
                 <div id="rightmenu">
                     <br />
@@ -288,7 +289,7 @@
                         w-96
                         h-8
                     "
-                    id="myRange"
+                    id="progress-bar-input-range"
                 />
 
                 <!--* The following <div> is what you should lengthen or shorten
@@ -296,7 +297,7 @@
                     * Also remember than this div when progress is near 100, the corners to its right
                         should be rounded by removing the class`rounded-r-none`-->
                 <div
-                    id="progressIndicator"
+                    id="progress-indicator"
                     class="
                         flex
                         absolute
@@ -369,7 +370,7 @@
                             w-28
                             h-10
                         "
-                        id="myRange"
+                        id="volume-input-range"
                     />
 
                     <!--* The following <div> is what you should lengthen or shorten
@@ -377,7 +378,7 @@
                     * Also remember than this div when progress is near 100, the corners to its top
                         should be rounded by removing the class`rounded-t-none`-->
                     <div
-                        id="progressIndicator"
+                        id="volume-level-indicator"
                         class="
                             h-20
                             absolute

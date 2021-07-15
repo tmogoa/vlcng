@@ -8,6 +8,8 @@ const minimizeIcon = document.getElementById("minimize");
 const maximizeIcon = document.getElementById("maximize");
 const playNetVideoBtn = document.getElementById("playNetVideoBtn");
 
+//Suppose the list recent videos and audio?
+
 closeBtn.onclick = (e) => {
     getWindow().close();
 };

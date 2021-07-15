@@ -17,14 +17,14 @@ function initialize(){
     myhelp = document.getElementById("myhelp");
     mshow = document.getElementById("main_place");
 
-    menu.addEventListener("click",showMenu,false);
-    mymedia.addEventListener("click",showMedia,false);
-    myaudio.addEventListener("click",showAudio,false);
-    mysubtitles.addEventListener("click",showSub,false);
-    mytools.addEventListener("click",showTools,false);
-    myview.addEventListener("click",showView,false);
-    myhelp.addEventListener("click",showHelp,false);
-    mshow.addEventListener("click",show,false);
+    // menu.addEventListener("click",showMenu,false);
+    // mymedia.addEventListener("click",showMedia,false);
+    // myaudio.addEventListener("click",showAudio,false);
+    // mysubtitles.addEventListener("click",showSub,false);
+    // mytools.addEventListener("click",showTools,false);
+    // myview.addEventListener("click",showView,false);
+    // myhelp.addEventListener("click",showHelp,false);
+    // mshow.addEventListener("click",show,false);
 }
 window.onload = initialize;
 
