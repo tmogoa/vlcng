@@ -68,6 +68,9 @@ vlcVideo.uiBookmarkButton = document.querySelector("#bookmarkBtn");
 vlcVideo.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
 );
+vlcVideo.uiBookmarkCloseButton = document.querySelector(
+    "#close-bookmark-button"
+);
 
 const trigger = document.querySelector(".trigger");
 const modal = document.querySelector(".modal");
@@ -95,7 +98,7 @@ document.addEventListener("dblclick", toggleFullScreen);
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
-    console.log("trigger clicked");
+    theManager.managedObject.playPause();
 }
 
 function windowOnClick(event) {
