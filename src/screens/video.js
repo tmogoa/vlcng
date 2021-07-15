@@ -78,6 +78,7 @@ const closeButton = document.querySelector(".close-button");
 
 console.log("Directory name is: " + Utility.path.resolve(__dirname));
 
+//Just making the window size match the video's dimensions
 vlcVideo.mediaObject.addEventListener(
     "loadedmetadata",
     function (e) {
@@ -102,7 +103,6 @@ function toggleModal() {
 }
 
 function windowOnClick(event) {
-    console.log("Window clicked");
     if (event.target === modal) {
         toggleModal();
     }
@@ -126,7 +126,6 @@ function listenForChanges() {
         clearTimeout(timeoutId);
     }
     timeoutId = setTimeout(() => {
-        //save article to db after 1s inactivity
         floatingMenu.style.visibility = "hidden";
     }, 2000);
 }
