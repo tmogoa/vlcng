@@ -96,6 +96,7 @@ document.addEventListener("dblclick", toggleFullScreen);
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
+    console.log("trigger clicked");
 }
 
 function windowOnClick(event) {
