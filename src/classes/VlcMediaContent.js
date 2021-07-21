@@ -53,6 +53,9 @@ const { timeStamp } = require('console');
      */
     playbackSpeeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
+    /**
+     * General UI components for both video and audios
+     */
     uiTotalDurationText; //The text showing the total duration of the video
     uiCurrentTimeText; //The text showing the current time in the video
     uiVolumeText; //the volume text of the volume
