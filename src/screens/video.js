@@ -61,12 +61,16 @@ vlcVideo.uiTotalDurationText = document.querySelector("#dur-time");
 vlcVideo.uiNameText = document.querySelector("#media-name");
 vlcVideo.uiPlaySpeedButton = document.querySelector("#play-speed");
 vlcVideo.uiVolumeInputRange = document.querySelector("#volume-input-range");
-vlcVideo.uiProgressBarInputRange = document.querySelector("#progress-bar-input-range");
+vlcVideo.uiProgressBarInputRange = document.querySelector(
+    "#progress-bar-input-range"
+);
 vlcVideo.uiBookmarkButton = document.querySelector("#bookmarkBtn");
 vlcVideo.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
 );
-vlcVideo.uiBookmarkCloseButton = document.querySelector("#close-bookmark-button");
+vlcVideo.uiBookmarkCloseButton = document.querySelector(
+    "#close-bookmark-button"
+);
 
 const trigger = document.querySelector(".trigger");
 const modal = document.querySelector(".modal");
@@ -74,6 +78,7 @@ const closeButton = document.querySelector(".close-button");
 
 console.log("Directory name is: " + Utility.path.resolve(__dirname));
 
+//Just making the window size match the video's dimensions
 vlcVideo.mediaObject.addEventListener(
     "loadedmetadata",
     function (e) {
@@ -98,7 +103,6 @@ function toggleModal() {
 }
 
 function windowOnClick(event) {
-    console.log("Window clicked");
     if (event.target === modal) {
         toggleModal();
     }
@@ -122,13 +126,12 @@ function listenForChanges() {
         clearTimeout(timeoutId);
     }
     timeoutId = setTimeout(() => {
-        //save article to db after 1s inactivity
         floatingMenu.style.visibility = "hidden";
-    }, 1000);
+    }, 2000);
 }
 
 function autoShowMenu() {
-    vlcVideo.mediaObject.addEventListener("mousemove", listenForChanges);
+    window.addEventListener("mousemove", listenForChanges);
 }
 
 autoShowMenu();

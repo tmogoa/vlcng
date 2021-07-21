@@ -237,3 +237,17 @@ musicBtn.onclick = (e) => {
     getWindow().loadFile("./src/screens/audio.html");
 };
 //end of UI testing
+
+//START OF TAB SWITCHERS
+const videoTabBtn = document.getElementById("videoTabBtn");
+const musicTabBtn = document.getElementById("musicTabBtn");
+
+function showTab() {
+    videoTabBtn.classList.toggle("active-tab");
+    videoTabBtn.classList.toggle("text-gray-500");
+    musicTabBtn.classList.toggle("active-tab");
+    musicTabBtn.classList.toggle("text-gray-500");
+}
+videoTabBtn.onclick = showTab;
+musicTabBtn.onclick = showTab;
+//END OF TAB SWITCHERS

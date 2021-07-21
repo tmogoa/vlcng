@@ -15,6 +15,11 @@
             type="text/css"
             href="../assets/css/controls.css"
         />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../assets/css/bookmark.css"
+        />
     </head>
 
     <body class="flex flex-col items-center overflow-hidden">
@@ -47,7 +52,7 @@
                         hover:bg-gray-800
                     "
                 >
-                    <img src="../assets/img/min.png" alt="" class="w-4" />
+                    <img src="../assets/img/min_white_24dp.svg" alt="" class="w-4" />
                 </button>
                 <button
                     id="maximize"
@@ -58,13 +63,13 @@
                         hover:bg-gray-800
                     "
                 >
-                    <img src="../assets/img/max.png" alt="" class="w-4" />
+                    <img src="../assets/img/max_white_24dp.svg" alt="" class="w-4" />
                 </button>
                 <button
                     id="close"
-                    class="p-2 rounded-full focus:outline-none hover:bg-white"
+                    class="p-2 rounded-full focus:outline-none hover:bg-gray-800"
                 >
-                    <img src="../assets/img/close.png" alt="" class="w-4" />
+                    <img src="../assets/img/close_white_24dp.svg" alt="" class="w-4" />
                 </button>
             </div>
         </div>
@@ -279,39 +284,6 @@
                 1x
             </button>
 
-            <!-- <div class="flex bg-yellow-500 bg-opacity-20 rounded-lg w-96 h-8">
-                <div
-                    id="videoProgressBar"
-                    class="
-                        flex
-                        items-center
-                        bg-yellow-500
-                        rounded-lg rounded-r-none
-                        w-48
-                        h-8
-                        overflow-visible
-                    "
-                ></div>
-
-                <div
-                    class="
-                        flex
-                        absolute
-                        z-30
-                        h-8
-                        flex-row
-                        items-center
-                        text-xs
-                        px-4
-                        font-bold
-                    "
-                >
-                    <span id="current-time">23:14</span>
-                    <span>&nbsp;/&nbsp;</span>
-                    <span id="dur-time">1:12:34</span>
-                </div>
-            </div> -->
-
             <div
                 id="videoProgressBaxrs"
                 class="flex items-center rounded-lg w-96 h-8"
@@ -446,7 +418,7 @@
                 onclick="showMenu()"
             >
                 <img src="../assets/img/settings.svg" alt="" />
-            </button> 
+            </button>
 
             <button
                 id="bookmarkBtn"
@@ -491,8 +463,10 @@
                 class="
                     modal-content
                     flex flex-col
-                    h-2/3
+                    lg:h-2/3
+                    h-5/6
                     w-8/12
+                    lg:w-6/12
                     rounded-lg
                     overflow-hidden
                 "
@@ -553,6 +527,7 @@
                         pb-6
                         text-gray-500
                         overflow-y-scroll
+                        flex-grow
                     "
                 >
                     <!--Item-->
