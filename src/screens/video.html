@@ -130,13 +130,7 @@
                     >
                         Tools
                     </button>
-                    <button
-                        class="menubtn"
-                        id="view_btn"
-                        onclick="show('myview')"
-                    >
-                        View
-                    </button>
+                
                     <button
                         class="menubtn"
                         id="help_btn"
@@ -154,21 +148,31 @@
                     </div>
 
                     <div id="mymedia" style="display: none">
-                        <button id="" class="mediabtns">Open File...</button><br>
-                        <button id="" class="mediabtns">Open Multiple Files...</button><br>
-                        <button id="" class="mediabtns">Open Folder...</button><br>
-                        <button id="" class="mediabtns">Open Disk...</button><br>
-                        <button id="" class="mediabtns">Open Network Stream...</button><br>
-                        <button id="" class="mediabtns">Open Recent Media...</button><br>
-                        <button id="" class="mediabtns">Exit</button><br>
+                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open File..</button><br>
+                        <input type='file' id="getFile" style="display:none" accept="video/*">
+
+                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Multiple Files..</button><br>
+                        <input type='file' id="getFile" style="display:none" accept="video/*" multiple>
+
+                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Folder...</button><br>
+                        <input type='file' id="getFile" style="display:none">
+
+                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Network Stream...</button><br>
+                        <input type='file' id="getFile" style="display:none">
+
+                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Recent Media</button><br>
+                        <input type='file' id="getFile" style="display:none">
+
+                        <button class="mediabtns">Exit</button><br>
+
                     </div>
 
                     <div id="myvideo" style="display: none">
-                        <label for="audio">Choose an Audio track:</label><br>
-                        <select name="audio" id="audio">
-                            <option value="Track">Track 2 - English uk</option>
-                            <option value="Track">Track 2 - Spanish</option>
-                            <option value="Track">Track 3 - Swahili</option>
+                        <label for="Resolution">Resolution</label><br>
+                        <select name="resolution" id="resolution">
+                            <option value="res">Auto</option>
+                            <option value="res">High Definition(720p)</option>
+                            <option value="res">Standard Definition(360p)</option>
                         </select>
                     </div>
 
@@ -187,12 +191,12 @@
                     </div>
 
                     <div id="mysubtitles" style="display: none"><br>
-                        <label for="audio">Choose an Audio track:</label><br>
-                        <select name="audio" id="audio">
-                            <option value="Track">Track 4 - English</option>
-                            <option value="Track">Track 2 - Polish</option>
-                            <option value="Track">Track 3 - French</option>
-                        </select>
+                        <label for="sub">Add Subtitle</label><br>
+                        <input type="file" id="myfile" name="myfile"><br>
+                        <input type="button" value="subtitle"><br><br>
+
+                        <button style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Add Subtitle</button>
+                        <input type='file' id="getFile" style="display:none">
                     </div>
 
                     <div id="mytools" style="display: none"><br>
@@ -200,15 +204,6 @@
                         <select name="audio" id="audio">
                             <option value="Track">Track 5 - English</option>
                             <option value="Track">Track 2 - Urkain</option>
-                            <option value="Track">Track 3 - French</option>
-                        </select>
-                    </div>
-
-                    <div id="myview" style="display: none"><br>
-                        <label for="audio">Choose an Audio track:</label>
-                        <select name="audio" id="audio">
-                            <option value="Track">Track 6 - English</option>
-                            <option value="Track">Track 2 - Chinese</option>
                             <option value="Track">Track 3 - French</option>
                         </select>
                     </div>
