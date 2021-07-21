@@ -2,7 +2,6 @@
 /**
  * The VLC media content class
  * This class is the parent of the Vlc video and audio classes
- * You must set the static mediaObject first before calling the constructor
  */
 const Utility = require('./Utility');
 const EventEmitter = require('events');
@@ -11,7 +10,7 @@ const { timeStamp } = require('console');
  class VlcMediaContent extends EventEmitter{
 
     /**
-     * Type of the Media content: Audio or Video
+     * Type of the Media content: audio or video
      */
     type;
 
@@ -22,7 +21,7 @@ const { timeStamp } = require('console');
 
     /**
      * The src of the media content object
-     * This is an object that has the directory, extension and basename field
+     * This is an object that has a `directory`, `extension`, name and `basename` fields
      * e.g. file source = "directory/file.mp4"
      * directory = /directory
      * extenstion = .mp4
@@ -49,7 +48,7 @@ const { timeStamp } = require('console');
     mediaObject;
 
     /**
-     * 
+     * This is the array of playback speeds. 
      * @property {array} playbackSpeeds
      */
     playbackSpeeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
@@ -62,10 +61,10 @@ const { timeStamp } = require('console');
     uiPlaySpeedButton; //the speed text
     uiPlayButton; //playbutton
     uiNameText; //The name of the media object
-    uiVolumeInputRange;
-    uiProgressBarInputRange;
-    uiBookmarkButton;
-    uiBookmarkCloseButton;
+    uiVolumeInputRange; //The range input of the volume
+    uiProgressBarInputRange; //The range input of the video or progress bar
+    uiBookmarkButton; //The bookmark button for both the audio and videos
+    uiBookmarkCloseButton; //close the book mark form
 
     /**
      * The constructor
@@ -116,42 +115,23 @@ const { timeStamp } = require('console');
         this.isPlaying = false;
     }
 
-    // testing sth out
-
-    seek(numberOfSeconds) {
-        let time = this.mediaObject.currentTime() + numberOfSeconds;
-      
-        if (time < 0) {
-          time = 0;
-        }
-      
-        this.mediaObject.currentTime(time);
-      }
-      
-      forward() {
-        this.seek(10);
-      }
-      
-      rewind() {
-        this.seek(-10);
-      }
-
+   
     /**
-     * Seek a certain time backward in the media
-     * @param {int} numberOfSeconds 
+     * 
+     * @param {int} numberOfSeconds seek the mediaObject to a particular play time
      */
-    // backward(numberOfSeconds){
-
-
-    // }
-
-    // /**
-    //  * moves forward a certain time in the media
-    //  * @param {int} numberOfSeconds 
-    //  */
-    // forward(numberOfSeconds){
-
-    // }
+    seek(numberOfSeconds) {
+        let time = this.getCurrentTime() + numberOfSeconds;
+        this.setCurrentTime((time > 0)?time:0);
+    }
+      
+    forward() {
+     this.seek(10);
+    }
+    
+    rewind() {
+     this.seek(-10);
+    }
 
     /**
      * The Current time of the media object
@@ -161,8 +141,8 @@ const { timeStamp } = require('console');
     }
 
     /**
-     * The time in H:m:s
-     * @param {string} time 
+     * The time in seconds
+     * @param {int} time 
      */
     setCurrentTime(time){
         this.mediaObject.currentTime = time;
@@ -180,13 +160,18 @@ const { timeStamp } = require('console');
         return this.mediaObject.volume;
     }
 
+    /**
+     * Returns the total duration of the mediaObject currently attached to the VlcMediaContent.
+     * This object could be a video or an audio
+     * @returns int
+     */
     getTotalDuration(){
         return this.mediaObject.duration;
     }
 
     /**
      * Sets the source of the mediaObject which is either video or audio.
-     * Never called the mediaObject.src directly because we need to set the srcObject of the VlcMediaContent
+     * Never called the `mediaObject.src` directly to set it. This is because we need to set the `srcObject` of the VlcMediaContent which will be used in other methods. Always call the `VlcMediaContent.setSrc(src)` to se the source.
      * @param {string} src 
      */
     setSrc(src){
@@ -212,17 +197,32 @@ const { timeStamp } = require('console');
         this.name = name;
     }
 
+    /**
+     * The Id of the object in the database.
+     * @returns int
+     */
     getId(){
         return this.id;
     }
 
+    /**
+     * Only call this method if the id you want to set is from the database.
+     * That means, you created the object and then saved it. After insertion into the database
+     * the id will be returned and you can go ahead to set it here.
+     * @param {int} id 
+     */
     setId(id){
         this.id = id;
     }
 
     /**
-     * 
+     * This method formats the time given to it. By default, the time is the current
+     * time of the mediaObject. It takes the time in seconds and formats it into H:mm:ss. (string)
+     * @param {int} passedTime - if you want a specific time to be formated you can pass it here. Remeber,
+     * it's in seconds. e.g. 3600 will return ["1:00:00", "3:05:47"] assuming that the 3:05:47 is the total duration of the mediaObject attached to the vlcMediaContent object.
      * @returns {array} [currentDuration text, totalDuration text]
+     * This method is used on the progress bar where there is a current time and the total time.
+     * It is also used in the bookmark timing.
      */
      formatTime(passedTime = -1){
          if(passedTime == -1){

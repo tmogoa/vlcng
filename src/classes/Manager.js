@@ -193,7 +193,6 @@ class Manager extends EventEmitter{
                 save();
             }
         }
-
         window.addEventListener('keydown', keyDown);
 
     }
@@ -247,26 +246,47 @@ class Manager extends EventEmitter{
         })();
     }
 
-    returnThumbnail(imageObject) {
+        /**
+         * create thumbnail of a video
+         * @param {HTMLElement} imageObject 
+         * @returns {HTMLElemet} image
+         */
+        makeThumbnail(imageObject) {
 
         var canvas = document.createElement("canvas");
-        var container = document.getElementById(`thumbnail-container-${this.managedObject.getId()}`);
+        var container = document.getElementById(`video-thumbnail-container-${this.managedObject.getId()}`);
         if(container){
             var width = container.clientWidth;
             var height = container.clientHeight;
             canvas.width = (width / 3);
             canvas.height = height;
             canvas.getContext("2d").drawImage(this.managedObject.mediaObject, 0, 0, canvas.width, canvas.height);
-            var image = document.createElement("img");
-            image.src = canvas.toDataURL();
-            return image;
+            imageObject.src = canvas.toDataURL();
         }
-         }
+        }
 
         setCurrentTime(currentTime){
             this.managedObject.setCurrentTime(currentTime);
         }
 
+        /**
+         * Remove the media object from the database
+         * @param {initSQLJs.SQL} SQL 
+         * @param {string} type - "video | audio"
+         */
+        static removeMediaObject(SQL, id, type = "video"){
+            let db = Utility.openDatabase(SQL);
+            //playlistItems
+            db.run(`DELETE from ${type}PlaylistItem where itemId = ?`, [id]);
+            //bookmark
+            db.run(`DELETE from ${type}Bookmark where ${type}Id = ?`, [id]);
+            //recent
+            db.run(`DELETE from recent${type.charAt(0).toUpperCase() + type.slice(1)} were ${type}Id = ?`, [id]);
+            //mediaContent
+            db.run(`DELETE from ${type} where id = ?`, [id]);
+
+            Utility.closeDatabase(db);
+        }
 }
 
 module.exports = Manager;

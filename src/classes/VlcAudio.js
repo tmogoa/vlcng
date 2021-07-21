@@ -1,8 +1,8 @@
 const VlcMediaContent = require('./VlcMediaContent');
 
 
-class audio extends VlcMediaContent{}
-
+class VlcAudio extends VlcMediaContent{}
+module.exports = VlcAudio;
 let previous = document.querySelector('#pre');
 let play = document.querySelector('#play');
 let next = document.querySelector('#next');
