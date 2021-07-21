@@ -4,10 +4,12 @@ const Bookmark = require("./Bookmark");
 const EventEmitter = require('events');
 
 /**
- * This is the Manager class.
+ * This is the Manager class extents EventEmitter. Hence can emit and listen for events.
  * It is responsible to save the media content data to the database.
  * for example, adding a video or audio to the recently played videos or audio.
  * Managing the bookmarks, and updating last the last played time.
+ * It will handle the management of playlists however, there must be a general manager to do that
+ * since every video or audio has its own manager.
  */
 
 class Manager extends EventEmitter{
@@ -29,11 +31,12 @@ class Manager extends EventEmitter{
 
     constructor(){
         super();
+        //we initialize the database here.
         Utility.initDb();
     }
 
     /**
-     * 
+     * So, most often, the manager will set the source of the vlcVideo or VlcAudio.
      * @param {string} src - the source of the vlcMediaObject which is the managedObject 
      */
     setSrc(src){
@@ -44,9 +47,7 @@ class Manager extends EventEmitter{
      * Updates the time of the managedObject
      */
     updateTime(){
-        this.managedObject.mediaObject.addEventListener('timeupdate', ()=>{
-            this.currentlyStoppedAt = this.managedObject.getCurrentTime();
-        });
+        this.currentlyStoppedAt = this.managedObject.getCurrentTime();
     }
 
     /**
@@ -57,7 +58,7 @@ class Manager extends EventEmitter{
     }
 
     /**
-     * Telling the manager to perform his management function
+     * Telling the manager to perform her management functions
      */
     manage(){
         this.addListener('managed-object-ready', ()=>{
@@ -66,8 +67,6 @@ class Manager extends EventEmitter{
             //check if the object exist in the database, if not, add it with its current data.
             (async()=>{
                 const SQL = await initSqlJs();
-                
-                
                 //adding the object
                 this.checkObjectPersistence(SQL);
                 
@@ -107,6 +106,9 @@ class Manager extends EventEmitter{
         
     }
 
+    /**
+     * To list the bookmarks
+     */
     listBookmarks(){
         var bookmarksList = document.querySelector("#bookmarkList");
         bookmarksList.innerHTML = "";
@@ -118,8 +120,8 @@ class Manager extends EventEmitter{
     /**
      * This updates the time the media content was played upto and 
      * the recent played date.
-     * SQL from {initSqlJs}.SQL
-     * @param {SQL} SQL 
+     * 
+     * @param {SQL} SQL - SQL from {initSqlJs}.SQL
      */
     updatePlayedTime(SQL){
         if(this.managedObject.isPlaying){
@@ -136,6 +138,12 @@ class Manager extends EventEmitter{
         
     }
 
+    /**
+     * Get's all the current bookmarks for the object
+     * @param {Object} SQL - from {initSqlJs}.SQL 
+     * @param {SQLiteDatabase} db - the database to deal with. If null, the function
+     * creates its own. So if you already have a database opened, just pass it here. 
+     */
     initBookmarksList(SQL, db = null){
         this.bookmarks = [];
         let wasPassed = true;
@@ -163,13 +171,16 @@ class Manager extends EventEmitter{
         }
     }
 
+    /**
+     * This function adds bookmarks to the database for the currently managedObject.
+     * The bookmark form must be opend in order to make this work. However, it can still work in the
+     * background.
+     */
     addBookmark(){
 
         let bookmarkTime = this.managedObject.getCurrentTime();
         let uiBookmarkTime = document.querySelector("#bookmark-added-time");
         uiBookmarkTime.innerHTML = this.managedObject.formatTime(bookmarkTime)[0];
-        let uiBookmarkSaveButton = document.querySelector("#add-bookmark-button");
-        let eventListenerAdded = false;
         //remember to remove the event listner from the button
         let save = ()=>{
             let description = document.querySelector("#bookmark-description").value;
@@ -197,6 +208,11 @@ class Manager extends EventEmitter{
 
     }
   
+    /**
+     * Returns the sql to list a bookmark item in the bookmark list.
+     * @param {Bookmark} bookmarkObject 
+     * @returns string
+     */
     returnedFormatedBookmark(bookmarkObject){
         let bookmark = `<div
         class="
@@ -235,6 +251,11 @@ class Manager extends EventEmitter{
         return bookmark;
     }
 
+    /**
+     * Deletes a bookmark from the database. It is called from the frontend. But if you have access
+     * to the bookmark id from the backend, you can just call it incase you need to delete the bookmark.
+     * @param {int} bookmarkId 
+     */
     deleteBookmark(bookmarkId){
         (async()=>{
             const SQL = await initSqlJs();
@@ -284,7 +305,6 @@ class Manager extends EventEmitter{
             db.run(`DELETE from recent${type.charAt(0).toUpperCase() + type.slice(1)} were ${type}Id = ?`, [id]);
             //mediaContent
             db.run(`DELETE from ${type} where id = ?`, [id]);
-
             Utility.closeDatabase(db);
         }
 }
