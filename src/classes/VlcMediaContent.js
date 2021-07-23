@@ -69,6 +69,13 @@ const { timeStamp } = require('console');
     uiBookmarkButton; //The bookmark button for both the audio and videos
     uiBookmarkCloseButton; //close the book mark form
 
+    //audio 
+    uiNextButton;//next button 
+    uiPreviousButton;//previous button
+    uiReplayButton;//replay button
+    uiShuffleButton;//shuffle button 
+    uiLikeButton;//like button
+    uiArtistText;//artist name
     /**
      * The constructor
      * @param {string} type - 'video' or 'audio' 
