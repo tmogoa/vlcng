@@ -171,8 +171,11 @@ const cwTimeLeft = document.getElementById("cw-time-left");
         console.log(`No recent videos found`);
     }
 
+    console.log("The recent audios are ");
+    console.log(recentAudios);
     if(recentAudios.length > 0){
         let rows = recentAudios[0].values;
+
     }
 
 })();

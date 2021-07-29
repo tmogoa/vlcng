@@ -189,7 +189,7 @@ class="bg-red-200
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
-                  <tr id="musicItem" 
+                  <tr onclick="setPath('../assets/audio/song3.mp3')"
                       class="bg-gray-50 
                              dark:bg-gray-800 
                              hover:bg-yellow-200 
@@ -403,7 +403,7 @@ class="bg-red-200
                                    <span id="total_time">0:00</span>
                                </div>
                                <div class="slidecontainer" id="progress-bar">
-                                 <input type="range" min="1" max="100" value="50" class="default" id="myRange">
+                                 <input type="range" min="1" max="100" value="50" class="default" id="audio-input-range">
                                </div>
                               </div>
                                </div>
@@ -413,7 +413,7 @@ class="bg-red-200
                <div>
            </div>
          <!-- ./Player Controls -->
-
+           <audio src=""></audio>
       </div>
     </div>
     <script defer src="./audio.js"></script>
