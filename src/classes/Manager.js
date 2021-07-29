@@ -99,13 +99,13 @@ class Manager extends EventEmitter{
      */
     checkObjectPersistence(SQL){
         const db = Utility.openDatabase(SQL);
-        let result = db.exec(`SELECT id from ${this.managedObject.type} where name = ? and source = ?`, [this.managedObject.getName(), this.managedObject.getSrc()]);
+        let result = db.exec(`SELECT id, playedTill from ${this.managedObject.type} where name = ? and source = ?`, [this.managedObject.getName(), this.managedObject.getSrc()]);
         
         if(result.length < 1){
             //add
             db.run(`INSERT into ${this.managedObject.type}(playedTill, name, source) values (?, ?, ?)`, [this.managedObject.getCurrentTime(), this.managedObject.getName(), this.managedObject.getSrc()]);
             
-            result = db.exec(`SELECT id from ${this.managedObject.type} where name = ? and source = ?`, [this.managedObject.getName(), this.managedObject.getSrc()]);
+            result = db.exec(`SELECT id, playedTill from ${this.managedObject.type} where name = ? and source = ?`, [this.managedObject.getName(), this.managedObject.getSrc()]);
 
             //insert into recent video
             db.run(`INSERT into recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)}(${this.managedObject.type}Id) values (?)`, [result[0].values[0][0]]);
@@ -113,6 +113,7 @@ class Manager extends EventEmitter{
         }
 
         this.managedObject.setId(result[0].values[0][0]);
+        this.managedObject.setCurrentTime(result[0].values[0][1]);
         this.initBookmarksList(SQL, db);
         this.listBookmarks();
         this.updateBookmarkButton();
