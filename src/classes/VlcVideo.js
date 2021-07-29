@@ -100,11 +100,11 @@ class VlcVideo extends VlcMediaContent{
     playPause(){
         if(!this.isPlaying){ 
             this.play(this.currentPlaybackRateIndex); 
-            this.uiPlayButton.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
+            this.uiPlayButton.querySelector('img').src = "../assets/img/pause.svg";
         }
         else{
             this.pause();
-            this.uiPlayButton.querySelector('img').src = "../assets/img/pause.svg";
+            this.uiPlayButton.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
         }
     }
 
