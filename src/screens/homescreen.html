@@ -277,7 +277,15 @@
                 <!---Item 1-->
                 <div id="item">
                     <input type="hidden" value="" id="video-id" />
-                    <div class="bg-gray-800 rounded-lg flex flex-row h-20">
+                    <div
+                        class="
+                            bg-gray-800
+                            shadow-2xl
+                            rounded-lg
+                            flex flex-row
+                            h-20
+                        "
+                    >
                         <img
                             id="video-thumbnail-container"
                             src="https://picsum.photos/300/200"
@@ -300,11 +308,13 @@
                                     items-center
                                 "
                             >
-                                <span class="font-semibold" id="video-name"
+                                <span class="font-medium" id="video-name"
                                     >Cars 2</span
                                 >
                                 <!--Duration-->
-                                <span class="text-xs" id="watch-time-left"
+                                <span
+                                    class="text-xs font-medium"
+                                    id="watch-time-left"
                                     >62 min left</span
                                 >
                             </div>
@@ -335,10 +345,12 @@
                             </div>
 
                             <div class="flex flex-row justify-between text-xs">
-                                <span class="font-semibold" id="video-path"
+                                <span class="font-medium" id="video-path"
                                     >home/Downloads</span
                                 >
-                                <span id="last-date-played">June 24th</span>
+                                <span id="last-date-played" class="font-medium"
+                                    >June 24th</span
+                                >
                             </div>
                         </div>
                     </div>
