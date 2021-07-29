@@ -6,7 +6,7 @@
 }
 #menu {
     position: absolute;
-    width: 600px;
+    width: 700px;
     height: 60%;
     text-align: center;
     background-color: #fff;
@@ -28,7 +28,7 @@
     /* border: 2px dashed black; */
 }
 #menu > div#rightmenu {
-    width: 450px;
+    width: 550px;
     height: 100%;
     border-left: 2px solid gray;
     padding-left: 5px;
@@ -38,41 +38,42 @@
     border: none;
     color: black;
     background-color: #ddd;
-    padding: 12px 16px;
+    padding: 5px 5px;
     font-size: 16px;
     cursor: pointer;
     width: 150px;
-    border-radius: 0px 50px 50px 0px;
+    border-radius: 50px;
     opacity: 0.6;
     transition: 0.3s;
+}
+.menubtn:focus{
+    background-color: #f59e0b;
 }
 #media_btn:before {
     content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/personal_video/v12/24px.svg);
     width: 20px;
     float: left;
     margin-right: 5px;
-    margin-top: -2px;
+    margin-top: 0px;
 }
 #audio_btn:before {
     content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/mic/v12/24px.svg);
     width: 20px;
     float: left;
     margin-right: 5px;
-    margin-top: -2px;
+    
 }
 #video_btn:before {
     content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/videocam/v14/24px.svg);
     width: 20px;
     float: left;
     margin-right: 5px;
-    margin-top: -2px;
 }
 #sub_btn:before {
     content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/subtitles/v11/24px.svg);
     width: 20px;
     float: left;
     margin-right: 5px;
-    margin-top: -2px;
 }
 #tools_btn:before {
     content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/construction/v10/24px.svg);
@@ -104,4 +105,18 @@
     transition: 0.3s;
     border-radius: 20px;
     width: 250px;
+}
+select{
+    margin: 20px;
+  width: 350px;
+  padding: 5px 35px 5px 5px;
+  font-size: 16px;
+  border: 1px solid #CCC;
+  height: 34px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+label{
+    color:#f59e0b;
 }
