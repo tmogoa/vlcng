@@ -10,6 +10,10 @@ const { timeStamp } = require('console');
  class VlcMediaContent extends EventEmitter{
 
     /**
+     * The manager of this VlcMediaContent
+     */
+    myManager;
+    /**
      * Type of the Media content: audio or video
      */
     type;
@@ -179,6 +183,10 @@ const { timeStamp } = require('console');
      */
     setSrc(src){
         if(src != ""){
+            if(!Utility.path.isAbsolute(src)){
+                console.log(`The path is not absolute ${src}`);
+                src = Utility.path.resolve(__dirname, src);
+            }
             this.srcObject.extension = Utility.path.extname(src);
             this.srcObject.directory = Utility.path.dirname(src);
             this.srcObject.basename = Utility.path.basename(src);
@@ -192,7 +200,15 @@ const { timeStamp } = require('console');
         return;
     }
 
+    getSrc(){
+        if(this.srcObject.directory){
+            let pathString = Utility.path.join(this.srcObject.directory, this.srcObject.basename);
+            return pathString;
+        }
+    }
+
     getName(){
+        this.name = decodeURI(this.name);
         return this.name;
     }
 
@@ -242,6 +258,23 @@ const { timeStamp } = require('console');
         return [`${(curHours > 0) ?(curHours > 9 ? curHours : "0" + curHours + ":") : ""}${curMins > 9 ? curMins : "0" + curMins}:${curSecs > 9 ? curSecs : "0" + curSecs}`,
         
         `${(durHours > 0) ?(durHours > 9 ? durHours : "0" + durHours + ":"): ""}${durMins > 9 ? durMins : "0" + durMins}:${durSecs > 9 ? durSecs : "0" + durSecs}`];
+    }
+
+    /**
+     * Sets the manager of the VlcMedia content
+     * @param {Manager} manager 
+     */
+
+    setManager(manager){
+        this.myManager = manager;
+    }
+
+    /**
+     * Get the manager of this object.
+     * @returns Manager
+     */
+    getManager(){
+        return this.myManager;
     }
 
 }

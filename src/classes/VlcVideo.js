@@ -6,8 +6,6 @@ const VlcMediaContent = require('./VlcMediaContent');
  */ 
 class VlcVideo extends VlcMediaContent{
 
-    //The manager of this vlcVideo
-    myManager;
 
     /**
      * The UI components that are specific to a video.
