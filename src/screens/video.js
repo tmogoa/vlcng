@@ -8,6 +8,7 @@ const getWindow = () => remote.BrowserWindow.getFocusedWindow();
 const closeBtn = document.getElementById("close");
 const minimizeIcon = document.getElementById("minimize");
 const maximizeIcon = document.getElementById("maximize");
+const titleBar = document.getElementById("titleBar");
 
 closeBtn.onclick = (e) => {
     getWindow().close();
@@ -26,7 +27,13 @@ maximizeIcon.onclick = (e) => {
 
 function maximize() {
     const window = getWindow();
-    window.isMaximized() ? window.unmaximize() : window.maximize();
+    if (window.isMaximized()) {
+        window.unmaximize();
+        titleBar.classList.toggle("hidden");
+    } else {
+        window.maximize();
+        titleBar.classList.toggle("hidden");
+    }
 }
 
 // #########
@@ -99,6 +106,7 @@ document.addEventListener("dblclick", toggleFullScreen);
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
+    modal.classList.add("trans-class");
     theManager.managedObject.playPause();
 }
 
@@ -152,3 +160,12 @@ ipcRenderer.invoke("receive-video-link", "").then((link) =>{
     theManager.setSrc(link);
 });
 
+const volControlBtn = document.getElementById("volume-control-button");
+const volProgressContainer = document.getElementById("vol-progress-container");
+
+volControlBtn.addEventListener("mouseover", function (e) {
+    volProgressContainer.classList.remove("invisible");
+});
+volControlBtn.addEventListener("mouseleave", function (e) {
+    volProgressContainer.classList.add("invisible");
+});
