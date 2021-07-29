@@ -46,7 +46,7 @@ class Manager extends EventEmitter{
      * @param {string} src - the source of the vlcMediaObject which is the managedObject 
      */
     setSrc(src){
-        this.managedObject.setSrc(src);
+        return this.managedObject.setSrc(src);
     }
 
     /**
@@ -114,9 +114,13 @@ class Manager extends EventEmitter{
 
         this.managedObject.setId(result[0].values[0][0]);
         this.managedObject.setCurrentTime(result[0].values[0][1]);
-        this.initBookmarksList(SQL, db);
-        this.listBookmarks();
-        this.updateBookmarkButton();
+
+        if(this.managedObject.type == 'video'){
+            this.initBookmarksList(SQL, db);
+            this.listBookmarks();
+            this.updateBookmarkButton();
+        }
+        
         Utility.closeDatabase(db);
         
     }

@@ -81,14 +81,18 @@ const cwTimeLeft = document.getElementById("cw-time-left");
             homescreenManager.managedObject.setManager(homescreenManager);
             listView.innerHTML += `<div id='item-${videoId}'><div>`;
             try{
+                if(!homescreenManager.setSrc(videoSource)){
+                    Manager.removeMediaObject(SQL, videoId, "video");
+                    return;
+                }
                
-                homescreenManager.setSrc(videoSource);
                 homescreenManager.managedObject.mediaObject.addEventListener("loadedmetadata",function(){
                     let totalDuration = this.duration;
                     let timeLeft = homescreenManager.managedObject.formatTime(totalDuration - playedTill)[0];
                     
                     let item = document.getElementById(`item-${videoId}`);
-                    item.innerHTML = constrouctObjectHTML(videoId, timeLeft, videoName, homescreenManager.managedObject.srcObject.directory, lastPlayed);
+                    let directory = homescreenManager.managedObject.srcObject.directory;
+                    item.innerHTML = constrouctObjectHTML(videoId, timeLeft, videoName, directory, lastPlayed);
                     let esSource = videoSource.replace(/\\/g, "\\\\");
                     item.setAttribute("onclick", `sendLink("${esSource}")`);
 
@@ -167,8 +171,11 @@ const cwTimeLeft = document.getElementById("cw-time-left");
         console.log(`No recent videos found`);
     }
 
+    console.log("The recent audios are ");
+    console.log(recentAudios);
     if(recentAudios.length > 0){
         let rows = recentAudios[0].values;
+
     }
 
 })();
@@ -195,10 +202,11 @@ function constructMediaObject(type){
 }
 
 function constrouctObjectHTML(objectId, timeLeft, name, source, datePlayed){
+    console.log(`the path source is ${source}`);
     let partialSource = source.split(/[\/\\]/);
     let pSource = partialSource.slice(partialSource.length - 3);
     let halfSource = Utility.path.join(pSource[0], pSource[1], pSource[2]);
-
+    console.log(`The half source is ${halfSource}`);
     let listItem = `
     <input type="hidden" value="${objectId}" id="video-id" />
     <div class="bg-gray-800 rounded-lg flex flex-row h-20">
