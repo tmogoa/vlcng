@@ -346,8 +346,10 @@ class="bg-red-200
                            <div class="flex justify-between">
                                <div>
                                    <h3 class="text-2xl text-blue-500 font-medium">Sanctus </h3>
-                                   <p class="text-sm text-blue-500 mt-1">Libera</p>
+                                    <p class="text-sm text-blue-500 mt-1">Libera</p>
+                                   
                                </div>
+                              
                                <!--like-->
                                <button>
                                <div id="like"
@@ -397,10 +399,10 @@ class="bg-red-200
                                 class="mx-8 py-4">
                             
                              <div class="flex justify-between text-sm text-yellow-500">
-                                   <p>0:00</p>
-                                   <p>0:00</p>
+                                   <span id="current_time">0:00</span>
+                                   <span id="total_time">0:00</span>
                                </div>
-                               <div class="slidecontainer">
+                               <div class="slidecontainer" id="progress-bar">
                                  <input type="range" min="1" max="100" value="50" class="default" id="myRange">
                                </div>
                               </div>
@@ -414,6 +416,7 @@ class="bg-red-200
 
       </div>
     </div>
+    <script defer src="./audio.js"></script>
 </body>
 <script type="text/javascript" src="queue.js"></script>
 </html>
