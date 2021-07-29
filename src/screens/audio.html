@@ -198,30 +198,29 @@ class="bg-red-200
                              dark:text-gray-400"
                              >
                     <td class="px-4 py-3">
-                      <div class="flex items-center text-sm">
-                        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                          <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy" />
-                          <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                      <tr id="music item" class="bg-gray-50 dark:bg-gray-800 hover:bg-yellow-200 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                        <td class="px-4 py-3">
+                          <div class="flex items-center text-sm">
+                            <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                              <img id="imageOne" class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy" />
+                              <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                            </div>
+                            <div>
+                              <p id="artistOne">JP Cooper</p>
+                              <p class="text-xl font-semi-bold text-gray-600 dark:text-gray-400" id="titleOne">September Song</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="px-4 py-3 text-sm"><p id="durationOne">3:56</p></td>
+                        <td class="px-4 py-3 text-xs">
+                          <button id="queue"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> + </span></button>
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                          <div class="text-red-500">
+                            <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"/></svg>
                         </div>
-                        <div>
-                          <p class="">JP Cooper</p>
-                          <p class="text-xl font-semi-bold text-gray-600 dark:text-gray-400">September Song</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3 text-sm">3:56</td>
-                    <td class="px-4 py-3 text-xs">
-                      <span id="addQueue" 
-                            class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> + </span>
-                    </td>
-                    <td class="px-4 py-3 text-sm">
-                      <div id="like" 
-                           class="text-red-500"
-                           >
-                        <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"/></svg>
-                    </div>
-                    </td>
-                  </tr>
+                        </td>
+                      </tr>
 
                   <tr id="musicItem" 
                       class="bg-gray-50 
@@ -416,4 +415,5 @@ class="bg-red-200
       </div>
     </div>
 </body>
+<script type="text/javascript" src="queue.js"></script>
 </html>
