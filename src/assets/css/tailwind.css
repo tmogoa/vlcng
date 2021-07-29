@@ -18,8 +18,13 @@ button {
         opacity: 0;
         visibility: hidden;
         transform: scale(1.1);
+        /* transition: visibility 0.5s linear 0s, opacity 0.5s 0s, transform 0.5s; */
+    }
+
+    .trans-class {
         transition: visibility 0.5s linear 0s, opacity 0.5s 0s, transform 0.5s;
     }
+
     .modal-content {
         position: absolute;
         top: 50%;
