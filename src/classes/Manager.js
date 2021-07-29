@@ -28,11 +28,17 @@ class Manager extends EventEmitter{
      * Contains all the bookmark ids for the managedObject
      */
     bookmarks = [];
+    uiBookmarkSaveButton;
+    uiBookmarkTime;
+    uiBookmarkDescription;
 
     constructor(){
         super();
         //we initialize the database here.
         Utility.initDb();
+        this.uiBookmarkDescription = null;
+        this.uiBookmarkTime = null;
+        this.uiBookmarkSaveButton = null;
     }
 
     /**
@@ -78,21 +84,28 @@ class Manager extends EventEmitter{
             })();
 
         });
+
     }
 
+    updateBookmarkButton(){
+        this.managedObject.uiBookmarkButton.innerHTML = `<img src="../assets/img/bookmark_white_24dp.svg" >`;
+        if(this.bookmarks.length > 0){
+            this.managedObject.uiBookmarkButton.innerHTML = `<img src="../assets/img/bookmark_alert.png " >`;
+        }
+    }
     /**
      * Checks if an object exist in the database else, adds it.
      * 
      */
     checkObjectPersistence(SQL){
         const db = Utility.openDatabase(SQL);
-        let result = db.exec(`SELECT id from ${this.managedObject.type} where name = ? and source = ?`, [this.managedObject.getName(), this.managedObject.mediaObject.src]);
+        let result = db.exec(`SELECT id, playedTill from ${this.managedObject.type} where name = ? and source = ?`, [this.managedObject.getName(), this.managedObject.getSrc()]);
         
         if(result.length < 1){
             //add
-            db.run(`INSERT into ${this.managedObject.type}(playedTill, name, source) values (?, ?, ?)`, [this.managedObject.getCurrentTime(), this.managedObject.getName(), this.managedObject.mediaObject.src]);
+            db.run(`INSERT into ${this.managedObject.type}(playedTill, name, source) values (?, ?, ?)`, [this.managedObject.getCurrentTime(), this.managedObject.getName(), this.managedObject.getSrc()]);
             
-            result = db.exec(`SELECT id from ${this.managedObject.type} where name = ? and source = ?`, [this.managedObject.getName(), this.managedObject.mediaObject.src]);
+            result = db.exec(`SELECT id, playedTill from ${this.managedObject.type} where name = ? and source = ?`, [this.managedObject.getName(), this.managedObject.getSrc()]);
 
             //insert into recent video
             db.run(`INSERT into recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)}(${this.managedObject.type}Id) values (?)`, [result[0].values[0][0]]);
@@ -100,8 +113,10 @@ class Manager extends EventEmitter{
         }
 
         this.managedObject.setId(result[0].values[0][0]);
+        this.managedObject.setCurrentTime(result[0].values[0][1]);
         this.initBookmarksList(SQL, db);
         this.listBookmarks();
+        this.updateBookmarkButton();
         Utility.closeDatabase(db);
         
     }
@@ -131,8 +146,12 @@ class Manager extends EventEmitter{
                 db.run(`UPDATE ${this.managedObject.type} set playedTill = ? where id = ?`, [this.currentlyStoppedAt, this.managedObject.getId()]);
     
                 db.run(`UPDATE recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)} set datePlayed = CURRENT_TIMESTAMP where  ${this.managedObject.type}Id = ?`, [this.managedObject.getId()]);
+            }else{
+                console.log(`The id is undefined`);
             }
             Utility.closeDatabase(db);
+
+            console.log(`The source of the object is ${this.managedObject.getSrc()}`);
             console.log("updated successfully");
         }
         
@@ -177,35 +196,55 @@ class Manager extends EventEmitter{
      * background.
      */
     addBookmark(){
-
         let bookmarkTime = this.managedObject.getCurrentTime();
-        let uiBookmarkTime = document.querySelector("#bookmark-added-time");
-        uiBookmarkTime.innerHTML = this.managedObject.formatTime(bookmarkTime)[0];
+        if(this.uiBookmarkDescription == null){
+            this.uiBookmarkDescription = document.querySelector("#bookmark-description");
+        }
+
+        if(this.uiBookmarkSaveButton == null){
+            this.uiBookmarkSaveButton = document.querySelector("#add-bookmark-button");
+        }
+
+        if(this.uiBookmarkTime == null){
+            this.uiBookmarkTime = document.querySelector("#bookmark-added-time");   
+        }
+
+        this.uiBookmarkTime.innerHTML = this.managedObject.formatTime(bookmarkTime)[0];
         //remember to remove the event listner from the button
         let save = ()=>{
-            let description = document.querySelector("#bookmark-description").value;
-            if(this.managedObject.getId() !== 'undefined'){
+            if(this.managedObject.getId() !== 'undefined' && this.uiBookmarkDescription.value.length != 0){
                 (async()=>{
+                    bookmarkTime = this.managedObject.getCurrentTime();
                     const SQL = await initSqlJs();
                     let db = Utility.openDatabase(SQL);
-                    db.run(`INSERT INTO ${this.managedObject.type}Bookmark(${this.managedObject.type}Id, markedTime, description) values (?, ?, ?)`, [this.managedObject.getId(), bookmarkTime, description]);
+                    db.run(`INSERT INTO ${this.managedObject.type}Bookmark(${this.managedObject.type}Id, markedTime, description) values (?, ?, ?)`, [this.managedObject.getId(), bookmarkTime, this.uiBookmarkDescription.value]);
                     this.initBookmarksList(SQL, db);
                     this.listBookmarks();
                     Utility.closeDatabase(db);
+                    this.uiBookmarkDescription.value = "";
+                    this.uiBookmarkSaveButton.removeEventListener("click", save);
+                    window.removeEventListener("keydown", keyDown);
+                    this.updateBookmarkButton();
                     //alert("Successfully added the bookmark");
                 })();
             }
         }
-        uiBookmarkSaveButton.addEventListener("click", save); 
-        
+
         let keyDown = (evt)=>{
             console.log("keydown");
             if(evt.key == "Enter"){
                 save();
             }
         }
-        window.addEventListener('keydown', keyDown);
 
+        let addSave = () =>{
+            this.uiBookmarkSaveButton.addEventListener("click", save);
+            window.addEventListener('keydown', keyDown);
+        }
+
+        this.uiBookmarkDescription.addEventListener('input', addSave);
+        this.uiBookmarkSaveButton.addEventListener("click", save); 
+        
     }
   
     /**
@@ -264,6 +303,7 @@ class Manager extends EventEmitter{
             this.initBookmarksList(SQL, db);
             this.listBookmarks();
             Utility.closeDatabase(db);
+            this.updateBookmarkButton();
         })();
     }
 
@@ -273,16 +313,20 @@ class Manager extends EventEmitter{
          * @returns {HTMLElemet} image
          */
         makeThumbnail(imageObject) {
-
+        
+        console.log(`attempting to create thumbnail from video`);
+        console.log(this.managedObject.mediaObject);
+        document.getElementById("temp-video").src = this.managedObject.mediaObject.src;
+        document.getElementById("temp-video").play();
         var canvas = document.createElement("canvas");
-        var container = document.getElementById(`video-thumbnail-container-${this.managedObject.getId()}`);
+        var container = imageObject; //document.getElementById(`video-thumbnail-container-${this.managedObject.getId()}`);
         if(container){
-            var width = container.clientWidth;
-            var height = container.clientHeight;
+            var width = 300;//container.clientWidth;
+            var height = 100;//container.clientHeight;
             canvas.width = (width / 3);
             canvas.height = height;
-            canvas.getContext("2d").drawImage(this.managedObject.mediaObject, 0, 0, canvas.width, canvas.height);
-            imageObject.src = canvas.toDataURL();
+            canvas.getContext("2d").drawImage(document.getElementById("temp-video"), 0, 0, canvas.width, canvas.height);
+            imageObject.setAttribute("src",canvas.toDataURL());
         }
         }
 
@@ -302,7 +346,7 @@ class Manager extends EventEmitter{
             //bookmark
             db.run(`DELETE from ${type}Bookmark where ${type}Id = ?`, [id]);
             //recent
-            db.run(`DELETE from recent${type.charAt(0).toUpperCase() + type.slice(1)} were ${type}Id = ?`, [id]);
+            db.run(`DELETE from recent${type.charAt(0).toUpperCase() + type.slice(1)} where ${type}Id = ?`, [id]);
             //mediaContent
             db.run(`DELETE from ${type} where id = ?`, [id]);
             Utility.closeDatabase(db);

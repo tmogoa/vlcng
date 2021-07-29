@@ -167,6 +167,7 @@
                     <div class="flex flex-col">
                         <div>
                             <input
+                                id = "video-link"
                                 type="text"
                                 placeholder="Paste a link to a video..."
                                 class="
@@ -202,7 +203,7 @@
 
                 <div class="flex-grow flex flex-col justify-start pt-10">
                     <span
-                        id="continue-video-name"
+                        id="cw-video-name"
                         class="text-4xl font-semibold mb-4 text-yellow-500"
                         >Cars 3</span
                     >
@@ -211,7 +212,7 @@
                         <!---Progress bar-->
                         <div class="flex bg-black rounded-md w-8/12 h-1 mr-2">
                             <div
-                                id="continue-video-progressBar"
+                                id="cw-progress-bar"
                                 class="
                                     flex
                                     items-center
@@ -226,14 +227,14 @@
 
                         <!--Duration-->
                         <span
-                            id="minutes-left"
+                            id="cw-time-left"
                             class="text-xs text-yellow-500 font-bold"
                             >62 min left</span
                         >
                     </div>
 
                     <button
-                        id="continue-watching-button"
+                        id="cw-button"
                         class="
                             py-3
                             px-4
@@ -261,9 +262,10 @@
                     </button>
                 </div>
             </div>
+            <video src="" style="display: none;" id='temp-video'></video>
             <div
                 id="listView"
-                class="
+                class = "
                     w-6/12
                     h-full
                     px-4
@@ -275,7 +277,6 @@
                 "
             >
                 <!---Item 1-->
-                
             </div>
         </div>
 

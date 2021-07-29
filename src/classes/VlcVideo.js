@@ -6,8 +6,6 @@ const VlcMediaContent = require('./VlcMediaContent');
  */ 
 class VlcVideo extends VlcMediaContent{
 
-    //The manager of this vlcVideo
-    myManager;
 
     /**
      * The UI components that are specific to a video.
@@ -61,6 +59,10 @@ class VlcVideo extends VlcMediaContent{
             this.updateVolumeSlider();
             this.updateDurationText();
             this.myManager.updateTime();
+            if(this.getCurrentTime() == this.getTotalDuration()){
+                this.isPlaying = false;
+                this.uiPlayButton.querySelector('img').src = "../assets/img/replay_white_24dp.svg";
+            }
         });
 
         /**
@@ -102,11 +104,11 @@ class VlcVideo extends VlcMediaContent{
     playPause(){
         if(!this.isPlaying){ 
             this.play(this.currentPlaybackRateIndex); 
-            this.uiPlayButton.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
+            this.uiPlayButton.querySelector('img').src = "../assets/img/pause.svg";
         }
         else{
             this.pause();
-            this.uiPlayButton.querySelector('img').src = "../assets/img/pause.svg";
+            this.uiPlayButton.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
         }
     }
 

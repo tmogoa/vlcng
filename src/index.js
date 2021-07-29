@@ -72,10 +72,10 @@ ipcMain.on("window:resize", (event, arg) => {
 //Handling the link from the homescreen
 ipcMain.on("save-video-link", (evt, link) => {
     vlcManager.currentlyPlayingMediaSrc = link;
-    console.log(link);
+   console.log(` - Saving the link is ${link} \n`);
 });
 
-ipcMain.on("send-video-link", (evt) => {
-    evt.reply("receive-video-link", vlcManager.currentlyPlayingMediaSrc);
-    console.log("sending video link");
+ipcMain.handle("receive-video-link", async(event, args) =>{
+    console.log(` - Sent the video link successfully. The video link was ${vlcManager.currentlyPlayingMediaSrc}\n`);
+    return vlcManager.currentlyPlayingMediaSrc;
 });

@@ -8,6 +8,7 @@ const getWindow = () => remote.BrowserWindow.getFocusedWindow();
 const closeBtn = document.getElementById("close");
 const minimizeIcon = document.getElementById("minimize");
 const maximizeIcon = document.getElementById("maximize");
+const titleBar = document.getElementById("titleBar");
 
 closeBtn.onclick = (e) => {
     getWindow().close();
@@ -26,7 +27,13 @@ maximizeIcon.onclick = (e) => {
 
 function maximize() {
     const window = getWindow();
-    window.isMaximized() ? window.unmaximize() : window.maximize();
+    if (window.isMaximized()) {
+        window.unmaximize();
+        titleBar.classList.toggle("hidden");
+    } else {
+        window.maximize();
+        titleBar.classList.toggle("hidden");
+    }
 }
 
 // #########
@@ -64,6 +71,7 @@ vlcVideo.uiVolumeInputRange = document.querySelector("#volume-input-range");
 vlcVideo.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
 );
+
 vlcVideo.uiBookmarkButton = document.querySelector("#bookmarkBtn");
 vlcVideo.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
@@ -99,6 +107,7 @@ document.addEventListener("dblclick", toggleFullScreen);
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
+    modal.classList.add("trans-class");
     theManager.managedObject.playPause();
 }
 
@@ -145,10 +154,21 @@ autoShowMenu();
  * Gets the link from the homescreen.
  */
 
-//change this to invoke
-ipcRenderer.send("send-video-link", "");
-ipcRenderer.on("receive-video-link", (evt, link) => {
-    //the video manager than sets the source
+ipcRenderer.invoke("receive-video-link", "").then((link) =>{
+    let resolvedLink = Utility.path.resolve(link);
 
-    theManager.setSrc(Utility.path.resolve(__dirname, link));
+    console.log(`- The resolved link from the main process: ${resolvedLink}\n`);
+    theManager.setSrc(link);
+});
+
+const volControlBtn = document.getElementById("volume-control-button");
+const volProgressContainer = document.getElementById("vol-progress-container");
+const tfButton = document.getElementById("toggle-fullscreen-button");
+
+tfButton.onclick = toggleFullScreen;
+volControlBtn.addEventListener("mouseover", function (e) {
+    volProgressContainer.classList.remove("invisible");
+});
+volControlBtn.addEventListener("mouseleave", function (e) {
+    volProgressContainer.classList.add("invisible");
 });
