@@ -47,6 +47,7 @@ Utility.databasePath = remote.app.getPath("userData");
 var recentVideos = [];
 var recentAudios = [];
 
+const videoLink = document.getElementById("video-link");
 const cwButton = document.getElementById("cw-button"); //continue watching button
 const cwName = document.getElementById("cw-video-name"); //continue watchin name
 const cwProgressBar = document.getElementById("cw-progress-bar");
@@ -283,10 +284,13 @@ function sendLink(itemSource){
 
 
 playNetVideoBtn.onclick = (e) => {
+    if(videoLink.value.length < 1){
+        return;
+    }
     //send the video link
     ipcRenderer.send(
         "save-video-link",
-        "../assets/video/Going Beyond- A Celebration of Safaricom at 20 -23TwendeTukiuke.mp4"
+        videoLink.value
     );
     console.log("sent video link");
     getWindow().loadFile("./src/screens/video.html");
