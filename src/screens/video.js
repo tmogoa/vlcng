@@ -163,7 +163,9 @@ ipcRenderer.invoke("receive-video-link", "").then((link) =>{
 
 const volControlBtn = document.getElementById("volume-control-button");
 const volProgressContainer = document.getElementById("vol-progress-container");
+const tfButton = document.getElementById("toggle-fullscreen-button");
 
+tfButton.onclick = toggleFullScreen;
 volControlBtn.addEventListener("mouseover", function (e) {
     volProgressContainer.classList.remove("invisible");
 });
