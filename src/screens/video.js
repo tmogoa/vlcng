@@ -106,6 +106,7 @@ document.addEventListener("dblclick", toggleFullScreen);
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
+    modal.classList.add("trans-class");
     theManager.managedObject.playPause();
 }
 
