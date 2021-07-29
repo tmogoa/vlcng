@@ -59,6 +59,10 @@ class VlcVideo extends VlcMediaContent{
             this.updateVolumeSlider();
             this.updateDurationText();
             this.myManager.updateTime();
+            if(this.getCurrentTime() == this.getTotalDuration()){
+                this.isPlaying = false;
+                this.uiPlayButton.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
+            }
         });
 
         /**
