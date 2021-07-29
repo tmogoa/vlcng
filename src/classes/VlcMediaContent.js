@@ -183,6 +183,7 @@ const { timeStamp } = require('console');
      */
     setSrc(src){
         if(src != ""){
+            console.log(`The source object ${src}`);
             if(!Utility.path.isAbsolute(src)){
                 console.log(`The path is not absolute ${src}`);
                 src = Utility.path.resolve(__dirname, src);
@@ -192,12 +193,18 @@ const { timeStamp } = require('console');
             this.srcObject.basename = Utility.path.basename(src);
             this.srcObject.name = Utility.path.basename(src, this.srcObject.extension);
             this.name = this.srcObject.name;
-            this.mediaObject.src = src;
+            try{
+                this.mediaObject.src = src;
+            }
+            catch(err){
+                return false;
+            }
             this.emit('source-set'); //emit that the source is set.
             console.log(this.srcObject);
+            return true;
         }
        
-        return;
+        return false;
     }
 
     getSrc(){

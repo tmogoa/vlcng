@@ -46,7 +46,7 @@ class Manager extends EventEmitter{
      * @param {string} src - the source of the vlcMediaObject which is the managedObject 
      */
     setSrc(src){
-        this.managedObject.setSrc(src);
+        return this.managedObject.setSrc(src);
     }
 
     /**
