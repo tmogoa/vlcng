@@ -272,7 +272,7 @@ playNetVideoBtn.onclick = (e) => {
     //send the video link
     ipcRenderer.send(
         "save-video-link",
-        "../assets/video/Cars 3 Rivalry Official Trailer.mp4"
+        "../assets/video/Going Beyond- A Celebration of Safaricom at 20 -23TwendeTukiuke.mp4"
     );
     console.log("sent video link");
     getWindow().loadFile("./src/screens/video.html");
