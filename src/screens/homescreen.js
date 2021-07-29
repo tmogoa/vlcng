@@ -41,10 +41,16 @@ const Utility = require("./../classes/Utility");
 const Manager = require("./../classes/Manager");
 //const VlcAudio = require("./../classes/VlcAudio");
 const VlcVideo = require("./../classes/VlcVideo");
+const { time } = require("console");
 Utility.databasePath = remote.app.getPath("userData");
 
 var recentVideos = [];
 var recentAudios = [];
+
+const cwButton = document.getElementById("cw-button"); //continue watching button
+const cwName = document.getElementById("cw-video-name"); //continue watchin name
+const cwProgressBar = document.getElementById("cw-progress-bar");
+const cwTimeLeft = document.getElementById("cw-time-left");
 
 (async()=>{
     const SQL = await initSqlJs();
@@ -63,8 +69,7 @@ var recentAudios = [];
     if(recentVideos.length > 0){
         let rows = recentVideos[0].values;
         queue.addListener("new-item", checkThumbnailQueue);
-
-        rows.forEach(row => {
+        rows.forEach((row, index) => {
             let videoId =  row[0];
             let playedTill = row[1];
             let videoName = row[2];
@@ -79,20 +84,16 @@ var recentAudios = [];
                 homescreenManager.setSrc(videoSource);
                 homescreenManager.managedObject.mediaObject.addEventListener("loadedmetadata",function(){
                     let totalDuration = this.duration;
-                    console.log(`Total duration is ${totalDuration} and playedTill is ${playedTill}`);
                     let timeLeft = homescreenManager.managedObject.formatTime(totalDuration - playedTill)[0];
                     
                     let item = document.getElementById(`item-${videoId}`);
                     item.innerHTML = constrouctObjectHTML(videoId, timeLeft, videoName, homescreenManager.managedObject.srcObject.directory, lastPlayed);
-                    console.log(`--In here--- the video link is ${videoSource}`);
                     let esSource = videoSource.replace(/\\/g, "\\\\");
-                    console.log(`The escaped video link you sent is ${esSource}`)
                     item.setAttribute("onclick", `sendLink("${esSource}")`);
 
                     let progressBar = document.getElementById("video-progress-bar-"+videoId);
                     if(progressBar){
                         let maxWidth = progressBar.parentElement.clientWidth;
-                        
                         let ratio = playedTill/totalDuration;
                         progressBar.style.width = `${Math.ceil(maxWidth * ratio)}px`;
                     }
@@ -111,6 +112,19 @@ var recentAudios = [];
     
                     queue.emit("new-item");
                 
+                    //updating continue watching
+                    if(index == 0){
+                        let maxWidth = cwProgressBar.parentElement.clientWidth;
+                        let ratio = playedTill/totalDuration;
+                        cwProgressBar.style.width = `${Math.ceil(maxWidth * ratio)}px`;
+
+                        cwName.innerHTML = videoName;
+                        cwTimeLeft.innerHTML = `${timeLeft} left`;
+
+                        cwButton.onclick = ()=>{
+                            sendLink(videoSource);
+                        }
+                    }
                 });
                 
             }
