@@ -275,7 +275,7 @@ playNetVideoBtn.onclick = (e) => {
         "../assets/video/Cars 3 Rivalry Official Trailer.mp4"
     );
     console.log("sent video link");
-    //getWindow().loadFile("./src/screens/video.html");
+    getWindow().loadFile("./src/screens/video.html");
 };
 
 musicBtn.onclick = (e) => {
