@@ -28,11 +28,17 @@ class Manager extends EventEmitter{
      * Contains all the bookmark ids for the managedObject
      */
     bookmarks = [];
+    uiBookmarkSaveButton;
+    uiBookmarkTime;
+    uiBookmarkDescription;
 
     constructor(){
         super();
         //we initialize the database here.
         Utility.initDb();
+        this.uiBookmarkDescription = null;
+        this.uiBookmarkTime = null;
+        this.uiBookmarkSaveButton = null;
     }
 
     /**
@@ -78,8 +84,15 @@ class Manager extends EventEmitter{
             })();
 
         });
+
     }
 
+    updateBookmarkButton(){
+        this.managedObject.uiBookmarkButton.innerHTML = `<img src="../assets/img/bookmark_white_24dp.svg" >`;
+        if(this.bookmarks.length > 0){
+            this.managedObject.uiBookmarkButton.innerHTML = `<img src="../assets/img/bookmark_alert.png " >`;
+        }
+    }
     /**
      * Checks if an object exist in the database else, adds it.
      * 
@@ -102,6 +115,7 @@ class Manager extends EventEmitter{
         this.managedObject.setId(result[0].values[0][0]);
         this.initBookmarksList(SQL, db);
         this.listBookmarks();
+        this.updateBookmarkButton();
         Utility.closeDatabase(db);
         
     }
@@ -182,32 +196,54 @@ class Manager extends EventEmitter{
      */
     addBookmark(){
         let bookmarkTime = this.managedObject.getCurrentTime();
-        let uiBookmarkTime = document.querySelector("#bookmark-added-time");
-        uiBookmarkTime.innerHTML = this.managedObject.formatTime(bookmarkTime)[0];
+        if(this.uiBookmarkDescription == null){
+            this.uiBookmarkDescription = document.querySelector("#bookmark-description");
+        }
+
+        if(this.uiBookmarkSaveButton == null){
+            this.uiBookmarkSaveButton = document.querySelector("#add-bookmark-button");
+        }
+
+        if(this.uiBookmarkTime == null){
+            this.uiBookmarkTime = document.querySelector("#bookmark-added-time");   
+        }
+
+        this.uiBookmarkTime.innerHTML = this.managedObject.formatTime(bookmarkTime)[0];
         //remember to remove the event listner from the button
         let save = ()=>{
-            let description = document.querySelector("#bookmark-description").value;
-            if(this.managedObject.getId() !== 'undefined'){
+            if(this.managedObject.getId() !== 'undefined' && this.uiBookmarkDescription.value.length != 0){
                 (async()=>{
+                    bookmarkTime = this.managedObject.getCurrentTime();
                     const SQL = await initSqlJs();
                     let db = Utility.openDatabase(SQL);
-                    db.run(`INSERT INTO ${this.managedObject.type}Bookmark(${this.managedObject.type}Id, markedTime, description) values (?, ?, ?)`, [this.managedObject.getId(), bookmarkTime, description]);
+                    db.run(`INSERT INTO ${this.managedObject.type}Bookmark(${this.managedObject.type}Id, markedTime, description) values (?, ?, ?)`, [this.managedObject.getId(), bookmarkTime, this.uiBookmarkDescription.value]);
                     this.initBookmarksList(SQL, db);
                     this.listBookmarks();
                     Utility.closeDatabase(db);
+                    this.uiBookmarkDescription.value = "";
+                    this.uiBookmarkSaveButton.removeEventListener("click", save);
+                    window.removeEventListener("keydown", keyDown);
+                    this.updateBookmarkButton();
                     //alert("Successfully added the bookmark");
                 })();
             }
         }
-        uiBookmarkSaveButton.addEventListener("click", save); 
-        
+
         let keyDown = (evt)=>{
             console.log("keydown");
             if(evt.key == "Enter"){
                 save();
             }
         }
-        window.addEventListener('keydown', keyDown);
+
+        let addSave = () =>{
+            this.uiBookmarkSaveButton.addEventListener("click", save);
+            window.addEventListener('keydown', keyDown);
+        }
+
+        this.uiBookmarkDescription.addEventListener('input', addSave);
+        this.uiBookmarkSaveButton.addEventListener("click", save); 
+        
     }
   
     /**
@@ -266,6 +302,7 @@ class Manager extends EventEmitter{
             this.initBookmarksList(SQL, db);
             this.listBookmarks();
             Utility.closeDatabase(db);
+            this.updateBookmarkButton();
         })();
     }
 

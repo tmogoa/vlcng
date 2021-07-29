@@ -71,6 +71,7 @@ vlcVideo.uiVolumeInputRange = document.querySelector("#volume-input-range");
 vlcVideo.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
 );
+
 vlcVideo.uiBookmarkButton = document.querySelector("#bookmarkBtn");
 vlcVideo.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
