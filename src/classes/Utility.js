@@ -99,6 +99,7 @@ class Utility{
         let fileBuffer = fs.readFileSync(dbPath);
         return new SQL.Database(fileBuffer);
     }
+
 }
 
 module.exports = Utility;

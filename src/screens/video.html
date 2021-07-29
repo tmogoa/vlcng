@@ -81,7 +81,7 @@
                 autoplay
             ></video>
 
-            <div id="menu" style="display: none">
+            <div id="menu"  style="display: none">
                 <!-- <div id="submenu">
                     <button class="menubtn" id="media_btn" onclick="showMedia('mymedia')">Media</button>
                     <button class="menubtn" id="video_btn" onclick="showVideo('myvideo')">Video</button>
@@ -130,13 +130,7 @@
                     >
                         Tools
                     </button>
-                    <button
-                        class="menubtn"
-                        id="view_btn"
-                        onclick="show('myview')"
-                    >
-                        View
-                    </button>
+                
                     <button
                         class="menubtn"
                         id="help_btn"
@@ -150,51 +144,62 @@
                     <br />
                     <br />
                     <div id="main_place">
-                        <label for="audio">Choose an Audio track:</label>
-                        <select name="audio" id="audio">
-                            <option value="Track">Track 1 - Venezuela</option>
-                            <option value="Track">Track 2 - German</option>
-                            <option value="Track">Track 3 - French</option>
-                        </select>
+                        <p>Welcome to VLCng Menu</p>
                     </div>
 
                     <div id="mymedia" style="display: none">
-                        <label for="audio">Choose an Audio track:</label>
-                        <select name="audio" id="audio">
-                            <option value="Track">Track 1 - Spanish</option>
-                            <option value="Track">Track 2 - German</option>
-                            <option value="Track">Track 3 - French</option>
-                        </select>
+                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open File..</button><br>
+                        <input type='file' id="getFile" style="display:none" accept="video/*">
+
+                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Multiple Files..</button><br>
+                        <input type='file' id="getFile" style="display:none" accept="video/*" multiple>
+
+                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Folder...</button><br>
+                        <input type='file' id="getFile" style="display:none">
+
+                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Network Stream...</button><br>
+                        <input type='file' id="getFile" style="display:none">
+
+                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Recent Media</button><br>
+                        <input type='file' id="getFile" style="display:none">
+
+                        <button class="mediabtns">Exit</button><br>
+
                     </div>
 
                     <div id="myvideo" style="display: none">
-                        <label for="audio">Choose an Audio track:</label>
-                        <select name="audio" id="audio">
-                            <option value="Track">Track 2 - English uk</option>
-                            <option value="Track">Track 2 - Spanish</option>
-                            <option value="Track">Track 3 - Swahili</option>
+                        <label for="Resolution">Resolution</label><br>
+                        <select name="resolution" id="resolution">
+                            <option value="res">Auto</option>
+                            <option value="res">High Definition(720p)</option>
+                            <option value="res">Standard Definition(360p)</option>
                         </select>
                     </div>
 
                     <div id="myaudio" style="display: none">
-                        <label for="audio">Choose an Audio track:</label>
-                        <select name="audio" id="audio">
-                            <option value="Track">Track 3 - English</option>
-                            <option value="Track">Track 3 - Danish</option>
-                            <option value="Track">Track 3 - Swedish</option>
+                        <label for="microphone">Microphone</label><br>
+                        <select name="microphone" id="microphone">
+                            <option value="mic">Default-Microphone Array(Realtek(R) Audio)</option>
+                            <option value="mic">Communications-Microphone Array(Realtek(R) Audio)</option>
+                        </select>
+
+                        <label for="speaker">Speaker</label><br>
+                        <select name="speaker" id="speaker">
+                            <option value="speak">Default-Speaker(Realtek(R) Audio)</option>
+                            <option value="speak">Communications-Speaker(Realtek(R) Audio)</option>
                         </select>
                     </div>
 
-                    <div id="mysubtitles" style="display: none">
-                        <label for="audio">Choose an Audio track:</label>
-                        <select name="audio" id="audio">
-                            <option value="Track">Track 4 - English</option>
-                            <option value="Track">Track 2 - Polish</option>
-                            <option value="Track">Track 3 - French</option>
-                        </select>
+                    <div id="mysubtitles" style="display: none"><br>
+                        <label for="sub">Add Subtitle</label><br>
+                        <input type="file" id="myfile" name="myfile"><br>
+                        <input type="button" value="subtitle"><br><br>
+
+                        <button style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Add Subtitle</button>
+                        <input type='file' id="getFile" style="display:none">
                     </div>
 
-                    <div id="mytools" style="display: none">
+                    <div id="mytools" style="display: none"><br>
                         <label for="audio">Choose an Audio track:</label>
                         <select name="audio" id="audio">
                             <option value="Track">Track 5 - English</option>
@@ -203,20 +208,11 @@
                         </select>
                     </div>
 
-                    <div id="myview" style="display: none">
-                        <label for="audio">Choose an Audio track:</label>
-                        <select name="audio" id="audio">
-                            <option value="Track">Track 6 - English</option>
-                            <option value="Track">Track 2 - Chinese</option>
-                            <option value="Track">Track 3 - French</option>
-                        </select>
-                    </div>
-
                     <div id="myhelp" style="display: none">
                         <div>
                             <p>
                                 Welcome to VLCng media player Help Documentation
-                                You can find VLC documentation on VideoLAN's
+                                You can find VLCng documentation on VideoLAN's
                                 wiki website. If you are a newcomer to VLCng
                                 media player, please read the Introduction to
                                 VLCng media player. You will find some
@@ -414,6 +410,7 @@
             </button>
 
             <button
+                id="menu_btn"
                 class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
                 onclick="showMenu()"
             >
