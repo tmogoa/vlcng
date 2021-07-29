@@ -24,6 +24,7 @@
 
     <body class="flex flex-col items-center overflow-hidden">
         <div
+            id="titleBar"
             class="
                 shadow-xl
                 w-full
@@ -52,7 +53,11 @@
                         hover:bg-gray-800
                     "
                 >
-                    <img src="../assets/img/min_white_24dp.svg" alt="" class="w-4" />
+                    <img
+                        src="../assets/img/min_white_24dp.svg"
+                        alt=""
+                        class="w-4"
+                    />
                 </button>
                 <button
                     id="maximize"
@@ -63,13 +68,26 @@
                         hover:bg-gray-800
                     "
                 >
-                    <img src="../assets/img/max_white_24dp.svg" alt="" class="w-4" />
+                    <img
+                        src="../assets/img/max_white_24dp.svg"
+                        alt=""
+                        class="w-4"
+                    />
                 </button>
                 <button
                     id="close"
-                    class="p-2 rounded-full focus:outline-none hover:bg-gray-800"
+                    class="
+                        p-2
+                        rounded-full
+                        focus:outline-none
+                        hover:bg-gray-800
+                    "
                 >
-                    <img src="../assets/img/close_white_24dp.svg" alt="" class="w-4" />
+                    <img
+                        src="../assets/img/close_white_24dp.svg"
+                        alt=""
+                        class="w-4"
+                    />
                 </button>
             </div>
         </div>
@@ -77,11 +95,11 @@
         <div id="mainMenu" class="w-full h-screen">
             <video
                 src="file://C:\Users\Levi Kamara Zwannah\Documents\School works\ICS year 3\Semester 1\papers\HCI\vlcng\src\assets\video\Cars 3 Rivalry Official Trailer.mp4"
-                class="w-full h-screen bg-gray-900 rounded-none p-0"
+                class="w-full h-screen bg-black rounded-none p-0"
                 autoplay
             ></video>
 
-            <div id="menu"  style="display: none">
+            <div id="menu" style="display: none">
                 <!-- <div id="submenu">
                     <button class="menubtn" id="media_btn" onclick="showMedia('mymedia')">Media</button>
                     <button class="menubtn" id="video_btn" onclick="showVideo('myvideo')">Video</button>
@@ -130,7 +148,7 @@
                     >
                         Tools
                     </button>
-                
+
                     <button
                         class="menubtn"
                         id="help_btn"
@@ -148,58 +166,111 @@
                     </div>
 
                     <div id="mymedia" style="display: none">
-                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open File..</button><br>
-                        <input type='file' id="getFile" style="display:none" accept="video/*">
+                        <button
+                            class="mediabtns"
+                            onclick="document.getElementById('getFile').click()"
+                        >
+                            Open File..</button
+                        ><br />
+                        <input
+                            type="file"
+                            id="getFile"
+                            style="display: none"
+                            accept="video/*"
+                        />
 
-                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Multiple Files..</button><br>
-                        <input type='file' id="getFile" style="display:none" accept="video/*" multiple>
+                        <button
+                            class="mediabtns"
+                            onclick="document.getElementById('getFile').click()"
+                        >
+                            Open Multiple Files..</button
+                        ><br />
+                        <input
+                            type="file"
+                            id="getFile"
+                            style="display: none"
+                            accept="video/*"
+                            multiple
+                        />
 
-                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Folder...</button><br>
-                        <input type='file' id="getFile" style="display:none">
+                        <button
+                            class="mediabtns"
+                            onclick="document.getElementById('getFile').click()"
+                        >
+                            Open Folder...</button
+                        ><br />
+                        <input type="file" id="getFile" style="display: none" />
 
-                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Network Stream...</button><br>
-                        <input type='file' id="getFile" style="display:none">
+                        <button
+                            class="mediabtns"
+                            onclick="document.getElementById('getFile').click()"
+                        >
+                            Open Network Stream...</button
+                        ><br />
+                        <input type="file" id="getFile" style="display: none" />
 
-                        <button class="mediabtns"  onclick="document.getElementById('getFile').click()">Open Recent Media</button><br>
-                        <input type='file' id="getFile" style="display:none">
+                        <button
+                            class="mediabtns"
+                            onclick="document.getElementById('getFile').click()"
+                        >
+                            Open Recent Media</button
+                        ><br />
+                        <input type="file" id="getFile" style="display: none" />
 
-                        <button class="mediabtns">Exit</button><br>
-
+                        <button class="mediabtns">Exit</button><br />
                     </div>
 
                     <div id="myvideo" style="display: none">
-                        <label for="Resolution">Resolution</label><br>
+                        <label for="Resolution">Resolution</label><br />
                         <select name="resolution" id="resolution">
                             <option value="res">Auto</option>
                             <option value="res">High Definition(720p)</option>
-                            <option value="res">Standard Definition(360p)</option>
+                            <option value="res">
+                                Standard Definition(360p)
+                            </option>
                         </select>
                     </div>
 
                     <div id="myaudio" style="display: none">
-                        <label for="microphone">Microphone</label><br>
+                        <label for="microphone">Microphone</label><br />
                         <select name="microphone" id="microphone">
-                            <option value="mic">Default-Microphone Array(Realtek(R) Audio)</option>
-                            <option value="mic">Communications-Microphone Array(Realtek(R) Audio)</option>
+                            <option value="mic">
+                                Default-Microphone Array(Realtek(R) Audio)
+                            </option>
+                            <option value="mic">
+                                Communications-Microphone Array(Realtek(R)
+                                Audio)
+                            </option>
                         </select>
 
-                        <label for="speaker">Speaker</label><br>
+                        <label for="speaker">Speaker</label><br />
                         <select name="speaker" id="speaker">
-                            <option value="speak">Default-Speaker(Realtek(R) Audio)</option>
-                            <option value="speak">Communications-Speaker(Realtek(R) Audio)</option>
+                            <option value="speak">
+                                Default-Speaker(Realtek(R) Audio)
+                            </option>
+                            <option value="speak">
+                                Communications-Speaker(Realtek(R) Audio)
+                            </option>
                         </select>
                     </div>
 
-                    <div id="mysubtitles" style="display: none"><br>
-                        <label for="sub">Add Subtitle</label><br>
-                        <input type="file" id="myfile" name="myfile"><br>
-                        <input type="button" value="subtitle"><br><br>
+                    <div id="mysubtitles" style="display: none">
+                        <br />
+                        <label for="sub">Add Subtitle</label><br />
+                        <input type="file" id="myfile" name="myfile" /><br />
+                        <input type="button" value="subtitle" /><br /><br />
 
-                        <button style="display:block;width:120px; height:30px;" onclick="document.getElementById('getFile').click()">Add Subtitle</button>
-                        <input type='file' id="getFile" style="display:none">
+                        <button
+                            style="display: block; width: 120px; height: 30px"
+                            onclick="document.getElementById('getFile').click()"
+                        >
+                            Add Subtitle
+                        </button>
+                        <input type="file" id="getFile" style="display: none" />
                     </div>
 
-                    <div id="mytools" style="display: none"><br>
+                    <div id="mytools" style="display: none">
+                        <br />
                         <label for="audio">Choose an Audio track:</label>
                         <select name="audio" id="audio">
                             <option value="Track">Track 5 - English</option>
@@ -342,7 +413,13 @@
 
             <button
                 id="volume-control-button"
-                class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
+                class="
+                    p-2
+                    rounded-full
+                    focus:outline-none
+                    hover:bg-yellow-500
+                    relative
+                "
             >
                 <img
                     id="mute-volume"
@@ -350,61 +427,68 @@
                     alt=""
                 />
 
-                <!--BEGIN Volume progress column-->
                 <div
-                    id="audioProgressColumn"
+                    id="vol-progress-container"
                     class="
+                        left-0
+                        invisible
                         flex
                         absolute
-                        bottom-16
+                        bottom-0
+                        pb-14
                         items-center
                         rounded-lg
-                        h-28
                         w-10
                         z-30
                     "
                 >
-                    <!--Actual slider-->
-                    <input
-                        type="range"
-                        min="0"
-                        max="100"
-                        value="50"
-                        class="
-                            volume
-                            -left-9
-                            bg-yellow-500
-                            absolute
-                            rounded-lg
-                            w-28
-                            h-10
-                        "
-                        id="volume-input-range"
-                    />
-
-                    <!--* The following <div> is what you should lengthen or shorten
-                    * It is also transparent to clicks
-                    * Also remember than this div when progress is near 100, the corners to its top
-                        should be rounded by removing the class`rounded-t-none`-->
+                    <!--BEGIN Volume progress column-->
                     <div
-                        id="volume-level-indicator"
-                        class="
-                            h-20
-                            absolute
-                            self-end
-                            pointer-events-none
-                            w-10
-                            bg-black bg-opacity-70
-                            rounded-lg rounded-t-none
-                            flex flex-col-reverse
-                        "
+                        id="audioProgressColumn"
+                        class="flex items-center rounded-lg h-28 w-10"
                     >
-                        <!--The text showing volume level-->
-                        <span
-                            id="volumeText"
-                            class="text-white text-xs font-bold mb-1"
-                            >0</span
+                        <!--Actual slider-->
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="
+                                volume
+                                -left-9
+                                bg-yellow-500
+                                absolute
+                                rounded-lg
+                                w-28
+                                h-10
+                            "
+                            id="volume-input-range"
+                        />
+
+                        <!--* The following <div> is what you should lengthen or shorten
+                        * It is also transparent to clicks
+                        * Also remember than this div when progress is near 100, the corners to its top
+                            should be rounded by removing the class`rounded-t-none`-->
+                        <div
+                            id="volume-level-indicator"
+                            class="
+                                h-20
+                                absolute
+                                self-end
+                                pointer-events-none
+                                w-10
+                                bg-black bg-opacity-70
+                                rounded-lg rounded-t-none
+                                flex flex-col-reverse
+                            "
                         >
+                            <!--The text showing volume level-->
+                            <span
+                                id="volumeText"
+                                class="text-white text-xs font-bold mb-1"
+                                >0</span
+                            >
+                        </div>
                     </div>
                 </div>
             </button>
@@ -528,8 +612,6 @@
                     "
                 >
                     <!--Item-->
-                    
-                    </div>
                 </div>
             </div>
         </div>
