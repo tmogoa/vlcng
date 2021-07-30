@@ -86,19 +86,6 @@ const closeButton = document.querySelector(".close-button");
 
 console.log("Directory name is: " + Utility.path.resolve(__dirname));
 
-//Just making the window size match the video's dimensions
-vlcVideo.mediaObject.addEventListener(
-    "loadedmetadata",
-    function (e) {
-        console.log("video " + this.videoWidth);
-        ipcRenderer.send(
-            "window:resize",
-            (800 * this.videoHeight) / this.videoWidth
-        );
-    },
-    false
-);
-
 function toggleFullScreen() {
     maximize();
 }
@@ -154,7 +141,7 @@ autoShowMenu();
  * Gets the link from the homescreen.
  */
 
-ipcRenderer.invoke("receive-video-link", "").then((link) =>{
+ipcRenderer.invoke("receive-video-link", "").then((link) => {
     let resolvedLink = Utility.path.resolve(link);
 
     console.log(`- The resolved link from the main process: ${resolvedLink}\n`);
