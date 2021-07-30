@@ -72,6 +72,11 @@ ipcMain.on("save-video-link", (evt, link) => {
     console.log(` - Saving the link is ${link} \n`);
 });
 
+ipcMain.on("save-audio-link", (evt, link) => {
+    vlcManager.currentlyPlayingMediaSrc = link;
+    console.log(` - Saving the link is ${link} \n`);
+});
+
 ipcMain.handle("receive-video-link", async (event, args) => {
     console.log(
         ` - Sent the video link successfully. The video link was ${vlcManager.currentlyPlayingMediaSrc}\n`
