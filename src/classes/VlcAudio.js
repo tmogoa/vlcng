@@ -58,6 +58,11 @@ class VlcAudio extends VlcMediaContent{
              if(this.getCurrentTime() == this.getTotalDuration()){
                  this.isPlaying = false;
                  this.uiPlayButton.querySelector('img').src = "../assets/img/replay_white_24dp.svg";
+
+                if(this.autoplay){
+                    this.setCurrentTime(0);
+                    this.playPause();
+                 }
              }
          });
  

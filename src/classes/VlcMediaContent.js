@@ -40,10 +40,15 @@ const EventEmitter = require('events');
     name;
 
     /**
+     * Should this auto play
+     */
+    autoplay = true;
+
+    /**
      * Is the mediaObject playing or not
      * @property {bool} isPlaying;
      */
-    isPlaying = false;
+    isPlaying = true;
 
     /**
      * @property {object} mediaObject - The actual media object. Either video or Audio
@@ -281,6 +286,10 @@ const EventEmitter = require('events');
      */
     getManager(){
         return this.myManager;
+    }
+
+    setAutoplay(autoplay = true){
+        this.autoplay = autoplay;
     }
 
 }

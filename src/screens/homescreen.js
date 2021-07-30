@@ -329,29 +329,32 @@ function sendaudioPath(itemSource){
     getWindow().loadFile("./src/screens/audio-play.html");
 }
 
+let isVideosList = true;
 
 playNetVideoBtn.onclick = (e) => {
+
     if(videoLink.value.length < 1){
         return;
     }
-    //send the video link
-    ipcRenderer.send(
-        "save-video-link",
-        videoLink.value
-    );
-    console.log("sent video link");
-    getWindow().loadFile("./src/screens/video.html");
+    if(isVideosList){
+        console.log(`Is video playlist`);
+        sendvideoPath(videoLink.value);
+        return;
+    }
+
+    console.log(`is audio playlist`);
+    sendaudioPath(videoLink.value);
 };
 
 musicBtn.onclick = (e) => {
-    getWindow().loadFile("./src/screens/audio-play.html");
+    getWindow().loadFile("./src/screens/audio.html");
 };
 //end of UI testing
 
 //START OF TAB SWITCHERS
 const videoTabBtn = document.getElementById("videoTabBtn");
 const musicTabBtn = document.getElementById("musicTabBtn");
-let isVideosList = true;
+
 
 
 function showTab() {
@@ -362,8 +365,14 @@ function showTab() {
     recentVideoItems.style.display = "";
     recentAudioItems.style.display = "none";
     if(isVideosList){
+        console.log(`is audio playlist`);
         recentVideoItems.style.display = "none";
         recentAudioItems.style.display = "";
+        videoLink.setAttribute("placeholder", "Paste a link to an audio");
+    }
+    else{
+        console.log(`is video list`);
+        videoLink.setAttribute("placeholder", "Paste a link to a  video");
     }
     
     isVideosList = !isVideosList;
