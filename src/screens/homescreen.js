@@ -39,9 +39,8 @@ const listView = document.getElementById("listView");
 const initSqlJs = require("sql.js");
 const Utility = require("./../classes/Utility");
 const Manager = require("./../classes/Manager");
-//const VlcAudio = require("./../classes/VlcAudio");
+const VlcAudio = require("./../classes/VlcAudio");
 const VlcVideo = require("./../classes/VlcVideo");
-const { time } = require("console");
 Utility.databasePath = remote.app.getPath("userData");
 
 var recentVideos = [];
@@ -52,6 +51,10 @@ const cwButton = document.getElementById("cw-button"); //continue watching butto
 const cwName = document.getElementById("cw-video-name"); //continue watchin name
 const cwProgressBar = document.getElementById("cw-progress-bar");
 const cwTimeLeft = document.getElementById("cw-time-left");
+const recentAudioItems = document.getElementById("audio-items");
+const recentVideoItems = document.getElementById("video-items");
+
+
 
 (async()=>{
     const SQL = await initSqlJs();
@@ -69,6 +72,7 @@ const cwTimeLeft = document.getElementById("cw-time-left");
 
     if(recentVideos.length > 0){
         let rows = recentVideos[0].values;
+        let type = 'video';
         queue.addListener("new-item", checkThumbnailQueue);
         rows.forEach((row, index) => {
             let videoId =  row[0];
@@ -77,68 +81,11 @@ const cwTimeLeft = document.getElementById("cw-time-left");
             let videoSource = row[3];
             let lastPlayed = row[4];
             
-            homescreenManager.managedObject = constructMediaObject("video");
+            homescreenManager.managedObject = constructMediaObject(type);
             homescreenManager.managedObject.setManager(homescreenManager);
-            listView.innerHTML += `<div id='item-${videoId}'><div>`;
-            try{
-                if(!homescreenManager.setSrc(videoSource)){
-                    Manager.removeMediaObject(SQL, videoId, "video");
-                    return;
-                }
-               
-                homescreenManager.managedObject.mediaObject.addEventListener("loadedmetadata",function(){
-                    let totalDuration = this.duration;
-                    let timeLeft = homescreenManager.managedObject.formatTime(totalDuration - playedTill)[0];
-                    
-                    let item = document.getElementById(`item-${videoId}`);
-                    let directory = homescreenManager.managedObject.srcObject.directory;
-                    item.innerHTML = constrouctObjectHTML(videoId, timeLeft, videoName, directory, lastPlayed);
-                    let esSource = videoSource.replace(/\\/g, "\\\\");
-                    item.setAttribute("onclick", `sendLink("${esSource}")`);
+            recentVideoItems.innerHTML += `<div id='${type}-item-${videoId}'><div>`;
 
-                    let progressBar = document.getElementById("video-progress-bar-"+videoId);
-                    if(progressBar){
-                        let maxWidth = progressBar.parentElement.clientWidth;
-                        let ratio = playedTill/totalDuration;
-                        progressBar.style.width = `${Math.ceil(maxWidth * ratio)}px`;
-                    }
-    
-                    //recalculate date
-                    let newDate = new Date(lastPlayed);
-                    let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-    
-                    document.getElementById("last-date-played-"+videoId).innerHTML = newDate.toLocaleDateString("en-Us", options);
-    
-                    //push into the thumbnail queue to be handled assynchronously
-                    thumbnailQueue.push({
-                        src: videoSource,
-                        id: videoId,
-                    });
-    
-                    queue.emit("new-item");
-                
-                    //updating continue watching
-                    if(index == 0){
-                        let maxWidth = cwProgressBar.parentElement.clientWidth;
-                        let ratio = playedTill/totalDuration;
-                        cwProgressBar.style.width = `${Math.ceil(maxWidth * ratio)}px`;
-
-                        cwName.innerHTML = videoName;
-                        cwTimeLeft.innerHTML = `${timeLeft} left`;
-
-                        cwButton.onclick = ()=>{
-                            sendLink(videoSource);
-                        }
-                    }
-                });
-                
-            }
-            catch (err){
-                console.log("An error occurred why trying to display row. " + err);
-                console.log(row);
-                //delete from the database. The video no long exist
-                Manager.removeMediaObject(SQL, videoId, "video");
-            }
+            listMedia(videoId, playedTill, videoName, videoSource, lastPlayed, type, index);
         });
         
         
@@ -175,7 +122,89 @@ const cwTimeLeft = document.getElementById("cw-time-left");
     console.log(recentAudios);
     if(recentAudios.length > 0){
         let rows = recentAudios[0].values;
+        let type = 'audio';
+        queue.addListener("new-item", checkThumbnailQueue);
+        rows.forEach((row, index) => {
+            let audioId =  row[0];
+            let playedTill = row[1];
+            let audioName = row[2];
+            let audioSource = row[3];
+            let lastPlayed = row[4];
+            
+            homescreenManager.managedObject = constructMediaObject(type);
+            homescreenManager.managedObject.setManager(homescreenManager);
+            recentAudioItems.innerHTML += `<div id='${type}-item-${audioId}'><div>`;
 
+            listMedia(audioId, playedTill, audioName, audioSource, lastPlayed, type, index);
+        });
+
+    }
+
+    //for the max width
+
+    function listMedia(id, playedTill, name, source, lastPlayed, type, index){
+            try{
+                if(!homescreenManager.setSrc(source)){
+                    Manager.removeMediaObject(SQL, id, type);
+                    return;
+                }
+               
+                homescreenManager.managedObject.mediaObject.addEventListener("loadedmetadata",function(){
+                    let totalDuration = this.duration;
+                    let timeLeft = homescreenManager.managedObject.formatTime(totalDuration - playedTill)[0];
+                    
+                    let item = document.getElementById(`${type}-item-${id}`);
+                    let directory = homescreenManager.managedObject.srcObject.directory;
+                    item.innerHTML = constrouctObjectHTML(id, timeLeft, name, directory, lastPlayed, type);
+                    let esSource = source.replace(/\\/g, "\\\\");
+                    item.setAttribute("onclick", `send${type}Path("${esSource}")`);
+
+                    let progressBar = document.getElementById(`${type}-progress-bar-${id}`);
+                    if(progressBar){
+                        let maxWidth = progressBar.parentElement.clientWidth;
+
+                        let ratio = playedTill/totalDuration;
+                        console.log(`${type} playedTill ${playedTill} of ${totalDuration} and ratio is ${ratio} and maximum width is ${maxWidth} and progress with is `);
+                        progressBar.style.width = `${Math.ceil(maxWidth * ratio)}px`;
+                    }
+    
+                    //recalculate date
+                    let newDate = new Date(lastPlayed);
+                    let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+    
+                    document.getElementById(type+"-last-date-played-"+id).innerHTML = newDate.toLocaleDateString("en-Us", options);
+    
+                    //push into the thumbnail queue to be handled assynchronously
+                    thumbnailQueue.push({
+                        source,
+                        id,
+                        type
+                    });
+    
+                    queue.emit("new-item");
+                
+                    //updating continue watching
+                    if(index == 0 && type == 'video'){
+                        let maxWidth = cwProgressBar.parentElement.clientWidth;
+                        let ratio = playedTill/totalDuration;
+                        cwProgressBar.style.width = `${Math.ceil(maxWidth * ratio)}px`;
+
+                        cwName.innerHTML = name;
+                        cwTimeLeft.innerHTML = `${timeLeft} left`;
+
+                        cwButton.onclick = ()=>{
+                            sendLink(videoSource);
+                        }
+                    }
+                });
+                
+            }
+            catch (err){
+                console.log("An error occurred why trying to display row. " + err);
+                console.log(row);
+                //delete from the database. The video no long exist
+                Manager.removeMediaObject(SQL, id, type);
+            }
     }
 
 })();
@@ -192,26 +221,26 @@ function constructMediaObject(type){
             }
         case "audio":
             {
-                // mediaObject = new VlcAudio();
-                // let audio = document.createElement('audio');
-                // mediaObject.mediaObject = audio;
-                // break;
+                mediaObject = new VlcAudio();
+                let audio = document.createElement('audio');
+                mediaObject.mediaObject = audio;
+                break;
             }
     }
     return mediaObject;
 }
 
-function constrouctObjectHTML(objectId, timeLeft, name, source, datePlayed){
+function constrouctObjectHTML(objectId, timeLeft, name, source, datePlayed, type='video'){
     console.log(`the path source is ${source}`);
     let partialSource = source.split(/[\/\\]/);
     let pSource = partialSource.slice(partialSource.length - 3);
     let halfSource = Utility.path.join(pSource[0], pSource[1], pSource[2]);
     console.log(`The half source is ${halfSource}`);
     let listItem = `
-    <input type="hidden" value="${objectId}" id="video-id" />
+    <input type="hidden" value="${objectId}" id="${type}-id" />
     <div class="bg-gray-800 rounded-lg flex flex-row h-20">
         <img
-            id="video-thumbnail-container-${objectId}"
+            id="${type}-thumbnail-container-${objectId}"
             src="https://picsum.photos/300/200"
             alt=""
             class="object-cover rounded-l-lg w-4/12"
@@ -232,11 +261,11 @@ function constrouctObjectHTML(objectId, timeLeft, name, source, datePlayed){
                     items-center
                 "
             >
-                <span class="font-semibold" id="video-name-${objectId}"
+                <span class="font-semibold" id="${type}-name-${objectId}"
                     >${name}</span
                 >
                 <!--Duration-->
-                <span class="text-xs" id="watch-time-left-${objectId}"
+                <span class="text-xs" id="${type}-time-left-${objectId}"
                     >${timeLeft} left</span
                 >
             </div>
@@ -253,7 +282,7 @@ function constrouctObjectHTML(objectId, timeLeft, name, source, datePlayed){
                     "
                 >
                     <div
-                        id="video-progress-bar-${objectId}"
+                        id="${type}-progress-bar-${objectId}"
                         class="
                             flex
                             bg-yellow-500
@@ -267,10 +296,10 @@ function constrouctObjectHTML(objectId, timeLeft, name, source, datePlayed){
             </div>
 
             <div class="flex flex-row justify-between text-xs">
-                <span class="font-semibold" id="video-path"
+                <span class="font-semibold" id="${type}-path"
                     >${halfSource}</span
                 >
-                <span id="last-date-played-${objectId}">${datePlayed}</span>
+                <span id="${type}-last-date-played-${objectId}">${datePlayed}</span>
             </div>
         </div>
     </div>
@@ -280,7 +309,7 @@ return listItem;
 }
 
 
-function sendLink(itemSource){
+function sendvideoPath(itemSource){
     console.log(`The link before sending was ${itemSource} `);
     ipcRenderer.send(
         "save-video-link",
@@ -288,6 +317,16 @@ function sendLink(itemSource){
     );
     console.log(`I successfully sent the video link. the link I send was ${itemSource}`);
     getWindow().loadFile("./src/screens/video.html");
+}
+
+function sendaudioPath(itemSource){
+    console.log(`The link before sending was ${itemSource} `);
+    ipcRenderer.send(
+        "save-audio-link",
+        itemSource
+    );
+    console.log(`I successfully sent the audio link. the link I send was ${itemSource}`);
+    getWindow().loadFile("./src/screens/audio-play.html");
 }
 
 
@@ -305,19 +344,29 @@ playNetVideoBtn.onclick = (e) => {
 };
 
 musicBtn.onclick = (e) => {
-    getWindow().loadFile("./src/screens/audio.html");
+    getWindow().loadFile("./src/screens/audio-play.html");
 };
 //end of UI testing
 
 //START OF TAB SWITCHERS
 const videoTabBtn = document.getElementById("videoTabBtn");
 const musicTabBtn = document.getElementById("musicTabBtn");
+let isVideosList = true;
+
 
 function showTab() {
     videoTabBtn.classList.toggle("active-tab");
     videoTabBtn.classList.toggle("text-gray-500");
     musicTabBtn.classList.toggle("active-tab");
     musicTabBtn.classList.toggle("text-gray-500");
+    recentVideoItems.style.display = "";
+    recentAudioItems.style.display = "none";
+    if(isVideosList){
+        recentVideoItems.style.display = "none";
+        recentAudioItems.style.display = "";
+    }
+    
+    isVideosList = !isVideosList;
 }
 videoTabBtn.onclick = showTab;
 musicTabBtn.onclick = showTab;

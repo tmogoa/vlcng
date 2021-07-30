@@ -5,7 +5,6 @@
  */
 const Utility = require('./Utility');
 const EventEmitter = require('events');
-const { timeStamp } = require('console');
 
  class VlcMediaContent extends EventEmitter{
 

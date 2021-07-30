@@ -115,11 +115,9 @@ class Manager extends EventEmitter{
         this.managedObject.setId(result[0].values[0][0]);
         this.managedObject.setCurrentTime(result[0].values[0][1]);
 
-        if(this.managedObject.type == 'video'){
-            this.initBookmarksList(SQL, db);
-            this.listBookmarks();
-            this.updateBookmarkButton();
-        }
+        this.initBookmarksList(SQL, db);
+        this.listBookmarks();
+        this.updateBookmarkButton();
         
         Utility.closeDatabase(db);
         
