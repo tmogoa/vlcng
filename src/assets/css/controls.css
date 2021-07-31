@@ -7,7 +7,7 @@
 #menu {
     position: absolute;
     width: 700px;
-    height: 60%;
+    height: 70%;
     text-align: center;
     background-color: #fff;
     display: flex; /* establish flex container */
@@ -29,7 +29,7 @@
 }
 #menu > div#rightmenu {
     width: 550px;
-    height: 100%;
+    height: 90%;
     border-left: 2px solid gray;
     padding-left: 5px;
     margin-top: 10px;
