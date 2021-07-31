@@ -45,6 +45,21 @@
             <input type="hidden" id="video-id" value="0" />
             <div class="flex flex-row justify-end gap-8">
                 <button
+                    id="toHomescreen"
+                    class="
+                        p-2
+                        rounded-full
+                        focus:outline-none
+                        hover:bg-gray-800
+                    "
+                >
+                    <img
+                        src="../assets/img/home_white_24dp.svg"
+                        alt=""
+                        class="w-4"
+                    />
+                </button>
+                <button
                     id="minimize"
                     class="
                         p-2
@@ -111,7 +126,7 @@
                 </div> -->
 
                 <div id="submenu">
-                    <br>
+                    <br />
                     <h1>Settings</h1>
                     <br />
                     <button
@@ -119,28 +134,72 @@
                         id="media_btn"
                         onclick="show('mymedia')"
                     >
-                       <p class="text-base font-semibold mx-auto my-auto px-2 py-2">Media</p> 
+                        <p
+                            class="
+                                text-base
+                                font-semibold
+                                mx-auto
+                                my-auto
+                                px-2
+                                py-2
+                            "
+                        >
+                            Media
+                        </p>
                     </button>
                     <button
                         class="menubtn"
                         id="video_btn"
                         onclick="show('myvideo')"
                     >
-                    <p class="text-base font-semibold mx-auto my-auto px-2 py-2">Video</p> 
+                        <p
+                            class="
+                                text-base
+                                font-semibold
+                                mx-auto
+                                my-auto
+                                px-2
+                                py-2
+                            "
+                        >
+                            Video
+                        </p>
                     </button>
                     <button
                         class="menubtn"
                         id="audio_btn"
                         onclick="show('myaudio')"
                     >
-                    <p class="text-base font-semibold mx-auto my-auto px-2 py-2">Audio</p> 
+                        <p
+                            class="
+                                text-base
+                                font-semibold
+                                mx-auto
+                                my-auto
+                                px-2
+                                py-2
+                            "
+                        >
+                            Audio
+                        </p>
                     </button>
                     <button
                         class="menubtn"
                         id="sub_btn"
                         onclick="show('mysubtitles')"
                     >
-                    <p class="text-base font-semibold mx-auto my-auto px-2 py-2">Subtitles</p> 
+                        <p
+                            class="
+                                text-base
+                                font-semibold
+                                mx-auto
+                                my-auto
+                                px-2
+                                py-2
+                            "
+                        >
+                            Subtitles
+                        </p>
                     </button>
 
                     <button
@@ -148,7 +207,18 @@
                         id="help_btn"
                         onclick="show('myhelp')"
                     >
-                    <p class="text-base font-semibold mx-auto my-auto px-2 py-2">Help</p> 
+                        <p
+                            class="
+                                text-base
+                                font-semibold
+                                mx-auto
+                                my-auto
+                                px-2
+                                py-2
+                            "
+                        >
+                            Help
+                        </p>
                     </button>
                 </div>
 
@@ -195,16 +265,29 @@
                         ><br />
                         <input type="file" id="getFile" style="display: none" />
 
-                        <button class="mediabtns"><a href="homescreen.html">Exit</a></button><br />
+                        <button class="mediabtns">
+                            <a href="homescreen.html">Exit</a></button
+                        ><br />
                     </div>
 
                     <div id="myvideo" style="display: none">
-                        <div class="custom-select" style="width:200px;">
+                        <div class="custom-select" style="width: 200px">
                             <label for="Resolution">Resolution</label><br />
-                            <div class=" pt-2 h-1 border-b-2 border-gray-500 w-96 ml-3.5 mb-2"></div>
+                            <div
+                                class="
+                                    pt-2
+                                    h-1
+                                    border-b-2 border-gray-500
+                                    w-96
+                                    ml-3.5
+                                    mb-2
+                                "
+                            ></div>
                             <select name="resolution" id="resolution">
                                 <option value="res">Auto</option>
-                                <option value="res">High Definition(720p)</option>
+                                <option value="res">
+                                    High Definition(720p)
+                                </option>
                                 <option value="res">
                                     Standard Definition(360p)
                                 </option>
@@ -213,9 +296,18 @@
                     </div>
 
                     <div id="myaudio" style="display: none">
-                        <div class="custom-select" style="width:200px;">
+                        <div class="custom-select" style="width: 200px">
                             <label for="microphone">Microphone</label><br />
-                            <div class=" pt-2 h-1 border-b-2 border-gray-500 w-96 ml-3.5 mb-2"></div>
+                            <div
+                                class="
+                                    pt-2
+                                    h-1
+                                    border-b-2 border-gray-500
+                                    w-96
+                                    ml-3.5
+                                    mb-2
+                                "
+                            ></div>
                             <select name="microphone" id="microphone">
                                 <option value="mic">
                                     Default-Microphone Array(Realtek(R) Audio)
@@ -227,7 +319,16 @@
                             </select>
 
                             <label for="speaker">Speaker</label><br />
-                            <div class=" pt-2 h-1 border-b-2 border-gray-500 w-96 ml-3.5 mb-2"></div>
+                            <div
+                                class="
+                                    pt-2
+                                    h-1
+                                    border-b-2 border-gray-500
+                                    w-96
+                                    ml-3.5
+                                    mb-2
+                                "
+                            ></div>
                             <select name="speaker" id="speaker">
                                 <option value="speak">
                                     Default-Speaker(Realtek(R) Audio)
@@ -240,21 +341,45 @@
                     </div>
 
                     <div id="mysubtitles" style="display: none">
-                        <div class="custom-select" style="width:200px;">
+                        <div class="custom-select" style="width: 200px">
                             <label for="sub">Subtitle</label><br />
-                            <div class=" pt-2 h-1 border-b-2 border-gray-500 w-96 ml-3.5 mb-2"></div>
-                            <button class="mx-auto border-yellow-500 border-2 rounded-lg"
-                                style="display: block; width: 120px; height: 30px"
+                            <div
+                                class="
+                                    pt-2
+                                    h-1
+                                    border-b-2 border-gray-500
+                                    w-96
+                                    ml-3.5
+                                    mb-2
+                                "
+                            ></div>
+                            <button
+                                class="
+                                    mx-auto
+                                    border-yellow-500 border-2
+                                    rounded-lg
+                                "
+                                style="
+                                    display: block;
+                                    width: 120px;
+                                    height: 30px;
+                                "
                                 onclick="document.getElementById('getFile').click()"
                             >
                                 Add Subtitle
                             </button>
-                            <input type="file" id="getFile" style="display: none" />
-                        </div>    
+                            <input
+                                type="file"
+                                id="getFile"
+                                style="display: none"
+                            />
+                        </div>
                     </div>
 
                     <div id="myhelp" style="display: none">
-                        <div class="flex-auto text-base font-sans font-semibold" >
+                        <div
+                            class="flex-auto text-base font-sans font-semibold"
+                        >
                             <p>
                                 Welcome to VLCng media player Help Documentation
                                 You can find VLCng documentation on VideoLAN's
