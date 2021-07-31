@@ -112,35 +112,35 @@
 
                 <div id="submenu">
                     <br>
-                    <p>Settings</p>
+                    <h1>Settings</h1>
                     <br />
                     <button
                         class="menubtn"
                         id="media_btn"
                         onclick="show('mymedia')"
                     >
-                        Media
+                       <p class="text-base font-semibold mx-auto my-auto px-2 py-2">Media</p> 
                     </button>
                     <button
                         class="menubtn"
                         id="video_btn"
                         onclick="show('myvideo')"
                     >
-                        Video
+                    <p class="text-base font-semibold mx-auto my-auto px-2 py-2">Video</p> 
                     </button>
                     <button
                         class="menubtn"
                         id="audio_btn"
                         onclick="show('myaudio')"
                     >
-                        Audio
+                    <p class="text-base font-semibold mx-auto my-auto px-2 py-2">Audio</p> 
                     </button>
                     <button
                         class="menubtn"
                         id="sub_btn"
                         onclick="show('mysubtitles')"
                     >
-                        Subtitles
+                    <p class="text-base font-semibold mx-auto my-auto px-2 py-2">Subtitles</p> 
                     </button>
 
                     <button
@@ -148,14 +148,14 @@
                         id="help_btn"
                         onclick="show('myhelp')"
                     >
-                        Help
+                    <p class="text-base font-semibold mx-auto my-auto px-2 py-2">Help</p> 
                     </button>
                 </div>
 
                 <div id="rightmenu">
                     <br />
                     <br />
-                    <div id="main_place">
+                    <div id="main_place" class="mt-4">
                         <p>Welcome to VLCng Menu</p>
                     </div>
 
@@ -201,6 +201,7 @@
                     <div id="myvideo" style="display: none">
                         <div class="custom-select" style="width:200px;">
                             <label for="Resolution">Resolution</label><br />
+                            <div class=" pt-2 h-1 border-b-2 border-gray-500 w-96 ml-3.5 mb-2"></div>
                             <select name="resolution" id="resolution">
                                 <option value="res">Auto</option>
                                 <option value="res">High Definition(720p)</option>
@@ -214,6 +215,7 @@
                     <div id="myaudio" style="display: none">
                         <div class="custom-select" style="width:200px;">
                             <label for="microphone">Microphone</label><br />
+                            <div class=" pt-2 h-1 border-b-2 border-gray-500 w-96 ml-3.5 mb-2"></div>
                             <select name="microphone" id="microphone">
                                 <option value="mic">
                                     Default-Microphone Array(Realtek(R) Audio)
@@ -225,6 +227,7 @@
                             </select>
 
                             <label for="speaker">Speaker</label><br />
+                            <div class=" pt-2 h-1 border-b-2 border-gray-500 w-96 ml-3.5 mb-2"></div>
                             <select name="speaker" id="speaker">
                                 <option value="speak">
                                     Default-Speaker(Realtek(R) Audio)
@@ -237,11 +240,10 @@
                     </div>
 
                     <div id="mysubtitles" style="display: none">
-                        <br />
                         <div class="custom-select" style="width:200px;">
                             <label for="sub">Subtitle</label><br />
-
-                            <button
+                            <div class=" pt-2 h-1 border-b-2 border-gray-500 w-96 ml-3.5 mb-2"></div>
+                            <button class="mx-auto border-yellow-500 border-2 rounded-lg"
                                 style="display: block; width: 120px; height: 30px"
                                 onclick="document.getElementById('getFile').click()"
                             >
@@ -252,7 +254,7 @@
                     </div>
 
                     <div id="myhelp" style="display: none">
-                        <div class="flex-auto text-xl font-sans font-semibold" >
+                        <div class="flex-auto text-base font-sans font-semibold" >
                             <p>
                                 Welcome to VLCng media player Help Documentation
                                 You can find VLCng documentation on VideoLAN's
