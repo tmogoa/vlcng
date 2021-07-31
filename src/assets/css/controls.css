@@ -51,14 +51,14 @@
 }
 #media_btn:before {
     content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/personal_video/v12/24px.svg);
-    width: 20px;
+    width: 10px;
     float: left;
     margin-right: 5px;
     margin-top: 0px;
 }
 #audio_btn:before {
     content: url(https://fonts.gstatic.com/s/i/materialiconsoutlined/mic/v12/24px.svg);
-    width: 20px;
+    width: 10px;
     float: left;
     margin-right: 5px;
     
