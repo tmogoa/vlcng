@@ -4,11 +4,13 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         <link
-            href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
             rel="stylesheet"
         />
 
+        <link rel="stylesheet" href="../index.css" />
         <style>
             .slidecontainer {
                 width: 100%;
@@ -55,15 +57,8 @@
     </head>
 
     <body
-        class="
-            h-screen
-            w-screen
-            overflow-hidden
-            flex flex-col
-            items-center
-            justify-center
-        "
-        style="background: #e4733e"
+        class="flex flex-col items-center"
+        style="background: #e4733e; height: 700px"
     >
         <div
             id="titleBar"
@@ -79,7 +74,6 @@
                 py-2
                 px-4
                 z-30
-                absolute
             "
             style="-webkit-app-region: drag; -webkit-user-select: none"
         >
@@ -149,1075 +143,1055 @@
             </div>
         </div>
 
-        <!-- Sidebar -->
-        <div
-            id="sidebarMenu"
-            class="
-                bg-white-100
-                fixed
-                flex flex-col
-                top-0
-                left-0
-                w-14
-                hover:w-64
-                md:w-64
-                dark:bg-gray-900
-                h-full
-                text-white
-                transition-all
-                duration-300
-                border-none
-                z-10
-                sidebar
-            "
-        >
+        <div class="flex flex-row w-full flex-grow">
+            <!-- Sidebar  bg-white-100-->
             <div
+                id="sidebarMenu"
                 class="
-                    overflow-y-auto overflow-x-hidden
                     flex flex-col
-                    justify-between
-                    flex-grow
+                    w-1/4
+                    md:w-1/4
+                    dark:bg-gray-900
+                    text-white
+                    transition-all
+                    duration-300
+                    border-none
                 "
             >
-                <ul class="flex flex-col py-4 space-y-1">
-                    <li class="px-5 hidden md:block">
-                        <div class="flex flex-row items-center h-8">
-                            <div
-                                class="
-                                    text-sm
-                                    font-medium
-                                    tracking-wide
-                                    text-white
-                                    uppercase
-                                "
-                            >
-                                MENU
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="
-                                relative
-                                flex flex-row
-                                items-center
-                                h-11
-                                focus:outline-none
-                                hover:bg-yellow-500
-                                dark:hover:bg-gray-600
-                                text-white-600
-                                hover:text-white-800
-                                border-l-4 border-transparent
-                                hover:border-blue-500
-                                dark:hover:border-gray-800
-                                pr-6
-                            "
-                        >
-                            <span
-                                class="
-                                    inline-flex
-                                    justify-center
-                                    items-center
-                                    ml-4
-                                "
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-6 w-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 10h16M4 14h16M4 18h16"
-                                    />
-                                </svg>
-                            </span>
-                            <span class="ml-2 text-sm tracking-wide truncate"
-                                >QUEUE</span
-                            >
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="
-                                relative
-                                flex flex-row
-                                items-center
-                                h-11
-                                focus:outline-none
-                                hover:bg-yellow-500
-                                dark:hover:bg-gray-600
-                                text-white-600
-                                hover:text-white-800
-                                border-l-4 border-transparent
-                                hover:border-blue-500
-                                dark:hover:border-gray-800
-                                pr-6
-                            "
-                        >
-                            <span
-                                class="
-                                    inline-flex
-                                    justify-center
-                                    items-center
-                                    ml-4
-                                "
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-6 w-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
-                                    />
-                                </svg>
-                            </span>
-                            <span class="ml-2 text-sm tracking-wide truncate"
-                                >ALL MUSIC</span
-                            >
-                            <span
-                                class="
-                                    hidden
-                                    md:block
-                                    px-2
-                                    py-0.5
-                                    ml-auto
-                                    text-xs
-                                    font-medium
-                                    tracking-wide
-                                    text-blue-500
-                                    bg-indigo-50
-                                    rounded-full
-                                "
-                                >New</span
-                            >
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="
-                                relative
-                                flex flex-row
-                                items-center
-                                h-11
-                                focus:outline-none
-                                hover:bg-yellow-500
-                                dark:hover:bg-gray-600
-                                text-white-600
-                                hover:text-white-800
-                                border-l-4 border-transparent
-                                hover:border-blue-500
-                                dark:hover:border-gray-800
-                                pr-6
-                            "
-                        >
-                            <span
-                                class="
-                                    inline-flex
-                                    justify-center
-                                    items-center
-                                    ml-4
-                                "
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                >
-                                    <path
-                                        d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z"
-                                    />
-                                </svg>
-                            </span>
-                            <span class="ml-2 text-sm tracking-wide truncate"
-                                >NEW PLAYLIST</span
-                            >
-                            <span
-                                class="
-                                    hidden
-                                    md:block
-                                    px-2
-                                    py-0.5
-                                    ml-auto
-                                    text-xs
-                                    font-medium
-                                    tracking-wide
-                                    text-red-500
-                                    bg-red-50
-                                    rounded-full
-                                "
-                                >+</span
-                            >
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="
-                                relative
-                                flex flex-row
-                                items-center
-                                h-11
-                                focus:outline-none
-                                hover:bg-yellow-500
-                                dark:hover:bg-gray-600
-                                text-white-600
-                                hover:text-white-800
-                                border-l-4 border-transparent
-                                hover:border-blue-500
-                                dark:hover:border-gray-800
-                                pr-6
-                            "
-                        >
-                            <span
-                                class="
-                                    inline-flex
-                                    justify-center
-                                    items-center
-                                    ml-4
-                                "
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                        clip-rule="evenodd"
-                                    />
-                                </svg>
-                            </span>
-                            <span
-                                class="
-                                    ml-2
-                                    text-sm
-                                    tracking-wide
-                                    truncate
-                                    uppercase
-                                "
-                                >Recently Played</span
-                            >
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="
-                                relative
-                                flex flex-row
-                                items-center
-                                h-11
-                                focus:outline-none
-                                hover:bg-yellow-500
-                                dark:hover:bg-gray-600
-                                text-white-600
-                                hover:text-white-800
-                                border-l-4 border-transparent
-                                hover:border-blue-500
-                                dark:hover:border-gray-800
-                                pr-6
-                            "
-                        >
-                            <span
-                                class="
-                                    inline-flex
-                                    justify-center
-                                    items-center
-                                    ml-4
-                                "
-                            >
-                                <svg
-                                    class="w-5 h-5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                                    ></path>
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                    ></path>
-                                </svg>
-                            </span>
-                            <span class="ml-2 text-sm tracking-wide truncate"
-                                >SETTINGS</span
-                            >
-                        </a>
-                    </li>
-                    <li class="px-5 hidden md:block">
-                        <div class="flex flex-row items-center mt-5 h-8">
-                            <div
-                                class="
-                                    text-sm
-                                    font-light
-                                    tracking-wide
-                                    text-gray-400
-                                    font-bold
-                                    uppercase
-                                "
-                            >
-                                PLAYLISTS
-                            </div>
-                        </div>
-                        <ul>
-                            <li>
-                                <a
-                                    href="#"
+                <div
+                    class="
+                        overflow-y-auto overflow-x-hidden
+                        flex flex-col
+                        justify-between
+                        flex-grow
+                    "
+                >
+                    <ul class="flex flex-col py-4 space-y-1">
+                        <li class="px-5 hidden md:block">
+                            <div class="flex flex-row items-center h-8">
+                                <div
                                     class="
-                                        relative
-                                        flex flex-row
-                                        items-center
-                                        h-11
-                                        focus:outline-none
-                                        hover:bg-yellow-500
-                                        dark:hover:bg-gray-600
-                                        text-white-600
-                                        hover:text-white-800
-                                        border-l-4 border-transparent
-                                        hover:border-blue-500
-                                        dark:hover:border-gray-800
-                                        pr-6
+                                        text-sm
+                                        font-medium
+                                        tracking-wide
+                                        text-white
+                                        uppercase
                                     "
                                 >
-                                    <span
+                                    MENU
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a
+                                href="#"
+                                class="
+                                    relative
+                                    flex flex-row
+                                    items-center
+                                    h-11
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                    dark:hover:bg-gray-600
+                                    text-white-600
+                                    hover:text-white-800
+                                    border-l-4 border-transparent
+                                    hover:border-blue-500
+                                    dark:hover:border-gray-800
+                                    pr-6
+                                "
+                            >
+                                <span
+                                    class="
+                                        inline-flex
+                                        justify-center
+                                        items-center
+                                        ml-4
+                                    "
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                                        />
+                                    </svg>
+                                </span>
+                                <span
+                                    class="ml-2 text-sm tracking-wide truncate"
+                                    >QUEUE</span
+                                >
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#"
+                                class="
+                                    relative
+                                    flex flex-row
+                                    items-center
+                                    h-11
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                    dark:hover:bg-gray-600
+                                    text-white-600
+                                    hover:text-white-800
+                                    border-l-4 border-transparent
+                                    hover:border-blue-500
+                                    dark:hover:border-gray-800
+                                    pr-6
+                                "
+                            >
+                                <span
+                                    class="
+                                        inline-flex
+                                        justify-center
+                                        items-center
+                                        ml-4
+                                    "
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+                                        />
+                                    </svg>
+                                </span>
+                                <span
+                                    class="ml-2 text-sm tracking-wide truncate"
+                                    >ALL MUSIC</span
+                                >
+                                <span
+                                    class="
+                                        hidden
+                                        md:block
+                                        px-2
+                                        py-0.5
+                                        ml-auto
+                                        text-xs
+                                        font-medium
+                                        tracking-wide
+                                        text-blue-500
+                                        bg-indigo-50
+                                        rounded-full
+                                    "
+                                    >New</span
+                                >
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#"
+                                class="
+                                    relative
+                                    flex flex-row
+                                    items-center
+                                    h-11
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                    dark:hover:bg-gray-600
+                                    text-white-600
+                                    hover:text-white-800
+                                    border-l-4 border-transparent
+                                    hover:border-blue-500
+                                    dark:hover:border-gray-800
+                                    pr-6
+                                "
+                            >
+                                <span
+                                    class="
+                                        inline-flex
+                                        justify-center
+                                        items-center
+                                        ml-4
+                                    "
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
+                                        <path
+                                            d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z"
+                                        />
+                                    </svg>
+                                </span>
+                                <span
+                                    class="ml-2 text-sm tracking-wide truncate"
+                                    >NEW PLAYLIST</span
+                                >
+                                <span
+                                    class="
+                                        hidden
+                                        md:block
+                                        px-2
+                                        py-0.5
+                                        ml-auto
+                                        text-xs
+                                        font-medium
+                                        tracking-wide
+                                        text-red-500
+                                        bg-red-50
+                                        rounded-full
+                                    "
+                                    >+</span
+                                >
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#"
+                                class="
+                                    relative
+                                    flex flex-row
+                                    items-center
+                                    h-11
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                    dark:hover:bg-gray-600
+                                    text-white-600
+                                    hover:text-white-800
+                                    border-l-4 border-transparent
+                                    hover:border-blue-500
+                                    dark:hover:border-gray-800
+                                    pr-6
+                                "
+                            >
+                                <span
+                                    class="
+                                        inline-flex
+                                        justify-center
+                                        items-center
+                                        ml-4
+                                    "
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                </span>
+                                <span
+                                    class="
+                                        ml-2
+                                        text-sm
+                                        tracking-wide
+                                        truncate
+                                        uppercase
+                                    "
+                                    >Recently Played</span
+                                >
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#"
+                                class="
+                                    relative
+                                    flex flex-row
+                                    items-center
+                                    h-11
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                    dark:hover:bg-gray-600
+                                    text-white-600
+                                    hover:text-white-800
+                                    border-l-4 border-transparent
+                                    hover:border-blue-500
+                                    dark:hover:border-gray-800
+                                    pr-6
+                                "
+                            >
+                                <span
+                                    class="
+                                        inline-flex
+                                        justify-center
+                                        items-center
+                                        ml-4
+                                    "
+                                >
+                                    <svg
+                                        class="w-5 h-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                                        ></path>
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                        ></path>
+                                    </svg>
+                                </span>
+                                <span
+                                    class="ml-2 text-sm tracking-wide truncate"
+                                    >SETTINGS</span
+                                >
+                            </a>
+                        </li>
+                        <li class="px-5 hidden md:block">
+                            <div class="flex flex-row items-center mt-5 h-8">
+                                <div
+                                    class="
+                                        text-sm
+                                        font-light
+                                        tracking-wide
+                                        text-gray-400
+                                        font-bold
+                                        uppercase
+                                    "
+                                >
+                                    PLAYLISTS
+                                </div>
+                            </div>
+                            <ul>
+                                <li>
+                                    <a
+                                        href="#"
                                         class="
-                                            inline-flex
-                                            justify-center
+                                            relative
+                                            flex flex-row
                                             items-center
-                                            ml-4
+                                            h-11
+                                            focus:outline-none
+                                            hover:bg-yellow-500
+                                            dark:hover:bg-gray-600
+                                            text-white-600
+                                            hover:text-white-800
+                                            border-l-4 border-transparent
+                                            hover:border-blue-500
+                                            dark:hover:border-gray-800
+                                            pr-6
+                                        "
+                                    >
+                                        <span
+                                            class="
+                                                inline-flex
+                                                justify-center
+                                                items-center
+                                                ml-4
+                                            "
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                class="h-5 w-5"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        <span
+                                            class="
+                                                ml-2
+                                                text-sm
+                                                tracking-wide
+                                                truncate
+                                            "
+                                            >Rhumba Playlist 1</span
+                                        >
+                                        <span
+                                            class="
+                                                hidden
+                                                md:block
+                                                px-2
+                                                py-0.5
+                                                ml-auto
+                                                text-xs
+                                                font-medium
+                                                tracking-wide
+                                                text-red-500
+                                                bg-red-50
+                                                rounded-full
+                                            "
+                                            >+</span
+                                        >
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- ./Sidebar -->
+            <div
+                class="
+                    flex-grow flex flex-col
+                    items-center
+                    gap-4
+                    p-3
+                    overflow-hidden
+                "
+            >
+                <!-- Music List -->
+                <div id="musicList" class="w-full">
+                    <div class="w-full rounded-lg shadow-xs">
+                        <div class="w-full overflow-x-auto">
+                            <table class="w-full rounded-lg">
+                                <thead>
+                                    <tr
+                                        class="
+                                            text-xs
+                                            font-semibold
+                                            tracking-wide
+                                            text-left text-gray-500
+                                            uppercase
+                                            border-b
+                                            dark:border-gray-700
+                                            bg-gray-50
+                                            dark:text-gray-400 dark:bg-gray-800
+                                        "
+                                    >
+                                        <th class="px-4 py-3 rounded-tl-lg">
+                                            Artist/Song
+                                        </th>
+                                        <th class="px-4 py-3">Duration</th>
+                                        <th class="px-4 py-3">Add to queue</th>
+                                        <th class="px-4 py-3 rounded-tr-lg">
+                                            Like
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    class="
+                                        bg-white
+                                        divide-y
+                                        dark:divide-gray-700 dark:bg-gray-800
+                                    "
+                                >
+                                    <tr
+                                        id="music item"
+                                        onclick="setPath('../assets/audio/song3.mp3')"
+                                        class="
+                                            bg-gray-50
+                                            dark:bg-gray-800
+                                            hover:bg-yellow-200
+                                            dark:hover:bg-gray-900
+                                            text-gray-700
+                                            dark:text-gray-400
+                                        "
+                                    >
+                                        <td class="px-4 py-3">
+                                            <div
+                                                class="
+                                                    flex
+                                                    items-center
+                                                    text-sm
+                                                "
+                                            >
+                                                <div
+                                                    class="
+                                                        relative
+                                                        hidden
+                                                        w-8
+                                                        h-8
+                                                        mr-3
+                                                        rounded-full
+                                                        md:block
+                                                    "
+                                                >
+                                                    <img
+                                                        id="imageOne"
+                                                        class="
+                                                            object-cover
+                                                            w-full
+                                                            h-full
+                                                            rounded-full
+                                                        "
+                                                        src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                                        alt=""
+                                                        loading="lazy"
+                                                    />
+                                                    <div
+                                                        class="
+                                                            absolute
+                                                            inset-0
+                                                            rounded-full
+                                                            shadow-inner
+                                                        "
+                                                        aria-hidden="true"
+                                                    ></div>
+                                                </div>
+                                                <div>
+                                                    <p id="artistOne">
+                                                        JP Cooper
+                                                    </p>
+                                                    <p
+                                                        class="
+                                                            text-xl
+                                                            font-semi-bold
+                                                            text-gray-600
+                                                            dark:text-gray-400
+                                                        "
+                                                        id="titleOne"
+                                                    >
+                                                        September Song
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            <p id="durationOne">3:56</p>
+                                        </td>
+                                        <td class="px-4 py-3 text-xs">
+                                            <button id="queue">
+                                                <span
+                                                    class="
+                                                        px-2
+                                                        py-1
+                                                        font-semibold
+                                                        leading-tight
+                                                        text-green-700
+                                                        bg-green-100
+                                                        rounded-full
+                                                        dark:bg-green-700
+                                                        dark:text-green-100
+                                                    "
+                                                >
+                                                    +
+                                                </span>
+                                            </button>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            <div class="text-red-500">
+                                                <svg
+                                                    class="w-6 h-6"
+                                                    fill="currentColor"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr
+                                        id="musicItem"
+                                        onclick="setPath('../assets/audio/song3.mp3')"
+                                        class="
+                                            bg-gray-50
+                                            dark:bg-gray-800
+                                            hover:bg-yellow-200
+                                            dark:hover:bg-gray-900
+                                            text-gray-700
+                                            dark:text-gray-400
+                                        "
+                                    >
+                                        <td class="px-4 py-3">
+                                            <div
+                                                class="
+                                                    flex
+                                                    items-center
+                                                    text-sm
+                                                "
+                                            >
+                                                <div
+                                                    class="
+                                                        relative
+                                                        hidden
+                                                        w-8
+                                                        h-8
+                                                        mr-3
+                                                        rounded-full
+                                                        md:block
+                                                    "
+                                                >
+                                                    <img
+                                                        class="
+                                                            object-cover
+                                                            w-full
+                                                            h-full
+                                                            rounded-full
+                                                        "
+                                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;facepad=3&amp;fit=facearea&amp;s=707b9c33066bf8808c934c8ab394dff6"
+                                                        alt=""
+                                                        loading="lazy"
+                                                    />
+                                                    <div
+                                                        class="
+                                                            absolute
+                                                            inset-0
+                                                            rounded-full
+                                                            shadow-inner
+                                                        "
+                                                        aria-hidden="true"
+                                                    ></div>
+                                                </div>
+                                                <div>
+                                                    <p class="">Sho Madjozi</p>
+                                                    <p
+                                                        class="
+                                                            text-xl
+                                                            font-semi-bold
+                                                            text-gray-600
+                                                            dark:text-gray-400
+                                                        "
+                                                    >
+                                                        John Cena
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">2:25</td>
+                                        <td class="px-4 py-3 text-xs">
+                                            <span
+                                                id="addQueue"
+                                                class="
+                                                    px-2
+                                                    py-1
+                                                    font-semibold
+                                                    leading-tight
+                                                    text-yellow-700
+                                                    bg-yellow-100
+                                                    rounded-full
+                                                "
+                                            >
+                                                +
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            <div
+                                                id="like"
+                                                class="text-gray-500"
+                                            >
+                                                <svg
+                                                    class="w-6 h-6"
+                                                    fill="currentColor"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr
+                                        id="musicItem"
+                                        onclick="setPath('../assets/audio/song3.mp3')"
+                                        class="
+                                            bg-gray-50
+                                            dark:bg-gray-800
+                                            hover:bg-yellow-200
+                                            dark:hover:bg-gray-900
+                                            text-gray-700
+                                            dark:text-gray-400
+                                        "
+                                    >
+                                        <td class="px-4 py-3">
+                                            <div
+                                                class="
+                                                    flex
+                                                    items-center
+                                                    text-sm
+                                                "
+                                            >
+                                                <div
+                                                    class="
+                                                        relative
+                                                        hidden
+                                                        w-8
+                                                        h-8
+                                                        mr-3
+                                                        rounded-full
+                                                        md:block
+                                                    "
+                                                >
+                                                    <img
+                                                        class="
+                                                            object-cover
+                                                            w-full
+                                                            h-full
+                                                            rounded-full
+                                                        "
+                                                        src="https://images.unsplash.com/photo-1502720705749-871143f0e671?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;s=b8377ca9f985d80264279f277f3a67f5"
+                                                        alt=""
+                                                        loading="lazy"
+                                                    />
+                                                    <div
+                                                        class="
+                                                            absolute
+                                                            inset-0
+                                                            rounded-full
+                                                            shadow-inner
+                                                        "
+                                                        aria-hidden="true"
+                                                    ></div>
+                                                </div>
+                                                <div>
+                                                    <p class="">
+                                                        Owl City ft Carly Rae
+                                                        Jepsen
+                                                    </p>
+                                                    <p
+                                                        class="
+                                                            text-xl
+                                                            font-semi-bold
+                                                            text-gray-600
+                                                            dark:text-gray-400
+                                                        "
+                                                    >
+                                                        Good Time
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">4:00</td>
+                                        <td class="px-4 py-3 text-xs">
+                                            <span
+                                                id="addQueue"
+                                                class="
+                                                    px-2
+                                                    py-1
+                                                    font-semibold
+                                                    leading-tight
+                                                    text-gray-700
+                                                    bg-gray-100
+                                                    rounded-full
+                                                    dark:text-gray-100
+                                                    dark:bg-gray-700
+                                                "
+                                            >
+                                                +
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            <div
+                                                id="like"
+                                                class="text-gray-500"
+                                            >
+                                                <svg
+                                                    class="w-6 h-6"
+                                                    fill="currentColor"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr
+                                        id="musicItem"
+                                        onclick="setPath('../assets/audio/song3.mp3')"
+                                        class="
+                                            bg-gray-50
+                                            dark:bg-gray-800
+                                            hover:bg-yellow-200
+                                            dark:hover:bg-gray-900
+                                            text-gray-700
+                                            dark:text-gray-400
+                                        "
+                                    >
+                                        <td class="px-4 py-3 rounded-bl-lg">
+                                            <div
+                                                class="
+                                                    flex
+                                                    items-center
+                                                    text-sm
+                                                "
+                                            >
+                                                <div
+                                                    class="
+                                                        relative
+                                                        hidden
+                                                        w-8
+                                                        h-8
+                                                        mr-3
+                                                        rounded-full
+                                                        md:block
+                                                    "
+                                                >
+                                                    <img
+                                                        class="
+                                                            object-cover
+                                                            w-full
+                                                            h-full
+                                                            rounded-full
+                                                        "
+                                                        src="https://images.unsplash.com/photo-1566411520896-01e7ca4726af?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                                        alt=""
+                                                        loading="lazy"
+                                                    />
+                                                    <div
+                                                        class="
+                                                            absolute
+                                                            inset-0
+                                                            rounded-full
+                                                            shadow-inner
+                                                        "
+                                                        aria-hidden="true"
+                                                    ></div>
+                                                </div>
+                                                <div>
+                                                    <p class="">
+                                                        Hellener Fischer
+                                                    </p>
+                                                    <p
+                                                        class="
+                                                            text-xl
+                                                            font-semi-bold
+                                                            text-gray-600
+                                                            dark:text-gray-400
+                                                        "
+                                                    >
+                                                        Atemlos durch die Nacht
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">3:14</td>
+                                        <td class="px-4 py-3 text-xs">
+                                            <span
+                                                id="addQueue"
+                                                class="
+                                                    px-2
+                                                    py-1
+                                                    font-semibold
+                                                    leading-tight
+                                                    text-red-700
+                                                    bg-red-100
+                                                    rounded-full
+                                                    dark:text-red-100
+                                                    dark:bg-red-700
+                                                "
+                                            >
+                                                +
+                                            </span>
+                                        </td>
+                                        <td
+                                            class="
+                                                px-4
+                                                py-3
+                                                text-sm
+                                                rounded-br-lg
+                                            "
+                                        >
+                                            <div id="like" class="text-red-500">
+                                                <svg
+                                                    class="w-6 h-6"
+                                                    fill="currentColor"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./Music List -->
+
+                <!-- Player Controls -->
+                <div
+                    id="player"
+                    class="bg-white shadow-lg rounded-lg px-5 w-full"
+                >
+                    <div class="flex">
+                        <div>
+                            <img
+                                class="w-20 h-20 m-5 rounded-full"
+                                src="https://tailwindcss.com/img/card-top.jpg"
+                                alt="Album Pic"
+                            />
+                        </div>
+                        <div class="w-full p-5">
+                            <div class="flex justify-between">
+                                <div>
+                                    <h3
+                                        class="
+                                            text-2xl text-blue-500
+                                            font-medium
+                                        "
+                                    >
+                                        Sanctus
+                                    </h3>
+                                    <p class="text-sm text-blue-500 mt-1">
+                                        Libera
+                                    </p>
+                                </div>
+
+                                <!--like-->
+                                <button>
+                                    <div id="like" class="text-red-500">
+                                        <svg
+                                            class="w-6 h-6"
+                                            fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                            <!--shuffle-->
+                            <div
+                                id="shuffle"
+                                class="flex justify-between items-center mt-2"
+                            >
+                                <button>
+                                    <div class="text-blue-500">
+                                        <svg
+                                            class="w-5 h-5"
+                                            fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                d="M6.59 12.83L4.4 15c-.58.58-1.59 1-2.4 1H0v-2h2c.29 0 .8-.2 1-.41l2.17-2.18 1.42 1.42zM16 4V1l4 4-4 4V6h-2c-.29 0-.8.2-1 .41l-2.17 2.18L9.4 7.17 11.6 5c.58-.58 1.59-1 2.41-1h2zm0 10v-3l4 4-4 4v-3h-2c-.82 0-1.83-.42-2.41-1l-8.6-8.59C2.8 6.21 2.3 6 2 6H0V4h2c.82 0 1.83.42 2.41 1l8.6 8.59c.2.2.7.41.99.41h2z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </button>
+                                <!--previous-->
+                                <button id="previous">
+                                    <div class="text-blue-500">
+                                        <svg
+                                            class="w-5 h-5"
+                                            fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                d="M4 5h3v10H4V5zm12 0v10l-9-5 9-5z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </button>
+                                <!--play-->
+                                <button id="play">
+                                    <div
+                                        class="
+                                            text-white-500
+                                            p-8
+                                            rounded-full
+                                            bg-yellow-500
+                                            shadow-lg
                                         "
                                     >
                                         <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="h-5 w-5"
-                                            viewBox="0 0 20 20"
+                                            class="w-5 h-5"
                                             fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
                                         >
                                             <path
-                                                d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"
+                                                d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"
                                             />
                                         </svg>
-                                    </span>
-                                    <span
-                                        class="
-                                            ml-2
-                                            text-sm
-                                            tracking-wide
-                                            truncate
-                                        "
-                                        >Rhumba Playlist 1</span
-                                    >
-                                    <span
-                                        class="
-                                            hidden
-                                            md:block
-                                            px-2
-                                            py-0.5
-                                            ml-auto
-                                            text-xs
-                                            font-medium
-                                            tracking-wide
-                                            text-red-500
-                                            bg-red-50
-                                            rounded-full
-                                        "
-                                        >+</span
-                                    >
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- ./Sidebar -->
-
-        <div class="h-full w-full ml-2 mt-14 mb-0 md:ml-5">
-            <!-- Music List -->
-            <div id="musicList" class="px-8 mt-0 mx-64" style="width: 80%">
-                <div class="w-full overflow-hidden rounded-lg shadow-xs">
-                    <div class="w-full overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr
-                                    class="
-                                        text-xs
-                                        font-semibold
-                                        tracking-wide
-                                        text-left text-gray-500
-                                        uppercase
-                                        border-b
-                                        dark:border-gray-700
-                                        bg-gray-50
-                                        dark:text-gray-400 dark:bg-gray-800
-                                    "
-                                >
-                                    <th class="px-4 py-3">Artist/Song</th>
-                                    <th class="px-4 py-3">Duration</th>
-                                    <th class="px-4 py-3">Add to queue</th>
-                                    <th class="px-4 py-3">Like</th>
-                                </tr>
-                            </thead>
-                            <tbody
-                                class="
-                                    bg-white
-                                    divide-y
-                                    dark:divide-gray-700 dark:bg-gray-800
-                                "
-                            >
-                                <tr
-                                    onclick="setPath('../assets/audio/song3.mp3')"
-                                    class="
-                                        bg-gray-50
-                                        dark:bg-gray-800
-                                        hover:bg-yellow-200
-                                        dark:hover:bg-gray-900
-                                        text-gray-700
-                                        dark:text-gray-400
-                                    "
-                                >
-                                    <td class="px-4 py-3">
-                                        <tr
-                                            id="music item"
-                                            class="
-                                                bg-gray-50
-                                                dark:bg-gray-800
-                                                hover:bg-yellow-200
-                                                dark:hover:bg-gray-900
-                                                text-gray-700
-                                                dark:text-gray-400
-                                            "
+                                    </div>
+                                </button>
+                                <!--next-->
+                                <button id="next">
+                                    <div class="text-blue-500">
+                                        <svg
+                                            class="w-5 h-5"
+                                            fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
                                         >
-                                            <td class="px-4 py-3">
-                                                <div
-                                                    class="
-                                                        flex
-                                                        items-center
-                                                        text-sm
-                                                    "
-                                                >
-                                                    <div
-                                                        class="
-                                                            relative
-                                                            hidden
-                                                            w-8
-                                                            h-8
-                                                            mr-3
-                                                            rounded-full
-                                                            md:block
-                                                        "
-                                                    >
-                                                        <img
-                                                            id="imageOne"
-                                                            class="
-                                                                object-cover
-                                                                w-full
-                                                                h-full
-                                                                rounded-full
-                                                            "
-                                                            src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                                            alt=""
-                                                            loading="lazy"
-                                                        />
-                                                        <div
-                                                            class="
-                                                                absolute
-                                                                inset-0
-                                                                rounded-full
-                                                                shadow-inner
-                                                            "
-                                                            aria-hidden="true"
-                                                        ></div>
-                                                    </div>
-                                                    <div>
-                                                        <p id="artistOne">
-                                                            JP Cooper
-                                                        </p>
-                                                        <p
-                                                            class="
-                                                                text-xl
-                                                                font-semi-bold
-                                                                text-gray-600
-                                                                dark:text-gray-400
-                                                            "
-                                                            id="titleOne"
-                                                        >
-                                                            September Song
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <p id="durationOne">3:56</p>
-                                            </td>
-                                            <td class="px-4 py-3 text-xs">
-                                                <button id="queue">
-                                                    <span
-                                                        class="
-                                                            px-2
-                                                            py-1
-                                                            font-semibold
-                                                            leading-tight
-                                                            text-green-700
-                                                            bg-green-100
-                                                            rounded-full
-                                                            dark:bg-green-700
-                                                            dark:text-green-100
-                                                        "
-                                                    >
-                                                        +
-                                                    </span>
-                                                </button>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <div class="text-red-500">
-                                                    <svg
-                                                        class="w-6 h-6"
-                                                        fill="currentColor"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 20 20"
-                                                    >
-                                                        <path
-                                                            d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr
-                                            id="musicItem"
-                                            class="
-                                                bg-gray-50
-                                                dark:bg-gray-800
-                                                hover:bg-yellow-200
-                                                dark:hover:bg-gray-900
-                                                text-gray-700
-                                                dark:text-gray-400
-                                            "
+                                            <path
+                                                d="M13 5h3v10h-3V5zM4 5l9 5-9 5V5z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </button>
+                                <!--replay-->
+                                <button id="replay">
+                                    <div class="text-blue-500">
+                                        <svg
+                                            class="w-5 h-5"
+                                            fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
                                         >
-                                            <td class="px-4 py-3">
-                                                <div
-                                                    class="
-                                                        flex
-                                                        items-center
-                                                        text-sm
-                                                    "
-                                                >
-                                                    <div
-                                                        class="
-                                                            relative
-                                                            hidden
-                                                            w-8
-                                                            h-8
-                                                            mr-3
-                                                            rounded-full
-                                                            md:block
-                                                        "
-                                                    >
-                                                        <img
-                                                            class="
-                                                                object-cover
-                                                                w-full
-                                                                h-full
-                                                                rounded-full
-                                                            "
-                                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;facepad=3&amp;fit=facearea&amp;s=707b9c33066bf8808c934c8ab394dff6"
-                                                            alt=""
-                                                            loading="lazy"
-                                                        />
-                                                        <div
-                                                            class="
-                                                                absolute
-                                                                inset-0
-                                                                rounded-full
-                                                                shadow-inner
-                                                            "
-                                                            aria-hidden="true"
-                                                        ></div>
-                                                    </div>
-                                                    <div>
-                                                        <p class="">
-                                                            Sho Madjozi
-                                                        </p>
-                                                        <p
-                                                            class="
-                                                                text-xl
-                                                                font-semi-bold
-                                                                text-gray-600
-                                                                dark:text-gray-400
-                                                            "
-                                                        >
-                                                            John Cena
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                2:25
-                                            </td>
-                                            <td class="px-4 py-3 text-xs">
-                                                <span
-                                                    id="addQueue"
-                                                    class="
-                                                        px-2
-                                                        py-1
-                                                        font-semibold
-                                                        leading-tight
-                                                        text-yellow-700
-                                                        bg-yellow-100
-                                                        rounded-full
-                                                    "
-                                                >
-                                                    +
-                                                </span>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <div
-                                                    id="like"
-                                                    class="text-gray-500"
-                                                >
-                                                    <svg
-                                                        class="w-6 h-6"
-                                                        fill="currentColor"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 20 20"
-                                                    >
-                                                        <path
-                                                            d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr
-                                            id="musicItem"
-                                            class="
-                                                bg-gray-50
-                                                dark:bg-gray-800
-                                                hover:bg-yellow-200
-                                                dark:hover:bg-gray-900
-                                                text-gray-700
-                                                dark:text-gray-400
-                                            "
-                                        >
-                                            <td class="px-4 py-3">
-                                                <div
-                                                    class="
-                                                        flex
-                                                        items-center
-                                                        text-sm
-                                                    "
-                                                >
-                                                    <div
-                                                        class="
-                                                            relative
-                                                            hidden
-                                                            w-8
-                                                            h-8
-                                                            mr-3
-                                                            rounded-full
-                                                            md:block
-                                                        "
-                                                    >
-                                                        <img
-                                                            class="
-                                                                object-cover
-                                                                w-full
-                                                                h-full
-                                                                rounded-full
-                                                            "
-                                                            src="https://images.unsplash.com/photo-1502720705749-871143f0e671?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;s=b8377ca9f985d80264279f277f3a67f5"
-                                                            alt=""
-                                                            loading="lazy"
-                                                        />
-                                                        <div
-                                                            class="
-                                                                absolute
-                                                                inset-0
-                                                                rounded-full
-                                                                shadow-inner
-                                                            "
-                                                            aria-hidden="true"
-                                                        ></div>
-                                                    </div>
-                                                    <div>
-                                                        <p class="">
-                                                            Owl City ft Carly
-                                                            Rae Jepsen
-                                                        </p>
-                                                        <p
-                                                            class="
-                                                                text-xl
-                                                                font-semi-bold
-                                                                text-gray-600
-                                                                dark:text-gray-400
-                                                            "
-                                                        >
-                                                            Good Time
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                4:00
-                                            </td>
-                                            <td class="px-4 py-3 text-xs">
-                                                <span
-                                                    id="addQueue"
-                                                    class="
-                                                        px-2
-                                                        py-1
-                                                        font-semibold
-                                                        leading-tight
-                                                        text-gray-700
-                                                        bg-gray-100
-                                                        rounded-full
-                                                        dark:text-gray-100
-                                                        dark:bg-gray-700
-                                                    "
-                                                >
-                                                    +
-                                                </span>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <div
-                                                    id="like"
-                                                    class="text-gray-500"
-                                                >
-                                                    <svg
-                                                        class="w-6 h-6"
-                                                        fill="currentColor"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 20 20"
-                                                    >
-                                                        <path
-                                                            d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr
-                                            id="musicItem"
-                                            class="
-                                                bg-gray-50
-                                                dark:bg-gray-800
-                                                hover:bg-yellow-200
-                                                dark:hover:bg-gray-900
-                                                text-gray-700
-                                                dark:text-gray-400
-                                            "
-                                        >
-                                            <td class="px-4 py-3">
-                                                <div
-                                                    class="
-                                                        flex
-                                                        items-center
-                                                        text-sm
-                                                    "
-                                                >
-                                                    <div
-                                                        class="
-                                                            relative
-                                                            hidden
-                                                            w-8
-                                                            h-8
-                                                            mr-3
-                                                            rounded-full
-                                                            md:block
-                                                        "
-                                                    >
-                                                        <img
-                                                            class="
-                                                                object-cover
-                                                                w-full
-                                                                h-full
-                                                                rounded-full
-                                                            "
-                                                            src="https://images.unsplash.com/photo-1566411520896-01e7ca4726af?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                                            alt=""
-                                                            loading="lazy"
-                                                        />
-                                                        <div
-                                                            class="
-                                                                absolute
-                                                                inset-0
-                                                                rounded-full
-                                                                shadow-inner
-                                                            "
-                                                            aria-hidden="true"
-                                                        ></div>
-                                                    </div>
-                                                    <div>
-                                                        <p class="">
-                                                            Hellener Fischer
-                                                        </p>
-                                                        <p
-                                                            class="
-                                                                text-xl
-                                                                font-semi-bold
-                                                                text-gray-600
-                                                                dark:text-gray-400
-                                                            "
-                                                        >
-                                                            Atemlos durch die
-                                                            Nacht
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                3:14
-                                            </td>
-                                            <td class="px-4 py-3 text-xs">
-                                                <span
-                                                    id="addQueue"
-                                                    class="
-                                                        px-2
-                                                        py-1
-                                                        font-semibold
-                                                        leading-tight
-                                                        text-red-700
-                                                        bg-red-100
-                                                        rounded-full
-                                                        dark:text-red-100
-                                                        dark:bg-red-700
-                                                    "
-                                                >
-                                                    +
-                                                </span>
-                                            </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                <div
-                                                    id="like"
-                                                    class="text-red-500"
-                                                >
-                                                    <svg
-                                                        class="w-6 h-6"
-                                                        fill="currentColor"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 20 20"
-                                                    >
-                                                        <path
-                                                            d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- ./Music List -->
-
-            <!-- Player Controls -->
-            <div
-                id="player"
-                class="
-                    bg-white
-                    h-1/5
-                    mb-20
-                    mt-10
-                    mx-72
-                    shadow-lg
-                    rounded-lg
-                    py-0
-                    px-5
-                "
-                style="width: 75% !important; height: 39%"
-            >
-                <div class="flex">
-                    <div>
-                        <img
-                            class="
-                                w-2
-                                h-2
-                                mr-3
-                                rounded-full
-                                hidden
-                                px-5
-                                py-5
-                                md:block
-                            "
-                            src="https://tailwindcss.com/img/card-top.jpg"
-                            alt="Album Pic"
-                        />
-                    </div>
-                    <div class="w-full p-5">
-                        <div class="flex justify-between">
-                            <div>
-                                <h3 class="text-2xl text-blue-500 font-medium">
-                                    Sanctus
-                                </h3>
-                                <p class="text-sm text-blue-500 mt-1">Libera</p>
+                                            <path
+                                                d="M5 4a2 2 0 0 0-2 2v6H0l4 4 4-4H5V6h7l2-2H5zm10 4h-3l4-4 4 4h-3v6a2 2 0 0 1-2 2H6l2-2h7V8z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </button>
                             </div>
-
-                            <!--like-->
-                            <button>
-                                <div id="like" class="text-red-500">
-                                    <svg
-                                        class="w-6 h-6"
-                                        fill="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"
-                                        />
-                                    </svg>
-                                </div>
-                            </button>
-                        </div>
-                        <!--shuffle-->
-                        <div
-                            id="shuffle"
-                            class="flex justify-between items-center mt-2"
-                        >
-                            <button>
-                                <div class="text-blue-500">
-                                    <svg
-                                        class="w-5 h-5"
-                                        fill="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            d="M6.59 12.83L4.4 15c-.58.58-1.59 1-2.4 1H0v-2h2c.29 0 .8-.2 1-.41l2.17-2.18 1.42 1.42zM16 4V1l4 4-4 4V6h-2c-.29 0-.8.2-1 .41l-2.17 2.18L9.4 7.17 11.6 5c.58-.58 1.59-1 2.41-1h2zm0 10v-3l4 4-4 4v-3h-2c-.82 0-1.83-.42-2.41-1l-8.6-8.59C2.8 6.21 2.3 6 2 6H0V4h2c.82 0 1.83.42 2.41 1l8.6 8.59c.2.2.7.41.99.41h2z"
-                                        />
-                                    </svg>
-                                </div>
-                            </button>
-                            <!--previous-->
-                            <button id="previous">
-                                <div class="text-blue-500">
-                                    <svg
-                                        class="w-5 h-5"
-                                        fill="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            d="M4 5h3v10H4V5zm12 0v10l-9-5 9-5z"
-                                        />
-                                    </svg>
-                                </div>
-                            </button>
-                            <!--play-->
-                            <button id="play">
+                            <!--duration-->
+                            <div id="duration" class="mx-8 py-4">
                                 <div
                                     class="
-                                        text-white-500
-                                        p-8
-                                        rounded-full
-                                        bg-yellow-500
-                                        shadow-lg
+                                        flex
+                                        justify-between
+                                        text-sm text-yellow-500
                                     "
                                 >
-                                    <svg
-                                        class="w-5 h-5"
-                                        fill="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"
-                                        />
-                                    </svg>
+                                    <span id="current_time">0:00</span>
+                                    <span id="total_time">0:00</span>
                                 </div>
-                            </button>
-                            <!--next-->
-                            <button id="next">
-                                <div class="text-blue-500">
-                                    <svg
-                                        class="w-5 h-5"
-                                        fill="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            d="M13 5h3v10h-3V5zM4 5l9 5-9 5V5z"
-                                        />
-                                    </svg>
+                                <div class="slidecontainer" id="progress-bar">
+                                    <input
+                                        type="range"
+                                        min="1"
+                                        max="100"
+                                        value="50"
+                                        class="default"
+                                        id="audio-input-range"
+                                    />
                                 </div>
-                            </button>
-                            <!--replay-->
-                            <button id="replay">
-                                <div class="text-blue-500">
-                                    <svg
-                                        class="w-5 h-5"
-                                        fill="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path
-                                            d="M5 4a2 2 0 0 0-2 2v6H0l4 4 4-4H5V6h7l2-2H5zm10 4h-3l4-4 4 4h-3v6a2 2 0 0 1-2 2H6l2-2h7V8z"
-                                        />
-                                    </svg>
-                                </div>
-                            </button>
-                        </div>
-                        <!--duration-->
-                        <div id="duration" class="mx-8 py-4">
-                            <div
-                                class="
-                                    flex
-                                    justify-between
-                                    text-sm text-yellow-500
-                                "
-                            >
-                                <span id="current_time">0:00</span>
-                                <span id="total_time">0:00</span>
-                            </div>
-                            <div class="slidecontainer" id="progress-bar">
-                                <input
-                                    type="range"
-                                    min="1"
-                                    max="100"
-                                    value="50"
-                                    class="default"
-                                    id="audio-input-range"
-                                />
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- ./Player Controls -->
+                <audio src=""></audio>
             </div>
         </div>
-        <div></div>
-        <!-- ./Player Controls -->
-        <audio src=""></audio>
 
         <script defer src="./audio.js"></script>
     </body>
