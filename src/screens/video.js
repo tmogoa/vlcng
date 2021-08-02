@@ -9,6 +9,7 @@ const closeBtn = document.getElementById("close");
 const minimizeIcon = document.getElementById("minimize");
 const maximizeIcon = document.getElementById("maximize");
 const titleBar = document.getElementById("titleBar");
+const toHomescreen = document.getElementById("toHomescreen");
 
 closeBtn.onclick = (e) => {
     getWindow().close();
@@ -25,6 +26,10 @@ maximizeIcon.onclick = (e) => {
     console.log("close clicked");
 };
 
+toHomescreen.onclick = (e) => {
+    routeToHomeScreen();
+};
+
 function maximize() {
     const window = getWindow();
     if (window.isMaximized()) {
@@ -34,6 +39,10 @@ function maximize() {
         window.maximize();
         titleBar.classList.toggle("hidden");
     }
+}
+
+function routeToHomeScreen() {
+    getWindow().loadFile("./src/screens/homescreen.html");
 }
 
 // #########
