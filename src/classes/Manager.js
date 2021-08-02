@@ -32,6 +32,7 @@ class Manager extends EventEmitter{
     uiBookmarkTime;
     uiBookmarkDescription;
 
+
     constructor(){
         super();
         //we initialize the database here.
@@ -353,6 +354,9 @@ class Manager extends EventEmitter{
             db.run(`DELETE from ${type} where id = ?`, [id]);
             Utility.closeDatabase(db);
         }
+
+        //managing playlist
+
 }
 
 module.exports = Manager;

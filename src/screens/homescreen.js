@@ -154,7 +154,7 @@ const recentVideoItems = document.getElementById("video-items");
                     let timeLeft = homescreenManager.managedObject.formatTime(totalDuration - playedTill)[0];
                     
                     let item = document.getElementById(`${type}-item-${id}`);
-                    let directory = homescreenManager.managedObject.srcObject.directory;
+                    let directory = Utility.path.dirname(source);
                     item.innerHTML = constrouctObjectHTML(id, timeLeft, name, directory, lastPlayed, type);
                     let esSource = source.replace(/\\/g, "\\\\");
                     item.setAttribute("onclick", `send${type}Path("${esSource}")`);
