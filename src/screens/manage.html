@@ -96,7 +96,7 @@
             >
                 <button
                     id="videoTabBtn"
-                    class="py-1 px-2 text-gray-500  font-semibold rounded"
+                    class="py-1 px-2 text-gray-500 font-semibold rounded"
                 >
                     Video
                 </button>
@@ -214,55 +214,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <a
-                                href="#"
-                                class="
-                                    relative
-                                    flex flex-row
-                                    items-center
-                                    h-11
-                                    focus:outline-none
-                                    hover:bg-yellow-500
-                                    dark:hover:bg-gray-600
-                                    text-white-600
-                                    hover:text-white-800
-                                    border-l-4 border-transparent
-                                    hover:border-blue-500
-                                    dark:hover:border-gray-800
-                                    pr-6
-                                "
-                            >
-                                <span
-                                    class="
-                                        inline-flex
-                                        justify-center
-                                        items-center
-                                        ml-4
-                                    "
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-6 w-6"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M4 6h16M4 10h16M4 14h16M4 18h16"
-                                        />
-                                    </svg>
-                                </span>
-                                <span
-                                    class="ml-2 text-sm tracking-wide truncate"
-                                    >QUEUE</span
-                                >
-                            </a>
-                        </li>
-                        <li>
+                        <li id="all-music-button">
                             <a
                                 href="#"
                                 class="
@@ -326,7 +278,8 @@
                                 >
                             </a>
                         </li>
-                        <li>
+
+                        <li id="queue-button">
                             <a
                                 href="#"
                                 class="
@@ -343,6 +296,56 @@
                                     hover:border-blue-500
                                     dark:hover:border-gray-800
                                     pr-6
+                                "
+                            >
+                                <span
+                                    class="
+                                        inline-flex
+                                        justify-center
+                                        items-center
+                                        ml-4
+                                    "
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                                        />
+                                    </svg>
+                                </span>
+                                <span
+                                    class="ml-2 text-sm tracking-wide truncate"
+                                    >QUEUE</span
+                                >
+                            </a>
+                        </li>
+                        
+                        <li id="add-playlist-trigger">
+                            <a
+                                href="#"
+                                class="
+                                    relative
+                                    flex flex-row
+                                    items-center
+                                    h-11
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                    dark:hover:bg-gray-600
+                                    text-white-600
+                                    hover:text-white-800
+                                    border-l-4 border-transparent
+                                    hover:border-blue-500
+                                    dark:hover:border-gray-800
+                                    pr-6
+                                    
                                 "
                             >
                                 <span
@@ -386,7 +389,7 @@
                                 >
                             </a>
                         </li>
-                        <li>
+                        <li id="recently-played-button">
                             <a
                                 href="#"
                                 class="
@@ -438,7 +441,7 @@
                                 >
                             </a>
                         </li>
-                        <li>
+                        <li id="settings-button">
                             <a
                                 href="#"
                                 class="
@@ -507,7 +510,7 @@
                                     PLAYLISTS
                                 </div>
                             </div>
-                            <ul>
+                            <ul id="playlist-list-ul">
                                 <li>
                                     <a
                                         href="#"
@@ -618,6 +621,7 @@
                                     </tr>
                                 </thead>
                                 <tbody
+                                    id="result-holder"
                                     class="
                                         bg-white
                                         divide-y
@@ -626,7 +630,6 @@
                                 >
                                     <tr
                                         id="music item"
-                                        onclick="setPath('../assets/audio/song3.mp3')"
                                         class="
                                             bg-gray-50
                                             dark:bg-gray-800
@@ -1221,6 +1224,87 @@
                     </div>
                 </div>
                 <!-- ./Player Controls -->
+                <!---Dialog boxes-->
+                <div class="modal">
+                    <div
+                        class="
+                            modal-content
+                            flex flex-col
+                            lg:h-2/3
+                            h-5/6
+                            w-8/12
+                            lg:w-6/12
+                            rounded-lg
+                            overflow-hidden
+                        "
+                    >
+                        <div
+                            class="
+                                border-b
+                                p-4
+                                flex flex-row
+                                justify-between
+                                items-center
+                            "
+                        >
+                            <span class="text-2xl text-gray-500">Playlist</span>
+                            <button
+                                id="close-playlist-button"
+                                class="
+                                    p-2
+                                    close-button
+                                    rounded-full
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                "
+                            >
+                                <img src="../assets/img/close_black_24dp.svg" alt="" />
+                            </button>
+                        </div>
+                        <div
+                            class="flex flex-row justify-between items-center p-4 gap-4"
+                        >
+                            <input
+                                id="playlist-name"
+                                class="py-2 px-4 flex-grow border rounded-md"
+                                placeholder="Enter the playlist name.."
+                                type="text"
+                            />
+                            
+                            <button
+                                id="add-playlist-button"
+                                class="
+                                    py-3
+                                    px-4
+                                    bg-yellow-500
+                                    rounded-md
+                                    text-xs text-white
+                                    font-bold
+                                "
+                            >
+                                Create
+                            </button>
+                        </div>
+                        <div class="flex flex-row justify-between items-center p-4 gap-4">
+                            <textarea name="playlist-description" id="playlist-description" rows="3" class="py-2 px-4 flex-grow border rounded-md w-full" placeholder="Playlist description (optional)"></textarea>
+                        </div>
+                        <div
+                            id="playlist-list"
+                            class="
+                                flex flex-col
+                                px-4
+                                pt-4
+                                pb-6
+                                text-gray-500
+                                overflow-y-scroll
+                                flex-grow
+                            "
+                        >
+                            <!--Item-->
+                        </div>
+                    </div>
+                </div>
+                <!--End of dialog boxes-->
                 <audio src=""></audio>
             </div>
         </div>

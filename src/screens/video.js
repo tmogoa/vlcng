@@ -140,12 +140,7 @@ function autoShowMenu() {
 }
 
 autoShowMenu();
-/**
- * #####################################################
- * Logic below
- * #####################################################
- * please keep all ui rendering above this below is for logic only.
- */
+
 /**
  * Gets the link from the homescreen.
  */

@@ -156,7 +156,7 @@ const recentVideoItems = document.getElementById("video-items");
                     let item = document.getElementById(`${type}-item-${id}`);
                     let directory = Utility.path.dirname(source);
                     item.innerHTML = constrouctObjectHTML(id, timeLeft, name, directory, lastPlayed, type);
-                    let esSource = source.replace(/\\/g, "\\\\");
+                    let esSource = source.replace(/\\/g, "\\\\");   
                     item.setAttribute("onclick", `send${type}Path("${esSource}")`);
 
                     let progressBar = document.getElementById(`${type}-progress-bar-${id}`);
@@ -347,7 +347,7 @@ playNetVideoBtn.onclick = (e) => {
 };
 
 musicBtn.onclick = (e) => {
-    getWindow().loadFile("./src/screens/audio.html");
+    getWindow().loadFile("./src/screens/manage.html");
 };
 //end of UI testing
 
