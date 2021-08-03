@@ -1,4 +1,6 @@
-const { remote, ipcRenderer } = require("electron");
+const remote = require("electron").remote;
+const ipcRenderer = require("electron").ipcRenderer;
+//const { remote, ipcRenderer } = require("electron");
 
 const getWindow = () => remote.BrowserWindow.getFocusedWindow();
 const EventEmitter = require('events');

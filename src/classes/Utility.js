@@ -100,33 +100,6 @@ class Utility{
         return new SQL.Database(fileBuffer);
     }
 
-    /**
-     * 
-     * @param {array} arr - sorted array
-     * @param {*} needle 
-     */
-    static binSearch(arr, needle){
-        let low = 0;
-        let high = arr.length - 1;
-        let index = Math.floor((low + high)/2);
-        while(low <= high){
-
-            index = Math.floor((low + high)/2);
-
-            if(arr[index] == needle){
-                return index;
-            }
-            else if(arr[index] > needle){
-                high = index - 1;
-            }
-            else{
-                low = index + 1;
-            }
-
-        }
-        return -1;
-    }
-
 }
 
 module.exports = Utility;
