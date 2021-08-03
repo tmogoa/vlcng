@@ -104,9 +104,13 @@ class Manager extends EventEmitter{
         this.initBookmarksList(SQL);
         var bookmarksList = document.querySelector("#bookmarkList");
 
+        
+        
+    }
+    listBookmark(){
+        var bookmarksList = document.querySelector('#bookmark-list');
         console.log(db.exec("SELECT * from " + this.managedObject.type));
         Utility.closeDatabase(db);
-        
     }
 
     /**
