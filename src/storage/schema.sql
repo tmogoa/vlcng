@@ -2,14 +2,16 @@ CREATE TABLE IF NOT EXISTS  `video` (
   `id` INTEGER  primary key AUTOINCREMENT,
   `playedTill` double not null default 0,
   `name` varchar(500) not null,
-  `source` varchar(1000) not null
+  `source` varchar(1000) not null,
+  `favorite` tinyint(1) not null default 0
 );
 
 CREATE TABLE IF NOT EXISTS  `audio` (
   `id` INTEGER  primary key AUTOINCREMENT,
   `playedTill` double not null default 0,
   `name` varchar(500) not null,
-  `source` varchar(1000) not null
+  `source` varchar(1000) not null,
+  `favorite` tinyint(1) not null default 0
 );
 
 CREATE TABLE IF NOT EXISTS  `playlist ` (

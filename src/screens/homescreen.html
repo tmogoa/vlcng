@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../index.css" />
         <link rel="stylesheet" href="../assets/css/homescreen.css" />
         <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
         />
     </head>
@@ -61,8 +61,8 @@
             </div>
 
             <!---END OF TAB SWITCHER-->
- 
-            <div class="flex flex-row justify-end gap-5">
+
+            <div class="flex flex-row justify-end gap-8">
                 <button
                     id="minimize"
                     class="
@@ -167,7 +167,7 @@
                     <div class="flex flex-col">
                         <div>
                             <input
-                                id = "video-link"
+                                id="video-link"
                                 type="text"
                                 placeholder="Paste a link to a video..."
                                 class="
@@ -262,16 +262,12 @@
                     </button>
                 </div>
             </div>
-            <video src="" style="display: none;" id='temp-video'></video>
+            <video src="" style="display: none" id="temp-video"></video>
+            <!-- <div id="listView"></div> -->
+
             <div
-                id="listView"
-                
-            >
-                
-            </div>
-
-            <div id="video-items"
-                class = "
+                id="video-items"
+                class="
                     w-6/12
                     h-full
                     px-4
@@ -280,24 +276,25 @@
                     flex flex-col
                     overflow-y-scroll
                     gap-6
-                ">
-
-                </div>
-
-                <div id="audio-items"
-                class = "
-                    w-6/12
-                    h-full
-                    px-4
-                    pt-14
-                    pb-6
-                    flex flex-col
-                    overflow-y-scroll
-                    gap-6
+                    scrollbar
                 "
-                 style="display: none;">
+            ></div>
 
-                </div>
+            <div
+                id="audio-items"
+                class="
+                    w-6/12
+                    h-full
+                    px-4
+                    pt-14
+                    pb-6
+                    flex flex-col
+                    overflow-y-scroll
+                    gap-6
+                    scrollbar
+                "
+                style="display: none"
+            ></div>
         </div>
 
         <div class="w-full h-screen bg-gray-700 opacity-80 overflow-hidden">
