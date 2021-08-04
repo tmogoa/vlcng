@@ -5,6 +5,7 @@
 
 const PlayListItem = require("./PlaylistItem");
 const Utility = require("./Utility");
+const VlcMediaContent = require("./VlcMediaContent");
 
 class PlayList{
     /**
@@ -71,20 +72,108 @@ class PlayList{
 
     /**
      * Updates the ui and list the items in a playlist
-     * @param {HTMLElement} container - The container to populate for the playlist
+     * @param {HTMLElement} container - The container to populate for the playlist. Make the playlist is empty
      */
-    updateUiPlaylist(container){
+    updateUiPlaylist(container, SQL){
+      var db = Utility.openDatabase(SQL);
+
+      items.forEach(item => {
+
+        let result = db.exec(`SELECT * from ${type} id = ? `, [item.itemId]);
+
+        if(result.length < 1){
+          return;
+        }
+
+        let row = result[0].values[0];
+        let playedTill = row[1];
+        let itemName = row[2];
+        let itemSource = row[3];
+
+        let htmlItem = this.ItemHTMLFormat(item.itemId, itemName, "UNKNOWN ARTIST", VlcMediaContent.formatTime(playedTill)[0], itemSource, true);
+
+        container.innerHTML += htmlItem;
+
+      });
+
+
+      Utility.closeDatabase(db);
 
     }
 
+    ItemHTMLFormat(id, name, artistName, playTill, source, isFav){
+
+      source = source.replace(/\\/g, "/");
+        let listItem = `<tr
+        class="bg-gray-50 
+               dark:bg-gray-800 
+               hover:bg-yellow-200 
+               dark:hover:bg-gray-900 
+               text-gray-700 
+               dark:text-gray-400"
+               >
+      <td class="px-4 py-3">
+        <div class="flex items-center text-sm">
+          <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+            <img class="object-cover w-full h-full rounded-full" src="../assets/img/vlc-playing.png" alt="" loading="lazy" />
+            <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+          </div>
+          <div onclick = "playItem(${source})">
+            <p class="">${artistName}</p>
+            <p class="text-xl font-semi-bold text-gray-600 dark:text-gray-400">${name}</p>
+          </div>
+        </div>
+      </td>
+      <td class="px-4 py-3 text-sm">${playTill}</td>
+      <td class="px-4 py-3 text-xs">
+        <span onclick="theManager.addToQueue(${id}, '${this.type}')" 
+              class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"> + </span>
+      </td>
+      <td class="px-4 py-3 text-sm">
+        <div id="like"
+             class="text-${(isFav)?"red":"gray"}-500">
+          <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"/></svg>
+      </div>
+      </td>`;
+
+      return listItem;
+    }
 
     /**
      * Only a manager can call this
-     * @param {int} id 
+     * @param {int} itemId - Id of the item to insert
      * @param {InitSqlJs} SQL - from SQL js 
      */
-    addItem(id, SQL){
+    addItem(itemId, SQL){
 
+      let itemExist = false;
+      
+      for(i = 0; i < this.items.length; i++){
+        if(items[i].itemId == itemId){
+          itemExist = true;
+          break;
+        }
+      }
+
+      if(itemExist){
+        return false;
+      }
+
+      var db = Utility.openDatabase(SQL);
+      var result = db.exec(`INSERT into ${this.managedObject.type}PlaylistItem(playlistId, itemId) values (?, ?);
+      SELECT id from ${this.managedObject.type}PlaylistItem where playlistId = ? and itemId = ?`, [this.id, itemId, this.id, itemId]);
+      Utility.closeDatabase(db);
+
+      if(result.length < 1){
+        return false;
+      }
+
+      let id = result[0].values[0][0];
+      //add to the playlist items array
+      let item = new PlayListItem(id, this.id, itemId, this.type);
+      this.items.push(item);
+
+      return true;
     }
 
     /**
@@ -94,14 +183,6 @@ class PlayList{
      */
     removeItem(id, SQL){
 
-    }
-
-    /**
-     * 
-     * @param {PlayListItem} playlistItem - The item to return an HTML string for
-     */
-    htmlPlayListItem(playlistItem){
-        //let play
     }
 
     htmlFormat(){
@@ -114,9 +195,11 @@ class PlayList{
             </svg>
           </span>
           <span class="ml-2 text-sm tracking-wide truncate">${this.name}</span>
-          <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">+</span>
+          <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full" onclick='theManager.addMedia(${this.id})'>+</span>
         </a>
       </li>`;
+
+      return html;
     }
 
 }

@@ -1,4 +1,6 @@
-const { remote, ipcRenderer } = require("electron");
+const remote = require("electron").remote;
+const ipcRenderer = require("electron").ipcRenderer;
+//const { remote, ipcRenderer } = require("electron");
 
 const getWindow = () => remote.BrowserWindow.getFocusedWindow();
 const EventEmitter = require("events");
@@ -182,8 +184,7 @@ const recentVideoItems = document.getElementById("video-items");
                     )[0];
 
                     let item = document.getElementById(`${type}-item-${id}`);
-                    let directory =
-                        homescreenManager.managedObject.srcObject.directory;
+                    let directory = Utility.path.dirname(source);
                     item.innerHTML = constrouctObjectHTML(
                         id,
                         timeLeft,
@@ -400,7 +401,7 @@ playNetVideoBtn.onclick = (e) => {
 };
 
 musicBtn.onclick = (e) => {
-    getWindow().loadFile("./src/screens/audio.html");
+    getWindow().loadFile("./src/screens/manage.html");
 };
 //end of UI testing
 
