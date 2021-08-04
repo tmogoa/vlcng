@@ -133,9 +133,11 @@
                 </div> -->
 
             <div id="submenu">
-                <br />
-                <h1>Settings</h1>
-                <br />
+                <div class="p-4 flex flex-row justify-between items-center">
+                    <br />
+                    <h1>Settings</h1>
+                    <br />
+                </div>
                 
                 <button
                     class="menubtn"
@@ -233,6 +235,22 @@
             <div id="rightmenu">
             <br />
             <br />
+            <div class="border-b p-4 flex flex-row justify-between items-center -mt-10">
+                <br />
+                <h1>Menu</h1>
+                <br />
+                <button
+                    id="close-menu-button"
+                    class="
+                    p-2
+                    rounded-full
+                    focus:outline-none
+                    hover:bg-yellow-500
+                    "
+                >
+                    <img src="../assets/img/close_black_24dp.svg" alt="" />
+                </button>
+            </div>
 
             <div id="main_place" class="mt-4">
                 <p>Welcome to VLCng Menu</p>
@@ -247,7 +265,7 @@
                 ><br />
                 <input
                 type="file"
-                id="getFile"
+                id="fileItem"
                 style="display: none"
                 accept="video/*"
                 />
@@ -274,10 +292,10 @@
                 ><br />
                 <input type="file" id="getFile" style="display: none" />
 
-                            <button class="mediabtns">
-                                <a href="homescreen.html">Exit</a></button
-                            ><br />
-                        </div>
+                <button class="mediabtns">
+                    <a href="homescreen.html">Exit</a></button
+                ><br />
+                </div>
 
                         <div id="myvideo" style="display: none">
                             <div class="custom-select" style="width: 200px">
