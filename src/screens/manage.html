@@ -626,6 +626,9 @@
                                         dark:divide-gray-700 dark:bg-gray-800
                                     "
                                 >
+                                    <!--In this item i pass the elem to js script which attaches the contextmenu listener
+                                        * Pull the media's id using the element passed.
+                                    -->
                                     <tr
                                         id="music item"
                                         class="
@@ -635,8 +638,8 @@
                                             dark:hover:bg-gray-900
                                             text-gray-700
                                             dark:text-gray-400
-                                            menuable
                                         "
+                                        oncontextmenu="attachListener(this)"
                                     >
                                         <td class="px-4 py-3">
                                             <div
@@ -745,8 +748,8 @@
                                             dark:hover:bg-gray-900
                                             text-gray-700
                                             dark:text-gray-400
-                                            menuable
                                         "
+                                        oncontextmenu="attachListener(this)"
                                     >
                                         <td class="px-4 py-3">
                                             <div
@@ -849,8 +852,8 @@
                                             dark:hover:bg-gray-900
                                             text-gray-700
                                             dark:text-gray-400
-                                            menuable
                                         "
+                                        oncontextmenu="attachListener(this)"
                                     >
                                         <td class="px-4 py-3">
                                             <div
@@ -958,8 +961,8 @@
                                             dark:hover:bg-gray-900
                                             text-gray-700
                                             dark:text-gray-400
-                                            menuable
                                         "
+                                        oncontextmenu="attachListener(this)"
                                     >
                                         <td class="px-4 py-3 rounded-bl-lg">
                                             <div

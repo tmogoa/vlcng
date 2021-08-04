@@ -57,6 +57,26 @@ menuable.forEach((item) => {
     });
 });
 
+function attachListener(item) {
+    item.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+
+        console.log(event.target.offsetParent);
+
+        const { clientX: mouseX, clientY: mouseY } = event;
+        const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
+
+        contextMenu.style.top = `${normalizedY}px`;
+
+        contextMenu.style.left = `${normalizedX}px`;
+
+        contextMenu.classList.remove("hide-menu");
+        setTimeout(() => {
+            contextMenu.classList.add("show-menu");
+        });
+    });
+}
+
 scope.addEventListener("click", (e) => {
     if (e.target.offsetParent != contextMenu) {
         contextMenu.classList.add("hide-menu");
