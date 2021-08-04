@@ -41,6 +41,8 @@ menuable.forEach((item) => {
     item.addEventListener("contextmenu", (event) => {
         event.preventDefault();
 
+        console.log(event.target.offsetParent);
+
         const { clientX: mouseX, clientY: mouseY } = event;
         const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
 
