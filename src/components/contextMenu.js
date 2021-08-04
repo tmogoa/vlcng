@@ -1,5 +1,6 @@
 const contextMenu = document.getElementById("context-menu");
 const scope = document.querySelector("body");
+const menuable = document.querySelectorAll(".menuable");
 
 const normalizePozition = (mouseX, mouseY) => {
     // ? compute what is the mouse position relative to the container element (scope)
@@ -36,19 +37,21 @@ const normalizePozition = (mouseX, mouseY) => {
     return { normalizedX, normalizedY };
 };
 
-scope.addEventListener("contextmenu", (event) => {
-    event.preventDefault();
+menuable.forEach((item) => {
+    item.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
 
-    const { clientX: mouseX, clientY: mouseY } = event;
-    const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
+        const { clientX: mouseX, clientY: mouseY } = event;
+        const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
 
-    contextMenu.style.top = `${normalizedY}px`;
+        contextMenu.style.top = `${normalizedY}px`;
 
-    contextMenu.style.left = `${normalizedX}px`;
+        contextMenu.style.left = `${normalizedX}px`;
 
-    contextMenu.classList.remove("hide-menu");
-    setTimeout(() => {
-        contextMenu.classList.add("show-menu");
+        contextMenu.classList.remove("hide-menu");
+        setTimeout(() => {
+            contextMenu.classList.add("show-menu");
+        });
     });
 });
 
