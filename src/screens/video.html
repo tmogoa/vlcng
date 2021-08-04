@@ -22,31 +22,24 @@
         />
     </head>
 
-  <body class="flex flex-col items-center overflow-hidden">
-    <div
-      id="titleBar"
-      class="
-        shadow-xl
-        w-full
-        bg-gray-50 bg-opacity-10
-        flex flex-row
-        items-center
-        justify-between
-        text-white
-        font-semibold
-        py-2
-        px-4
-        z-30
-        absolute
-      "
-      style="-webkit-app-region: drag; -webkit-user-select: none"
-    >
-      <div id="media-name">Video Title</div>
-      <input type="hidden" id="video-id" value="0" />
-      <div class="flex flex-row justify-end gap-8">
-        <button
-          id="minimize"
-          class="p-2 rounded-full focus:outline-none hover:bg-gray-800"
+    <body class="flex flex-col items-center overflow-hidden">
+        <div
+            id="titleBar"
+            class="
+                shadow-xl
+                w-full
+                bg-gray-50 bg-opacity-10
+                flex flex-row
+                items-center
+                justify-between
+                text-white
+                font-semibold
+                py-2
+                px-4
+                z-30
+                absolute
+            "
+            style="-webkit-app-region: drag; -webkit-user-select: none"
         >
             <div id="media-name">Video Title</div>
             <input type="hidden" id="video-id" value="0" />
@@ -114,15 +107,15 @@
             </div>
         </div>
 
-    <div id="mainMenu" class="w-full h-screen">
-      <video
-        src="file://C:\Users\Levi Kamara Zwannah\Documents\School works\ICS year 3\Semester 1\papers\HCI\vlcng\src\assets\video\Cars 3 Rivalry Official Trailer.mp4"
-        class="w-full h-screen bg-black rounded-none p-0"
-        autoplay
-      ></video>
+        <div id="mainMenu" class="w-full h-screen">
+            <video
+                src="file://C:\Users\Levi Kamara Zwannah\Documents\School works\ICS year 3\Semester 1\papers\HCI\vlcng\src\assets\video\Cars 3 Rivalry Official Trailer.mp4"
+                class="w-full h-screen bg-black rounded-none p-0"
+                autoplay
+            ></video>
 
-        <div id="menu" style="display: none" class="z-50 shadow-2xl">
-            <!-- <div id="submenu">
+            <div id="menu" style="display: none" class="z-50 shadow-2xl">
+                <!-- <div id="submenu">
                     <button class="menubtn" id="media_btn" onclick="showMedia('mymedia')">Media</button>
                     <button class="menubtn" id="video_btn" onclick="showVideo('myvideo')">Video</button>
                     <button class="menubtn" id="audio_btn" onclick="showAudio('myaudio')">Audio</button>
@@ -132,315 +125,324 @@
                     <button class="menubtn" id="help_btn" onclick="ShowHelp('myhelp')">Help</button>
                 </div> -->
 
-            <div id="submenu">
-                <div class="p-4 flex flex-row justify-between items-center">
-                    <br />
-                    <h1>Settings</h1>
-                    <br />
-                </div>
-                
-                <button
-                    class="menubtn"
-                    id="media_btn"
-                    onclick="show('mymedia')"
-                >
-                    <p
-                        class="
-                            text-base
-                            font-semibold
-                            mx-auto
-                            my-auto
-                            px-2
-                            py-2
-                        "
+                <div id="submenu">
+                    <div class="p-4 flex flex-row justify-between items-center">
+                        <br />
+                        <h1>Settings</h1>
+                        <br />
+                    </div>
+
+                    <button
+                        class="menubtn"
+                        id="media_btn"
+                        onclick="show('mymedia')"
                     >
-                        Media
-                    </p>
-                </button>
-                <button
-                    class="menubtn"
-                    id="video_btn"
-                    onclick="show('myvideo')"
-                >
-                    <p
-                        class="
-                            text-base
-                            font-semibold
-                            mx-auto
-                            my-auto
-                            px-2
-                            py-2
-                        "
+                        <p
+                            class="
+                                text-base
+                                font-semibold
+                                mx-auto
+                                my-auto
+                                px-2
+                                py-2
+                            "
+                        >
+                            Media
+                        </p>
+                    </button>
+                    <button
+                        class="menubtn"
+                        id="video_btn"
+                        onclick="show('myvideo')"
                     >
-                        Video
-                    </p>
-                </button>
-                <button
-                    class="menubtn"
-                    id="audio_btn"
-                    onclick="show('myaudio')"
-                >
-                    <p
-                        class="
-                            text-base
-                            font-semibold
-                            mx-auto
-                            my-auto
-                            px-2
-                            py-2
-                        "
+                        <p
+                            class="
+                                text-base
+                                font-semibold
+                                mx-auto
+                                my-auto
+                                px-2
+                                py-2
+                            "
+                        >
+                            Video
+                        </p>
+                    </button>
+                    <button
+                        class="menubtn"
+                        id="audio_btn"
+                        onclick="show('myaudio')"
                     >
-                        Audio
-                    </p>
-                </button>
-                <button
-                    class="menubtn"
-                    id="sub_btn"
-                    onclick="show('mysubtitles')"
-                >
-                    <p
-                        class="
-                            text-base
-                            font-semibold
-                            mx-auto
-                            my-auto
-                            px-2
-                            py-2
-                        "
+                        <p
+                            class="
+                                text-base
+                                font-semibold
+                                mx-auto
+                                my-auto
+                                px-2
+                                py-2
+                            "
+                        >
+                            Audio
+                        </p>
+                    </button>
+                    <button
+                        class="menubtn"
+                        id="sub_btn"
+                        onclick="show('mysubtitles')"
                     >
-                        Subtitles
-                    </p>
-                </button>
+                        <p
+                            class="
+                                text-base
+                                font-semibold
+                                mx-auto
+                                my-auto
+                                px-2
+                                py-2
+                            "
+                        >
+                            Subtitles
+                        </p>
+                    </button>
 
-                <button
-                    class="menubtn"
-                    id="help_btn"
-                    onclick="show('myhelp')"
-                >
-                    <p
-                        class="
-                            text-base
-                            font-semibold
-                            mx-auto
-                            my-auto
-                            px-2
-                            py-2
-                        "
+                    <button
+                        class="menubtn"
+                        id="help_btn"
+                        onclick="show('myhelp')"
                     >
-                        Help
-                    </p>
-                </button>
-            </div>
-
-            <div id="rightmenu">
-            <br />
-            <br />
-            <div class="border-b p-4 flex flex-row justify-between items-center -mt-10">
-                <br />
-                <h1>Menu</h1>
-                <br />
-                <button
-                    id="close-menu-button"
-                    class="
-                    p-2
-                    rounded-full
-                    focus:outline-none
-                    hover:bg-yellow-500
-                    "
-                >
-                    <img src="../assets/img/close_black_24dp.svg" alt="" />
-                </button>
-            </div>
-
-            <div id="main_place" class="mt-4">
-                <p>Welcome to VLCng Menu</p>
-            </div>
-
-            <div id="mymedia" style="display: none">
-                <button
-                class="mediabtns"
-                onclick="document.getElementById('getFile').click()"
-                >
-                Open File..</button
-                ><br />
-                <input
-                type="file"
-                id="fileItem"
-                style="display: none"
-                accept="video/*"
-                />
-
-                <button
-                class="mediabtns"
-                onclick="document.getElementById('getFile').click()"
-                >
-                Open Multiple Files...</button
-                ><br />
-                <input
-                type="file"
-                id="getFile"
-                style="display: none"
-                accept="video/*"
-                multiple
-                />
-
-                <button
-                class="mediabtns"
-                onclick="document.getElementById('getFile').click()"
-                >
-                Open Folder...</button
-                ><br />
-                <input type="file" id="getFile" style="display: none" />
-
-                <button class="mediabtns">
-                    <a href="homescreen.html">Exit</a></button
-                ><br />
+                        <p
+                            class="
+                                text-base
+                                font-semibold
+                                mx-auto
+                                my-auto
+                                px-2
+                                py-2
+                            "
+                        >
+                            Help
+                        </p>
+                    </button>
                 </div>
 
-                        <div id="myvideo" style="display: none">
-                            <div class="custom-select" style="width: 200px">
-                                <label for="Resolution">Resolution</label><br />
-                                <div
-                                    class="
-                                        pt-2
-                                        h-1
-                                        border-b-2 border-gray-500
-                                        w-96
-                                        ml-3.5
-                                        mb-2
-                                    "
-                                ></div>
-                                <select name="resolution" id="resolution">
-                                    <option value="res">Auto</option>
-                                    <option value="res">
-                                        High Definition(720p)
-                                    </option>
-                                    <option value="res">
-                                        Standard Definition(360p)
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
+                <div id="rightmenu">
+                    <br />
+                    <br />
+                    <div
+                        class="
+                            border-b
+                            p-4
+                            flex flex-row
+                            justify-between
+                            items-center
+                            -mt-10
+                        "
+                    >
+                        <br />
+                        <h1>Menu</h1>
+                        <br />
+                        <button
+                            id="close-menu-button"
+                            class="
+                                p-2
+                                rounded-full
+                                focus:outline-none
+                                hover:bg-yellow-500
+                            "
+                        >
+                            <img
+                                src="../assets/img/close_black_24dp.svg"
+                                alt=""
+                            />
+                        </button>
+                    </div>
 
-                        <div id="myaudio" style="display: none">
-                            <div class="custom-select" style="width: 200px">
-                                <label for="microphone">Microphone</label><br />
-                                <div
-                                    class="
-                                        pt-2
-                                        h-1
-                                        border-b-2 border-gray-500
-                                        w-96
-                                        ml-3.5
-                                        mb-2
-                                    "
-                                ></div>
-                                <select name="microphone" id="microphone">
-                                    <option value="mic">
-                                        Default-Microphone Array(Realtek(R) Audio)
-                                    </option>
-                                    <option value="mic">
-                                        Communications-Microphone Array(Realtek(R)
-                                        Audio)
-                                    </option>
-                                </select>
+                    <div id="main_place" class="mt-4">
+                        <p>Welcome to VLCng Menu</p>
+                    </div>
 
-                                <label for="speaker">Speaker</label><br />
-                                <div
-                                    class="
-                                        pt-2
-                                        h-1
-                                        border-b-2 border-gray-500
-                                        w-96
-                                        ml-3.5
-                                        mb-2
-                                    "
-                                ></div>
-                                <select name="speaker" id="speaker">
-                                    <option value="speak">
-                                        Default-Speaker(Realtek(R) Audio)
-                                    </option>
-                                    <option value="speak">
-                                        Communications-Speaker(Realtek(R) Audio)
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
+                    <div id="mymedia" style="display: none">
+                        <button
+                            class="mediabtns"
+                            onclick="document.getElementById('getFile').click()"
+                        >
+                            Open File..</button
+                        ><br />
+                        <input
+                            type="file"
+                            id="fileItem"
+                            style="display: none"
+                            accept="video/*"
+                        />
 
-                        <div id="mysubtitles" style="display: none">
-                            <div class="custom-select" style="width: 200px">
-                                <label for="sub">Subtitle</label><br />
-                                <div
-                                    class="
-                                        pt-2
-                                        h-1
-                                        border-b-2 border-gray-500
-                                        w-96
-                                        ml-3.5
-                                        mb-2
-                                    "
-                                ></div>
-                                <button
-                                    class="
-                                        mx-auto
-                                        border-yellow-500 border-2
-                                        rounded-lg
-                                    "
-                                    style="
-                                        display: block;
-                                        width: 120px;
-                                        height: 30px;
-                                    "
-                                    onclick="document.getElementById('getFile').click()"
-                                >
-                                    Add Subtitle
-                                </button>
-                                <input
-                                    type="file"
-                                    id="getFile"
-                                    style="display: none"
-                                />
-                            </div>
-                        </div>
+                        <button
+                            class="mediabtns"
+                            onclick="document.getElementById('getFile').click()"
+                        >
+                            Open Multiple Files...</button
+                        ><br />
+                        <input
+                            type="file"
+                            id="getFile"
+                            style="display: none"
+                            accept="video/*"
+                            multiple
+                        />
 
-                        <div id="myhelp" style="display: none">
+                        <button
+                            class="mediabtns"
+                            onclick="document.getElementById('getFile').click()"
+                        >
+                            Open Folder...</button
+                        ><br />
+                        <input type="file" id="getFile" style="display: none" />
+
+                        <button class="mediabtns">
+                            <a href="homescreen.html">Exit</a></button
+                        ><br />
+                    </div>
+
+                    <div id="myvideo" style="display: none">
+                        <div class="custom-select" style="width: 200px">
+                            <label for="Resolution">Resolution</label><br />
                             <div
-                                class="flex-auto text-base font-sans font-semibold"
+                                class="
+                                    pt-2
+                                    h-1
+                                    border-b-2 border-gray-500
+                                    w-96
+                                    ml-3.5
+                                    mb-2
+                                "
+                            ></div>
+                            <select name="resolution" id="resolution">
+                                <option value="res">Auto</option>
+                                <option value="res">
+                                    High Definition(720p)
+                                </option>
+                                <option value="res">
+                                    Standard Definition(360p)
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="myaudio" style="display: none">
+                        <div class="custom-select" style="width: 200px">
+                            <label for="microphone">Microphone</label><br />
+                            <div
+                                class="
+                                    pt-2
+                                    h-1
+                                    border-b-2 border-gray-500
+                                    w-96
+                                    ml-3.5
+                                    mb-2
+                                "
+                            ></div>
+                            <select name="microphone" id="microphone">
+                                <option value="mic">
+                                    Default-Microphone Array(Realtek(R) Audio)
+                                </option>
+                                <option value="mic">
+                                    Communications-Microphone Array(Realtek(R)
+                                    Audio)
+                                </option>
+                            </select>
+
+                            <label for="speaker">Speaker</label><br />
+                            <div
+                                class="
+                                    pt-2
+                                    h-1
+                                    border-b-2 border-gray-500
+                                    w-96
+                                    ml-3.5
+                                    mb-2
+                                "
+                            ></div>
+                            <select name="speaker" id="speaker">
+                                <option value="speak">
+                                    Default-Speaker(Realtek(R) Audio)
+                                </option>
+                                <option value="speak">
+                                    Communications-Speaker(Realtek(R) Audio)
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="mysubtitles" style="display: none">
+                        <div class="custom-select" style="width: 200px">
+                            <label for="sub">Subtitle</label><br />
+                            <div
+                                class="
+                                    pt-2
+                                    h-1
+                                    border-b-2 border-gray-500
+                                    w-96
+                                    ml-3.5
+                                    mb-2
+                                "
+                            ></div>
+                            <button
+                                class="
+                                    mx-auto
+                                    border-yellow-500 border-2
+                                    rounded-lg
+                                "
+                                style="
+                                    display: block;
+                                    width: 120px;
+                                    height: 30px;
+                                "
+                                onclick="document.getElementById('getFile').click()"
                             >
-                                <p>
-                                    Welcome to VLCng media player Help Documentation
-                                    You can find VLCng documentation on VideoLAN's
-                                    wiki website. If you are a newcomer to VLCng
-                                    media player, please read the Introduction to
-                                    VLCng media player. You will find some
-                                    information on how to use the player in the "How
-                                    to play files with VLCng media player" document.
-                                    For all the saving, converting, transcoding,
-                                    encoding, muxing and streaming tasks, you should
-                                    find useful information in the Streaming
-                                    Documentation. If you are unsure about
-                                    terminology, please consult the knowledge base.
-                                    To understand the main keyboard shortcuts, read
-                                    the shortcuts page. Help Before asking any
-                                    question, please refer yourself to the FAQ. You
-                                    might then get (and give) help on the Forums,
-                                    the mailing-lists or our IRC channel (#videolan
-                                    on irc.freenode.net). Contribute to the project
-                                    You can help the VideoLAN project giving some of
-                                    your time to help the community, to design
-                                    skins, to translate the documentation, to test
-                                    and to code. You can also give funds and
-                                    material to help us. And of course, you can
-                                    promote VLCng media player.
-                                </p>
-                            </div>
+                                Add Subtitle
+                            </button>
+                            <input
+                                type="file"
+                                id="getFile"
+                                style="display: none"
+                            />
+                        </div>
+                    </div>
+
+                    <div id="myhelp" style="display: none">
+                        <div
+                            class="flex-auto text-base font-sans font-semibold"
+                        >
+                            <p>
+                                Welcome to VLCng media player Help Documentation
+                                You can find VLCng documentation on VideoLAN's
+                                wiki website. If you are a newcomer to VLCng
+                                media player, please read the Introduction to
+                                VLCng media player. You will find some
+                                information on how to use the player in the "How
+                                to play files with VLCng media player" document.
+                                For all the saving, converting, transcoding,
+                                encoding, muxing and streaming tasks, you should
+                                find useful information in the Streaming
+                                Documentation. If you are unsure about
+                                terminology, please consult the knowledge base.
+                                To understand the main keyboard shortcuts, read
+                                the shortcuts page. Help Before asking any
+                                question, please refer yourself to the FAQ. You
+                                might then get (and give) help on the Forums,
+                                the mailing-lists or our IRC channel (#videolan
+                                on irc.freenode.net). Contribute to the project
+                                You can help the VideoLAN project giving some of
+                                your time to help the community, to design
+                                skins, to translate the documentation, to test
+                                and to code. You can also give funds and
+                                material to help us. And of course, you can
+                                promote VLCng media player.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-      </div>
-    </div>
 
         <div
             id="floatingMenu"
@@ -465,251 +467,289 @@
                 <img src="../assets/img/pause.svg" alt="" />
             </button>
 
-      <button
-        id="play-speed"
-        class="
-          font-bold
-          text-xs
-          px-2
-          py-1
-          rounded
-          focus:outline-none
-          bg-yellow-500
-        "
-      >
-        1x
-      </button>
+            <button
+                id="play-speed"
+                class="
+                    font-bold
+                    text-xs
+                    px-2
+                    py-1
+                    rounded
+                    focus:outline-none
+                    bg-yellow-500
+                "
+            >
+                1x
+            </button>
 
-      <div
-        id="videoProgressBaxrs"
-        class="flex items-center rounded-lg w-96 h-8"
-      >
-        <!--* Your slider is here.
+            <div
+                id="videoProgressBaxrs"
+                class="flex items-center rounded-lg w-96 h-8"
+            >
+                <!--* Your slider is here.
                     * The sliding thumb's visibility is hidden
                     * CSS for the slider is under slider.css-->
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value="50"
-          class="slider bg-opacity-20 bg-yellow-500 rounded-lg w-96 h-8"
-          id="progress-bar-input-range"
-        />
+                <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                    class="
+                        slider
+                        bg-opacity-20 bg-yellow-500
+                        rounded-lg
+                        w-96
+                        h-8
+                    "
+                    id="progress-bar-input-range"
+                />
 
-        <!--* The following <div> is what you should lengthen or shorten
+                <!--* The following <div> is what you should lengthen or shorten
                     * It is also transparent to clicks
                     * Also remember than this div when progress is near 100, the corners to its right
                         should be rounded by removing the class`rounded-r-none`-->
-        <div
-          id="progress-indicator"
-          class="
-            flex
-            absolute
-            rounded-lg rounded-r-none
-            w-48
-            pointer-events-none
-            bg-yellow-500
-            h-8
-          "
-        ></div>
+                <div
+                    id="progress-indicator"
+                    class="
+                        flex
+                        absolute
+                        rounded-lg rounded-r-none
+                        w-48
+                        pointer-events-none
+                        bg-yellow-500
+                        h-8
+                    "
+                ></div>
 
-        <!--* This is the progress text-->
-        <div
-          class="
-            flex
-            absolute
-            z-30
-            h-8
-            flex-row
-            items-center
-            text-xs
-            px-4
-            pointer-events-none
-            font-bold
-          "
-        >
-          <span id="current-time">23:14</span>
-          <span>&nbsp;/&nbsp;</span>
-          <span id="dur-time">1:12:34</span>
-        </div>
-      </div>
+                <!--* This is the progress text-->
+                <div
+                    class="
+                        flex
+                        absolute
+                        z-30
+                        h-8
+                        flex-row
+                        items-center
+                        text-xs
+                        px-4
+                        pointer-events-none
+                        font-bold
+                    "
+                >
+                    <span id="current-time">23:14</span>
+                    <span>&nbsp;/&nbsp;</span>
+                    <span id="dur-time">1:12:34</span>
+                </div>
+            </div>
 
-      <button
-        id="volume-control-button"
-        class="p-2 rounded-full focus:outline-none hover:bg-yellow-500 relative"
-      >
-        <img
-          id="mute-volume"
-          src="../assets/img/volume_up_black_24dp.svg"
-          alt=""
-        />
+            <button
+                id="volume-control-button"
+                class="
+                    p-2
+                    rounded-full
+                    focus:outline-none
+                    hover:bg-yellow-500
+                    relative
+                "
+            >
+                <img
+                    id="mute-volume"
+                    src="../assets/img/volume_up_black_24dp.svg"
+                    alt=""
+                />
 
-        <div
-          id="vol-progress-container"
-          class="
-            left-0
-            invisible
-            flex
-            absolute
-            bottom-0
-            pb-14
-            items-center
-            rounded-lg
-            w-10
-            z-30
-          "
-        >
-          <!--BEGIN Volume progress column-->
-          <div
-            id="audioProgressColumn"
-            class="flex items-center rounded-lg h-28 w-10"
-          >
-            <!--Actual slider-->
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value="50"
-              class="volume -left-9 bg-yellow-500 absolute rounded-lg w-28 h-10"
-              id="volume-input-range"
-            />
+                <div
+                    id="vol-progress-container"
+                    class="
+                        left-0
+                        invisible
+                        flex
+                        absolute
+                        bottom-0
+                        pb-14
+                        items-center
+                        rounded-lg
+                        w-10
+                        z-30
+                    "
+                >
+                    <!--BEGIN Volume progress column-->
+                    <div
+                        id="audioProgressColumn"
+                        class="flex items-center rounded-lg h-28 w-10"
+                    >
+                        <!--Actual slider-->
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="
+                                volume
+                                -left-9
+                                bg-yellow-500
+                                absolute
+                                rounded-lg
+                                w-28
+                                h-10
+                            "
+                            id="volume-input-range"
+                        />
 
-            <!--* The following <div> is what you should lengthen or shorten
+                        <!--* The following <div> is what you should lengthen or shorten
                         * It is also transparent to clicks
                         * Also remember than this div when progress is near 100, the corners to its top
                             should be rounded by removing the class`rounded-t-none`-->
-            <div
-              id="volume-level-indicator"
-              class="
-                h-20
-                absolute
-                self-end
-                pointer-events-none
-                w-10
-                bg-black bg-opacity-70
-                rounded-lg rounded-t-none
-                flex flex-col-reverse
-              "
+                        <div
+                            id="volume-level-indicator"
+                            class="
+                                h-20
+                                absolute
+                                self-end
+                                pointer-events-none
+                                w-10
+                                bg-black bg-opacity-70
+                                rounded-lg rounded-t-none
+                                flex flex-col-reverse
+                            "
+                        >
+                            <!--The text showing volume level-->
+                            <span
+                                id="volumeText"
+                                class="text-white text-xs font-bold mb-1"
+                                >0</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </button>
+
+            <button
+                id="menu_btn"
+                class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
+                onclick="showMenu()"
             >
-              <!--The text showing volume level-->
-              <span id="volumeText" class="text-white text-xs font-bold mb-1"
-                >0</span
-              >
-            </div>
-          </div>
+                <img src="../assets/img/settings.svg " alt="" />
+            </button>
+
+            <button
+                id="bookmarkBtn"
+                class="
+                    trigger
+                    p-2
+                    rounded-full
+                    focus:outline-none
+                    hover:bg-yellow-500
+                "
+            >
+                <img src="../assets/img/bookmark_white_24dp.svg" alt="" />
+            </button>
+
+            <button
+                id="toggle-fullscreen-button"
+                class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
+            >
+                <img src="../assets/img/fullscreen.svg" alt="" />
+            </button>
         </div>
-      </button>
 
-      <button
-        id="menu_btn"
-        class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
-        onclick="showMenu()"
-      >
-        <img src="../assets/img/settings.svg " alt="" />
-      </button>
-
-      <button
-        id="bookmarkBtn"
-        class="trigger p-2 rounded-full focus:outline-none hover:bg-yellow-500"
-      >
-        <img src="../assets/img/bookmark_white_24dp.svg" alt="" />
-      </button>
-
-      <button
-        id="toggle-fullscreen-button"
-        class="p-2 rounded-full focus:outline-none hover:bg-yellow-500"
-      >
-        <img src="../assets/img/fullscreen.svg" alt="" />
-      </button>
-    </div>
-
-    <div
-      id="subtitleBox"
-      class="
-        bg-black
-        text-white
-        font-semibold
-        py-2
-        px-6
-        bg-opacity-30
-        rounded-md
-        absolute
-        bottom-5
-      "
-    >
-      Some text
-    </div>
-
-    <!---Dialog boxes-->
-    <div class="modal">
-      <div
-        class="
-          modal-content
-          flex flex-col
-          lg:h-2/3
-          h-5/6
-          w-8/12
-          lg:w-6/12
-          rounded-lg
-          overflow-hidden
-        "
-      >
-        <div class="border-b p-4 flex flex-row justify-between items-center">
-          <span class="text-2xl text-gray-500">Bookmarks</span>
-          <button
-            id="close-bookmark-button"
-            class="
-              p-2
-              close-button
-              rounded-full
-              focus:outline-none
-              hover:bg-yellow-500
-            "
-          >
-            <img src="../assets/img/close_black_24dp.svg" alt="" />
-          </button>
-        </div>
-        <div class="flex flex-row justify-between items-center p-4 gap-4">
-          <input
-            id="bookmark-description"
-            class="py-2 px-4 flex-grow border rounded-md"
-            placeholder="Enter a bookmark description.."
-            type="text"
-          />
-          <span class="mb-2" id="bookmark-added-time"></span>
-          <button
-            id="add-bookmark-button"
-            class="
-              py-3
-              px-4
-              bg-yellow-500
-              rounded-md
-              text-xs text-white
-              font-bold
-            "
-          >
-            Add bookmark
-          </button>
-        </div>
         <div
-          id="bookmarkList"
-          class="
-            flex flex-col
-            px-4
-            pt-4
-            pb-6
-            text-gray-500
-            overflow-y-scroll
-            flex-grow
-          "
+            id="subtitleBox"
+            class="
+                bg-black
+                text-white
+                font-semibold
+                py-2
+                px-6
+                bg-opacity-30
+                rounded-md
+                absolute
+                bottom-5
+            "
         >
-          <!--Item-->
+            Some text
         </div>
-      </div>
-    </div>
-    <!--End of dialog boxes-->
-    <script defer src="./video.js"></script>
-    <script defer src="../test/subtitles.js"></script>
-    <script defer src="./menu.js"></script>
-  </body>
+
+        <!---Dialog boxes-->
+        <div class="modal">
+            <div
+                class="
+                    modal-content
+                    flex flex-col
+                    lg:h-2/3
+                    h-5/6
+                    w-8/12
+                    lg:w-6/12
+                    rounded-lg
+                    overflow-hidden
+                "
+            >
+                <div
+                    class="
+                        border-b
+                        p-4
+                        flex flex-row
+                        justify-between
+                        items-center
+                    "
+                >
+                    <span class="text-2xl text-gray-500">Bookmarks</span>
+                    <button
+                        id="close-bookmark-button"
+                        class="
+                            p-2
+                            close-button
+                            rounded-full
+                            focus:outline-none
+                            hover:bg-yellow-500
+                        "
+                    >
+                        <img src="../assets/img/close_black_24dp.svg" alt="" />
+                    </button>
+                </div>
+                <div
+                    class="flex flex-row justify-between items-center p-4 gap-4"
+                >
+                    <input
+                        id="bookmark-description"
+                        class="py-2 px-4 flex-grow border rounded-md"
+                        placeholder="Enter a bookmark description.."
+                        type="text"
+                    />
+                    <span class="mb-2" id="bookmark-added-time"></span>
+                    <button
+                        id="add-bookmark-button"
+                        class="
+                            py-3
+                            px-4
+                            bg-yellow-500
+                            rounded-md
+                            text-xs text-white
+                            font-bold
+                        "
+                    >
+                        Add bookmark
+                    </button>
+                </div>
+                <div
+                    id="bookmarkList"
+                    class="
+                        flex flex-col
+                        px-4
+                        pt-4
+                        pb-6
+                        text-gray-500
+                        overflow-y-scroll
+                        flex-grow
+                    "
+                >
+                    <!--Item-->
+                </div>
+            </div>
+        </div>
+        <!--End of dialog boxes-->
+        <script defer src="./video.js"></script>
+        <script defer src="../test/subtitles.js"></script>
+        <script defer src="./menu.js"></script>
+    </body>
 </html>
