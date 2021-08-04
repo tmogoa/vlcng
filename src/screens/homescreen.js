@@ -317,13 +317,14 @@ function constrouctObjectHTML(
                     flex flex-row
                     justify-between
                     items-center
+                    gap-2
                 "
             >
-                <span class="font-medium overflow-ellipsis w-40" id="${type}-name-${objectId}"
+                <span class="font-medium overflow-ellipsis flex-grow truncate" id="${type}-name-${objectId}"
                     >${name}</span
                 >
                 <!--Duration-->
-                <span class="text-xs w-2/12 font-medium" id="${type}-time-left-${objectId}"
+                <span class="text-xs flex-shrink-0 font-medium" id="${type}-time-left-${objectId}"
                     >${timeLeft} left</span
                 >
             </div>
@@ -354,10 +355,10 @@ function constrouctObjectHTML(
             </div>
 
             <div class="flex flex-row justify-between text-xs">
-                <span class="font-medium" id="${type}-path"
+                <span class="font-medium flex-grow truncate" id="${type}-path"
                     >${halfSource}</span
                 >
-                <span id="${type}-last-date-played-${objectId}" class="font-medium">${datePlayed}</span>
+                <span id="${type}-last-date-played-${objectId}" class="font-medium flex-shrink-0">${datePlayed}</span>
             </div>
         </div>
     </div>
