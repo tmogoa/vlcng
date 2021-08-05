@@ -37,44 +37,69 @@ const normalizePozition = (mouseX, mouseY) => {
     return { normalizedX, normalizedY };
 };
 
-menuable.forEach((item) => {
-    item.addEventListener("contextmenu", (event) => {
-        event.preventDefault();
+// menuable.forEach((item) => {
+//     item.addEventListener("contextmenu", (event) => {
+//         event.preventDefault();
 
-        console.log(event.target.offsetParent);
+//         console.log("right-clicked");
 
-        const { clientX: mouseX, clientY: mouseY } = event;
-        const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
+//         const { clientX: mouseX, clientY: mouseY } = event;
+//         const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
 
-        contextMenu.style.top = `${normalizedY}px`;
+//         contextMenu.style.top = `${normalizedY}px`;
 
-        contextMenu.style.left = `${normalizedX}px`;
+//         contextMenu.style.left = `${normalizedX}px`;
 
-        contextMenu.classList.remove("hide-menu");
-        setTimeout(() => {
-            contextMenu.classList.add("show-menu");
-        });
+//         contextMenu.classList.remove("hide-menu");
+//         setTimeout(() => {
+//             contextMenu.classList.add("show-menu");
+//         });
+//     });
+// });
+
+/**
+ *
+ * @param {td} item table row
+ * @param {string} mediaId passed from view - use this media id for work
+ */
+
+// function attachListener(item, mediaId) {
+//     item.addEventListener("contextmenu", (event) => {
+//         event.preventDefault();
+
+//         console.log("right-clicked");
+
+//         const { clientX: mouseX, clientY: mouseY } = event;
+//         const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
+
+//         contextMenu.style.top = `${normalizedY}px`;
+
+//         contextMenu.style.left = `${normalizedX}px`;
+
+//         contextMenu.classList.remove("hide-menu");
+//         setTimeout(() => {
+//             contextMenu.classList.add("show-menu");
+//         });
+//     });
+// }
+function showContextMenu(event, mediaId) {
+    //event.preventDefault();
+
+    console.log("right-clicked");
+
+    const { clientX: mouseX, clientY: mouseY } = event;
+    const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
+
+    contextMenu.style.top = `${normalizedY}px`;
+
+    contextMenu.style.left = `${normalizedX}px`;
+
+    contextMenu.classList.remove("hide-menu");
+    setTimeout(() => {
+        contextMenu.classList.add("show-menu");
     });
-});
-
-function attachListener(item) {
-    item.addEventListener("contextmenu", (event) => {
-        event.preventDefault();
-
-        console.log(event.target.offsetParent);
-
-        const { clientX: mouseX, clientY: mouseY } = event;
-        const { normalizedX, normalizedY } = normalizePozition(mouseX, mouseY);
-
-        contextMenu.style.top = `${normalizedY}px`;
-
-        contextMenu.style.left = `${normalizedX}px`;
-
-        contextMenu.classList.remove("hide-menu");
-        setTimeout(() => {
-            contextMenu.classList.add("show-menu");
-        });
-    });
+    // item.addEventListener("contextmenu", (event) => {
+    // });
 }
 
 scope.addEventListener("click", (e) => {
