@@ -200,6 +200,9 @@ const EventEmitter = require('events');
             this.srcObject.basename = Utility.path.basename(src);
             this.srcObject.name = Utility.path.basename(src, this.srcObject.extension);
             this.name = this.srcObject.name;
+            if(this.uiNameText){
+                this.uiNameText.innerHTML = this.name;
+            }
             try{
                 this.mediaObject.src = src;
             }

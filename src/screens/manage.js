@@ -383,12 +383,18 @@ let uiMediaTitle = document.getElementById("media-title");
 let uiLikeButton = document.getElementById("like-button");
 let currentAudio = document.getElementById("currently-playing-audio");
 let currentVideo = document.getElementById("currently-playing-video");
+let uiTotalDuration = document.getElementById("dur-time");
+let uiCurrentTime = document.getElementById("cur-time");
 
 //assigning the media objects
 vlcVideo.mediaObject = currentVideo;
 vlcAudio.mediaObject = currentAudio;
 vlcAudio.uiNameText = uiMediaTitle;
 vlcVideo.uiNameText = uiMediaTitle;
+vlcVideo.uiCurrentTimeText = uiCurrentTime;
+vlcAudio.uiCurrentTimeText = uiCurrentTime;
+vlcVideo.uiTotalDurationText = uiTotalDuration;
+vlcAudio.uiTotalDurationText = uiTotalDuration;
 
 let audioManager = new Manager();
 let videoManager = new Manager();
@@ -465,6 +471,20 @@ currentVideo.addEventListener('timeupdate', function(){
 function updateSlider(element){
     let ratio = element.currentTime/element.duration;
     uiProgressInputRange.value = ratio * 100;
+    switch(type){
+        case "video":
+            {
+                uiCurrentTime.innerHTML = vlcVideo.formatTime(element.currentTime)[0];
+                uiTotalDuration.innerHTML = vlcAudio.formatTime()[1];
+                break;
+            }
+        case "audio":
+            {
+                uiCurrentTime.innerHTML = vlcVideo.formatTime(element.currentTime)[0];
+                uiTotalDuration.innerHTML = vlcAudio.formatTime()[1];
+                break;
+            }
+    }
 }
 
 uiProgressInputRange.addEventListener("input", function(){
