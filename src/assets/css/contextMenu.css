@@ -1,0 +1,8 @@
+.show-menu {
+    transform: scale(1);
+    transition: transform 200ms ease-in-out;
+}
+.hide-menu {
+    transform: scale(0);
+    transform-origin: top left;
+}
