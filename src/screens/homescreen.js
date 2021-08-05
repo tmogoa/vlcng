@@ -1,7 +1,12 @@
 const remote = require("electron").remote;
 const ipcRenderer = require("electron").ipcRenderer;
-//const { remote, ipcRenderer } = require("electron");
-
+const fileType = require("file-type");
+const fs = require("fs");
+const initSqlJs = require("sql.js");
+var SQL;
+(async () =>{
+    SQL = await initSqlJs();
+})();
 const getWindow = () => remote.BrowserWindow.getFocusedWindow();
 const EventEmitter = require('events');
 
@@ -38,7 +43,7 @@ function maximize() {
 const listView = document.getElementById("listView");
 
 //getting the recent videos and audios
-const initSqlJs = require("sql.js");
+
 const Utility = require("./../classes/Utility");
 const Manager = require("./../classes/Manager");
 const VlcAudio = require("./../classes/VlcAudio");
@@ -59,9 +64,14 @@ const recentVideoItems = document.getElementById("video-items");
 
 
 (async()=>{
-    const SQL = await initSqlJs();
+    if(typeof SQL == 'undefined'){
+        SQL = await initSqlJs();
+    }
+
     let homescreenManager = new Manager();
     const db = Utility.openDatabase(SQL);
+    let all = db.exec(`SELECT * from video, audio`);
+    console.log("All from audio and videos ", all);
 
     recentVideos = db.exec("SELECT video.id, video.playedTill, video.name, video.source, recentVideo.datePlayed from recentVideo inner join video on video.id = videoId order by datePlayed DESC");
 
@@ -125,7 +135,6 @@ const recentVideoItems = document.getElementById("video-items");
     if(recentAudios.length > 0){
         let rows = recentAudios[0].values;
         let type = 'audio';
-        queue.addListener("new-item", checkThumbnailQueue);
         rows.forEach((row, index) => {
             let audioId =  row[0];
             let playedTill = row[1];
@@ -158,7 +167,7 @@ const recentVideoItems = document.getElementById("video-items");
                     let item = document.getElementById(`${type}-item-${id}`);
                     let directory = Utility.path.dirname(source);
                     item.innerHTML = constrouctObjectHTML(id, timeLeft, name, directory, lastPlayed, type);
-                    let esSource = source.replace(/\\/g, "\\\\");   
+                    let esSource = source.replace(/\\/g, "/");   
                     item.setAttribute("onclick", `send${type}Path("${esSource}")`);
 
                     let progressBar = document.getElementById(`${type}-progress-bar-${id}`);
@@ -195,7 +204,7 @@ const recentVideoItems = document.getElementById("video-items");
                         cwTimeLeft.innerHTML = `${timeLeft} left`;
 
                         cwButton.onclick = ()=>{
-                            sendLink(videoSource);
+                            sendvideoPath(esSource);
                         }
                     }
                 });
@@ -311,24 +320,117 @@ return listItem;
 }
 
 
-function sendvideoPath(itemSource){
-    console.log(`The link before sending was ${itemSource} `);
-    ipcRenderer.send(
-        "save-video-link",
-        itemSource
-    );
-    console.log(`I successfully sent the video link. the link I send was ${itemSource}`);
-    getWindow().loadFile("./src/screens/video.html");
+
+/**
+ * Checks for error in reading the file
+ * @param {string} source - source of file
+ * @param {string} type - audio | video
+ */
+function checkFile(source, type, destination = ""){
+    let db = Utility.openDatabase(SQL);
+    function deleteFile(){
+        db.run(`DELETE FROM ${type} WHERE source = ?`, [source]);
+        Utility.closeDatabase(db);
+    }
+    fs.access(source, fs.constants.X_OK, (err)=>{
+        
+        if(err){
+            console.log(err);
+            alert("An error occurrend while trying to access the file. The file might not exist, has errors, or has been relocated");
+            //deleteFile();
+            return;
+        }
+        fileType.fromFile(source).then((ft) => {
+            console.log("Right here");
+            if(typeof ft == 'undefined'){
+                alert("The file is not of type media");
+                deleteFile();
+                return;
+            }
+
+            //console.log('The ft object is ft and path is ', ft, fullPath);
+            let extname = ft.mime;
+
+            switch(type){
+                case "audio":
+                    {
+                        if(/audio\/*/.test(extname)){
+                            let id = db.exec(`SELECT id from ${type} where source = ?`, [source]);
+                            let name = Utility.path.basename(source, Utility.path.extname(source));
+
+                            if(id.length < 1){
+                                db.exec(`INSERT INTO ${type}(playedTill, name, source) values (?, ?, ?)`, [0, name, source]);
+
+                                id = db.exec(`SELECT id from ${type} where source = ?`, [source]);
+                            }
+                            Utility.closeDatabase(db);
+                            if(id.length < 1){
+                                alert("An error occurred while trying to save the file for future look up");
+                            }
+                            if(destination != ""){
+                                ipcRenderer.send(
+                                    "save-audio-link",
+                                    source
+                                );
+                                getWindow().loadFile(destination);
+                            }
+                            //console.log("found audio");
+                        }else{
+                            alert("The file is not an audio file");
+                            deleteFile();
+                        }
+                        break;
+                    }
+                case "video":
+                    {
+                        if(/video\/*/.test(extname)){
+                            let id = db.exec(`SELECT id from ${type} where source = ?`, [source]);
+                            let name = Utility.path.basename(source, Utility.path.extname(source));
+                            if(id.length < 1){
+                                db.exec(`INSERT INTO ${type}(playedTill, name, source) values (?, ?, ?)`, [0, name, source]);
+
+                                id = db.exec(`SELECT id from ${type} where source = ?`, [source]);
+                            }
+                            Utility.closeDatabase(db);
+                            if(id.length < 1){
+                                alert("An error occurred while trying to save the file for future look up");
+                            }
+                            if(destination != ""){
+                                ipcRenderer.send(
+                                    "save-video-link",
+                                    source
+                                );
+                                getWindow().loadFile(destination);
+                            }
+                            
+                        }else{
+                            
+                            deleteFile();
+                            alert("The file is not a video.");
+                        }
+                        break;
+                    }
+                    
+                default: 
+                {
+                    console.error("file type is not defined for the manage.html");
+                }
+            }
+        });
+
+        return;
+    })
+    
+    
 }
 
+function sendvideoPath(itemSource){
+    checkFile(itemSource, "video", "./src/screens/video.html");
+}
+
+
 function sendaudioPath(itemSource){
-    console.log(`The link before sending was ${itemSource} `);
-    ipcRenderer.send(
-        "save-audio-link",
-        itemSource
-    );
-    console.log(`I successfully sent the audio link. the link I send was ${itemSource}`);
-    getWindow().loadFile("./src/screens/audio-play.html");
+    checkFile(itemSource, "audio", "./src/screens/audio-play.html");
 }
 
 let isVideosList = true;

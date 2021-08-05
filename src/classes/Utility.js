@@ -90,8 +90,8 @@ class Utility{
 
     /**
      * Always call const SQL = await initSqlJs(); and pass SQL to this function if SQL is not already defined.
-     * @param {Object} SQL 
-     * @returns Object Db
+     * @param {initSqlJs} SQL 
+     * @returns {SQL.Database} Db
      */
     static openDatabase(SQL){
         let dbPath = Utility.path.join(Utility.databasePath, Utility.dbFileName);

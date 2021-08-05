@@ -188,9 +188,12 @@ const EventEmitter = require('events');
     setSrc(src){
         if(src != ""){
             console.log(`The source object ${src}`);
+            src = src.replace(/\\/g, "/");
+            let dirname = __dirname.replace(/\\/g, "/");
+
             if(!Utility.path.isAbsolute(src)){
                 console.log(`The path is not absolute ${src}`);
-                src = Utility.path.resolve(__dirname, src);
+                src = Utility.path.resolve(dirname, src);
             }
             this.srcObject.extension = Utility.path.extname(src);
             this.srcObject.directory = Utility.path.dirname(src);
@@ -214,7 +217,7 @@ const EventEmitter = require('events');
     getSrc(){
         if(this.srcObject.directory){
             let pathString = Utility.path.join(this.srcObject.directory, this.srcObject.basename);
-            return pathString;
+            return pathString.replace(/\\/g, "/");
         }
     }
 
