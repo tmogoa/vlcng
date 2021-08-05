@@ -111,8 +111,6 @@
             </div>
 
             <!---END OF TAB SWITCHER-->
-
-            <input type="hidden" id="video-id" value="0" />
             <div class="flex flex-row justify-end gap-8">
                 <button
                     id="toHomescreen"
@@ -216,7 +214,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li id="all-music-button">
+                        <li id="all-music-button" class="bg-yellow-500">
                             <a
                                 href="#"
                                 class="
@@ -656,7 +654,7 @@
                                             dark:text-gray-400 dark:bg-gray-800
                                         "
                                     >
-                                        <th class="px-4 py-3 rounded-tl-lg">
+                                        <th class="px-4 py-3 rounded-tl-lg" id="table-header-title">
                                             Artist/Song
                                         </th>
                                         <th class="px-4 py-3">Duration</th>
@@ -1148,6 +1146,7 @@
                                             text-2xl text-blue-500
                                             font-medium
                                         "
+
                                     >
                                         Sanctus
                                     </h3>
@@ -1269,8 +1268,8 @@
                                         text-sm text-yellow-500
                                     "
                                 >
-                                    <span id="current_time">0:00</span>
-                                    <span id="total_time">0:00</span>
+                                    <span id="current-time">0:00</span>
+                                    <span id="dur-time">0:00</span>
                                 </div>
                                 <div class="slidecontainer" id="progress-bar">
                                     <input

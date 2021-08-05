@@ -10,7 +10,6 @@ class ListManager extends Manager{
         super();
     }
 
-    
 }
 
 module.exports = ListManager;

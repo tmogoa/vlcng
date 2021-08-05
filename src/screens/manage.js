@@ -9,9 +9,6 @@ const fileType = require("file-type");
 const Manager = require("../classes/Manager");
 const VlcMediaContent = require("../classes/VlcMediaContent");
 
-//const { remote, ipcRenderer } = require("electron");
-console.log(remote);
-
 Utility.databasePath = remote.app.getPath("userData");
 var SQL; //global SQL from initJs to be used by all functions
 
@@ -57,6 +54,7 @@ function routeToHomeScreen() {
 const videoTabBtn = document.getElementById("videoTabBtn");
 const musicTabBtn = document.getElementById("musicTabBtn");
 const allMusicText = document.querySelector("#all-music-text");
+var tableTitle = document.getElementById("table-header-title");
 
 let isVideosList = false;
 
@@ -67,14 +65,18 @@ function showTab() {
     musicTabBtn.classList.toggle("text-gray-500");
     type = "audio";
     allMusicText.innerHTML = "ALL MUSIC";
-    if (!isVideosList) {
+    tableTitle.innerHTML = "Artist/Song";
+    if(!isVideosList){
         type = "video";
         isVideosList = !isVideosList;
         allMusicText.innerHTML = "ALL VIDEO";
+        tableTitle.innerHTML = "Video";
     }
     stopSearch = true;
     pendingSearch = false;
-    ipcRenderer.send("stop-search", stopSearch);
+    activeMenu.click();
+    //ipcRenderer.send("stop-search", stopSearch);
+    
 }
 videoTabBtn.onclick = showTab;
 musicTabBtn.onclick = showTab;
@@ -96,7 +98,7 @@ const recentlyPlayedBtn = document.querySelector("#recently-played-button");
 const settingBtn = document.querySelector("#settings-button");
 const playlistList = document.querySelector("#playlist-list-ul");
 const resultHolder = document.querySelector("#result-holder");
-var activeTab = allMusicBtn;
+var activeMenu = allMusicBtn;
 
 function toggleModal() {
     console.log("Toggling modal");
@@ -120,8 +122,8 @@ let fileFoundListener = new EventEmitter();
  * Update UI for the listing of all music or video
  *
  */
-function updateUIForList() {
-    if (activeTab != allMusicBtn) {
+function updateUIForList(){
+    if(activeMenu != allMusicBtn){
         return;
     }
 
@@ -217,8 +219,8 @@ function itemHTMLFormat(id, name, artistName, duration, source, isFav) {
           <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
         </div>
         <div onclick = "playItem(${source})">
-          <p class="">${artistName}</p>
-          <p class="text-xl font-semi-bold text-gray-600 dark:text-gray-400 w-80 truncate overflow-ellipsis">${name}</p>
+          ${(type == "audio")?"<p class=''>" + artistName + "</p>": ""}
+          <p class="text-xl font-semi-bold text-gray-600 dark:text-gray-400">${name}</p>
         </div>
       </div>
     </td>
@@ -250,11 +252,15 @@ function listAllMedia() {
         let result = db.exec(`SELECT source, id, name, favorite from ${type}`);
         Utility.closeDatabase(db);
 
-        if (result.length < 1) {
+        if(result.length < 1){
+            resultHolder.innerHTML = Utility.openMediaHtml(type);
             return;
         }
 
         rows = result[0].values;
+        if(rows.length < 1){
+            resultHolder.innerHTML = Utility.openMediaHtml(type);
+        }
 
         //let j = 0;
         console.log(result);
@@ -320,7 +326,7 @@ function searchResult(event, fileObject, dirSearched) {
 ipcRenderer.on("search-stopped", function (event, decision) {
     searchStop = decision;
 
-    if (pendingSearch) {
+    if(pendingSearch && ipcRenderer.invoke("clear-directory-array")){
         searchStop = false;
         listAllMedia();
     }
@@ -335,13 +341,29 @@ ipcRenderer.on("start-search-is-false", function (event, decision) {
 
 ipcRenderer.on("search-result", searchResult);
 
-//list all the media
-allMusicBtn.addEventListener("click", () => {
-    activeTab = allMusicBtn;
-    stopSearch = false;
+function toggleActiveMenu(li){
+    activeMenu.classList.toggle("bg-yellow-500");
+    activeMenu = li;
+    activeMenu.classList.toggle("bg-yellow-500");
+}
 
+//update the ui when searching is done
+fileFoundListener.addListener("file", updateUIForList);
+
+//list all the media
+allMusicBtn.addEventListener('click', () =>{
+    toggleActiveMenu(allMusicBtn);
+    stopSearch = false;
+    //the search is started when the main process notify us of search-stopped event
     ipcRenderer.send("stop-search", stopSearch);
     pendingSearch = true;
+    console.log(`pending search is ${pendingSearch}`);
 });
 
-fileFoundListener.addListener("file", updateUIForList);
+//click allMusicBtn initially
+allMusicBtn.click();
+
+
+
+
+

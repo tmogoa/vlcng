@@ -85,7 +85,7 @@ const recentVideoItems = document.getElementById("video-items");
     let queue = new EventEmitter();
     let thumbnailQueue = [];
 
-    if (recentVideos.length > 0) {
+    if (recentVideos.length > 0 && recentVideos[0].values.length > 0) {
         let rows = recentVideos[0].values;
         let type = "video";
         queue.addListener("new-item", checkThumbnailQueue);
@@ -146,12 +146,12 @@ const recentVideoItems = document.getElementById("video-items");
             }
         }
     } else {
-        console.log(`No recent videos found`);
+        recentVideoItems.innerHTML += Utility.openMediaHtml("video"); //ask for a file
     }
 
     console.log("The recent audios are ");
     console.log(recentAudios);
-    if (recentAudios.length > 0) {
+    if (recentAudios.length > 0 && recentAudios[0].values.length > 0) {
         let rows = recentAudios[0].values;
         let type = 'audio';
         rows.forEach((row, index) => {
@@ -174,11 +174,15 @@ const recentVideoItems = document.getElementById("video-items");
                 type,
                 index
             );
+
+            
         });
+    }else{
+        recentAudioItems.innerHTML += Utility.openMediaHtml("audio"); //ask for a file
     }
+    
 
-    //for the max width
-
+    //list the media objects
     function listMedia(id, playedTill, name, source, lastPlayed, type, index) {
         try {
             if (!homescreenManager.setSrc(source)) {
@@ -261,6 +265,7 @@ const recentVideoItems = document.getElementById("video-items");
     }
 })();
 
+//constructs the media object to get the duration
 function constructMediaObject(type) {
     let mediaObject;
     switch (type) {
@@ -280,6 +285,7 @@ function constructMediaObject(type) {
     return mediaObject;
 }
 
+//makes the html list items
 function constrouctObjectHTML(
     objectId,
     timeLeft,
@@ -466,22 +472,22 @@ function checkFile(source, type, destination = ""){
         });
 
         return;
-    })
-    
-    
+    });
 }
 
+//send the audio file to the player
 function sendvideoPath(itemSource){
     checkFile(itemSource, "video", "./src/screens/video.html");
 }
 
-
+//Send the video file to the player
 function sendaudioPath(itemSource){
     checkFile(itemSource, "audio", "./src/screens/audio-play.html");
 }
 
 let isVideosList = true;
 
+//sending files to be played
 playNetVideoBtn.onclick = (e) => {
     if (videoLink.value.length < 1) {
         return;
@@ -495,6 +501,28 @@ playNetVideoBtn.onclick = (e) => {
     console.log(`is audio playlist`);
     sendaudioPath(videoLink.value);
 };
+
+//opening media files
+function openMedia(input, type){
+    let files = input.files;
+    if(files){
+        let mediaFile = files[0].path;
+        let src = mediaFile.replace(/\\+/g, "/");
+        switch(type){
+            case "audio":
+                {
+                    sendaudioPath(src);
+                    break;
+                }
+            case "video":
+                {
+                    sendvideoPath(src);
+                    break;
+                }
+            
+        }
+    }
+}
 
 musicBtn.onclick = (e) => {
     getWindow().loadFile("./src/screens/manage.html");
