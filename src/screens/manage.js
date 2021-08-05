@@ -66,7 +66,7 @@ function showTab() {
     type = "audio";
     allMusicText.innerHTML = "ALL MUSIC";
     tableTitle.innerHTML = "Artist/Song";
-    if(!isVideosList){
+    if (!isVideosList) {
         type = "video";
         isVideosList = !isVideosList;
         allMusicText.innerHTML = "ALL VIDEO";
@@ -76,7 +76,6 @@ function showTab() {
     pendingSearch = false;
     activeMenu.click();
     //ipcRenderer.send("stop-search", stopSearch);
-    
 }
 videoTabBtn.onclick = showTab;
 musicTabBtn.onclick = showTab;
@@ -122,8 +121,8 @@ let fileFoundListener = new EventEmitter();
  * Update UI for the listing of all music or video
  *
  */
-function updateUIForList(){
-    if(activeMenu != allMusicBtn){
+function updateUIForList() {
+    if (activeMenu != allMusicBtn) {
         return;
     }
 
@@ -219,8 +218,8 @@ function itemHTMLFormat(id, name, artistName, duration, source, isFav) {
           <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
         </div>
         <div onclick = "playItem(${source})">
-          ${(type == "audio")?"<p class=''>" + artistName + "</p>": ""}
-          <p class="text-xl font-semi-bold text-gray-600 dark:text-gray-400">${name}</p>
+          ${type == "audio" ? "<p class=''>" + artistName + "</p>" : ""}
+          <p class="text-lg font-semi-bold text-gray-600 dark:text-gray-400 truncate overflow-ellipsis w-72 lg:w-96">${name}</p>
         </div>
       </div>
     </td>
@@ -252,13 +251,13 @@ function listAllMedia() {
         let result = db.exec(`SELECT source, id, name, favorite from ${type}`);
         Utility.closeDatabase(db);
 
-        if(result.length < 1){
+        if (result.length < 1) {
             resultHolder.innerHTML = Utility.openMediaHtml(type);
             return;
         }
 
         rows = result[0].values;
-        if(rows.length < 1){
+        if (rows.length < 1) {
             resultHolder.innerHTML = Utility.openMediaHtml(type);
         }
 
@@ -326,7 +325,7 @@ function searchResult(event, fileObject, dirSearched) {
 ipcRenderer.on("search-stopped", function (event, decision) {
     searchStop = decision;
 
-    if(pendingSearch && ipcRenderer.invoke("clear-directory-array")){
+    if (pendingSearch && ipcRenderer.invoke("clear-directory-array")) {
         searchStop = false;
         listAllMedia();
     }
@@ -341,7 +340,7 @@ ipcRenderer.on("start-search-is-false", function (event, decision) {
 
 ipcRenderer.on("search-result", searchResult);
 
-function toggleActiveMenu(li){
+function toggleActiveMenu(li) {
     activeMenu.classList.toggle("bg-yellow-500");
     activeMenu = li;
     activeMenu.classList.toggle("bg-yellow-500");
@@ -351,7 +350,7 @@ function toggleActiveMenu(li){
 fileFoundListener.addListener("file", updateUIForList);
 
 //list all the media
-allMusicBtn.addEventListener('click', () =>{
+allMusicBtn.addEventListener("click", () => {
     toggleActiveMenu(allMusicBtn);
     stopSearch = false;
     //the search is started when the main process notify us of search-stopped event
@@ -362,8 +361,3 @@ allMusicBtn.addEventListener('click', () =>{
 
 //click allMusicBtn initially
 allMusicBtn.click();
-
-
-
-
-
