@@ -168,11 +168,35 @@ volControlBtn.addEventListener("mouseover", function (e) {
 volControlBtn.addEventListener("mouseleave", function (e) {
     volProgressContainer.classList.add("invisible");
 });
+//trying sth
+var canv = document.getElementById('output');
+var ctx = canv.getContext('2d');
+window.devicePixelRatio = 1;
+var size = 1100;
+canv.style.width = size + "px";
+canv.style.height = size + "px";
+  
+var scale = window.devicePixelRatio; 
+            
+canv.width = Math.floor(size * scale);
+canv.height = Math.floor(size * scale);
+  
+        //CSS pixels for coordinate systems
+ctx.scale(scale, scale);
+        //ctx.font = '10px Arial';
+       // ctx.textAlign = 'center';
+       // ctx.textBaseline = 'middle';
+  
+var x = size / 2;
+var y = size / 2;
+  
+       
+        // ctx.fillText(textString, x, y);
 
 let wave = new Wave();
 wave.fromElement("audio-elem", "output", {
-    type: "shine",
-    colors: ["red", "white", "blue"],
+    type: "static",
+    colors: ["pink", "green", "blue"],
 });
 
 console.log(navigator);
