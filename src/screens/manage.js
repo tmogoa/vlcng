@@ -8,6 +8,10 @@ const initSqlJs = require("sql.js");
 const fileType = require("file-type");
 const Manager = require("../classes/Manager");
 const VlcMediaContent = require("../classes/VlcMediaContent");
+const VlcAudio = require("../classes/VlcAudio");
+const VlcVideo = require("../classes/VlcVideo");
+const ListManager = require("../classes/ListManager");
+const { ipcRenderer } = require("electron");
 
 Utility.databasePath = remote.app.getPath("userData");
 var SQL; //global SQL from initJs to be used by all functions
@@ -361,3 +365,139 @@ allMusicBtn.addEventListener("click", () => {
 
 //click allMusicBtn initially
 allMusicBtn.click();
+
+//for the minimal player
+//Assuming that the manage.js has been called already.
+//If the manage.js is not called, this script will craft
+
+// let vlcAudio = new VlcAudio();
+// let vlcVideo = new VlcVideo();
+
+// let uiPlayButton = document.getElementById("play-button");
+// let uiNextButton = document.getElementById("next-button");
+// let uiPreviousButton = document.getElementById("previous-button");
+// let uiProgressInputRange = document.getElementById("progress-input-range");
+// let uiShuffleButton = document.getElementById("shuffle-button");
+// let uiLoopButton = document.getElementById("play-in-loop");
+// let uiArtistTitle = document.getElementById("artist-title");
+// let uiMediaTitle = document.getElementById("media-title");
+// let uiLikeButton = document.getElementById("like-button");
+// let currentAudio = document.getElementById("currently-playing-audio");
+// let currentVideo = document.getElementById("currently-playing-video");
+
+// //assigning the media objects
+// vlcVideo.mediaObject = currentVideo;
+// vlcAudio.mediaObject = currentAudio;
+// vlcAudio.uiNameText = uiMediaTitle;
+// vlcVideo.uiNameText = uiMediaTitle;
+
+// let audioManager = new Manager();
+// let videoManager = new Manager();
+
+// let listManager = new ListManager();
+
+// //assigning the managers
+// function assignManagers(){
+//     audioManager.managedObject = vlcAudio;
+//     vlcAudio.setManager(audioManager);
+
+//     videoManager.managedObject = vlcVideo;
+//     vlcVideo.setManager(videoManager);
+// }
+
+// //reassign managers when stuff change
+// function retireAndAssignManagers(){
+//     audioManager = new Manager();
+//     videoManager = new Manager();
+//     assignManagers();
+// }
+
+// //remanage objects when their link change
+// function reManage(src){
+//     switch(type)
+//     {
+//         case "audio":
+//             {
+//                 audioManager.setSrc(src);
+//                 audioManager.manage();
+//                 break;
+//             }
+//         case "video":
+//             {
+//                 videoManager.setSrc(src);
+//                 videoManager.manage();
+//             }
+//     }
+// }
+
+// uiPlayButton.addEventListener("click", function(){
+//     switch(type){
+//         case "audio":
+//             {
+//                 if(vlcAudio.isPlaying){
+//                     //change the icon
+//                 }else{
+
+//                 }
+//                 vlcAudio.playPause();
+//                 break;
+//             }
+//         case "video":
+//             {
+//                 if(vlcVideo.isPlaying){
+//                     //change the icon
+//                 }else{
+
+//                 }
+//                 vlcVideo.playPause();
+//                 break;
+//             }
+//     }
+// });
+
+// //
+// currentAudio.addEventListener('timeupdate', function(){
+//     updateSlider(this);
+// });
+// currentVideo.addEventListener('timeupdate', function(){
+//     updateSlider(this);
+// });
+
+// function updateSlider(element){
+//     let ratio = element.currentTime/element.duration;
+//     uiProgressInputRange.value = ratio * 100;
+// }
+
+// uiProgressInputRange.addEventListener("input", function(){
+//     switch(type){
+//         case "video":
+//             {
+//                 vlcVideo.setCurrentTime(this.value/100 * vlcVideo.getTotalDuration());
+//                 break;
+//             }
+//         case "audio":
+//             {
+//                 vlcAudio.setCurrentTime(this.value/100 * vlcAudio.getTotalDuration());
+//                 break;
+//             }
+//     }
+// });
+
+// //get the link of the audio from the main process
+
+// ipcRenderer.on("receive-link", (event, link, _type) =>{
+//     if(type !== _type){
+//         showTab();
+//     }
+//     retireAndAssignManagers();
+//     reManage(link);
+// });
+
+// //get the most recent audio
+// if(type == "audio" && currentAudio.src == ""){
+
+//     recentAudios = db.exec(
+//         "SELECT audio.id, audio.playedTill, audio.name, audio.source, recentAudio.datePlayed from recentAudio inner join audio on audio.id = audioId order by datePlayed DESC"
+//     );
+
+// }

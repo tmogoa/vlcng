@@ -42,13 +42,19 @@ class VlcAudio extends VlcMediaContent{
          this.updateVolumeSlider();
          this.updateAudioProgess();
  
-         this.uiPlayButton.addEventListener('click', () => {
-             this.playPause();
-         });
+         if(this.uiPlayButton){
+            this.uiPlayButton.addEventListener('click', () => {
+                this.playPause();
+            });
+         }
+         
  
-         this.uiVolumeButtonImg.addEventListener('click', ()=>{
-             this.muteVideo();
-         });
+         if(this.uiVolumeButtonImg){
+            this.uiVolumeButtonImg.addEventListener('click', ()=>{
+                this.muteVideo();
+            });
+         }
+         
  
          this.mediaObject.addEventListener('timeupdate', () =>{
              this.updateAudioProgess();
@@ -57,7 +63,7 @@ class VlcAudio extends VlcMediaContent{
              this.myManager.updateTime();
              if(this.getCurrentTime() == this.getTotalDuration()){
                  this.isPlaying = false;
-                 this.uiPlayButton.querySelector('img').src = "../assets/img/replay_white_24dp.svg";
+                 if(this.uiPlayButton)this.uiPlayButton.querySelector('img').src = "../assets/img/replay_white_24dp.svg";
 
                 if(this.autoplay){
                     this.setCurrentTime(0);
@@ -69,33 +75,47 @@ class VlcAudio extends VlcMediaContent{
          /**
           * Will implement animation later
           */
-         this.uiVolumeInputRange.addEventListener('input', (evt)=>{
-             this.updateVolumeSlider();
-         });
+         if(this.uiVolumeInputRange){
+            this.uiVolumeInputRange.addEventListener('input', (evt)=>{
+                this.updateVolumeSlider();
+            });
+         }
+         
  
-         this.uiPlaySpeedButton.addEventListener('click', ()=>{
-             this.changePlaybackRate();
-         });
+         if(this.uiPlaySpeedButton){
+            this.uiPlaySpeedButton.addEventListener('click', ()=>{
+                this.changePlaybackRate();
+            });
+         }
+         
  
-         this.uiProgressBarInputRange.addEventListener('input', ()=>{
-             let level = this.uiProgressBarInputRange.value / 100 * this.getTotalDuration(); 
-             this.setCurrentTime(level);
-             this.updateVideoProgess();
-             this.updateDurationText();
-             this.myManager.updateTime();
-         });
+         if(this.uiProgressBarInputRange){
+            this.uiProgressBarInputRange.addEventListener('input', ()=>{
+                let level = this.uiProgressBarInputRange.value / 100 * this.getTotalDuration(); 
+                this.setCurrentTime(level);
+                this.updateVideoProgess();
+                this.updateDurationText();
+                this.myManager.updateTime();
+            });
+         }
+         
          
          this.addListener('source-set', ()=>{
              //The object is ready to be managed. Hence, signal the manager.
              this.myManager.emit('managed-object-ready');
-             this.uiNameText.innerHTML = this.name;
-         });
- 
-         this.uiBookmarkButton.addEventListener('click', ()=>{
-             if(this.myManager){
-                 this.myManager.addBookmark();
+             if(this.uiNameText){
+                this.uiNameText.innerHTML = this.name;
              }
          });
+ 
+         if(this.uiBookmarkButton){
+            this.uiBookmarkButton.addEventListener('click', ()=>{
+                if(this.myManager){
+                    this.myManager.addBookmark();
+                }
+            });
+         }
+         
  
      }
  
@@ -105,11 +125,15 @@ class VlcAudio extends VlcMediaContent{
      playPause(){
          if(!this.isPlaying){ 
              this.play(this.currentPlaybackRateIndex); 
-             this.uiPlayButton.querySelector('img').src = "../assets/img/pause.svg";
+             if(this.uiPlaySpeedButton){
+                this.uiPlayButton.querySelector('img').src = "../assets/img/pause.svg";
+             }
          }
          else{
              this.pause();
-             this.uiPlayButton.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
+             if(this.uiPlayButton){
+                this.uiPlayButton.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
+             }
          }
      }
  
@@ -117,7 +141,10 @@ class VlcAudio extends VlcMediaContent{
       * Updates the current duration text
       */
      updateDurationText(){
-         
+         if(!this.uiCurrentTimeText){
+            return;
+         }
+
          let formattedTime = this.formatTime();
          this.uiCurrentTimeText.innerHTML =  formattedTime[0];
          this.uiTotalDurationText.innerHTML = formattedTime[1];
@@ -126,10 +153,15 @@ class VlcAudio extends VlcMediaContent{
      muteVideo(){
          if (this.mediaObject.muted) {
              this.mediaObject.muted = false;
-             this.uiVolumeButtonImg.src = "../assets/img/volume_up_black_24dp.svg";
+             if(this.uiVolumeButtonImg){
+                this.uiVolumeButtonImg.src = "../assets/img/volume_up_black_24dp.svg";
+             }
+             
          } else {
              this.mediaObject.muted = true;
-             this.uiVolumeButtonImg.src = "../assets/img/volumemute.svg";
+             if(this.uiVolumeButtonImg){
+                this.uiVolumeButtonImg.src = "../assets/img/volumemute.svg";
+             }
          }
      }
  
@@ -137,6 +169,9 @@ class VlcAudio extends VlcMediaContent{
       * Update the height of the slider to tell the volume
       */
      updateVolumeSlider(evt){
+         if(!this.uiVolumeInputRange){
+             return;
+         }
          let level = this.uiVolumeInputRange.value;
          this.updateVolumeLevel(level);
      }
@@ -146,6 +181,9 @@ class VlcAudio extends VlcMediaContent{
       * @param {int} level - value from the range 
       */
      updateVolumeLevel(level) {
+         if(!this.uiVolumeLevelBar){
+            return;
+         }
          let max = this.uiVolumeLevelBar.parentElement.clientHeight; //maximum height of the bar
          let ratio = (level/100);
         
@@ -167,6 +205,9 @@ class VlcAudio extends VlcMediaContent{
       * Updates the progress bar
       */
      updateAudioProgess(){
+         if(!this.uiAudioProgressBar){
+             return;
+         }
          let max = this.uiAudioProgressBar.parentElement.clientWidth;
          let ratio = this.getCurrentTime()/this.getTotalDuration();
          this.uiProgressBarInputRange.value = ratio * 100;
@@ -187,7 +228,9 @@ class VlcAudio extends VlcMediaContent{
      changePlaybackRate(){
          this.currentPlaybackRateIndex += 1
          this.currentPlaybackRateIndex %= this.playbackSpeeds.length;
-         this.uiPlaySpeedButton.innerHTML = this.playbackSpeeds[this.currentPlaybackRateIndex] + "x";
+         if(this.uiPlaySpeedButton){
+            this.uiPlaySpeedButton.innerHTML = this.playbackSpeeds[this.currentPlaybackRateIndex] + "x";
+         }
          this.pause();
          this.play(this.currentPlaybackRateIndex);
      }
