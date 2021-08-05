@@ -100,6 +100,49 @@ class Utility{
         return new SQL.Database(fileBuffer);
     }
 
+    static openMediaHtml(type){
+        let html = `<!--No recent media view-->
+        <div
+            class="
+                bg-gray-50
+                flex flex-row
+                justify-between
+                p-4
+                rounded-lg
+                text-gray-600
+                items-center
+                gap-8
+            "
+        >
+            <span class="flex flex-row items-center gap-2">
+                <img
+                    src="../assets/img/schedule_black_24dp.svg"
+                    alt=""
+                    class="w-10"
+                />
+                <span class="font-medium">No recent ${type}</span>
+            </span>
+            <input type="file" style="display: none;" id="open-${type}-file" oninput="openMedia(this, '${type}')" accept="${type}/*"/>
+            <button
+                class="
+                    py-3
+                    px-4
+                    bg-yellow-500
+                    rounded-md
+                    text-xs text-white
+                    font-bold
+                    flex-grow
+                    w-4/12
+                "
+                onclick="document.getElementById('open-${type}-file').click()"
+            >
+                Open ${type} file
+            </button>
+        </div>`;
+
+    return html;
+    }
+
 }
 
 module.exports = Utility;

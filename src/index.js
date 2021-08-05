@@ -111,6 +111,7 @@ ipcMain.handle("clear-directory-array", (event)=>{
 ipcMain.on('start-search', search);
 
 ipcMain.on('stop-search', function(event, decision){
+    console.log(`Search stopped`);
     stopSearch = decision;
     if(decision){
         dirSearched = [];
