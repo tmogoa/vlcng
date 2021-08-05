@@ -45,6 +45,21 @@
             <input type="hidden" id="audio-id" value="0" />
             <div class="flex flex-row justify-end gap-8">
                 <button
+                    id="toHomescreen"
+                    class="
+                        p-2
+                        rounded-full
+                        focus:outline-none
+                        hover:bg-gray-800
+                    "
+                >
+                    <img
+                        src="../assets/img/home_white_24dp.svg"
+                        alt=""
+                        class="w-4"
+                    />
+                </button>
+                <button
                     id="minimize"
                     class="
                         p-2
@@ -99,7 +114,7 @@
                 autoplay
             ></video> -->
 
-            <img src="../assets/img/vlc-playing.png" alt="VLC playing icon" class="w-full h-screen bg-black rounded-none p-0">
+            <canvas id="output" class="w-full h-screen"></canvas>
 
             <div id="menu" style="display: none">
                 <!-- <div id="submenu">
