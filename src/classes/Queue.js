@@ -1,3 +1,4 @@
+//create object inorder to use the functions
 function Queue() {
   this.elements = [];//data being the object on queue
 }
