@@ -233,7 +233,7 @@ function itemHTMLFormat(id, name, artistName, duration, source, isFav) {
             class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"> + </span>
     </td>
     <td class="px-4 py-3 text-sm" oncontextmenu="showContextMenu(event, 'test')">
-      <div onclick="likeItem(${id}, ${isFav})"
+      <div onclick="likeItem(${id}, ${isFav}, this)"
            class="text-${isFav ? "red" : "gray"}-500">
         <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"/></svg>
     </div>
@@ -542,7 +542,7 @@ function playRecentAudio(){
         recentAudios = db.exec(
             "SELECT source from recentAudio inner join audio on audio.id = audioId order by datePlayed DESC"
         );
-            
+        Utility.closeDatabase(db);
         console.log(recentAudios);
 
         if(recentAudios.length > 0 && recentAudios[0].values.length > 0){
@@ -687,6 +687,25 @@ function openMedia(input, type){
                 }
             
         }
+    }
+}
+
+function likeItem(id, isFav, button){
+    isFav = !isFav;
+    let fav = (isFav)? 1: 0;
+
+    let db = Utility.openDatabase(SQL);
+    db.exec(`Update ${type} set favorite = ? where id = ?`, [fav, id]);
+    let r = db.exec(`SELECT favorite from ${type} where id = ?`, [id]);
+    if(r.length < 1 || r[0].values[0][0] != fav){
+        db.exec(`Update ${type} set favorite = ? where id = ?`, [fav, id]);  
+    }
+    Utility.closeDatabase(db);
+
+    if(isFav){
+        button.setAttribute("class", "text-red-500");
+    }else{
+        button.setAttribute("class", "text-gray-500");
     }
 }
 
