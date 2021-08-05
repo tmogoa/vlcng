@@ -6,7 +6,7 @@ const initSqlJs = require("sql.js");
 const fileType = require("file-type");
 const fs = require('fs');
 const find = require('findit');
-const { X_OK } = require("constants");
+const { X_OK, F_OK } = require("constants");
 var dirSearched = [];
 var SQL;
 var stopSearch = false;
@@ -153,7 +153,7 @@ async function search(event, args){
      */
     async function sendFile(file, stat){
         if(filter.test(file)){
-            fs.access(file, X_OK, (err)=>{
+            fs.access(file, F_OK, (err)=>{
 
                 if(err){
                     return;

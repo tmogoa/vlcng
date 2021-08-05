@@ -385,7 +385,7 @@ function checkFile(source, type, destination = ""){
         db.run(`DELETE FROM ${type} WHERE source = ?`, [source]);
         Utility.closeDatabase(db);
     }
-    fs.access(source, fs.constants.X_OK, (err)=>{
+    fs.access(source, fs.constants.F_OK, (err)=>{
         
         if(err){
             console.log(err);
