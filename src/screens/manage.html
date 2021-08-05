@@ -12,6 +12,7 @@
 
         <link rel="stylesheet" href="../index.css" />
         <link rel="stylesheet" href="../assets/css/contextMenu.css" />
+        <link rel="stylesheet" href="../assets/css/homescreen.css" />
         <style>
             .slidecontainer {
                 width: 100%;
@@ -58,7 +59,7 @@
     </head>
 
     <body
-        class="flex flex-col items-center"
+        class="flex flex-col items-center overflow-hidden"
         style="background: #e4733e; height: 700px"
     >
         <div
@@ -258,7 +259,8 @@
                                     </svg>
                                 </span>
                                 <span
-                                    class="ml-2 text-sm tracking-wide truncate" id="all-music-text"
+                                    class="ml-2 text-sm tracking-wide truncate"
+                                    id="all-music-text"
                                     >ALL MUSIC</span
                                 >
                                 <span
@@ -627,9 +629,18 @@
                 "
             >
                 <!-- Music List -->
-                <div id="musicList" class="w-full">
-                    <div class="w-full rounded-lg shadow-xs">
-                        <div class="w-full overflow-x-auto">
+                <div id="musicList" class="w-full rounded-lg">
+                    <div
+                        class="
+                            w-full
+                            rounded-lg
+                            shadow-xs
+                            h-96
+                            overflow-y-scroll overflow-x-hidden
+                            scrollbar
+                        "
+                    >
+                        <div class="w-full rounded-lg">
                             <table class="w-full rounded-lg">
                                 <thead>
                                     <tr
@@ -676,9 +687,11 @@
                                             text-gray-700
                                             dark:text-gray-400
                                         "
-                                        oncontextmenu="attachListener(this)"
                                     >
-                                        <td class="px-4 py-3">
+                                        <td
+                                            class="px-4 py-3"
+                                            oncontextmenu="showContextMenu(event, 'test')"
+                                        >
                                             <div
                                                 class="
                                                     flex
@@ -729,6 +742,8 @@
                                                             font-semi-bold
                                                             text-gray-600
                                                             dark:text-gray-400
+                                                            truncate
+                                                            overflow-ellipsis
                                                         "
                                                         id="titleOne"
                                                     >
@@ -737,10 +752,16 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-4 py-3 text-sm">
+                                        <td
+                                            class="px-4 py-3 text-sm"
+                                            oncontextmenu="showContextMenu(event, 'test')"
+                                        >
                                             <p id="durationOne">3:56</p>
                                         </td>
-                                        <td class="px-4 py-3 text-xs">
+                                        <td
+                                            class="px-4 py-3 text-xs"
+                                            oncontextmenu="showContextMenu(event, 'test')"
+                                        >
                                             <button id="queue">
                                                 <span
                                                     class="
@@ -759,7 +780,10 @@
                                                 </span>
                                             </button>
                                         </td>
-                                        <td class="px-4 py-3 text-sm">
+                                        <td
+                                            class="px-4 py-3 text-sm"
+                                            oncontextmenu="showContextMenu(event, 'test')"
+                                        >
                                             <div class="text-red-500">
                                                 <svg
                                                     class="w-6 h-6"
@@ -786,7 +810,6 @@
                                             text-gray-700
                                             dark:text-gray-400
                                         "
-                                        oncontextmenu="attachListener(this)"
                                     >
                                         <td class="px-4 py-3">
                                             <div
@@ -890,7 +913,6 @@
                                             text-gray-700
                                             dark:text-gray-400
                                         "
-                                        oncontextmenu="attachListener(this)"
                                     >
                                         <td class="px-4 py-3">
                                             <div
@@ -999,7 +1021,6 @@
                                             text-gray-700
                                             dark:text-gray-400
                                         "
-                                        oncontextmenu="attachListener(this)"
                                     >
                                         <td class="px-4 py-3 rounded-bl-lg">
                                             <div

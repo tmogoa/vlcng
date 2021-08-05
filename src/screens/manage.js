@@ -9,7 +9,6 @@ const fileType = require("file-type");
 const Manager = require("../classes/Manager");
 const VlcMediaContent = require("../classes/VlcMediaContent");
 
-
 //const { remote, ipcRenderer } = require("electron");
 console.log(remote);
 
@@ -26,7 +25,6 @@ var stopSearch = false; //tell main render to stop the search
 var pendingSearch = false;
 var rows = []; //rows from the database
 
- 
 closeBtn.onclick = (e) => {
     getAudioWindow().close();
     console.log("close clicked");
@@ -62,15 +60,14 @@ const allMusicText = document.querySelector("#all-music-text");
 
 let isVideosList = false;
 
-
 function showTab() {
     videoTabBtn.classList.toggle("active-tab");
     videoTabBtn.classList.toggle("text-gray-500");
     musicTabBtn.classList.toggle("active-tab");
-    musicTabBtn.classList.toggle("text-gray-500");     
+    musicTabBtn.classList.toggle("text-gray-500");
     type = "audio";
     allMusicText.innerHTML = "ALL MUSIC";
-    if(!isVideosList){
+    if (!isVideosList) {
         type = "video";
         isVideosList = !isVideosList;
         allMusicText.innerHTML = "ALL VIDEO";
@@ -88,7 +85,7 @@ const addPlaylistTrigger = document.querySelector("#add-playlist-trigger");
 const closePlaylistForm = document.querySelector("#close-playlist-button");
 const modal = document.querySelector(".modal");
 
-addPlaylistTrigger.addEventListener("click", toggleModal); 
+addPlaylistTrigger.addEventListener("click", toggleModal);
 
 closePlaylistForm.addEventListener("click", toggleModal);
 
@@ -101,14 +98,10 @@ const playlistList = document.querySelector("#playlist-list-ul");
 const resultHolder = document.querySelector("#result-holder");
 var activeTab = allMusicBtn;
 
-
-
-
 function toggleModal() {
     console.log("Toggling modal");
     modal.classList.toggle("show-modal");
     modal.classList.add("trans-class");
-
 }
 
 function windowOnClick(event) {
@@ -125,82 +118,99 @@ let fileFoundListener = new EventEmitter();
 
 /**
  * Update UI for the listing of all music or video
- * 
+ *
  */
-function updateUIForList(){
-    if(activeTab != allMusicBtn){
+function updateUIForList() {
+    if (activeTab != allMusicBtn) {
         return;
     }
 
-    while((type == "audio")?foundAudioFiles.length > 0 : foundVideoFiles.length > 0){
+    while (
+        type == "audio"
+            ? foundAudioFiles.length > 0
+            : foundVideoFiles.length > 0
+    ) {
         let source;
         let id;
-        if(type == "video"){
+        if (type == "video") {
             source = foundVideoFiles[0].source;
             id = foundVideoFiles[0].id;
-        }
-        else{
+        } else {
             source = foundAudioFiles[0].source;
             id = foundAudioFiles[0].id;
         }
 
-        if(document.getElementById(source) != null){
+        if (document.getElementById(source) != null) {
             continue;
         }
-        
 
-        let media = (type == "audio")? document.createElement("audio") : document.createElement("video");
+        let media =
+            type == "audio"
+                ? document.createElement("audio")
+                : document.createElement("video");
         media.src = source;
-        media.addEventListener("loadedmetadata", function(){
-
-            if(document.getElementById(source) != null){
-                return;;
+        media.addEventListener("loadedmetadata", function () {
+            if (document.getElementById(source) != null) {
+                return;
             }
             let mediaObject = new VlcMediaContent(type);
             mediaObject.mediaObject = media;
             let formatedDuration = mediaObject.formatTime()[1];
-            let name = Utility.path.basename(source, Utility.path.extname(source)); 
+            let name = Utility.path.basename(
+                source,
+                Utility.path.extname(source)
+            );
             let isFav = false;
-            if(typeof SQL  != 'undefined'){
+            if (typeof SQL != "undefined") {
                 let db = Utility.openDatabase(SQL);
-                let isFavResult = db.exec(`SELECT favorite from ${type} where source = ?`, [source]);
+                let isFavResult = db.exec(
+                    `SELECT favorite from ${type} where source = ?`,
+                    [source]
+                );
                 Utility.closeDatabase(db);
-                if(isFavResult.length > 0){
+                if (isFavResult.length > 0) {
                     isFavResult = isFavResult[0].values[0][0];
                     isFav = isFavResult == 1;
                 }
             }
-            let item = itemHTMLFormat(id, name, "Unknown Artist", formatedDuration, source, isFav );
+            let item = itemHTMLFormat(
+                id,
+                name,
+                "Unknown Artist",
+                formatedDuration,
+                source,
+                isFav
+            );
 
             resultHolder.innerHTML += item;
         });
 
-        (type == "audio")?foundAudioFiles.shift():foundVideoFiles.shift();
+        type == "audio" ? foundAudioFiles.shift() : foundVideoFiles.shift();
     }
 }
 
 /**
  * Make the list for the found item
  * @param {int} id
- * @param {string} name 
- * @param {string} artistName 
+ * @param {string} name
+ * @param {string} artistName
  * @param {string} duration
- * @param {string} source 
- * @param {string} isFav 
+ * @param {string} source
+ * @param {string} isFav
  * @returns
  */
-function itemHTMLFormat(id, name, artistName, duration, source, isFav){
-
+function itemHTMLFormat(id, name, artistName, duration, source, isFav) {
     source = source.replace(/\\/g, "/");
-      let listItem = `<tr id="${source}"
+    let listItem = `<tr id="${source}"
       class="bg-gray-50 
              dark:bg-gray-800 
              hover:bg-yellow-200 
              dark:hover:bg-gray-900 
              text-gray-700 
              dark:text-gray-400"
+             
              >
-    <td class="px-4 py-3">
+    <td class="px-4 py-3" oncontextmenu="showContextMenu(event, 'test')">
       <div class="flex items-center text-sm">
         <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
           <img class="object-cover w-full h-full rounded-full" src="../assets/img/vlc-playing.png" alt="" loading="lazy" />
@@ -208,117 +218,116 @@ function itemHTMLFormat(id, name, artistName, duration, source, isFav){
         </div>
         <div onclick = "playItem(${source})">
           <p class="">${artistName}</p>
-          <p class="text-xl font-semi-bold text-gray-600 dark:text-gray-400">${name}</p>
+          <p class="text-xl font-semi-bold text-gray-600 dark:text-gray-400 w-80 truncate overflow-ellipsis">${name}</p>
         </div>
       </div>
     </td>
-    <td class="px-4 py-3 text-sm">${duration}</td>
-    <td class="px-4 py-3 text-xs">
+    <td class="px-4 py-3 text-sm" oncontextmenu="showContextMenu(event, 'test')">${duration}</td>
+    <td class="px-4 py-3 text-xs" oncontextmenu="showContextMenu(event, 'test')">
       <span onclick="listManager.addToQueue(${source}, '${this.type}')" 
             class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"> + </span>
     </td>
-    <td class="px-4 py-3 text-sm">
+    <td class="px-4 py-3 text-sm" oncontextmenu="showContextMenu(event, 'test')">
       <div onclick="likeItem(${id}, ${isFav})"
-           class="text-${(isFav)?"red":"gray"}-500">
+           class="text-${isFav ? "red" : "gray"}-500">
         <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"/></svg>
     </div>
     </td>`;
 
     return listItem;
-  }
+}
 
 /**
  * Listing all the found files from the main process
  */
-function listAllMedia(){
+function listAllMedia() {
     resultHolder.innerHTML = "";
 
-    (async()=>{
+    (async () => {
         SQL = await initSqlJs();
         const db = Utility.openDatabase(SQL);
-        
+
         let result = db.exec(`SELECT source, id, name, favorite from ${type}`);
         Utility.closeDatabase(db);
 
-        if(result.length < 1){
+        if (result.length < 1) {
             return;
         }
 
         rows = result[0].values;
-        
+
         //let j = 0;
         console.log(result);
         console.log(`The rows are: `);
         console.log(rows);
         searchDirectories([]);
-       
     })();
-
 }
 
 /**
- * 
+ *
  * @param {array} rows - result from the sql query
  * @param {array} dirSearched - directories searched
  */
-function searchDirectories(dirSearched){
-        if(typeof rows[0] == 'undefined'){
-            return;
-        }
-        let dir1 = Utility.path.dirname(rows[0][0]).replace(/\\{1}/g, "/");
-        //let dir2 = Utility.path.dirname(dir1);
-        console.log("directory being searched "+ dir1);
-        let criteria = /.*/;
-        if(dirSearched.indexOf(dir1) == -1){
-            ipcRenderer.send("start-search", {type: type, dir:dir1, criteria:criteria});
-        }
-        rows.shift();
+function searchDirectories(dirSearched) {
+    if (typeof rows[0] == "undefined") {
+        return;
+    }
+    let dir1 = Utility.path.dirname(rows[0][0]).replace(/\\{1}/g, "/");
+    //let dir2 = Utility.path.dirname(dir1);
+    console.log("directory being searched " + dir1);
+    let criteria = /.*/;
+    if (dirSearched.indexOf(dir1) == -1) {
+        ipcRenderer.send("start-search", {
+            type: type,
+            dir: dir1,
+            criteria: criteria,
+        });
+    }
+    rows.shift();
 }
 
 /**
- * 
- * @param {*} event 
+ *
+ * @param {*} event
  * @param {Array} fileObject - {id: id,source: fullPath, type: type}
  */
-function searchResult(event, fileObject, dirSearched){
+function searchResult(event, fileObject, dirSearched) {
     console.log("new search result", fileObject);
-    if(fileObject.type != type){
+    if (fileObject.type != type) {
         ipcRenderer.send("stop-search", true);
         return;
     }
 
-    switch(type){
-        case "audio":
-            {
-                foundAudioFiles.push(fileObject);
-                break;
-            }
-        case "video":
-            {
-                foundVideoFiles.push(fileObject);
-                break;
-            }
-        default:
-            {
-                console.log("no type is set");
-            }
+    switch (type) {
+        case "audio": {
+            foundAudioFiles.push(fileObject);
+            break;
+        }
+        case "video": {
+            foundVideoFiles.push(fileObject);
+            break;
+        }
+        default: {
+            console.log("no type is set");
+        }
     }
 
     fileFoundListener.emit("file");
     searchDirectories(dirSearched);
 }
 
-ipcRenderer.on("search-stopped", function(event, decision){
+ipcRenderer.on("search-stopped", function (event, decision) {
     searchStop = decision;
 
-    if(pendingSearch){
+    if (pendingSearch) {
         searchStop = false;
         listAllMedia();
     }
 });
 
-ipcRenderer.on("start-search-is-false", function(event, decision){
-    if(decision && pendingSearch){
+ipcRenderer.on("start-search-is-false", function (event, decision) {
+    if (decision && pendingSearch) {
         ipcRenderer.send("stop-search", stopSearch);
         listAllMedia();
     }
@@ -326,9 +335,8 @@ ipcRenderer.on("start-search-is-false", function(event, decision){
 
 ipcRenderer.on("search-result", searchResult);
 
-
 //list all the media
-allMusicBtn.addEventListener('click', () =>{
+allMusicBtn.addEventListener("click", () => {
     activeTab = allMusicBtn;
     stopSearch = false;
 
