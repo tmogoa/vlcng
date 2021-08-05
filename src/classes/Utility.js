@@ -120,7 +120,7 @@ class Utility{
                     alt=""
                     class="w-10"
                 />
-                <span class="font-medium">No recent ${type}</span>
+                <span class="font-medium">Recent ${type}</span>
             </span>
             <input type="file" style="display: none;" id="open-${type}-file" oninput="openMedia(this, '${type}')" accept="${type}/*"/>
             <button

@@ -10,6 +10,8 @@ const { X_OK, F_OK } = require("constants");
 var dirSearched = [];
 var SQL;
 var stopSearch = false;
+var type; //type of the media being currently played
+var specialType = "audio"; //will change later
 
 
 async function initSQL(){
@@ -27,7 +29,7 @@ initSQL();
 Utility.databasePath = app.getPath("userData");
 
 const vlcManager = new Manager();
-
+vlcManager.currentlyPlayingMediaSrc = "";
 let mainWindow;
 
 if (require("electron-squirrel-startup")) {
@@ -83,11 +85,13 @@ app.on("activate", () => {
 //Handling the link from the homescreen
 ipcMain.on("save-video-link", (evt, link) => {
     vlcManager.currentlyPlayingMediaSrc = link.replace(/\\/g, "/");
+    type = "video";
     console.log(` - Saving the link is ${link} \n`);
 });
 
 ipcMain.on("save-audio-link", (evt, link) => {
     vlcManager.currentlyPlayingMediaSrc = link.replace(/\\/g, "/");
+    type = "audio"
     console.log(` - Saving the link is ${link} \n`);
 });
 
@@ -101,6 +105,12 @@ ipcMain.handle("receive-video-link", async (event, args) => {
 ipcMain.handle("receive-audio-link", async(event, args) =>{
     console.log(` - Sent the video link successfully. The video link was ${vlcManager.currentlyPlayingMediaSrc}\n`);
     return vlcManager.currentlyPlayingMediaSrc;
+});
+
+//the recently playing
+ipcMain.handle("receive-link", () => {
+    console.log("asked for link");
+  return {link: vlcManager.currentlyPlayingMediaSrc, type: specialType};
 });
 //clean the directory array
 ipcMain.handle("clear-directory-array", (event)=>{

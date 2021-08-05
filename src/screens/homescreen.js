@@ -84,7 +84,7 @@ const recentVideoItems = document.getElementById("video-items");
     console.log(recentVideos);
     let queue = new EventEmitter();
     let thumbnailQueue = [];
-
+    recentVideoItems.innerHTML += Utility.openMediaHtml("video"); //ask for a file
     if (recentVideos.length > 0 && recentVideos[0].values.length > 0) {
         let rows = recentVideos[0].values;
         let type = "video";
@@ -145,12 +145,11 @@ const recentVideoItems = document.getElementById("video-items");
                 });
             }
         }
-    } else {
-        recentVideoItems.innerHTML += Utility.openMediaHtml("video"); //ask for a file
     }
 
     console.log("The recent audios are ");
     console.log(recentAudios);
+    recentAudioItems.innerHTML += Utility.openMediaHtml("audio"); //ask for a file
     if (recentAudios.length > 0 && recentAudios[0].values.length > 0) {
         let rows = recentAudios[0].values;
         let type = 'audio';
@@ -177,8 +176,6 @@ const recentVideoItems = document.getElementById("video-items");
 
             
         });
-    }else{
-        recentAudioItems.innerHTML += Utility.openMediaHtml("audio"); //ask for a file
     }
     
 
