@@ -8,6 +8,10 @@ const initSqlJs = require("sql.js");
 const fileType = require("file-type");
 const Manager = require("../classes/Manager");
 const VlcMediaContent = require("../classes/VlcMediaContent");
+const VlcAudio = require("../classes/VlcAudio");
+const VlcVideo = require("../classes/VlcVideo");
+const ListManager = require("../classes/ListManager");
+const { ipcRenderer } = require("electron");
 
 Utility.databasePath = remote.app.getPath("userData");
 var SQL; //global SQL from initJs to be used by all functions
@@ -66,7 +70,7 @@ function showTab() {
     type = "audio";
     allMusicText.innerHTML = "ALL MUSIC";
     tableTitle.innerHTML = "Artist/Song";
-    if(!isVideosList){
+    if (!isVideosList) {
         type = "video";
         isVideosList = !isVideosList;
         allMusicText.innerHTML = "ALL VIDEO";
@@ -76,7 +80,6 @@ function showTab() {
     pendingSearch = false;
     activeMenu.click();
     //ipcRenderer.send("stop-search", stopSearch);
-    
 }
 videoTabBtn.onclick = showTab;
 musicTabBtn.onclick = showTab;
@@ -122,8 +125,8 @@ let fileFoundListener = new EventEmitter();
  * Update UI for the listing of all music or video
  *
  */
-function updateUIForList(){
-    if(activeMenu != allMusicBtn){
+function updateUIForList() {
+    if (activeMenu != allMusicBtn) {
         return;
     }
 
@@ -219,8 +222,8 @@ function itemHTMLFormat(id, name, artistName, duration, source, isFav) {
           <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
         </div>
         <div onclick = "playItem(${source})">
-          ${(type == "audio")?"<p class=''>" + artistName + "</p>": ""}
-          <p class="text-xl font-semi-bold text-gray-600 dark:text-gray-400">${name}</p>
+          ${type == "audio" ? "<p class=''>" + artistName + "</p>" : ""}
+          <p class="text-lg font-semi-bold text-gray-600 dark:text-gray-400 truncate overflow-ellipsis w-72 lg:w-96">${name}</p>
         </div>
       </div>
     </td>
@@ -252,13 +255,13 @@ function listAllMedia() {
         let result = db.exec(`SELECT source, id, name, favorite from ${type}`);
         Utility.closeDatabase(db);
 
-        if(result.length < 1){
+        if (result.length < 1) {
             resultHolder.innerHTML = Utility.openMediaHtml(type);
             return;
         }
 
         rows = result[0].values;
-        if(rows.length < 1){
+        if (rows.length < 1) {
             resultHolder.innerHTML = Utility.openMediaHtml(type);
         }
 
@@ -326,7 +329,7 @@ function searchResult(event, fileObject, dirSearched) {
 ipcRenderer.on("search-stopped", function (event, decision) {
     searchStop = decision;
 
-    if(pendingSearch && ipcRenderer.invoke("clear-directory-array")){
+    if (pendingSearch && ipcRenderer.invoke("clear-directory-array")) {
         searchStop = false;
         listAllMedia();
     }
@@ -341,7 +344,7 @@ ipcRenderer.on("start-search-is-false", function (event, decision) {
 
 ipcRenderer.on("search-result", searchResult);
 
-function toggleActiveMenu(li){
+function toggleActiveMenu(li) {
     activeMenu.classList.toggle("bg-yellow-500");
     activeMenu = li;
     activeMenu.classList.toggle("bg-yellow-500");
@@ -351,7 +354,7 @@ function toggleActiveMenu(li){
 fileFoundListener.addListener("file", updateUIForList);
 
 //list all the media
-allMusicBtn.addEventListener('click', () =>{
+allMusicBtn.addEventListener("click", () => {
     toggleActiveMenu(allMusicBtn);
     stopSearch = false;
     //the search is started when the main process notify us of search-stopped event
@@ -363,7 +366,138 @@ allMusicBtn.addEventListener('click', () =>{
 //click allMusicBtn initially
 allMusicBtn.click();
 
+//for the minimal player
+//Assuming that the manage.js has been called already.
+//If the manage.js is not called, this script will craft
 
+// let vlcAudio = new VlcAudio();
+// let vlcVideo = new VlcVideo();
 
+// let uiPlayButton = document.getElementById("play-button");
+// let uiNextButton = document.getElementById("next-button");
+// let uiPreviousButton = document.getElementById("previous-button");
+// let uiProgressInputRange = document.getElementById("progress-input-range");
+// let uiShuffleButton = document.getElementById("shuffle-button");
+// let uiLoopButton = document.getElementById("play-in-loop");
+// let uiArtistTitle = document.getElementById("artist-title");
+// let uiMediaTitle = document.getElementById("media-title");
+// let uiLikeButton = document.getElementById("like-button");
+// let currentAudio = document.getElementById("currently-playing-audio");
+// let currentVideo = document.getElementById("currently-playing-video");
 
+// //assigning the media objects
+// vlcVideo.mediaObject = currentVideo;
+// vlcAudio.mediaObject = currentAudio;
+// vlcAudio.uiNameText = uiMediaTitle;
+// vlcVideo.uiNameText = uiMediaTitle;
 
+// let audioManager = new Manager();
+// let videoManager = new Manager();
+
+// let listManager = new ListManager();
+
+// //assigning the managers
+// function assignManagers(){
+//     audioManager.managedObject = vlcAudio;
+//     vlcAudio.setManager(audioManager);
+
+//     videoManager.managedObject = vlcVideo;
+//     vlcVideo.setManager(videoManager);
+// }
+
+// //reassign managers when stuff change
+// function retireAndAssignManagers(){
+//     audioManager = new Manager();
+//     videoManager = new Manager();
+//     assignManagers();
+// }
+
+// //remanage objects when their link change
+// function reManage(src){
+//     switch(type)
+//     {
+//         case "audio":
+//             {
+//                 audioManager.setSrc(src);
+//                 audioManager.manage();
+//                 break;
+//             }
+//         case "video":
+//             {
+//                 videoManager.setSrc(src);
+//                 videoManager.manage();
+//             }
+//     }
+// }
+
+// uiPlayButton.addEventListener("click", function(){
+//     switch(type){
+//         case "audio":
+//             {
+//                 if(vlcAudio.isPlaying){
+//                     //change the icon
+//                 }else{
+
+//                 }
+//                 vlcAudio.playPause();
+//                 break;
+//             }
+//         case "video":
+//             {
+//                 if(vlcVideo.isPlaying){
+//                     //change the icon
+//                 }else{
+
+//                 }
+//                 vlcVideo.playPause();
+//                 break;
+//             }
+//     }
+// });
+
+// //
+// currentAudio.addEventListener('timeupdate', function(){
+//     updateSlider(this);
+// });
+// currentVideo.addEventListener('timeupdate', function(){
+//     updateSlider(this);
+// });
+
+// function updateSlider(element){
+//     let ratio = element.currentTime/element.duration;
+//     uiProgressInputRange.value = ratio * 100;
+// }
+
+// uiProgressInputRange.addEventListener("input", function(){
+//     switch(type){
+//         case "video":
+//             {
+//                 vlcVideo.setCurrentTime(this.value/100 * vlcVideo.getTotalDuration());
+//                 break;
+//             }
+//         case "audio":
+//             {
+//                 vlcAudio.setCurrentTime(this.value/100 * vlcAudio.getTotalDuration());
+//                 break;
+//             }
+//     }
+// });
+
+// //get the link of the audio from the main process
+
+// ipcRenderer.on("receive-link", (event, link, _type) =>{
+//     if(type !== _type){
+//         showTab();
+//     }
+//     retireAndAssignManagers();
+//     reManage(link);
+// });
+
+// //get the most recent audio
+// if(type == "audio" && currentAudio.src == ""){
+
+//     recentAudios = db.exec(
+//         "SELECT audio.id, audio.playedTill, audio.name, audio.source, recentAudio.datePlayed from recentAudio inner join audio on audio.id = audioId order by datePlayed DESC"
+//     );
+
+// }
