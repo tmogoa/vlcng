@@ -1,5 +1,6 @@
 const remote = require("electron").remote;
 const { ipcRenderer } = require("electron");
+const Wave = require("@foobar404/wave");
 
 // ########
 // windows controls
@@ -24,6 +25,14 @@ maximizeIcon.onclick = (e) => {
     maximize();
     console.log("close clicked");
 };
+
+toHomescreen.onclick = (e) => {
+    routeToHomeScreen();
+};
+
+function routeToHomeScreen() {
+    getWindow().loadFile("./src/screens/homescreen.html");
+}
 
 function maximize() {
     const window = getWindow();
@@ -141,7 +150,7 @@ autoShowMenu();
  * Gets the link from the homescreen.
  */
 
-ipcRenderer.invoke("receive-audio-link", "").then((link) =>{
+ipcRenderer.invoke("receive-audio-link", "").then((link) => {
     let resolvedLink = Utility.path.resolve(link);
 
     console.log(`- The resolved link from the main process: ${resolvedLink}\n`);
@@ -159,3 +168,27 @@ volControlBtn.addEventListener("mouseover", function (e) {
 volControlBtn.addEventListener("mouseleave", function (e) {
     volProgressContainer.classList.add("invisible");
 });
+
+let wave = new Wave();
+wave.fromElement("audio-elem", "output", {
+    type: "shine",
+    colors: ["red", "white", "blue"],
+});
+
+console.log(navigator);
+
+// navigator.mediaDevices
+//     .getUserMedia({
+//         audio: true,
+//     })
+//     .then(function (stream) {
+//         wave.fromStream(stream, "output", {
+//             type: "shine",
+//             colors: ["red", "white", "blue"],
+//         });
+//         console.log(stream);
+//     })
+//     .catch(function (err) {
+//         console.log(err.message);
+//         console.log("test log.");
+//     });

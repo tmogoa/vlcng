@@ -47,6 +47,7 @@
         }
     },
     "dependencies": {
+        "@foobar404/wave": "^1.2.7",
         "electron-squirrel-startup": "^1.0.0",
         "file-type": "^16.5.3",
         "findit": "^2.0.0",
