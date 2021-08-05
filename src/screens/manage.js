@@ -99,6 +99,7 @@ const queueBtn = document.querySelector("#queue-button");
 const recentlyPlayedBtn = document.querySelector("#recently-played-button");
 const settingBtn = document.querySelector("#settings-button");
 const playlistList = document.querySelector("#playlist-list-ul");
+const openFileBtn = document.querySelector("#open-file-button");
 const resultHolder = document.querySelector("#result-holder");
 var activeMenu = allMusicBtn;
 
@@ -220,7 +221,7 @@ function itemHTMLFormat(id, name, artistName, duration, source, isFav) {
           <img class="object-cover w-full h-full rounded-full" src="../assets/img/vlc-playing.png" alt="" loading="lazy" />
           <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
         </div>
-        <div onclick = "playItem(${source})">
+        <div onclick = "${(type == "audio" ) ? "sendaudioPath('" + source+"')": "sendvideoPath('" + source+"')"}">
           ${type == "audio" ? "<p class=''>" + artistName + "</p>" : ""}
           <p class="text-lg font-semi-bold text-gray-600 dark:text-gray-400 truncate overflow-ellipsis w-72 lg:w-96">${name}</p>
         </div>
@@ -364,6 +365,17 @@ allMusicBtn.addEventListener("click", () => {
 
 //click allMusicBtn initially
 allMusicBtn.click();
+
+//the open file button
+openFileBtn.addEventListener("click", () =>{
+    let input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", `${type}/*`);
+    input.addEventListener('input', function(){
+        openMedia(this, type);
+    });
+    input.click();
+});
 
 // for the minimal player
 // Assuming that the manage.js has been called already.
@@ -541,4 +553,141 @@ function playRecentAudio(){
         }
     }
 }
+
+
+
+
+/**
+ * Checks for error in reading the file. To send the file to main process for playing.
+ * @param {string} source - source of file
+ * @param {string} type - audio | video
+ */
+ function checkFile(source, type, destination = ""){
+    let db = Utility.openDatabase(SQL);
+    function deleteFile(){
+        db.run(`DELETE FROM ${type} WHERE source = ?`, [source]);
+        Utility.closeDatabase(db);
+    }
+    fs.access(source, fs.constants.F_OK, (err)=>{
+        
+        if(err){
+            console.log(err);
+            alert("An error occurrend while trying to access the file. The file might not exist, has errors, or has been relocated");
+            //deleteFile();
+            return;
+        }
+        fileType.fromFile(source).then((ft) => {
+            console.log("Right here");
+            if(typeof ft == 'undefined'){
+                alert("The file is not of type media");
+                deleteFile();
+                return;
+            }
+
+            //console.log('The ft object is ft and path is ', ft, fullPath);
+            let extname = ft.mime;
+
+            switch(type){
+                case "audio":
+                    {
+                        if(/audio\/*/.test(extname)){
+                            let id = db.exec(`SELECT id from ${type} where source = ?`, [source]);
+                            let name = Utility.path.basename(source, Utility.path.extname(source));
+
+                            if(id.length < 1){
+                                db.exec(`INSERT INTO ${type}(playedTill, name, source) values (?, ?, ?)`, [0, name, source]);
+
+                                id = db.exec(`SELECT id from ${type} where source = ?`, [source]);
+                            }
+                            Utility.closeDatabase(db);
+                            if(id.length < 1){
+                                alert("An error occurred while trying to save the file for future look up");
+                            }
+                            if(destination != ""){
+                                ipcRenderer.send(
+                                    "save-audio-link",
+                                    source
+                                );
+                                getWindow().loadFile(destination);
+                            }
+                            //console.log("found audio");
+                        }else{
+                            alert("The file is not an audio file");
+                            deleteFile();
+                        }
+                        break;
+                    }
+                case "video":
+                    {
+                        if(/video\/*/.test(extname)){
+                            let id = db.exec(`SELECT id from ${type} where source = ?`, [source]);
+                            let name = Utility.path.basename(source, Utility.path.extname(source));
+                            if(id.length < 1){
+                                db.exec(`INSERT INTO ${type}(playedTill, name, source) values (?, ?, ?)`, [0, name, source]);
+
+                                id = db.exec(`SELECT id from ${type} where source = ?`, [source]);
+                            }
+                            Utility.closeDatabase(db);
+                            if(id.length < 1){
+                                alert("An error occurred while trying to save the file for future look up");
+                            }
+                            if(destination != ""){
+                                ipcRenderer.send(
+                                    "save-video-link",
+                                    source
+                                );
+                                getWindow().loadFile(destination);
+                            }
+                            
+                        }else{
+                            
+                            deleteFile();
+                            alert("The file is not a video.");
+                        }
+                        break;
+                    }
+                    
+                default: 
+                {
+                    console.error("file type is not defined for the manage.html");
+                }
+            }
+        });
+
+        return;
+    });
+}
+
+//send the audio file to the player
+function sendvideoPath(itemSource){
+    checkFile(itemSource, "video", "./src/screens/video.html");
+}
+
+//Send the video file to the player
+function sendaudioPath(itemSource){
+    checkFile(itemSource, "audio", "./src/screens/audio-play.html");
+}
+
+//opening media files
+function openMedia(input, type){
+    let files = input.files;
+    if(files){
+        let mediaFile = files[0].path;
+        let src = mediaFile.replace(/\\+/g, "/");
+        switch(type){
+            case "audio":
+                {
+                    sendaudioPath(src);
+                    break;
+                }
+            case "video":
+                {
+                    sendvideoPath(src);
+                    break;
+                }
+            
+        }
+    }
+}
+
 
