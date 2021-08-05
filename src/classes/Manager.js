@@ -100,13 +100,16 @@ class Manager extends EventEmitter{
      */
     checkObjectPersistence(SQL){
         const db = Utility.openDatabase(SQL);
-        let result = db.exec(`SELECT id, playedTill from ${this.managedObject.type} where name = ? and source = ?`, [this.managedObject.getName(), this.managedObject.getSrc()]);
-        
+        let res = db.exec(`SELECT * from ${this.managedObject.type}`);
+        console.log(`Every item in the database of this ${this.managedObject.type} is`, res);
+        let result = db.exec(`SELECT id, playedTill from ${this.managedObject.type} where source = ?`, [this.managedObject.getSrc()]);
+        console.log(`The result from the database is`, result);
         if(result.length < 1){
+            console.log(`Ojbect doesn't exist in the database. Source: `, this.managedObject.getSrc());
             //add
             db.run(`INSERT into ${this.managedObject.type}(playedTill, name, source) values (?, ?, ?)`, [this.managedObject.getCurrentTime(), this.managedObject.getName(), this.managedObject.getSrc()]);
             
-            result = db.exec(`SELECT id, playedTill from ${this.managedObject.type} where name = ? and source = ?`, [this.managedObject.getName(), this.managedObject.getSrc()]);
+            result = db.exec(`SELECT id, playedTill from ${this.managedObject.type} where source = ?`, [this.managedObject.getSrc()]);
 
             //insert into recent video
             db.run(`INSERT into recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)}(${this.managedObject.type}Id) values (?)`, [result[0].values[0][0]]);
@@ -144,17 +147,32 @@ class Manager extends EventEmitter{
         if(this.managedObject.isPlaying){
             const db = Utility.openDatabase(SQL);
             this.currentlyStoppedAt = this.managedObject.getCurrentTime();
-            if(this.managedObject.id !== 'undefined'){
-                db.run(`UPDATE ${this.managedObject.type} set playedTill = ? where id = ?`, [this.currentlyStoppedAt, this.managedObject.getId()]);
+            if(typeof this.managedObject.id !== 'undefined'){
+                db.exec(`UPDATE ${this.managedObject.type} set playedTill = ? where id = ?`, [this.currentlyStoppedAt, this.managedObject.getId()]);
     
-                db.run(`UPDATE recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)} set datePlayed = CURRENT_TIMESTAMP where  ${this.managedObject.type}Id = ?`, [this.managedObject.getId()]);
+                let currentRecent = db.exec(`SELECT ${this.managedObject.type}Id from recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)} where ${this.managedObject.type}Id = ?`, [this.managedObject.getId()]);
+
+                console.log(`The current recent from the database is`, currentRecent);
+                if(currentRecent.length < 1){
+                    //insert into recent video
+                    db.run(`INSERT into recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)}(${this.managedObject.type}Id) values (?)`, [this.managedObject.getId()]);
+                }
+
+                db.exec(`UPDATE recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)} set datePlayed = CURRENT_TIMESTAMP where  ${this.managedObject.type}Id = ?`, [this.managedObject.getId()]);
+
+                console.log(`Recent ${this.managedObject.type}s`);
+                let r = db.exec(`SELECT * from recent${this.managedObject.type.charAt(0).toUpperCase() + this.managedObject.type.slice(1)}`);
+                console.log(r);
+
+                console.log("updated successfully");
+                
             }else{
                 console.log(`The id is undefined`);
             }
             Utility.closeDatabase(db);
 
             console.log(`The source of the object is ${this.managedObject.getSrc()}`);
-            console.log("updated successfully");
+            
         }
         
     }

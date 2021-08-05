@@ -103,7 +103,7 @@ class PlayList{
 
     ItemHTMLFormat(id, name, artistName, playTill, source, isFav){
 
-      source = source.replace(/\\/g, "\\\\");
+      source = source.replace(/\\/g, "/");
         let listItem = `<tr
         class="bg-gray-50 
                dark:bg-gray-800 

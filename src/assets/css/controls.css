@@ -32,7 +32,7 @@
     height: 90%;
     border-left: 2px solid gray;
     padding-left: 5px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     overflow: auto;
     margin-left: 14px;
     align-items: flex-start;

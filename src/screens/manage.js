@@ -1,6 +1,16 @@
+//const remote = require("electron").remote;
+//const ipcRenderer = require("electron").ipcRenderer;
+
 const fs = require("fs");
 const EventEmitter = require("events");
 const Utility = require("../classes/Utility");
+const initSqlJs = require("sql.js");
+const fileType = require("file-type");
+const Manager = require("../classes/Manager");
+const VlcMediaContent = require("../classes/VlcMediaContent");
+
+Utility.databasePath = remote.app.getPath("userData");
+var SQL; //global SQL from initJs to be used by all functions
 
 const getAudioWindow = () => remote.BrowserWindow.getFocusedWindow();
 const closeBtn = document.getElementById("close");
@@ -8,8 +18,10 @@ const minimizeIcon = document.getElementById("minimize");
 const maximizeIcon = document.getElementById("maximize");
 const toHomescreen = document.getElementById("toHomescreen");
 var type = "audio";
-var activeTab = allMusicBtn;
- 
+var stopSearch = false; //tell main render to stop the search
+var pendingSearch = false;
+var rows = []; //rows from the database
+
 closeBtn.onclick = (e) => {
     getAudioWindow().close();
     console.log("close clicked");
@@ -41,6 +53,8 @@ function routeToHomeScreen() {
 //START OF TAB SWITCHERS
 const videoTabBtn = document.getElementById("videoTabBtn");
 const musicTabBtn = document.getElementById("musicTabBtn");
+const allMusicText = document.querySelector("#all-music-text");
+var tableTitle = document.getElementById("table-header-title");
 
 let isVideosList = false;
 
@@ -48,12 +62,21 @@ function showTab() {
     videoTabBtn.classList.toggle("active-tab");
     videoTabBtn.classList.toggle("text-gray-500");
     musicTabBtn.classList.toggle("active-tab");
-    musicTabBtn.classList.toggle("text-gray-500");     
+    musicTabBtn.classList.toggle("text-gray-500");
     type = "audio";
+    allMusicText.innerHTML = "ALL MUSIC";
+    tableTitle.innerHTML = "Artist/Song";
     if(!isVideosList){
         type = "video";
         isVideosList = !isVideosList;
+        allMusicText.innerHTML = "ALL VIDEO";
+        tableTitle.innerHTML = "Video";
     }
+    stopSearch = true;
+    pendingSearch = false;
+    activeMenu.click();
+    //ipcRenderer.send("stop-search", stopSearch);
+    
 }
 videoTabBtn.onclick = showTab;
 musicTabBtn.onclick = showTab;
@@ -64,7 +87,7 @@ const addPlaylistTrigger = document.querySelector("#add-playlist-trigger");
 const closePlaylistForm = document.querySelector("#close-playlist-button");
 const modal = document.querySelector(".modal");
 
-addPlaylistTrigger.addEventListener("click", toggleModal); 
+addPlaylistTrigger.addEventListener("click", toggleModal);
 
 closePlaylistForm.addEventListener("click", toggleModal);
 
@@ -75,15 +98,12 @@ const recentlyPlayedBtn = document.querySelector("#recently-played-button");
 const settingBtn = document.querySelector("#settings-button");
 const playlistList = document.querySelector("#playlist-list-ul");
 const resultHolder = document.querySelector("#result-holder");
-var dirsSearched = [];
-
-
+var activeMenu = allMusicBtn;
 
 function toggleModal() {
     console.log("Toggling modal");
     modal.classList.toggle("show-modal");
     modal.classList.add("trans-class");
-
 }
 
 function windowOnClick(event) {
@@ -98,110 +118,252 @@ var foundVideoFiles = [];
 
 let fileFoundListener = new EventEmitter();
 
-//This function recursively searches the users computer for all the media items of specific type
-
-
-
 /**
- * 
- * @param {error} err 
- * @param {string[]} files 
- * @returns 
+ * Update UI for the listing of all music or video
+ *
  */
-function foundfiles(currentDir, err, files, type){
-    if(err){
-        console.error(err);
+function updateUIForList(){
+    if(activeMenu != allMusicBtn){
         return;
     }
-    let i = 0;
-    console.log(`New i and i = ${i}`);
 
-    let checkFile = ()=>{
-        if(files.length > i){
-            let file = files[i];
-            let fullPath = `${currentDir}${Utility.path.sep}${file.name}`;
-            fullPath = fullPath.replace(/\\{1}/g, "/");
-
-            if(file.isDirectory() && Utility.binSearch(dirsSearched, fullPath) == -1){
-                console.log(`new directory called ${fullPath} is being searched`);
-                dirsSearched.push(fullPath);
-
-                findAllFiles(fullPath, 'video', foundfiles);
-            }
-
-            console.log(Utility.path.extname(file.name))
-            if(Utility.path.extname(file.name) == ".mp3"){
-                console.log("is music");
-                foundAudioFiles.push(currentDir + "/" + file.name);
-                fileFoundListener.emit("file");
-            }
-            else if((/\.mp4|\.m4v|\.wmv/).test(Utility.path.extname(file.name))){
-                console.log("is video");
-                foundVideoFiles.push(currentDir + "/" + file.name);
-                fileFoundListener.emit("file");
-            }
-        }
-        
-        if(i == files.length){
-            clearInterval(checkFile);
+    while (
+        type == "audio"
+            ? foundAudioFiles.length > 0
+            : foundVideoFiles.length > 0
+    ) {
+        let source;
+        let id;
+        if (type == "video") {
+            source = foundVideoFiles[0].source;
+            id = foundVideoFiles[0].id;
+        } else {
+            source = foundAudioFiles[0].source;
+            id = foundAudioFiles[0].id;
         }
 
-        i++;
+        if (document.getElementById(source) != null) {
+            continue;
+        }
+
+        let media =
+            type == "audio"
+                ? document.createElement("audio")
+                : document.createElement("video");
+        media.src = source;
+        media.addEventListener("loadedmetadata", function () {
+            if (document.getElementById(source) != null) {
+                return;
+            }
+            let mediaObject = new VlcMediaContent(type);
+            mediaObject.mediaObject = media;
+            let formatedDuration = mediaObject.formatTime()[1];
+            let name = Utility.path.basename(
+                source,
+                Utility.path.extname(source)
+            );
+            let isFav = false;
+            if (typeof SQL != "undefined") {
+                let db = Utility.openDatabase(SQL);
+                let isFavResult = db.exec(
+                    `SELECT favorite from ${type} where source = ?`,
+                    [source]
+                );
+                Utility.closeDatabase(db);
+                if (isFavResult.length > 0) {
+                    isFavResult = isFavResult[0].values[0][0];
+                    isFav = isFavResult == 1;
+                }
+            }
+            let item = itemHTMLFormat(
+                id,
+                name,
+                "Unknown Artist",
+                formatedDuration,
+                source,
+                isFav
+            );
+
+            resultHolder.innerHTML += item;
+        });
+
+        type == "audio" ? foundAudioFiles.shift() : foundVideoFiles.shift();
     }
-    
-    setInterval(checkFile, 0);
-    
 }
 
-async function findAllFiles(directory, type, foundfiles){
+/**
+ * Make the list for the found item
+ * @param {int} id
+ * @param {string} name
+ * @param {string} artistName
+ * @param {string} duration
+ * @param {string} source
+ * @param {string} isFav
+ * @returns
+ */
+function itemHTMLFormat(id, name, artistName, duration, source, isFav) {
+    source = source.replace(/\\/g, "/");
+    let listItem = `<tr id="${source}"
+      class="bg-gray-50 
+             dark:bg-gray-800 
+             hover:bg-yellow-200 
+             dark:hover:bg-gray-900 
+             text-gray-700 
+             dark:text-gray-400"
+             
+             >
+    <td class="px-4 py-3" oncontextmenu="showContextMenu(event, 'test')">
+      <div class="flex items-center text-sm">
+        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+          <img class="object-cover w-full h-full rounded-full" src="../assets/img/vlc-playing.png" alt="" loading="lazy" />
+          <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+        </div>
+        <div onclick = "playItem(${source})">
+          ${(type == "audio")?"<p class=''>" + artistName + "</p>": ""}
+          <p class="text-xl font-semi-bold text-gray-600 dark:text-gray-400">${name}</p>
+        </div>
+      </div>
+    </td>
+    <td class="px-4 py-3 text-sm" oncontextmenu="showContextMenu(event, 'test')">${duration}</td>
+    <td class="px-4 py-3 text-xs" oncontextmenu="showContextMenu(event, 'test')">
+      <span onclick="listManager.addToQueue(${source}, '${this.type}')" 
+            class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"> + </span>
+    </td>
+    <td class="px-4 py-3 text-sm" oncontextmenu="showContextMenu(event, 'test')">
+      <div onclick="likeItem(${id}, ${isFav})"
+           class="text-${isFav ? "red" : "gray"}-500">
+        <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"/></svg>
+    </div>
+    </td>`;
 
-    fs.readdir(directory, {withFileTypes: true},(err, files)=>{
-        foundfiles(directory, err, files, type);
-    });
+    return listItem;
 }
 
-fileFoundListener.on("file", ()=>{
-    console.log(foundAudioFiles, foundVideoFiles);
+/**
+ * Listing all the found files from the main process
+ */
+function listAllMedia() {
+    resultHolder.innerHTML = "";
+
+    (async () => {
+        SQL = await initSqlJs();
+        const db = Utility.openDatabase(SQL);
+
+        let result = db.exec(`SELECT source, id, name, favorite from ${type}`);
+        Utility.closeDatabase(db);
+
+        if(result.length < 1){
+            resultHolder.innerHTML = Utility.openMediaHtml(type);
+            return;
+        }
+
+        rows = result[0].values;
+        if(rows.length < 1){
+            resultHolder.innerHTML = Utility.openMediaHtml(type);
+        }
+
+        //let j = 0;
+        console.log(result);
+        console.log(`The rows are: `);
+        console.log(rows);
+        searchDirectories([]);
+    })();
+}
+
+/**
+ *
+ * @param {array} rows - result from the sql query
+ * @param {array} dirSearched - directories searched
+ */
+function searchDirectories(dirSearched) {
+    if (typeof rows[0] == "undefined") {
+        return;
+    }
+    let dir1 = Utility.path.dirname(rows[0][0]).replace(/\\{1}/g, "/");
+    //let dir2 = Utility.path.dirname(dir1);
+    console.log("directory being searched " + dir1);
+    let criteria = /.*/;
+    if (dirSearched.indexOf(dir1) == -1) {
+        ipcRenderer.send("start-search", {
+            type: type,
+            dir: dir1,
+            criteria: criteria,
+        });
+    }
+    rows.shift();
+}
+
+/**
+ *
+ * @param {*} event
+ * @param {Array} fileObject - {id: id,source: fullPath, type: type}
+ */
+function searchResult(event, fileObject, dirSearched) {
+    console.log("new search result", fileObject);
+    if (fileObject.type != type) {
+        ipcRenderer.send("stop-search", true);
+        return;
+    }
+
+    switch (type) {
+        case "audio": {
+            foundAudioFiles.push(fileObject);
+            break;
+        }
+        case "video": {
+            foundVideoFiles.push(fileObject);
+            break;
+        }
+        default: {
+            console.log("no type is set");
+        }
+    }
+
+    fileFoundListener.emit("file");
+    searchDirectories(dirSearched);
+}
+
+ipcRenderer.on("search-stopped", function (event, decision) {
+    searchStop = decision;
+
+    if(pendingSearch && ipcRenderer.invoke("clear-directory-array")){
+        searchStop = false;
+        listAllMedia();
+    }
 });
+
+ipcRenderer.on("start-search-is-false", function (event, decision) {
+    if (decision && pendingSearch) {
+        ipcRenderer.send("stop-search", stopSearch);
+        listAllMedia();
+    }
+});
+
+ipcRenderer.on("search-result", searchResult);
+
+function toggleActiveMenu(li){
+    activeMenu.classList.toggle("bg-yellow-500");
+    activeMenu = li;
+    activeMenu.classList.toggle("bg-yellow-500");
+}
+
+//update the ui when searching is done
+fileFoundListener.addListener("file", updateUIForList);
 
 //list all the media
-allMusicBtn.addEventListener('click', ()=>{
-    activeTab = allMusicBtn;
-    dirsSearched = [];
-
-    (async()=>{
-        const SQL = await initSqlJs();
-        let filesManager = new Manager();
-        const db = Utility.openDatabase(SQL);
-        
-        
-    })();
-
+allMusicBtn.addEventListener('click', () =>{
+    toggleActiveMenu(allMusicBtn);
+    stopSearch = false;
+    //the search is started when the main process notify us of search-stopped event
+    ipcRenderer.send("stop-search", stopSearch);
+    pendingSearch = true;
+    console.log(`pending search is ${pendingSearch}`);
 });
 
-//constructs either a temporary vlc video or audio object
-function constructMediaObject(type){
-    let mediaObject;
-    switch(type){
-        case "video":
-            {
-                mediaObject = new VlcVideo();
-                let video = document.createElement('video');
-                mediaObject.mediaObject = video;
-                break;
-            }
-        case "audio":
-            {
-                mediaObject = new VlcAudio();
-                let audio = document.createElement('audio');
-                mediaObject.mediaObject = audio;
-                break;
-            }
-    }
-    return mediaObject;
-}
+//click allMusicBtn initially
+allMusicBtn.click();
 
-findAllFiles("C:/Users/Levi Kamara Zwannah/Videos", 'video', foundfiles);
+
 
 
 

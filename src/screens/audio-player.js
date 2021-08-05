@@ -25,6 +25,14 @@ maximizeIcon.onclick = (e) => {
     console.log("close clicked");
 };
 
+toHomescreen.onclick = (e) => {
+    routeToHomeScreen();
+};
+
+function routeToHomeScreen() {
+    getWindow().loadFile("./src/screens/homescreen.html");
+}
+
 function maximize() {
     const window = getWindow();
     if (window.isMaximized()) {
@@ -141,7 +149,7 @@ autoShowMenu();
  * Gets the link from the homescreen.
  */
 
-ipcRenderer.invoke("receive-audio-link", "").then((link) =>{
+ipcRenderer.invoke("receive-audio-link", "").then((link) => {
     let resolvedLink = Utility.path.resolve(link);
 
     console.log(`- The resolved link from the main process: ${resolvedLink}\n`);
@@ -159,3 +167,19 @@ volControlBtn.addEventListener("mouseover", function (e) {
 volControlBtn.addEventListener("mouseleave", function (e) {
     volProgressContainer.classList.add("invisible");
 });
+
+let wave = new Wave();
+
+navigator.mediaDevices
+    .getUserMedia({
+        audio: true,
+    })
+    .then(function (stream) {
+        wave.fromStream(stream, "output", {
+            type: "shine",
+            colors: ["red", "white", "blue"],
+        });
+    })
+    .catch(function (err) {
+        console.log(err.message);
+    });

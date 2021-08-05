@@ -11,6 +11,8 @@
         />
 
         <link rel="stylesheet" href="../index.css" />
+        <link rel="stylesheet" href="../assets/css/contextMenu.css" />
+        <link rel="stylesheet" href="../assets/css/homescreen.css" />
         <style>
             .slidecontainer {
                 width: 100%;
@@ -57,7 +59,7 @@
     </head>
 
     <body
-        class="flex flex-col items-center"
+        class="flex flex-col items-center overflow-hidden"
         style="background: #e4733e; height: 700px"
     >
         <div
@@ -109,8 +111,6 @@
             </div>
 
             <!---END OF TAB SWITCHER-->
-
-            <input type="hidden" id="video-id" value="0" />
             <div class="flex flex-row justify-end gap-8">
                 <button
                     id="toHomescreen"
@@ -214,7 +214,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li id="all-music-button">
+                        <li id="all-music-button" class="bg-yellow-500">
                             <a
                                 href="#"
                                 class="
@@ -258,6 +258,7 @@
                                 </span>
                                 <span
                                     class="ml-2 text-sm tracking-wide truncate"
+                                    id="all-music-text"
                                     >ALL MUSIC</span
                                 >
                                 <span
@@ -275,6 +276,45 @@
                                         rounded-full
                                     "
                                     >New</span
+                                >
+                            </a>
+                        </li>
+
+                        <li id="open-file-button">
+                            <a
+                                href="#"
+                                class="
+                                    relative
+                                    flex flex-row
+                                    items-center
+                                    h-11
+                                    focus:outline-none
+                                    hover:bg-yellow-500
+                                    dark:hover:bg-gray-600
+                                    text-white-600
+                                    hover:text-white-800
+                                    border-l-4 border-transparent
+                                    hover:border-blue-500
+                                    dark:hover:border-gray-800
+                                    pr-6
+                                "
+                            >
+                                <span
+                                    class="
+                                        inline-flex
+                                        justify-center
+                                        items-center
+                                        ml-4
+                                    "
+                                >
+                                    <img
+                                        src="../assets/img/folder_open_white_24dp.svg"
+                                        class="w-6 h-6"
+                                    />
+                                </span>
+                                <span
+                                    class="ml-2 text-sm tracking-wide truncate"
+                                    >OPEN FILE</span
                                 >
                             </a>
                         </li>
@@ -327,7 +367,7 @@
                                 >
                             </a>
                         </li>
-                        
+
                         <li id="add-playlist-trigger">
                             <a
                                 href="#"
@@ -345,7 +385,6 @@
                                     hover:border-blue-500
                                     dark:hover:border-gray-800
                                     pr-6
-                                    
                                 "
                             >
                                 <span
@@ -373,8 +412,6 @@
                                 >
                                 <span
                                     class="
-                                        hidden
-                                        md:block
                                         px-2
                                         py-0.5
                                         ml-auto
@@ -500,9 +537,7 @@
                                 <div
                                     class="
                                         text-sm
-                                        font-light
                                         tracking-wide
-                                        text-gray-400
                                         font-bold
                                         uppercase
                                     "
@@ -592,9 +627,18 @@
                 "
             >
                 <!-- Music List -->
-                <div id="musicList" class="w-full">
-                    <div class="w-full rounded-lg shadow-xs">
-                        <div class="w-full overflow-x-auto">
+                <div id="musicList" class="w-full rounded-lg">
+                    <div
+                        class="
+                            w-full
+                            rounded-lg
+                            shadow-xs
+                            h-80
+                            overflow-y-scroll overflow-x-hidden
+                            scrollbar
+                        "
+                    >
+                        <div class="w-full rounded-lg">
                             <table class="w-full rounded-lg">
                                 <thead>
                                     <tr
@@ -610,7 +654,7 @@
                                             dark:text-gray-400 dark:bg-gray-800
                                         "
                                     >
-                                        <th class="px-4 py-3 rounded-tl-lg">
+                                        <th class="px-4 py-3 rounded-tl-lg" id="table-header-title">
                                             Artist/Song
                                         </th>
                                         <th class="px-4 py-3">Duration</th>
@@ -628,6 +672,9 @@
                                         dark:divide-gray-700 dark:bg-gray-800
                                     "
                                 >
+                                    <!--In this item i pass the elem to js script which attaches the contextmenu listener
+                                        * Pull the media's id using the element passed.
+                                    -->
                                     <tr
                                         id="music item"
                                         class="
@@ -639,7 +686,10 @@
                                             dark:text-gray-400
                                         "
                                     >
-                                        <td class="px-4 py-3">
+                                        <td
+                                            class="px-4 py-3"
+                                            oncontextmenu="showContextMenu(event, 'test')"
+                                        >
                                             <div
                                                 class="
                                                     flex
@@ -690,6 +740,8 @@
                                                             font-semi-bold
                                                             text-gray-600
                                                             dark:text-gray-400
+                                                            truncate
+                                                            overflow-ellipsis
                                                         "
                                                         id="titleOne"
                                                     >
@@ -698,10 +750,16 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-4 py-3 text-sm">
+                                        <td
+                                            class="px-4 py-3 text-sm"
+                                            oncontextmenu="showContextMenu(event, 'test')"
+                                        >
                                             <p id="durationOne">3:56</p>
                                         </td>
-                                        <td class="px-4 py-3 text-xs">
+                                        <td
+                                            class="px-4 py-3 text-xs"
+                                            oncontextmenu="showContextMenu(event, 'test')"
+                                        >
                                             <button id="queue">
                                                 <span
                                                     class="
@@ -720,7 +778,10 @@
                                                 </span>
                                             </button>
                                         </td>
-                                        <td class="px-4 py-3 text-sm">
+                                        <td
+                                            class="px-4 py-3 text-sm"
+                                            oncontextmenu="showContextMenu(event, 'test')"
+                                        >
                                             <div class="text-red-500">
                                                 <svg
                                                     class="w-6 h-6"
@@ -1085,6 +1146,7 @@
                                             text-2xl text-blue-500
                                             font-medium
                                         "
+
                                     >
                                         Sanctus
                                     </h3>
@@ -1206,8 +1268,8 @@
                                         text-sm text-yellow-500
                                     "
                                 >
-                                    <span id="current_time">0:00</span>
-                                    <span id="total_time">0:00</span>
+                                    <span id="current-time">0:00</span>
+                                    <span id="dur-time">0:00</span>
                                 </div>
                                 <div class="slidecontainer" id="progress-bar">
                                     <input
@@ -1258,11 +1320,20 @@
                                     hover:bg-yellow-500
                                 "
                             >
-                                <img src="../assets/img/close_black_24dp.svg" alt="" />
+                                <img
+                                    src="../assets/img/close_black_24dp.svg"
+                                    alt=""
+                                />
                             </button>
                         </div>
                         <div
-                            class="flex flex-row justify-between items-center p-4 gap-4"
+                            class="
+                                flex flex-row
+                                justify-between
+                                items-center
+                                p-4
+                                gap-4
+                            "
                         >
                             <input
                                 id="playlist-name"
@@ -1270,7 +1341,7 @@
                                 placeholder="Enter the playlist name.."
                                 type="text"
                             />
-                            
+
                             <button
                                 id="add-playlist-button"
                                 class="
@@ -1285,8 +1356,29 @@
                                 Create
                             </button>
                         </div>
-                        <div class="flex flex-row justify-between items-center p-4 gap-4">
-                            <textarea name="playlist-description" id="playlist-description" rows="3" class="py-2 px-4 flex-grow border rounded-md w-full" placeholder="Playlist description (optional)"></textarea>
+                        <div
+                            class="
+                                flex flex-row
+                                justify-between
+                                items-center
+                                p-4
+                                gap-4
+                            "
+                        >
+                            <textarea
+                                name="playlist-description"
+                                id="playlist-description"
+                                rows="3"
+                                class="
+                                    py-2
+                                    px-4
+                                    flex-grow
+                                    border
+                                    rounded-md
+                                    w-full
+                                "
+                                placeholder="Playlist description (optional)"
+                            ></textarea>
                         </div>
                         <div
                             id="playlist-list"
@@ -1309,7 +1401,85 @@
             </div>
         </div>
 
+        <!--[START] Context Menu Code-->
+        <div
+            id="context-menu"
+            class="
+                fixed
+                rounded-md
+                w-48
+                z-50
+                bg-gray-100
+                hide-menu
+                py-3
+                border
+                shadow
+            "
+        >
+            <!--This is a context menu item.
+                Load the playlists using the item defined below
+            -->
+            <div
+                class="
+                    py-3
+                    px-6
+                    text-sm text-gray-500
+                    cursor-pointer
+                    hover:bg-gray-200
+                    flex
+                    justify-between
+                "
+            >
+                <span>Playlist 1</span>
+                <span
+                    class="
+                        px-2
+                        py-0.5
+                        ml-auto
+                        text-xs
+                        font-medium
+                        tracking-wide
+                        text-red-500
+                        bg-red-50
+                        rounded-full
+                    "
+                    >+</span
+                >
+            </div>
+
+            <!--Item 2-->
+            <div
+                class="
+                    py-3
+                    px-6
+                    text-sm text-gray-500
+                    cursor-pointer
+                    hover:bg-gray-200
+                    flex
+                    justify-between
+                "
+            >
+                <span>Playlist 2</span>
+                <span
+                    class="
+                        px-2
+                        py-0.5
+                        ml-auto
+                        text-xs
+                        font-medium
+                        tracking-wide
+                        text-red-500
+                        bg-red-50
+                        rounded-full
+                    "
+                    >-</span
+                >
+            </div>
+        </div>
+        <!--[END] Context Menu Code-->
+
         <script defer src="./manage.js"></script>
+        <script defer src="../components/contextMenu.js"></script>
     </body>
     <script type="text/javascript" src="queue.js"></script>
 </html>
