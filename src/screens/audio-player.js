@@ -1,5 +1,6 @@
 const remote = require("electron").remote;
 const { ipcRenderer } = require("electron");
+const Wave = require("@foobar404/wave");
 
 // ########
 // windows controls
@@ -169,17 +170,25 @@ volControlBtn.addEventListener("mouseleave", function (e) {
 });
 
 let wave = new Wave();
+wave.fromElement("audio-elem", "output", {
+    type: "shine",
+    colors: ["red", "white", "blue"],
+});
 
-navigator.mediaDevices
-    .getUserMedia({
-        audio: true,
-    })
-    .then(function (stream) {
-        wave.fromStream(stream, "output", {
-            type: "shine",
-            colors: ["red", "white", "blue"],
-        });
-    })
-    .catch(function (err) {
-        console.log(err.message);
-    });
+console.log(navigator);
+
+// navigator.mediaDevices
+//     .getUserMedia({
+//         audio: true,
+//     })
+//     .then(function (stream) {
+//         wave.fromStream(stream, "output", {
+//             type: "shine",
+//             colors: ["red", "white", "blue"],
+//         });
+//         console.log(stream);
+//     })
+//     .catch(function (err) {
+//         console.log(err.message);
+//         console.log("test log.");
+//     });
