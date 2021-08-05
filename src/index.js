@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
-const Manager = require('./classes/Manager');
+const Manager = require("./classes/Manager");
 const Utility = require("./classes/Utility");
 
 /**
@@ -10,7 +10,7 @@ const Utility = require("./classes/Utility");
 /**
  * Always set the database path before calling the Utility#initdb method.
  */
-Utility.databasePath = app.getPath('userData');
+Utility.databasePath = app.getPath("userData");
 
 const vlcManager = new Manager();
 
@@ -65,17 +65,26 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-ipcMain.on("window:resize", (event, arg) => {
-    mainWindow.setSize(800, Math.ceil(arg));
-});
 
 //Handling the link from the homescreen
 ipcMain.on("save-video-link", (evt, link) => {
     vlcManager.currentlyPlayingMediaSrc = link;
-    console.log(link);
+    console.log(` - Saving the link is ${link} \n`);
 });
 
-ipcMain.on("send-video-link", (evt) => {
-    evt.reply("receive-video-link", vlcManager.currentlyPlayingMediaSrc);
-    console.log("sending video link");
+ipcMain.on("save-audio-link", (evt, link) => {
+    vlcManager.currentlyPlayingMediaSrc = link;
+    console.log(` - Saving the link is ${link} \n`);
+});
+
+ipcMain.handle("receive-video-link", async (event, args) => {
+    console.log(
+        ` - Sent the video link successfully. The video link was ${vlcManager.currentlyPlayingMediaSrc}\n`
+    );
+    return vlcManager.currentlyPlayingMediaSrc;
+});
+
+ipcMain.handle("receive-audio-link", async(event, args) =>{
+    console.log(` - Sent the video link successfully. The video link was ${vlcManager.currentlyPlayingMediaSrc}\n`);
+    return vlcManager.currentlyPlayingMediaSrc;
 });

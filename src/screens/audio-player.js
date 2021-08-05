@@ -9,7 +9,6 @@ const closeBtn = document.getElementById("close");
 const minimizeIcon = document.getElementById("minimize");
 const maximizeIcon = document.getElementById("maximize");
 const titleBar = document.getElementById("titleBar");
-const toHomescreen = document.getElementById("toHomescreen");
 
 closeBtn.onclick = (e) => {
     getWindow().close();
@@ -26,10 +25,6 @@ maximizeIcon.onclick = (e) => {
     console.log("close clicked");
 };
 
-toHomescreen.onclick = (e) => {
-    routeToHomeScreen();
-};
-
 function maximize() {
     const window = getWindow();
     if (window.isMaximized()) {
@@ -41,51 +36,47 @@ function maximize() {
     }
 }
 
-function routeToHomeScreen() {
-    getWindow().loadFile("./src/screens/homescreen.html");
-}
-
 // #########
 // UI controls
 // #########
 
-//create the manager for this video
-const Utility = require("./../classes/Utility");
-const Manager = require("./../classes/Manager");
+//create the manager for this audio
+const Utility = require("../classes/Utility");
+const Manager = require("../classes/Manager");
 
 Utility.databasePath = remote.app.getPath("userData");
 
 const theManager = new Manager();
 
-//initial the vlcVideo object that will manage the played video
-const VlcVideo = require("./../classes/VlcVideo");
-const vlcVideo = new VlcVideo();
+//initial the vlcAudio object that will manage the played audio
+const VlcAudio = require("../classes/VlcAudio");
+const vlcAudio = new VlcAudio();
 
-//set the manager ManagedObject property to this video.
-theManager.managedObject = vlcVideo;
-vlcVideo.myManager = theManager;
+//set the manager ManagedObject property to this audio.
+theManager.managedObject = vlcAudio;
+vlcAudio.myManager = theManager;
 
-vlcVideo.id = document.getElementById("video-id");
-vlcVideo.mediaObject = document.querySelector("video");
-vlcVideo.uiVolumeLevelBar = document.getElementById("volume-level-indicator");
-vlcVideo.uiVolumeText = document.getElementById("volumeText");
-vlcVideo.uiVideoProgressBar = document.getElementById("progress-indicator");
-vlcVideo.uiVolumeButtonImg = document.querySelector("#mute-volume");
-vlcVideo.uiPlayButton = document.querySelector("#play-pause");
-vlcVideo.uiCurrentTimeText = document.querySelector("#current-time");
-vlcVideo.uiTotalDurationText = document.querySelector("#dur-time");
-vlcVideo.uiNameText = document.querySelector("#media-name");
-vlcVideo.uiPlaySpeedButton = document.querySelector("#play-speed");
-vlcVideo.uiVolumeInputRange = document.querySelector("#volume-input-range");
-vlcVideo.uiProgressBarInputRange = document.querySelector(
+vlcAudio.id = document.getElementById("audio-id");
+vlcAudio.mediaObject = document.querySelector("audio");
+vlcAudio.uiVolumeLevelBar = document.getElementById("volume-level-indicator");
+vlcAudio.uiVolumeText = document.getElementById("volumeText");
+vlcAudio.uiAudioProgressBar = document.getElementById("progress-indicator");
+vlcAudio.uiVolumeButtonImg = document.querySelector("#mute-volume");
+vlcAudio.uiPlayButton = document.querySelector("#play-pause");
+vlcAudio.uiCurrentTimeText = document.querySelector("#current-time");
+vlcAudio.uiTotalDurationText = document.querySelector("#dur-time");
+vlcAudio.uiNameText = document.querySelector("#media-name");
+vlcAudio.uiPlaySpeedButton = document.querySelector("#play-speed");
+vlcAudio.uiVolumeInputRange = document.querySelector("#volume-input-range");
+vlcAudio.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
 );
 
-vlcVideo.uiBookmarkButton = document.querySelector("#bookmarkBtn");
-vlcVideo.uiProgressBarInputRange = document.querySelector(
+vlcAudio.uiBookmarkButton = document.querySelector("#bookmarkBtn");
+vlcAudio.uiProgressBarInputRange = document.querySelector(
     "#progress-bar-input-range"
 );
-vlcVideo.uiBookmarkCloseButton = document.querySelector(
+vlcAudio.uiBookmarkCloseButton = document.querySelector(
     "#close-bookmark-button"
 );
 
@@ -117,10 +108,10 @@ trigger.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
 
-vlcVideo.activate(); //activates all event listeners for the video
-theManager.manage(); //calls the manager to manage the videos
+vlcAudio.activate(); //activates all event listeners for the audio
+theManager.manage(); //calls the manager to manage the audios
 
-ipcRenderer.send("window:resize", vlcVideo.mediaObject.videoHeight);
+ipcRenderer.send("window:resize", vlcAudio.mediaObject.audioHeight);
 
 let timeoutId;
 const floatingMenu = document.getElementById("floatingMenu");
@@ -140,12 +131,17 @@ function autoShowMenu() {
 }
 
 autoShowMenu();
-
+/**
+ * #####################################################
+ * Logic below
+ * #####################################################
+ * please keep all ui rendering above this below is for logic only.
+ */
 /**
  * Gets the link from the homescreen.
  */
 
-ipcRenderer.invoke("receive-video-link", "").then((link) => {
+ipcRenderer.invoke("receive-audio-link", "").then((link) =>{
     let resolvedLink = Utility.path.resolve(link);
 
     console.log(`- The resolved link from the main process: ${resolvedLink}\n`);

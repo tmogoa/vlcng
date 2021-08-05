@@ -614,6 +614,14 @@ video {
   }
 }
 
+.active-tab {
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -32231,7 +32239,11 @@ video {
   opacity: 0;
   visibility: hidden;
   transform: scale(1.1);
-  transition: visibility 1.5s linear 0s, opacity 1.5s 0s, transform 1.5s;
+  /* transition: visibility 0.5s linear 0s, opacity 0.5s 0s, transform 0.5s; */
+}
+
+.trans-class {
+  transition: visibility 0.5s linear 0s, opacity 0.5s 0s, transform 0.5s;
 }
 
 .modal-content {
@@ -32253,7 +32265,7 @@ video {
   opacity: 1;
   visibility: visible;
   transform: scale(1);
-  transition: visibility 1.5s linear 0s, opacity 1.5s 0s, transform 1.5s;
+  transition: visibility 0.5s linear 0s, opacity 0.5s 0s, transform 0.5s;
 }
 
 button {

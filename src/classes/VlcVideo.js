@@ -6,9 +6,10 @@ const VlcMediaContent = require('./VlcMediaContent');
  */ 
 class VlcVideo extends VlcMediaContent{
 
-    //The manager of this vlcVideo
-    myManager;
 
+    /**
+     * The UI components that are specific to a video.
+     */
     uiVideoProgressBar; //the progress bar
     uiTotalDurationText; //The text showing the total duration of the video
     uiCurrentTimeText; //The text showing the current time in the video
@@ -58,6 +59,10 @@ class VlcVideo extends VlcMediaContent{
             this.updateVolumeSlider();
             this.updateDurationText();
             this.myManager.updateTime();
+            if(this.getCurrentTime() == this.getTotalDuration()){
+                this.isPlaying = false;
+                this.uiPlayButton.querySelector('img').src = "../assets/img/replay_white_24dp.svg";
+            }
         });
 
         /**
@@ -87,11 +92,10 @@ class VlcVideo extends VlcMediaContent{
 
         this.uiBookmarkButton.addEventListener('click', ()=>{
             if(this.myManager){
-                this.myManager.addBookmark()
+                this.myManager.addBookmark();
             }
-
         });
-        
+
     }
 
     /**
@@ -100,11 +104,11 @@ class VlcVideo extends VlcMediaContent{
     playPause(){
         if(!this.isPlaying){ 
             this.play(this.currentPlaybackRateIndex); 
-            this.uiPlayButton.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
+            this.uiPlayButton.querySelector('img').src = "../assets/img/pause.svg";
         }
         else{
             this.pause();
-            this.uiPlayButton.querySelector('img').src = "../assets/img/pause.svg";
+            this.uiPlayButton.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
         }
     }
 
@@ -137,7 +141,7 @@ class VlcVideo extends VlcMediaContent{
     }
 
     /**
-     * 
+     * Updating the volume level
      * @param {int} level - value from the range 
      */
     updateVolumeLevel(level) {
@@ -158,8 +162,10 @@ class VlcVideo extends VlcMediaContent{
 
     }
     
+    /**
+     * Updates the progress bar
+     */
     updateVideoProgess(){
-
         let max = this.uiVideoProgressBar.parentElement.clientWidth;
         let ratio = this.getCurrentTime()/this.getTotalDuration();
         this.uiProgressBarInputRange.value = ratio * 100;
@@ -171,6 +177,12 @@ class VlcVideo extends VlcMediaContent{
         this.uiVideoProgressBar.style.width = `${Math.ceil(ratio * max)}px`;
     }
 
+    /**
+     * changes the playback rates.
+     * Remember the playback speeds from the parent class (VlcMediaContent)? Yes, we use it here.
+     * We just increase the speed to the next level in the playbackSpeeds array in a circular form.
+     * When we get at the highest, we circle back to the lowest on the next click.
+     */
     changePlaybackRate(){
         this.currentPlaybackRateIndex += 1
         this.currentPlaybackRateIndex %= this.playbackSpeeds.length;

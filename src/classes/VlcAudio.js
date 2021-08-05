@@ -1,197 +1,196 @@
-const VlcMediaContent = require('./VlcMediaContent');
+const Utility = require('./Utility');
+const VlcMediaContent =require('./VlcMediaContent');
+class VlcAudio extends VlcMediaContent{
 
-
-class audio extends VlcMediaContent{}
-
-let previous = document.querySelector('#pre');
-let play = document.querySelector('#play');
-let next = document.querySelector('#next');
-let title = document.querySelector('#title');
-let recent_volume= document.querySelector('#volume');
-let volume_show = document.querySelector('#volume_show');
-let slider = document.querySelector('#duration_slider');
-let show_duration = document.querySelector('#show_duration');
-let track_image = document.querySelector('#track_image');
-let auto_play = document.querySelector('#auto');
-let present = document.querySelector('#present');
-let total = document.querySelector('#total');
-let artist = document.querySelector('#artist');
-
-let timer;
-let autoplay = 0;
-
-let index_no = 0;
-let Playing_song = false;
-
-//create a audio Element
-let track = document.createElement('audio');
-
-
-//All songs list
-let All_song = [
-   {
-     name: "first song",
-     path: "music/song1.mp3",
-     img: "img/img1.jpg",
-     singer: "1"
-   },
-   {
-     name: "second song",
-     path: "music/song2.mp3",
-     img: "img/img2.jpg",
-     singer: "2"
-   },
-   /*
-   {
-     name: "third song",
-     path: "music/song3.mp3",
-     img: "img/img3.jpg",
-     singer: "3"
-   },
-   {
-     name: "fourth song",
-     path: "music/song4.mp3",
-     img: "img/img4.jpg",
-     singer: "4"
-   },
-   {
-     name: "fifth song",
-     path: "music/song5.mp3",
-     img: "img/img5.jpg",
-     singer: "5"
-   }*/
-];
-
-// function load the track
-function load_track(index_no){
-	clearInterval(timer);
-	reset_slider();
-
-	track.src = All_song[index_no].path;
-	title.innerHTML = All_song[index_no].name;	
-	track_image.src = All_song[index_no].img;
-    artist.innerHTML = All_song[index_no].singer;
-    track.load();
-
-	timer = setInterval(range_slider ,1000);
-	total.innerHTML = All_song.length;
-	present.innerHTML = index_no + 1;
-}
-
-load_track(index_no);
-
-
-//mute sound function
-function mute_sound(){
-	track.volume = 0;
-	volume.value = 0;
-	volume_show.innerHTML = 0;
-}
-
-
-// checking.. the song is playing or not
- function justplay(){
- 	if(Playing_song==false){
- 		playsong();
-
- 	}else{
- 		pausesong();
- 	}
- }
-
-
-// reset song slider
- function reset_slider(){
- 	slider.value = 0;
- }
-
-// play song
-function playsong(){
-  track.play();
-  Playing_song = true;
-  play.innerHTML = '<i class="fa fa-pause" aria-hidden="true"></i>';
-}
-
-//pause song
-function pausesong(){
-	track.pause();
-	Playing_song = false;
-	play.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
-}
-
-
-// next song
-function next_song(){
-	if(index_no < All_song.length - 1){
-		index_no += 1;
-		load_track(index_no);
-		playsong();
-	}else{
-		index_no = 0;
-		load_track(index_no);
-		playsong();
-
-	}
-}
-
-
-// previous song
-function previous_song(){
-	if(index_no > 0){
-		index_no -= 1;
-		load_track(index_no);
-		playsong();
-
-	}else{
-		index_no = All_song.length;
-		load_track(index_no);
-		playsong();
-	}
-}
-
-
-// change volume
-function volume_change(){
-	volume_show.innerHTML = recent_volume.value;
-	track.volume = recent_volume.value / 100;
-}
-
-// change slider position 
-function change_duration(){
-	slider_position = track.duration * (slider.value / 100);
-	track.currentTime = slider_position;
-}
-
-// autoplay function
-function autoplay_switch(){
-	if (autoplay==1){
-       autoplay = 0;
-       auto_play.style.background = "rgba(255,255,255,0.2)";
-	}else{
-       autoplay = 1;
-       auto_play.style.background = "#FF8A65";
-	}
-}
-
-
-function range_slider(){
-	let position = 0;
-        
-        // update slider position
-		if(!isNaN(track.duration)){
-		   position = track.currentTime * (100 / track.duration);
-		   slider.value =  position;
-	      }
-
-       
-       // function will run when the song is over
-       if(track.ended){
-       	 play.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
-           if(autoplay==1){
-		       index_no += 1;
-		       load_track(index_no);
-		       playsong();
-           }
-	    }
+	
+    /**
+     * The UI components that are specific to a video.
+     */
+     uiAudioProgressBar; //the progress bar
+     uiTotalDurationText; //The text showing the total duration of the video
+     uiCurrentTimeText; //The text showing the current time in the video
+     uiVolumeText; //the volume text of the volume
+     uiVolumeButtonImg; //the volume button with the volume icon
+     uiVolumeProgressColumn; //the ui slider on the volume
+     uiPlaySpeedButton; //the speed text
+     uiPlayButton; //playbutton
+     uiNameText; //The name of the video
+     //implement foward and rewing buttons
+ 
+     
+ 
+     /**
+      * @property {index} currentPlaybackRateIndex the current playback index
+      * in the playbackSpeeds array in the VlcMediaContent class.
+      */
+     currentPlaybackRateIndex = 3;
+     /**
+      * 
+      * @param {string} src 
+      * The source of the video
+      */
+     constructor(src){
+         super("audio", src);
      }
+     /**
+      * After you have set everything for the ui, call the this method.
+      */
+     //call methods for btns heregit
+     activate(){
+         this.isPlaying = true;
+ 
+         this.updateVolumeSlider();
+         this.updateAudioProgess();
+ 
+         this.uiPlayButton.addEventListener('click', () => {
+             this.playPause();
+         });
+ 
+         this.uiVolumeButtonImg.addEventListener('click', ()=>{
+             this.muteVideo();
+         });
+ 
+         this.mediaObject.addEventListener('timeupdate', () =>{
+             this.updateAudioProgess();
+             this.updateVolumeSlider();
+             this.updateDurationText();
+             this.myManager.updateTime();
+             if(this.getCurrentTime() == this.getTotalDuration()){
+                 this.isPlaying = false;
+                 this.uiPlayButton.querySelector('img').src = "../assets/img/replay_white_24dp.svg";
+
+                if(this.autoplay){
+                    this.setCurrentTime(0);
+                    this.playPause();
+                 }
+             }
+         });
+ 
+         /**
+          * Will implement animation later
+          */
+         this.uiVolumeInputRange.addEventListener('input', (evt)=>{
+             this.updateVolumeSlider();
+         });
+ 
+         this.uiPlaySpeedButton.addEventListener('click', ()=>{
+             this.changePlaybackRate();
+         });
+ 
+         this.uiProgressBarInputRange.addEventListener('input', ()=>{
+             let level = this.uiProgressBarInputRange.value / 100 * this.getTotalDuration(); 
+             this.setCurrentTime(level);
+             this.updateVideoProgess();
+             this.updateDurationText();
+             this.myManager.updateTime();
+         });
+         
+         this.addListener('source-set', ()=>{
+             //The object is ready to be managed. Hence, signal the manager.
+             this.myManager.emit('managed-object-ready');
+             this.uiNameText.innerHTML = this.name;
+         });
+ 
+         this.uiBookmarkButton.addEventListener('click', ()=>{
+             if(this.myManager){
+                 this.myManager.addBookmark();
+             }
+         });
+ 
+     }
+ 
+     /**
+      * Controls playing and pausing
+      */
+     playPause(){
+         if(!this.isPlaying){ 
+             this.play(this.currentPlaybackRateIndex); 
+             this.uiPlayButton.querySelector('img').src = "../assets/img/pause.svg";
+         }
+         else{
+             this.pause();
+             this.uiPlayButton.querySelector('img').src = "../assets/img/play_arrow_black_24dp.svg";
+         }
+     }
+ 
+     /**
+      * Updates the current duration text
+      */
+     updateDurationText(){
+         
+         let formattedTime = this.formatTime();
+         this.uiCurrentTimeText.innerHTML =  formattedTime[0];
+         this.uiTotalDurationText.innerHTML = formattedTime[1];
+     }
+ 
+     muteVideo(){
+         if (this.mediaObject.muted) {
+             this.mediaObject.muted = false;
+             this.uiVolumeButtonImg.src = "../assets/img/volume_up_black_24dp.svg";
+         } else {
+             this.mediaObject.muted = true;
+             this.uiVolumeButtonImg.src = "../assets/img/volumemute.svg";
+         }
+     }
+ 
+     /**
+      * Update the height of the slider to tell the volume
+      */
+     updateVolumeSlider(evt){
+         let level = this.uiVolumeInputRange.value;
+         this.updateVolumeLevel(level);
+     }
+ 
+     /**
+      * Updating the volume level
+      * @param {int} level - value from the range 
+      */
+     updateVolumeLevel(level) {
+         let max = this.uiVolumeLevelBar.parentElement.clientHeight; //maximum height of the bar
+         let ratio = (level/100);
+        
+         this.setVolume(ratio);
+ 
+             this.uiVolumeLevelBar.classList.add("rounded-t-none");
+         if (level >= 95) {
+             this.uiVolumeLevelBar.classList.remove("rounded-t-none");
+         }
+ 
+         this.uiVolumeText.innerHTML = level;
+         this.uiVolumeLevelBar.style.height = `${Math.ceil(
+             ratio * max
+         )}px`;
+ 
+     }
+     
+     /**
+      * Updates the progress bar
+      */
+     updateAudioProgess(){
+         let max = this.uiAudioProgressBar.parentElement.clientWidth;
+         let ratio = this.getCurrentTime()/this.getTotalDuration();
+         this.uiProgressBarInputRange.value = ratio * 100;
+ 
+         this.uiAudioProgressBar.classList.add("rounded-r-none");
+         if (this.uiProgressBarInputRange.value >= 95) {
+             this.uiAudioProgressBar.classList.remove("rounded-r-none");
+         }
+         this.uiAudioProgressBar.style.width = `${Math.ceil(ratio * max)}px`;
+     }
+ 
+     /**
+      * changes the playback rates.
+      * Remember the playback speeds from the parent class (VlcMediaContent)? Yes, we use it here.
+      * We just increase the speed to the next level in the playbackSpeeds array in a circular form.
+      * When we get at the highest, we circle back to the lowest on the next click.
+      */
+     changePlaybackRate(){
+         this.currentPlaybackRateIndex += 1
+         this.currentPlaybackRateIndex %= this.playbackSpeeds.length;
+         this.uiPlaySpeedButton.innerHTML = this.playbackSpeeds[this.currentPlaybackRateIndex] + "x";
+         this.pause();
+         this.play(this.currentPlaybackRateIndex);
+     }
+}
+module.exports=VlcAudio;
 

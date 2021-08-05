@@ -1,12 +1,13 @@
-.scrollbar::-webkit-scrollbar {
+/*Just styling the scroll bar*/
+#bookmarkList::-webkit-scrollbar {
     width: 7px; /* width of the entire scrollbar */
 }
 
-.scrollbar::-webkit-scrollbar-track {
+#bookmarkList::-webkit-scrollbar-track {
     background: none; /* color of the tracking area */
 }
 
-.scrollbar::-webkit-scrollbar-thumb {
+#bookmarkList::-webkit-scrollbar-thumb {
     background-color: orange; /* color of the scroll thumb */
     border-radius: 20px; /* roundness of the scroll thumb */
     /* border: 3px solid orange;  */
